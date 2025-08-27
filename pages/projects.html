@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"="width=device-width, initial-scale=1.0">
+    <title>Projects - Nazer Hdaifeh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .project-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .project-title {
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .project-description {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        
+        .project-link:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../index.html" style="color: inherit; text-decoration: none;">Nazer Hdaifeh</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Projects Hero Section -->
+    <section class="hero" style="height: 60vh;">
+        <div class="hero-content">
+            <h1>My Projects</h1>
+            <p class="subtitle">Real-world applications of Data Science and Machine Learning</p>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section">
+        <div class="container">
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Supply Chain Forecasting System</div>
+                        <div class="project-date">2024 - EffectManager ApS</div>
+                    </div>
+                </div>
+                <div class="project-description">
+                    Developed an end-to-end ML-based forecasting system for supply chain optimization. The system integrates with multiple data sources, applies advanced time series models, and provides real-time predictions with automated alerts for inventory management.
+                </div>
+                <div class="skills-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Prophet</span>
+                    <span class="skill-tag">Azure ML</span>
+                    <span class="skill-tag">Power Automate</span>
+                    <span class="skill-tag">Time Series</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">
+                        <i class="fab fa-github"></i>
+                        View Code
+                    </a>
+                    <a href="#" class="project-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Automated Document Processing RPA</div>
+                        <div class="project-date">2023 - EffectManager ApS</div>
+                    </div>
+                </div>
+                <div class="project-description">
+                    Built a comprehensive RPA solution for document processing using OCR, computer vision, and AI classification. The system processes thousands of documents daily with 98% accuracy and has reduced manual work by 85%.
+                </div>
+                <div class="skills-tags">
+                    <span class="skill-tag">Power Automate</span>
+                    <span class="skill-tag">OCR</span>
+                    <span class="skill-tag">Computer Vision</span>
+                    <span class="skill-tag">Azure Cognitive Services</span>
+                    <span class="skill-tag">RPA</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">
+                        <i class="fas fa-info-circle"></i>
+                        Case Study
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Employee Attrition Prediction Model</div>
+                        <div class="project-date">2023 - Valuebeat ApS</div>
+                    </div>
+                </div>
+                <div class="project-description">
+                    Developed a machine learning model to predict employee attrition using HR data and behavioral patterns. The model achieved 87% accuracy and helped HR teams proactively address retention issues.
+                </div>
+                <div class="skills-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Scikit-learn</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">Feature Engineering</span>
+                    <span class="skill-tag">PCA</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">
+                        <i class="fab fa-github"></i>
+                        View Code
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div>
+                        <div class="project-title">Education Data Quality System</div>
+                        <div class="project-date">2022 - Statistics Denmark</div>
+                    </div>
+                </div>
+                <div class="project-description">
+                    Built an automated ML-based error detection system for national education records. The system identifies anomalies and data quality issues in real-time, improving the reliability of official statistics.
+                </div>
+                <div class="skills-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Anomaly Detection</span>
+                    <span class="skill-tag">Statistical Analysis</span>
+                    <span class="skill-tag">Data Cleaning</span>
+                    <span class="skill-tag">Machine Learning</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" class="project-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        Research Paper
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="mailto:nazerof@gmail.com" class="social-link" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://linkedin.com/in/nazer-hd" class="social-link" title="LinkedIn" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="tel:+4542316710" class="social-link" title="Phone">
+                    <i class="fas fa-phone"></i>
+                </a>
+                <a href="#" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p>&copy; 2025 Nazer Hdaifeh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

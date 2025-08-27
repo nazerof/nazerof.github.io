@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Nazer Hdaifeh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .blog-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .blog-header {
+            margin-bottom: 1rem;
+        }
+        
+        .blog-title {
+            color: #667eea;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-meta {
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: #764ba2;
+        }
+        
+        .coming-soon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../index.html" style="color: inherit; text-decoration: none;">Nazer Hdaifeh</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Blog Hero Section -->
+    <section class="hero" style="height: 60vh;">
+        <div class="hero-content">
+            <h1>My Blog</h1>
+            <p class="subtitle">Insights, tutorials, and thoughts on Data Science & Machine Learning</p>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="section">
+        <div class="container">
+            <!-- Coming Soon Notice -->
+            <div class="coming-soon fade-in">
+                <h2><i class="fas fa-rocket"></i> Blog Coming Soon!</h2>
+                <p style="font-size: 1.2rem; margin-top: 1rem;">I'm currently working on creating valuable content about Data Science, Machine Learning, and RPA. Stay tuned for in-depth tutorials, case studies, and insights from my professional experience.</p>
+                <div style="margin-top: 2rem;">
+                    <a href="contact.html" class="btn btn-primary">
+                        <i class="fas fa-bell"></i>
+                        Get Notified When It's Ready
+                    </a>
+                </div>
+            </div>
+
+            <!-- Preview of Upcoming Posts -->
+            <h2 style="text-align: center; margin-bottom: 3rem; color: #333;">Upcoming Posts</h2>
+
+            <div class="blog-card fade-in">
+                <div class="blog-header">
+                    <div class="blog-title">Building End-to-End RPA Solutions with Power Automate</div>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> Coming February 2025</span>
+                        <span><i class="fas fa-clock"></i> 15 min read</span>
+                        <span><i class="fas fa-tag"></i> RPA, Power Automate</span>
+                    </div>
+                </div>
+                <div class="blog-excerpt">
+                    A comprehensive guide to designing and implementing robust RPA systems using Microsoft Power Automate. This post will cover best practices, error handling, monitoring, and real-world case studies from my experience at EffectManager ApS.
+                </div>
+                <div class="skills-tags">
+                    <span class="skill-tag">Power Automate</span>
+                    <span class="skill-tag">RPA</span>
+                    <span class="skill-tag">Process Automation</span>
+                </div>
+            </div>
+
+            <div class="blog-card fade-in">
+                <div class="blog-header">
+                    <div class="blog-title">Time Series Forecasting for Supply Chain Optimization</div>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> Coming March 2025</span>
+                        <span><i class="fas fa-clock"></i> 20 min read</span>
+                        <span><i class="fas fa-tag"></i> Machine Learning, Forecasting</span>
+                    </div>
+                </div>
+                <div class="blog-excerpt">
+                    Deep dive into advanced time series forecasting techniques for supply chain management. Learn how to implement Prophet, ARIMA models, and handle seasonality in real-world business contexts.
+                </div>
+                <div class="skills-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Prophet</span>
+                    <span class="skill-tag">Time Series</span>
+                    <span class="skill-tag">Machine Learning</span>
+                </div>
+            </div>
+
+            <div class="blog-card fade-in">
+                <div class="blog-header">
+                    <div class="blog-title">From Academic Research to Industry: My Data Science Journey</div>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> Coming April 2025</span>
+                        <span><i class="fas fa-clock"></i> 12 min read</span>
+                        <span><i class="fas fa-tag"></i> Career, Data Science</span>
+                    </div>
+                </div>
+                <div class="blog-excerpt">
+                    Personal insights on transitioning from academic research in mathematics to applied data science in industry. Lessons learned, challenges faced, and advice for others making similar transitions.
+                </div>
+                <div class="skills-tags">
+                    <span class="skill-tag">Career Development</span>
+                    <span class="skill-tag">Data Science</span>
+                    <span class="skill-tag">Academia</span>
+                </div>
+            </div>
+
+            <div class="blog-card fade-in">
+                <div class="blog-header">
+                    <div class="blog-title">Computer Vision for Document Processing: OCR and Beyond</div>
+                    <div class="blog-meta">
+                        <span><i class="fas fa-calendar"></i> Coming May 2025</span>
+                        <span><i class="fas fa-clock"></i> 18 min read</span>
+                        <span><i class="fas fa-tag"></i> Computer Vision, OCR</span>
+                    </div>
+                </div>
+                <div class="blog-excerpt">
+                    Explore advanced computer vision techniques for automated document processing. From basic OCR to intelligent document classification and data extraction using Azure Cognitive Services and custom ML models.
+                </div>
+                <div class="skills-tags">
+                    <span class="skill-tag">Computer Vision</span>
+                    <span class="skill-tag">OCR</span>
+                    <span class="skill-tag">Azure Cognitive Services</span>
+                    <span class="skill-tag">Document Processing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="section knowledge-sharing">
+        <div class="container">
+            <h2 class="section-title fade-in">Stay Updated</h2>
+            <div class="fade-in" style="text-align: center; max-width: 600px; margin: 0 auto;">
+                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                    Get notified when new blog posts are published and receive exclusive insights about Data Science and Machine Learning.
+                </p>
+                <a href="contact.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">
+                    <i class="fas fa-envelope"></i>
+                    Subscribe to Updates
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="mailto:nazerof@gmail.com" class="social-link" title="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://linkedin.com/in/nazer-hd" class="social-link" title="LinkedIn" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="tel:+4542316710" class="social-link" title="Phone">
+                    <i class="fas fa-phone"></i>
+                </a>
+                <a href="#" class="social-link" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p>&copy; 2025 Nazer Hdaifeh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
