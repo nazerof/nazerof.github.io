@@ -513,6 +513,34 @@ nav.scrolled {
     margin-bottom: 1rem;
 }
 
+.knowledge-card .btn {
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    border: 2px solid #667eea;
+}
+
+.knowledge-card .btn:hover {
+    background: #5a67d8;
+    border-color: #5a67d8;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.knowledge-card .btn i {
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
 /* Footer */
 footer {
     background: #333;
