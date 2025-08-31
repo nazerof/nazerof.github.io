@@ -465,9 +465,14 @@ nav.scrolled {
 
 /* Knowledge Sharing Section */
 .knowledge-sharing {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8eaff 100%);
+    color: #333;
     text-align: center;
+}
+
+.knowledge-sharing .section-title {
+    color: #667eea;
+    font-weight: 700;
 }
 
 .knowledge-cards {
@@ -478,25 +483,33 @@ nav.scrolled {
 }
 
 .knowledge-card {
-    background: rgba(255,255,255,0.1);
+    background: linear-gradient(135deg, #f8f9ff 0%, #e8eaff 100%);
     padding: 2rem;
     border-radius: 15px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(102, 126, 234, 0.2);
     transition: transform 0.3s ease;
+    box-shadow: 0 3px 15px rgba(102, 126, 234, 0.1);
 }
 
 .knowledge-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
 }
 
 .knowledge-card i {
     font-size: 3rem;
     margin-bottom: 1rem;
     display: block;
+    color: #667eea;
 }
 
 .knowledge-card h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.knowledge-card p {
+    color: #666;
     margin-bottom: 1rem;
 }
 
