@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Interactive Learning Diagram - Complete DevOps Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="header">
+            <h1>🐳 Docker Complete Learning Path</h1>
+            <p>Interactive DevOps Journey - From Zero to Production</p>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="diagram-section">
+                <div class="layer-controls">
+                    <button class="control-btn active" onclick="showLayer('overview')">📊 Overview</button>
+                    <button class="control-btn" onclick="showLayer('detail')" id="detailBtn" style="display:none">🔍 Detailed Steps</button>
+                    <button class="control-btn" onclick="resetView()">🔄 Reset</button>
+                </div>
+
+                <div class="diagram-container">
+                    <svg class="diagram-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
+                        <defs>
+                            <linearGradient id="activeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#667eea" />
+                            </marker>
+                            <marker id="arrowhead-detail" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#f5576c" />
+                            </marker>
+                        </defs>
+
+                        <!-- Overview Layer -->
+                        <g id="overviewLayer">
+                            <!-- Edges -->
+                            <path class="edge" d="M 250 100 L 450 100" />
+                            <path class="edge" d="M 650 100 L 850 100" />
+                            <path class="edge" d="M 950 150 L 950 250" />
+                            <path class="edge" d="M 850 300 L 650 300" />
+                            <path class="edge" d="M 450 300 L 250 300" />
+                            <path class="edge" d="M 150 350 L 150 450" />
+                            <path class="edge" d="M 250 500 L 450 500" />
+                            <path class="edge" d="M 650 500 L 850 500" />
+
+                            <!-- Nodes -->
+                            <g class="node" transform="translate(150, 100)" onclick="selectNode('install')">
+                                <rect width="180" height="80" x="-90" y="-40"/>
+                                <text x="0" y="-10" text-anchor="middle" class="node-icon">🚀</text>
+                                <text x="0" y="15" text-anchor="middle">Install Docker</text>
+                            </g>
+
+                            <g class="node" transform="translate(550, 100)" onclick="selectNode('basics')">
+                                <rect width="180" height="80" x="-90" y="-40"/>
+                                <text x="0" y="-10" text-anchor="middle" class="node-icon">📦</text>
+                                <text x="0" y="15" text-anchor="middle">Container Basics</text>
+                            </g>
+
+                            <g class="node" transform="translate(950, 100)" onclick="selectNode('images')">
+                                <rect width="180" height="80" x="-90" y="-40"/>
+                                <text x="0" y="-10" text-anchor="middle" class="node-icon">🏗️</text>
+                                <text x="0" y="15" text-anchor="middle">Build Images</text>
+                            </g>
+
+                            <g class="node" transform="translate(950, 300)" onclick="selectNode('compose')">
+                                <rect width="180" height="80" x="-90" y="-40"/>
+                                <text x="0" y="-10" text-anchor="middle" class="node-icon">🎼</text>
+                                <text x="0" y="15" text-anchor="middle">Docker Compose</text>
+                            </g>
+
+                            <g class="node" transform="translate(550, 300)" onclick="selectNode('volumes')">
+                                <rect width="180" height="80" x="-90" y="-40"/>
+                                <text x="0" y="-10" text-anchor="middle" class="node-icon">💾</text>
+                                <text x="0" y="15" text-anchor="middle">Data Persistence</text>
+                            </g>
+
+                            <g class="node" transform="translate(150, 300)" onclick="selectNode('network')">
+                                <rect width="180" height="80" x="-90" y="-40"/>
+                                <text x="0" y="-10" text-anchor="middle" class="node-icon">🌐</text>
+                                <text x="0" y="15" text-anchor="middle">Networking</text>
+                            </g>
+
+                            <g class="node" transform="translate(150, 500)" onclick="selectNode('registry')">
+                                <rect width="180" height="80" x="-90" y="-40"/>
+                                <text x="0" y="-10" text-anchor="middle" class="node-icon">📤</text>
+                                <text x="0" y="15" text-anchor="middle">Registry & CI/CD</text>
+                            </g>
+
+                            <g class="node" transform="translate(550, 500)" onclick="selectNode('production')">
+                                <rect width="180" height="80" x="-90" y="-40"/>
+                                <text x="0" y="-10" text-anchor="middle" class="node-icon">⚙️</text>
+                                <text x="0" y="15" text-anchor="middle">Production Deploy</text>
+                            </g>
+
+                            <g class="node" transform="translate(950, 500)" onclick="selectNode('orchestration')">
+                                <rect width="180" height="80" x="-90" y="-40"/>
+                                <text x="0" y="-10" text-anchor="middle" class="node-icon">☸️</text>
+                                <text x="0" y="15" text-anchor="middle">Orchestration (K8s)</text>
+                            </g>
+                        </g>
+
+                        <!-- Detail Layer (Hidden Initially) -->
+                        <g id="detailLayer" style="display: none;">
+                            <!-- Will be populated dynamically -->
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="info-header">
+                    <h2 id="infoTitle">Welcome to Your Docker Journey! 🎯</h2>
+                    <div id="infoBadges">
+                        <span class="info-badge">Beginner Friendly</span>
+                        <span class="info-badge">Hands-On</span>
+                    </div>
+                </div>
+
+                <div class="breadcrumb" id="breadcrumb">
+                    <span>Start</span> → Select a topic to begin
+                </div>
+
+                <div class="tab-container" id="tabContainer" style="display: none;">
+                    <button class="tab-btn active" onclick="showTab('concept')">📚 Concept</button>
+                    <button class="tab-btn" onclick="showTab('practical')">💻 Practical</button>
+                    <button class="tab-btn" onclick="showTab('troubleshoot')">🔧 Troubleshoot</button>
+                </div>
+
+                <div id="infoContent">
+                    <div class="info-section fade-in">
+                        <h3>🎯 How This Works</h3>
+                        <p>This interactive diagram will guide you through Docker step-by-step:</p>
+                        <ol class="step-list">
+                            <li><strong>Click any topic</strong> in the diagram to start learning</li>
+                            <li><strong>Follow the numbered path</strong> for the recommended learning order</li>
+                            <li><strong>Each topic has 3 tabs:</strong> Concept (theory), Practical (hands-on), Troubleshoot (common issues)</li>
+                            <li><strong>Use "Detailed Steps"</strong> button to see sub-topics for deeper learning</li>
+                        </ol>
+                        
+                        <div class="tip-box">
+                            <strong>💡 Pro Tip:</strong> Keep a terminal open and try commands as you learn!
+                        </div>
+
+                        <h3>📋 Prerequisites</h3>
+                        <ul>
+                            <li>✅ Basic command line knowledge</li>
+                            <li>✅ A computer with admin access</li>
+                            <li>✅ Internet connection for downloads</li>
+                            <li>✅ 4GB+ RAM recommended</li>
+                        </ul>
+
+                        <div class="success-box">
+                            <strong>Ready?</strong> Click "🚀 Install Docker" to begin your journey!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Database (Hidden) -->
+    <div id="contentDatabase" style="display: none;">
+        
+        <!-- Install Docker Content -->
+        <div data-node="install">
+            <div data-tab="concept">
+                <h3>🤔 What is Docker?</h3>
+                <p>Docker is a platform that packages your application and all its dependencies into a "container" - think of it as a lightweight, portable box that runs the same everywhere.</p>
+                
+                <h3>❓ Why Docker Matters</h3>
+                <ul>
+                    <li><strong>No more "works on my machine"</strong> - Containers run identically everywhere</li>
+                    <li><strong>Instant environment setup</strong> - New team members productive in minutes</li>
+                    <li><strong>Resource efficient</strong> - Unlike VMs, containers share the host OS kernel</li>
+                </ul>
+
+                <div class="tip-box">
+                    <strong>💡 Key Insight:</strong> Docker containers are NOT virtual machines. They're much lighter and faster!
+                </div>
+            </div>
+            
+            <div data-tab="practical">
+                <h3>🛠️ Installation Steps</h3>
+                <ol class="step-list">
+                    <li>
+                        <strong>Download Docker Desktop</strong>
+                        <div class="code-block">
+                        # For Windows/Mac: Visit docker.com/products/docker-desktop
+                        # For Linux Ubuntu/Debian:
+                        curl -fsSL https://get.docker.com -o get-docker.sh
+                        sudo sh get-docker.sh
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Verify Installation</strong>
+                        <div class="code-block">
+                        docker --version
+                        # Expected: Docker version 24.x.x, build xxxxx
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Test with Hello World</strong>
+                        <div class="code-block">
+                        docker run hello-world
+                        # This downloads a test image and runs it
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Enable Docker Service (Linux)</strong>
+                        <div class="code-block">
+                        sudo systemctl enable docker
+                        sudo systemctl start docker
+                        sudo usermod -aG docker $USER
+                        # Log out and back in for group changes
+                        </div>
+                    </li>
+                </ol>
+
+                <div class="success-box">
+                    ✅ If you see "Hello from Docker!" - you're ready to go!
+                </div>
+            </div>
+            
+            <div data-tab="troubleshoot">
+                <h3>🔧 Common Installation Issues</h3>
+                
+                <h4>❌ "Cannot connect to Docker daemon"</h4>
+                <div class="code-block">
+                # Fix: Start Docker service
+                sudo systemctl start docker
+                # Or on Mac/Windows: Open Docker Desktop app
+                </div>
+
+                <h4>❌ "Permission denied" on Linux</h4>
+                <div class="code-block">
+                # Fix: Add user to docker group
+                sudo usermod -aG docker $USER
+                newgrp docker  # Or logout/login
+                </div>
+
+                <h4>❌ WSL2 Issues on Windows</h4>
+                <div class="warning-box">
+                    Enable WSL2 in Windows Features, install WSL2 kernel update from Microsoft
+                </div>
+
+                <h4>❌ Virtualization Disabled</h4>
+                <p>Enable virtualization in BIOS/UEFI settings (Intel VT-x or AMD-V)</p>
+            </div>
+        </div>
+
+        <!-- Container Basics Content -->
+        <div data-node="basics">
+            <div data-tab="concept">
+                <h3>🎯 Container Fundamentals</h3>
+                <p>Containers are running instances of Docker images. Think of it this way:</p>
+                <ul>
+                    <li><strong>Image</strong> = Recipe/Blueprint (like a class in programming)</li>
+                    <li><strong>Container</strong> = Actual dish/Instance (like an object)</li>
+                    <li><strong>Registry</strong> = Cookbook library (Docker Hub)</li>
+                </ul>
+
+                <h3>🔄 Container Lifecycle</h3>
+                <div class="tip-box">
+                    <strong>States:</strong> Created → Running → Paused/Stopped → Removed
+                </div>
+
+                <h3>📊 Key Concepts</h3>
+                <ul>
+                    <li><strong>Isolation:</strong> Each container has its own filesystem, network, process space</li>
+                    <li><strong>Layers:</strong> Images built in layers, containers add writable layer on top</li>
+                    <li><strong>Ephemeral:</strong> Containers are temporary by default - data lost on removal</li>
+                </ul>
+            </div>
+            
+            <div data-tab="practical">
+                <h3>💻 Essential Docker Commands</h3>
+                
+                <h4>1️⃣ Pull an Image</h4>
+                <div class="code-block">
+                # Download nginx web server image
+                docker pull nginx:latest
+                
+                # List downloaded images
+                docker images
+                </div>
+
+                <h4>2️⃣ Run Your First Container</h4>
+                <div class="code-block">
+                # Run nginx in foreground (Ctrl+C to stop)
+                docker run nginx
+                
+                # Run in background (detached)
+                docker run -d nginx
+                
+                # Run with port mapping (host:container)
+                docker run -d -p 8080:80 nginx
+                # Visit http://localhost:8080
+                </div>
+
+                <h4>3️⃣ Manage Containers</h4>
+                <div class="code-block">
+                # List running containers
+                docker ps
+                
+                # List all containers (including stopped)
+                docker ps -a
+                
+                # Stop a container
+                docker stop [container_id]
+                
+                # Start a stopped container
+                docker start [container_id]
+                
+                # Remove a container
+                docker rm [container_id]
+                </div>
+
+                <h4>4️⃣ Interact with Containers</h4>
+                <div class="code-block">
+                # View logs
+                docker logs [container_id]
+                docker logs -f [container_id]  # Follow logs
+                
+                # Execute commands inside
+                docker exec -it [container_id] bash
+                # Type 'exit' to leave
+                
+                # Copy files
+                docker cp file.txt [container_id]:/path/
+                docker cp [container_id]:/path/file.txt .
+                </div>
+
+                <div class="success-box">
+                    🎉 Practice: Run MongoDB with mongo-express UI!
+                </div>
+                <div class="code-block">
+                # Create network
+                docker network create mongo-network
+                
+                # Run MongoDB
+                docker run -d \
+                    --name mongodb \
+                    --network mongo-network \
+                    -e MONGO_INITDB_ROOT_USERNAME=admin \
+                    -e MONGO_INITDB_ROOT_PASSWORD=pass \
+                    mongo
+                
+                # Run Mongo Express
+                docker run -d \
+                    --name mongo-express \
+                    --network mongo-network \
+                    -p 8081:8081 \
+                    -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin \
+                    -e ME_CONFIG_MONGODB_ADMINPASSWORD=pass \
+                    -e ME_CONFIG_MONGODB_SERVER=mongodb \
+                    mongo-express
+                
+                # Visit http://localhost:8081
+                </div>
+            </div>
+            
+            <div data-tab="troubleshoot">
+                <h3>🔧 Common Container Issues</h3>
+                
+                <h4>❌ Container exits immediately</h4>
+                <p>Check logs to see why:</p>
+                <div class="code-block">
+                docker logs [container_id]
+                # Look for error messages
+                </div>
+
+                <h4>❌ Port already in use</h4>
+                <div class="code-block">
+                # Find what's using the port
+                sudo lsof -i :8080  # Linux/Mac
+                netstat -ano | findstr :8080  # Windows
+                
+                # Use different port
+                docker run -p 8090:80 nginx
+                </div>
+
+                <h4>❌ Cannot connect to container</h4>
+                <ul>
+                    <li>Check port mapping: -p hostPort:containerPort</li>
+                    <li>Ensure container is running: docker ps</li>
+                    <li>Check firewall settings</li>
+                </ul>
+
+                <h4>❌ "No space left on device"</h4>
+                <div class="code-block">
+                # Clean up unused resources
+                docker system prune -a
+                
+                # Remove stopped containers
+                docker container prune
+                
+                # Remove unused images
+                docker image prune -a
+                </div>
+
+                <h4>❌ Container name conflicts</h4>
+                <div class="code-block">
+                # Remove container with same name
+                docker rm [container_name]
+                
+                # Or use auto-generated names
+                docker run nginx  # Docker assigns random name
+                </div>
+            </div>
+        </div>
+
+        <!-- Build Images Content -->
+        <div data-node="images">
+            <div data-tab="concept">
+                <h3>🎨 Understanding Docker Images</h3>
+                <p>Images are the blueprints for containers. They contain:</p>
+                <ul>
+                    <li><strong>Base OS:</strong> Minimal Linux distribution (Alpine, Ubuntu, etc.)</li>
+                    <li><strong>Runtime:</strong> Language/framework (Node.js, Python, Java)</li>
+                    <li><strong>Application Code:</strong> Your actual application</li>
+                    <li><strong>Configuration:</strong> Environment variables, exposed ports</li>
+                </ul>
+
+                <h3>📚 Image Layers</h3>
+                <div class="tip-box">
+                    <strong>Key Concept:</strong> Each instruction in Dockerfile creates a new layer. Layers are cached and reused!
+                </div>
+                
+                <h3>🏷️ Image Naming</h3>
+                <p>Format: <code>[registry/]username/imagename:tag</code></p>
+                <ul>
+                    <li>docker.io/library/nginx:latest (full name)</li>
+                    <li>nginx:latest (short form)</li>
+                    <li>myapp:v1.2.3 (custom versioning)</li>
+                </ul>
+            </div>
+            
+            <div data-tab="practical">
+                <h3>🛠️ Create Your First Image</h3>
+                
+                <h4>1️⃣ Create a Simple Node.js App</h4>
+                <div class="code-block">
+                # Create project directory
+                mkdir my-node-app && cd my-node-app
+                
+                # Create package.json
+                cat > package.json << EOF
+                {
+                  "name": "docker-app",
+                  "version": "1.0.0",
+                  "main": "server.js",
+                  "scripts": {
+                    "start": "node server.js"
+                  },
+                  "dependencies": {
+                    "express": "^4.18.0"
+                  }
+                }
+                EOF
+                
+                # Create server.js
+                cat > server.js << EOF
+                const express = require('express');
+                const app = express();
+                
+                app.get('/', (req, res) => {
+                  res.send('<h1>Hello from Docker! 🐳</h1>');
+                });
+                
+                app.listen(3000, () => {
+                  console.log('App running on port 3000');
+                });
+                EOF
+                </div>
+
+                <h4>2️⃣ Write Dockerfile</h4>
+                <div class="dockerfile-block">
+                # Use official Node.js image
+                FROM node:18-alpine
+                
+                # Set working directory
+                WORKDIR /app
+                
+                # Copy package files first (layer caching!)
+                COPY package*.json ./
+                
+                # Install dependencies
+                RUN npm install
+                
+                # Copy application code
+                COPY . .
+                
+                # Expose port
+                EXPOSE 3000
+                
+                # Define startup command
+                CMD ["npm", "start"]
+                </div>
+
+                <h4>3️⃣ Build the Image</h4>
+                <div class="code-block">
+                # Build with tag
+                docker build -t my-node-app:1.0 .
+                
+                # Watch the layers being created!
+                # Each step creates a new layer
+                
+                # List your images
+                docker images
+                
+                # Run your custom image
+                docker run -d -p 3000:3000 my-node-app:1.0
+                # Visit http://localhost:3000
+                </div>
+            </div>
+            
+            <div data-tab="troubleshoot">
+                <h3>🔧 Build Troubleshooting</h3>
+                
+                <h4>❌ Build fails at RUN command</h4>
+                <div class="code-block">
+                # Debug with interactive shell
+                docker run -it node:18-alpine sh
+                
+                # Test commands manually first
+                </div>
+
+                <h4>❌ Image is too large</h4>
+                <div class="tip-box">
+                    <strong>Solutions:</strong> Use alpine images, multi-stage builds, .dockerignore file
+                </div>
+                
+                <div class="code-block">
+                # Create .dockerignore
+                node_modules
+                .git
+                *.md
+                .env
+                </div>
+
+                <h4>❌ Cannot find Dockerfile</h4>
+                <div class="code-block">
+                # Specify Dockerfile location
+                docker build -f path/to/Dockerfile -t myapp .
+                </div>
+            </div>
+        </div>
+
+        <!-- Docker Compose Content -->
+        <div data-node="compose">
+            <div data-tab="concept">
+                <h3>🎭 Multi-Container Applications</h3>
+                <p>Docker Compose lets you define and run multi-container applications using a YAML file.</p>
+                
+                <h3>📋 Why Use Compose?</h3>
+                <ul>
+                    <li><strong>Simple:</strong> Define entire stack in one file</li>
+                    <li><strong>Reproducible:</strong> Same environment every time</li>
+                    <li><strong>Networked:</strong> Containers can communicate by name</li>
+                    <li><strong>Scalable:</strong> Easy to scale services up/down</li>
+                </ul>
+
+                <h3>🔧 Key Components</h3>
+                <ul>
+                    <li><strong>Services:</strong> Container definitions</li>
+                    <li><strong>Networks:</strong> How containers communicate</li>
+                    <li><strong>Volumes:</strong> Data persistence</li>
+                    <li><strong>Environment:</strong> Configuration variables</li>
+                </ul>
+            </div>
+            
+            <div data-tab="practical">
+                <h3>🛠️ Complete Web Stack Example</h3>
+                
+                <h4>1️⃣ Create docker-compose.yml</h4>
+                <div class="yaml-block">
+                version: '3.8'
+                
+                services:
+                  web:
+                    build: .
+                    ports:
+                      - "3000:3000"
+                    depends_on:
+                      - db
+                      - redis
+                    environment:
+                      - DATABASE_URL=mongodb://db:27017/myapp
+                      - REDIS_URL=redis://redis:6379
+                    volumes:
+                      - ./src:/app/src
+                    networks:
+                      - app-network
+                
+                  db:
+                    image: mongo:latest
+                    ports:
+                      - "27017:27017"
+                    volumes:
+                      - mongo_data:/data/db
+                    environment:
+                      - MONGO_INITDB_ROOT_USERNAME=admin
+                      - MONGO_INITDB_ROOT_PASSWORD=secret
+                    networks:
+                      - app-network
+                
+                  redis:
+                    image: redis:alpine
+                    ports:
+                      - "6379:6379"
+                    networks:
+                      - app-network
+                
+                volumes:
+                  mongo_data:
+                
+                networks:
+                  app-network:
+                    driver: bridge
+                </div>
+
+                <h4>2️⃣ Essential Compose Commands</h4>
+                <div class="code-block">
+                # Start all services in background
+                docker-compose up -d
+                
+                # View all running services
+                docker-compose ps
+                
+                # View logs from all services
+                docker-compose logs -f
+                
+                # Scale a service
+                docker-compose up -d --scale web=3
+                
+                # Stop all services
+                docker-compose stop
+                
+                # Remove everything (containers, networks)
+                docker-compose down
+                </div>
+            </div>
+            
+            <div data-tab="troubleshoot">
+                <h3>🔧 Compose Troubleshooting</h3>
+                
+                <h4>❌ Service can't connect to another service</h4>
+                <div class="code-block">
+                # Check if services are on same network
+                docker-compose ps
+                docker network ls
+                
+                # Use service name as hostname
+                # Example: mongodb://db:27017 (not localhost:27017)
+                </div>
+
+                <h4>❌ Port already in use</h4>
+                <div class="code-block">
+                # Change port mapping in compose file
+                ports:
+                  - "8080:80"  # host:container
+                </div>
+
+                <h4>❌ Volume mount permission issues</h4>
+                <div class="code-block">
+                # Fix ownership
+                sudo chown -R $USER:$USER ./data
+                </div>
+            </div>
+        </div>
+
+        <!-- Add remaining nodes with minimal content for now -->
+        <div data-node="volumes">
+            <div data-tab="concept">
+                <h3>💾 Data Persistence</h3>
+                <p>By default, container data is lost when the container is removed. Volumes solve this by providing persistent storage.</p>
+            </div>
+            <div data-tab="practical">
+                <h3>🛠️ Using Volumes</h3>
+                <div class="code-block">
+                # Create and use a named volume
+                docker volume create my-data
+                docker run -d -v my-data:/data nginx
+                </div>
+            </div>
+            <div data-tab="troubleshoot">
+                <h3>🔧 Volume Issues</h3>
+                <p>Common issues include permission problems and volume not found errors.</p>
+            </div>
+        </div>
+
+        <div data-node="network">
+            <div data-tab="concept">
+                <h3>🌐 Container Networking</h3>
+                <p>Docker provides different network types for container communication.</p>
+            </div>
+            <div data-tab="practical">
+                <h3>🛠️ Network Commands</h3>
+                <div class="code-block">
+                # Create custom network
+                docker network create my-network
+                docker run -d --network my-network --name web nginx
+                </div>
+            </div>
+            <div data-tab="troubleshoot">
+                <h3>🔧 Network Issues</h3>
+                <p>Check network configuration and container connectivity.</p>
+            </div>
+        </div>
+
+        <div data-node="registry">
+            <div data-tab="concept">
+                <h3>📤 Image Distribution</h3>
+                <p>Container registries store and distribute Docker images.</p>
+            </div>
+            <div data-tab="practical">
+                <h3>🛠️ Push to Registry</h3>
+                <div class="code-block">
+                # Tag and push image
+                docker tag my-app:latest username/my-app:v1.0
+                docker push username/my-app:v1.0
+                </div>
+            </div>
+            <div data-tab="troubleshoot">
+                <h3>🔧 Registry Issues</h3>
+                <p>Authentication and connectivity problems are common.</p>
+            </div>
+        </div>
+
+        <div data-node="production">
+            <div data-tab="concept">
+                <h3>🎯 Production Considerations</h3>
+                <p>Running containers in production requires security, monitoring, and scaling considerations.</p>
+            </div>
+            <div data-tab="practical">
+                <h3>🚀 Production Setup</h3>
+                <div class="dockerfile-block">
+                # Add health checks to Dockerfile
+                HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+                    CMD curl -f http://localhost:3000/health || exit 1
+                </div>
+            </div>
+            <div data-tab="troubleshoot">
+                <h3>🔧 Production Issues</h3>
+                <p>Monitor logs, health checks, and resource usage.</p>
+            </div>
+        </div>
+
+        <div data-node="orchestration">
+            <div data-tab="concept">
+                <h3>🎭 Beyond Docker Compose</h3>
+                <p>Kubernetes (K8s) provides advanced container orchestration with auto-scaling and self-healing.</p>
+            </div>
+            <div data-tab="practical">
+                <h3>🛠️ Basic Kubernetes</h3>
+                <div class="code-block">
+                # Install minikube for local development
+                minikube start
+                kubectl get pods
+                </div>
+            </div>
+            <div data-tab="troubleshoot">
+                <h3>🔧 K8s Issues</h3>
+                <p>Check pod status and cluster configuration.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
