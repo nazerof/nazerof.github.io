@@ -1,28 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- ====================================
+         DOCUMENT CONFIGURATION
+         Objective: Basic HTML setup and metadata
+         Docs: Standard HTML5 document structure
+         ==================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Docker Interactive Learning Diagram - Complete DevOps Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- ====================================
+         MAIN APPLICATION CONTAINER
+         Objective: Primary wrapper for entire learning platform
+         Docs: Contains header, content sections, and navigation
+         ==================================== -->
     <div class="main-container">
+        
+        <!-- ====================================
+             HEADER SECTION
+             Objective: Platform branding and introductory information
+             Docs: Displays main title and learning path description
+             ==================================== -->
         <div class="header">
-            <h1>🐳 Docker Complete Learning Path</h1>
+            <h1><i class="fab fa-docker"></i> Docker Complete Learning Path</h1>
             <p>Interactive DevOps Journey - From Zero to Production</p>
         </div>
 
         <div class="content-wrapper">
+            
+            <!-- ====================================
+                 INTERACTIVE DIAGRAM SECTION
+                 Objective: Visual learning path with clickable nodes
+                 Docs: Contains SVG diagram with Docker learning topics
+                       and layer controls for different detail levels
+                 ==================================== -->
             <div class="diagram-section">
+                
+                <!-- ====================================
+                     DIAGRAM CONTROLS
+                     Objective: Layer visibility and view management
+                     Docs: Buttons to switch between overview/detail views
+                     ==================================== -->
                 <div class="layer-controls">
-                    <button class="control-btn active" onclick="showLayer('overview')">📊 Overview</button>
-                    <button class="control-btn" onclick="showLayer('detail')" id="detailBtn" style="display:none">🔍 Detailed Steps</button>
-                    <button class="control-btn" onclick="resetView()">🔄 Reset</button>
+                    <button class="control-btn active" onclick="showLayer('overview')">
+                        <i class="fas fa-chart-bar"></i> Overview
+                    </button>
+                    <button class="control-btn" onclick="showLayer('detail')" id="detailBtn" style="display:none">
+                        <i class="fas fa-search"></i> Detailed Steps
+                    </button>
+                    <button class="control-btn" onclick="resetView()">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
                 </div>
+
+                <!-- ====================================
+                     SVG DIAGRAM CONTAINER
+                     Objective: Interactive learning path visualization
+                     Docs: Scalable vector graphics showing Docker workflow
+                           with clickable nodes for each learning topic
+                     ==================================== -->
 
                 <div class="diagram-container">
                     <svg class="diagram-svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet">
+                        
+                        <!-- ====================================
+                             SVG DEFINITIONS
+                             Objective: Reusable visual elements
+                             Docs: Gradients, markers, and styling definitions
+                                   for consistent diagram appearance
+                             ==================================== -->
                         <defs>
                             <linearGradient id="activeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                                 <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
@@ -36,9 +86,15 @@
                             </marker>
                         </defs>
 
-                        <!-- Overview Layer -->
+                        <!-- ====================================
+                             OVERVIEW LAYER
+                             Objective: Main learning path visualization
+                             Docs: Shows 9 Docker topics connected in learning sequence
+                                   Each node is clickable for detailed content
+                             ==================================== -->
                         <g id="overviewLayer">
-                            <!-- Edges -->
+                            
+                            <!-- Connection Lines Between Topics -->
                             <path class="edge" d="M 250 100 L 450 100" />
                             <path class="edge" d="M 650 100 L 850 100" />
                             <path class="edge" d="M 950 150 L 950 250" />
@@ -48,92 +104,172 @@
                             <path class="edge" d="M 250 500 L 450 500" />
                             <path class="edge" d="M 650 500 L 850 500" />
 
-                            <!-- Nodes -->
+                            <!-- ====================================
+                                 LEARNING NODES
+                                 Objective: Clickable topics for interactive learning
+                                 Docs: Each represents a major Docker concept
+                                       Positioned in logical learning sequence
+                                 ==================================== -->
+                            <!-- Topic 1: Docker Installation -->
                             <g class="node" transform="translate(150, 100)" onclick="selectNode('install')">
                                 <rect width="180" height="80" x="-90" y="-40"/>
-                                <text x="0" y="-10" text-anchor="middle" class="node-icon">🚀</text>
+                                <foreignObject x="-10" y="-20" width="20" height="20">
+                                    <i class="fas fa-download node-icon"></i>
+                                </foreignObject>
                                 <text x="0" y="15" text-anchor="middle">Install Docker</text>
                             </g>
 
+                            <!-- Topic 2: Container Fundamentals -->
                             <g class="node" transform="translate(550, 100)" onclick="selectNode('basics')">
                                 <rect width="180" height="80" x="-90" y="-40"/>
-                                <text x="0" y="-10" text-anchor="middle" class="node-icon">📦</text>
+                                <foreignObject x="-10" y="-20" width="20" height="20">
+                                    <i class="fas fa-cube node-icon"></i>
+                                </foreignObject>
                                 <text x="0" y="15" text-anchor="middle">Container Basics</text>
                             </g>
 
+                            <!-- Topic 3: Image Building -->
                             <g class="node" transform="translate(950, 100)" onclick="selectNode('images')">
                                 <rect width="180" height="80" x="-90" y="-40"/>
-                                <text x="0" y="-10" text-anchor="middle" class="node-icon">🏗️</text>
+                                <foreignObject x="-10" y="-20" width="20" height="20">
+                                    <i class="fas fa-hammer node-icon"></i>
+                                </foreignObject>
                                 <text x="0" y="15" text-anchor="middle">Build Images</text>
                             </g>
 
+                            <!-- Topic 4: Multi-Container Apps -->
                             <g class="node" transform="translate(950, 300)" onclick="selectNode('compose')">
                                 <rect width="180" height="80" x="-90" y="-40"/>
-                                <text x="0" y="-10" text-anchor="middle" class="node-icon">🎼</text>
+                                <foreignObject x="-10" y="-20" width="20" height="20">
+                                    <i class="fas fa-layer-group node-icon"></i>
+                                </foreignObject>
                                 <text x="0" y="15" text-anchor="middle">Docker Compose</text>
                             </g>
 
+                            <!-- Topic 5: Data Persistence -->
                             <g class="node" transform="translate(550, 300)" onclick="selectNode('volumes')">
                                 <rect width="180" height="80" x="-90" y="-40"/>
-                                <text x="0" y="-10" text-anchor="middle" class="node-icon">💾</text>
+                                <foreignObject x="-10" y="-20" width="20" height="20">
+                                    <i class="fas fa-database node-icon"></i>
+                                </foreignObject>
                                 <text x="0" y="15" text-anchor="middle">Data Persistence</text>
                             </g>
 
+                            <!-- Topic 6: Container Networking -->
                             <g class="node" transform="translate(150, 300)" onclick="selectNode('network')">
                                 <rect width="180" height="80" x="-90" y="-40"/>
-                                <text x="0" y="-10" text-anchor="middle" class="node-icon">🌐</text>
+                                <foreignObject x="-10" y="-20" width="20" height="20">
+                                    <i class="fas fa-network-wired node-icon"></i>
+                                </foreignObject>
                                 <text x="0" y="15" text-anchor="middle">Networking</text>
                             </g>
 
+                            <!-- Topic 7: Image Distribution -->
                             <g class="node" transform="translate(150, 500)" onclick="selectNode('registry')">
                                 <rect width="180" height="80" x="-90" y="-40"/>
-                                <text x="0" y="-10" text-anchor="middle" class="node-icon">📤</text>
+                                <foreignObject x="-10" y="-20" width="20" height="20">
+                                    <i class="fas fa-cloud-upload-alt node-icon"></i>
+                                </foreignObject>
                                 <text x="0" y="15" text-anchor="middle">Registry & CI/CD</text>
                             </g>
 
+                            <!-- Topic 8: Production Deployment -->
                             <g class="node" transform="translate(550, 500)" onclick="selectNode('production')">
                                 <rect width="180" height="80" x="-90" y="-40"/>
-                                <text x="0" y="-10" text-anchor="middle" class="node-icon">⚙️</text>
+                                <foreignObject x="-10" y="-20" width="20" height="20">
+                                    <i class="fas fa-cogs node-icon"></i>
+                                </foreignObject>
                                 <text x="0" y="15" text-anchor="middle">Production Deploy</text>
                             </g>
 
+                            <!-- Topic 9: Container Orchestration -->
                             <g class="node" transform="translate(950, 500)" onclick="selectNode('orchestration')">
                                 <rect width="180" height="80" x="-90" y="-40"/>
-                                <text x="0" y="-10" text-anchor="middle" class="node-icon">☸️</text>
+                                <foreignObject x="-10" y="-20" width="20" height="20">
+                                    <i class="fab fa-kubernetes node-icon"></i>
+                                </foreignObject>
                                 <text x="0" y="15" text-anchor="middle">Orchestration (K8s)</text>
                             </g>
                         </g>
 
-                        <!-- Detail Layer (Hidden Initially) -->
+                        <!-- ====================================
+                             DETAIL LAYER
+                             Objective: Extended view for advanced topics
+                             Docs: Placeholder for dynamically populated
+                                   detailed learning paths (hidden by default)
+                             ==================================== -->
                         <g id="detailLayer" style="display: none;">
-                            <!-- Will be populated dynamically -->
+                            <!-- Will be populated dynamically by JavaScript -->
                         </g>
                     </svg>
                 </div>
             </div>
 
+            <!-- ====================================
+                 CONTENT INFORMATION PANEL
+                 Objective: Dynamic content display for selected topics
+                 Docs: Shows detailed learning content with tabbed interface
+                       Updates based on user's diagram node selection
+                 ==================================== -->
             <div class="info-panel">
+                
+                <!-- ====================================
+                     PANEL HEADER
+                     Objective: Title and learning badges display
+                     Docs: Shows current topic title and difficulty/type indicators
+                     ==================================== -->
                 <div class="info-header">
-                    <h2 id="infoTitle">Welcome to Your Docker Journey! 🎯</h2>
+                    <h2 id="infoTitle">Welcome to Your Docker Journey! <i class="fas fa-route"></i></h2>
                     <div id="infoBadges">
                         <span class="info-badge">Beginner Friendly</span>
                         <span class="info-badge">Hands-On</span>
                     </div>
                 </div>
 
+                <!-- ====================================
+                     BREADCRUMB NAVIGATION
+                     Objective: Show current position in learning path
+                     Docs: Visual indicator of user's progress through topics
+                     ==================================== -->
                 <div class="breadcrumb" id="breadcrumb">
                     <span>Start</span> → Select a topic to begin
                 </div>
 
+                <!-- ====================================
+                     TABBED CONTENT INTERFACE
+                     Objective: Organize content by learning approach
+                     Docs: Three tabs for each topic:
+                           - Concept: Theory and explanations
+                           - Practical: Hands-on commands and examples
+                           - Troubleshoot: Common issues and solutions
+                     ==================================== -->
                 <div class="tab-container" id="tabContainer" style="display: none;">
-                    <button class="tab-btn active" onclick="showTab('concept')">📚 Concept</button>
-                    <button class="tab-btn" onclick="showTab('practical')">💻 Practical</button>
-                    <button class="tab-btn" onclick="showTab('troubleshoot')">🔧 Troubleshoot</button>
+                    <button class="tab-btn active" onclick="showTab('concept')">
+                        <i class="fas fa-book"></i> Concept
+                    </button>
+                    <button class="tab-btn" onclick="showTab('practical')">
+                        <i class="fas fa-laptop-code"></i> Practical
+                    </button>
+                    <button class="tab-btn" onclick="showTab('troubleshoot')">
+                        <i class="fas fa-wrench"></i> Troubleshoot
+                    </button>
                 </div>
 
+                <!-- ====================================
+                     DYNAMIC CONTENT AREA
+                     Objective: Display topic-specific learning content
+                     Docs: Content populated from contentDatabase based on
+                           selected node and active tab
+                     ==================================== -->
                 <div id="infoContent">
+                    <!-- ====================================
+                         DEFAULT WELCOME CONTENT
+                         Objective: Initial instructions and platform overview
+                         Docs: Explains how to use the interactive learning platform
+                               Provides prerequisites and getting started guide
+                         ==================================== -->
                     <div class="info-section fade-in">
-                        <h3>🎯 How This Works</h3>
+                        <h3><i class="fas fa-bullseye"></i> How This Works</h3>
                         <p>This interactive diagram will guide you through Docker step-by-step:</p>
                         <ol class="step-list">
                             <li><strong>Click any topic</strong> in the diagram to start learning</li>
@@ -143,19 +279,19 @@
                         </ol>
                         
                         <div class="tip-box">
-                            <strong>💡 Pro Tip:</strong> Keep a terminal open and try commands as you learn!
+                            <strong><i class="fas fa-lightbulb"></i> Pro Tip:</strong> Keep a terminal open and try commands as you learn!
                         </div>
 
-                        <h3>📋 Prerequisites</h3>
+                        <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
                         <ul>
-                            <li>✅ Basic command line knowledge</li>
-                            <li>✅ A computer with admin access</li>
-                            <li>✅ Internet connection for downloads</li>
-                            <li>✅ 4GB+ RAM recommended</li>
+                            <li><i class="fas fa-check"></i> Basic command line knowledge</li>
+                            <li><i class="fas fa-check"></i> A computer with admin access</li>
+                            <li><i class="fas fa-check"></i> Internet connection for downloads</li>
+                            <li><i class="fas fa-check"></i> 4GB+ RAM recommended</li>
                         </ul>
 
                         <div class="success-box">
-                            <strong>Ready?</strong> Click "🚀 Install Docker" to begin your journey!
+                            <strong>Ready?</strong> Click "<i class="fas fa-download"></i> Install Docker" to begin your journey!
                         </div>
                     </div>
                 </div>
@@ -163,10 +299,21 @@
         </div>
     </div>
 
-    <!-- Content Database (Hidden) -->
+    <!-- ====================================
+         EMBEDDED CONTENT DATABASE
+         Objective: Store all educational content for CORS-free access
+         Docs: Hidden div containing all learning materials organized by:
+               - data-node: Topic identifier (install, basics, images, etc.)
+               - data-tab: Content type (concept, practical, troubleshoot)
+               This approach avoids external file fetching issues
+         ==================================== -->
     <div id="contentDatabase" style="display: none;">
         
-        <!-- Install Docker Content -->
+        <!-- ====================================
+             DOCKER INSTALLATION CONTENT
+             Objective: Complete guide for Docker setup across platforms
+             Docs: Covers concept, installation steps, and troubleshooting
+             ==================================== -->
         <div data-node="install">
             <div data-tab="concept">
                 <h3>🤔 What is Docker?</h3>
@@ -190,33 +337,86 @@
                     <li>
                         <strong>Download Docker Desktop</strong>
                         <div class="code-block">
-                        # For Windows/Mac: Visit docker.com/products/docker-desktop
-                        # For Linux Ubuntu/Debian:
-                        curl -fsSL https://get.docker.com -o get-docker.sh
-                        sudo sh get-docker.sh
+                            <div class="code-header">
+                                <div class="code-title">Terminal Commands</div>
+                                <button class="copy-btn" onclick="copyCodeBlock(this)" title="Copy code">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="code-content">
+<span class="comment"># For Windows/Mac: Visit <span class="url">docker.com/products/docker-desktop</span></span>
+<span class="comment"># For Linux Ubuntu/Debian:</span>
+<span class="command">curl <span class="flag">-fsSL</span> <span class="url">https://get.docker.com</span> <span class="flag">-o</span> <span class="string">get-docker.sh</span></span>
+<span class="command">sudo sh <span class="string">get-docker.sh</span></span>
+                            </div>
                         </div>
                     </li>
                     <li>
                         <strong>Verify Installation</strong>
                         <div class="code-block">
-                        docker --version
-                        # Expected: Docker version 24.x.x, build xxxxx
+                            <div class="code-header">
+                                <div class="code-title">Terminal Commands</div>
+                                <div class="code-actions">
+                                    <button class="copy-btn" onclick="copyCodeBlock(this)" title="Copy code">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="fullscreen-btn" onclick="toggleFullscreen(this)" title="Fullscreen">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M15 3h6v6"></path>
+                                            <path d="M9 21H3v-6"></path>
+                                            <path d="M21 3l-7 7"></path>
+                                            <path d="M3 21l7-7"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="code-content">
+<span class="command">docker <span class="flag">--version</span></span>
+<span class="comment"># Expected: <span class="output">Docker version 24.x.x, build xxxxx</span></span>
+                            </div>
                         </div>
                     </li>
                     <li>
                         <strong>Test with Hello World</strong>
                         <div class="code-block">
-                        docker run hello-world
-                        # This downloads a test image and runs it
+                            <div class="code-header">
+                                <div class="code-title">Terminal Commands</div>
+                                <div class="code-actions">
+                                    <button class="copy-btn" onclick="copyCodeBlock(this)" title="Copy code">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="fullscreen-btn" onclick="toggleFullscreen(this)" title="Fullscreen">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M15 3h6v6"></path>
+                                            <path d="M9 21H3v-6"></path>
+                                            <path d="M21 3l-7 7"></path>
+                                            <path d="M3 21l7-7"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="code-content">
+<span class="command">docker run <span class="string">hello-world</span></span>
+<span class="comment"># This downloads a test image and runs it</span>
+                            </div>
                         </div>
                     </li>
                     <li>
                         <strong>Enable Docker Service (Linux)</strong>
                         <div class="code-block">
-                        sudo systemctl enable docker
-                        sudo systemctl start docker
-                        sudo usermod -aG docker $USER
-                        # Log out and back in for group changes
+<span class="command">sudo systemctl enable docker</span>
+<span class="command">sudo systemctl start docker</span>
+<span class="command">sudo usermod <span class="flag">-aG</span> docker <span class="variable">$USER</span></span>
+<span class="comment"># Log out and back in for group changes</span>
                         </div>
                     </li>
                 </ol>
@@ -231,16 +431,17 @@
                 
                 <h4>❌ "Cannot connect to Docker daemon"</h4>
                 <div class="code-block">
-                # Fix: Start Docker service
-                sudo systemctl start docker
-                # Or on Mac/Windows: Open Docker Desktop app
+<span class="comment"># Fix: Start Docker service</span>
+<span class="command">sudo systemctl start docker</span>
+<span class="comment"># Or on Mac/Windows: Open Docker Desktop app</span>
                 </div>
 
                 <h4>❌ "Permission denied" on Linux</h4>
                 <div class="code-block">
-                # Fix: Add user to docker group
-                sudo usermod -aG docker $USER
-                newgrp docker  # Or logout/login
+<span class="comment"># Fix: Add user to docker group</span>
+<span class="command">sudo usermod <span class="flag">-aG</span> docker <span class="variable">$USER</span></span>
+<span class="command">newgrp docker</span>
+<span class="comment"># Or logout/login</span>
                 </div>
 
                 <h4>❌ WSL2 Issues on Windows</h4>
@@ -253,7 +454,11 @@
             </div>
         </div>
 
-        <!-- Container Basics Content -->
+        <!-- ====================================
+             CONTAINER FUNDAMENTALS CONTENT
+             Objective: Core Docker concepts and basic operations
+             Docs: Essential commands, lifecycle management, practical examples
+             ==================================== -->
         <div data-node="basics">
             <div data-tab="concept">
                 <h3>🎯 Container Fundamentals</h3>
@@ -282,85 +487,86 @@
                 
                 <h4>1️⃣ Pull an Image</h4>
                 <div class="code-block">
-                # Download nginx web server image
-                docker pull nginx:latest
-                
-                # List downloaded images
-                docker images
+<span class="comment"># Download nginx web server image</span>
+<span class="command">docker pull nginx:latest</span>
+
+<span class="comment"># List downloaded images</span>
+<span class="command">docker images</span>
                 </div>
 
                 <h4>2️⃣ Run Your First Container</h4>
                 <div class="code-block">
-                # Run nginx in foreground (Ctrl+C to stop)
-                docker run nginx
-                
-                # Run in background (detached)
-                docker run -d nginx
-                
-                # Run with port mapping (host:container)
-                docker run -d -p 8080:80 nginx
-                # Visit http://localhost:8080
+<span class="comment"># Run nginx in foreground (Ctrl+C to stop)</span>
+<span class="command">docker run nginx</span>
+
+<span class="comment"># Run in background (detached)</span>
+<span class="command">docker run <span class="flag">-d</span> nginx</span>
+
+<span class="comment"># Run with port mapping (host:container)</span>
+<span class="command">docker run <span class="flag">-d</span> <span class="flag">-p</span> <span class="string">8080:80</span> nginx</span>
+<span class="comment"># Visit <span class="url">http://localhost:8080</span></span>
                 </div>
 
                 <h4>3️⃣ Manage Containers</h4>
                 <div class="code-block">
-                # List running containers
-                docker ps
-                
-                # List all containers (including stopped)
-                docker ps -a
-                
-                # Stop a container
-                docker stop [container_id]
-                
-                # Start a stopped container
-                docker start [container_id]
-                
-                # Remove a container
-                docker rm [container_id]
+<span class="comment"># List running containers</span>
+<span class="command">docker ps</span>
+
+<span class="comment"># List all containers (including stopped)</span>
+<span class="command">docker ps <span class="flag">-a</span></span>
+
+<span class="comment"># Stop a container</span>
+<span class="command">docker stop <span class="variable">[container_id]</span></span>
+
+<span class="comment"># Start a stopped container</span>
+<span class="command">docker start <span class="variable">[container_id]</span></span>
+
+<span class="comment"># Remove a container</span>
+<span class="command">docker rm <span class="variable">[container_id]</span></span>
                 </div>
 
                 <h4>4️⃣ Interact with Containers</h4>
                 <div class="code-block">
-                # View logs
-                docker logs [container_id]
-                docker logs -f [container_id]  # Follow logs
-                
-                # Execute commands inside
-                docker exec -it [container_id] bash
-                # Type 'exit' to leave
-                
-                # Copy files
-                docker cp file.txt [container_id]:/path/
-                docker cp [container_id]:/path/file.txt .
+<span class="comment"># View logs</span>
+<span class="command">docker logs <span class="variable">[container_id]</span></span>
+<span class="command">docker logs <span class="flag">-f</span> <span class="variable">[container_id]</span></span>
+<span class="comment"># Follow logs in real-time</span>
+
+<span class="comment"># Execute commands inside container</span>
+<span class="command">docker exec <span class="flag">-it</span> <span class="variable">[container_id]</span> bash</span>
+<span class="comment"># Type 'exit' to leave</span>
+
+<span class="comment"># Copy files to/from container</span>
+<span class="command">docker cp <span class="string">file.txt</span> <span class="variable">[container_id]</span>:<span class="string">/path/</span></span>
+<span class="command">docker cp <span class="variable">[container_id]</span>:<span class="string">/path/file.txt</span> <span class="string">.</span></span>
                 </div>
 
                 <div class="success-box">
                     🎉 Practice: Run MongoDB with mongo-express UI!
                 </div>
                 <div class="code-block">
-                # Create network
-                docker network create mongo-network
-                
-                # Run MongoDB
-                docker run -d \
-                    --name mongodb \
-                    --network mongo-network \
-                    -e MONGO_INITDB_ROOT_USERNAME=admin \
-                    -e MONGO_INITDB_ROOT_PASSWORD=pass \
-                    mongo
-                
-                # Run Mongo Express
-                docker run -d \
-                    --name mongo-express \
-                    --network mongo-network \
-                    -p 8081:8081 \
-                    -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin \
-                    -e ME_CONFIG_MONGODB_ADMINPASSWORD=pass \
-                    -e ME_CONFIG_MONGODB_SERVER=mongodb \
-                    mongo-express
-                
-                # Visit http://localhost:8081
+<span class="comment"># Create network</span>
+<span class="command">docker network create <span class="variable">mongo-network</span></span>
+
+<span class="comment"># Run MongoDB</span>
+<span class="command">docker run <span class="flag">-d</span> \</span>
+<span class="command">    <span class="flag">--name</span> <span class="string">mongodb</span> \</span>
+<span class="command">    <span class="flag">--network</span> <span class="variable">mongo-network</span> \</span>
+<span class="command">    <span class="flag">-e</span> <span class="variable">MONGO_INITDB_ROOT_USERNAME</span>=<span class="string">admin</span> \</span>
+<span class="command">    <span class="flag">-e</span> <span class="variable">MONGO_INITDB_ROOT_PASSWORD</span>=<span class="string">pass</span> \</span>
+<span class="command">    mongo</span>
+
+<span class="comment"># Run Mongo Express</span>
+<span class="command">docker run <span class="flag">-d</span> \</span>
+<span class="command">    <span class="flag">--name</span> <span class="string">mongo-express</span> \</span>
+<span class="command">    <span class="flag">--network</span> <span class="variable">mongo-network</span> \</span>
+<span class="command">    <span class="flag">-p</span> <span class="string">8081:8081</span> \</span>
+<span class="command">    <span class="flag">-e</span> <span class="variable">ME_CONFIG_MONGODB_ADMINUSERNAME</span>=<span class="string">admin</span> \</span>
+<span class="command">    <span class="flag">-e</span> <span class="variable">ME_CONFIG_MONGODB_ADMINPASSWORD</span>=<span class="string">pass</span> \</span>
+<span class="command">    <span class="flag">-e</span> <span class="variable">ME_CONFIG_MONGODB_SERVER</span>=<span class="string">mongodb</span> \</span>
+<span class="command">    mongo-express</span>
+
+<span class="comment"># Visit <span class="url">http://localhost:8081</span></span>
                 </div>
             </div>
             
@@ -370,18 +576,20 @@
                 <h4>❌ Container exits immediately</h4>
                 <p>Check logs to see why:</p>
                 <div class="code-block">
-                docker logs [container_id]
-                # Look for error messages
+<span class="command">docker logs <span class="variable">[container_id]</span></span>
+<span class="comment"># Look for error messages</span>
                 </div>
 
                 <h4>❌ Port already in use</h4>
                 <div class="code-block">
-                # Find what's using the port
-                sudo lsof -i :8080  # Linux/Mac
-                netstat -ano | findstr :8080  # Windows
-                
-                # Use different port
-                docker run -p 8090:80 nginx
+<span class="comment"># Find what's using the port</span>
+<span class="command">sudo lsof <span class="flag">-i</span> <span class="string">:8080</span></span>
+<span class="comment"># Linux/Mac</span>
+<span class="command">netstat <span class="flag">-ano</span> | findstr <span class="string">:8080</span></span>
+<span class="comment"># Windows</span>
+
+<span class="comment"># Use different port</span>
+<span class="command">docker run <span class="flag">-p</span> <span class="string">8090:80</span> nginx</span>
                 </div>
 
                 <h4>❌ Cannot connect to container</h4>
@@ -393,28 +601,33 @@
 
                 <h4>❌ "No space left on device"</h4>
                 <div class="code-block">
-                # Clean up unused resources
-                docker system prune -a
-                
-                # Remove stopped containers
-                docker container prune
-                
-                # Remove unused images
-                docker image prune -a
+<span class="comment"># Clean up unused resources</span>
+<span class="command">docker system prune <span class="flag">-a</span></span>
+
+<span class="comment"># Remove stopped containers</span>
+<span class="command">docker container prune</span>
+
+<span class="comment"># Remove unused images</span>
+<span class="command">docker image prune <span class="flag">-a</span></span>
                 </div>
 
                 <h4>❌ Container name conflicts</h4>
                 <div class="code-block">
-                # Remove container with same name
-                docker rm [container_name]
-                
-                # Or use auto-generated names
-                docker run nginx  # Docker assigns random name
+<span class="comment"># Remove container with same name</span>
+<span class="command">docker rm <span class="variable">[container_name]</span></span>
+
+<span class="comment"># Or use auto-generated names</span>
+<span class="command">docker run nginx</span>
+<span class="comment"># Docker assigns random name</span>
                 </div>
             </div>
         </div>
 
-        <!-- Build Images Content -->
+        <!-- ====================================
+             IMAGE BUILDING CONTENT
+             Objective: Creating custom Docker images with Dockerfiles
+             Docs: Layer concepts, Dockerfile syntax, build optimization
+             ==================================== -->
         <div data-node="images">
             <div data-tab="concept">
                 <h3>🎨 Understanding Docker Images</h3>
@@ -445,77 +658,98 @@
                 
                 <h4>1️⃣ Create a Simple Node.js App</h4>
                 <div class="code-block">
-                # Create project directory
-                mkdir my-node-app && cd my-node-app
-                
-                # Create package.json
-                cat > package.json << EOF
-                {
-                  "name": "docker-app",
-                  "version": "1.0.0",
-                  "main": "server.js",
-                  "scripts": {
-                    "start": "node server.js"
-                  },
-                  "dependencies": {
-                    "express": "^4.18.0"
-                  }
-                }
-                EOF
-                
-                # Create server.js
-                cat > server.js << EOF
-                const express = require('express');
-                const app = express();
-                
-                app.get('/', (req, res) => {
-                  res.send('<h1>Hello from Docker! 🐳</h1>');
-                });
-                
-                app.listen(3000, () => {
-                  console.log('App running on port 3000');
-                });
-                EOF
+<span class="comment"># Create project directory</span>
+<span class="command">mkdir <span class="string">my-node-app</span> && cd <span class="string">my-node-app</span></span>
+
+<span class="comment"># Create package.json</span>
+<span class="command">cat > <span class="string">package.json</span> << <span class="string">EOF</span></span>
+<span class="string">{</span>
+<span class="string">  "name": "docker-app",</span>
+<span class="string">  "version": "1.0.0",</span>
+<span class="string">  "main": "server.js",</span>
+<span class="string">  "scripts": {</span>
+<span class="string">    "start": "node server.js"</span>
+<span class="string">  },</span>
+<span class="string">  "dependencies": {</span>
+<span class="string">    "express": "^4.18.0"</span>
+<span class="string">  }</span>
+<span class="string">}</span>
+<span class="string">EOF</span>
+
+<span class="comment"># Create server.js</span>
+<span class="command">cat > <span class="string">server.js</span> << <span class="string">EOF</span></span>
+<span class="string">const express = require('express');</span>
+<span class="string">const app = express();</span>
+
+<span class="string">app.get('/', (req, res) => {</span>
+<span class="string">  res.send('<h1>Hello from Docker! 🐳</h1>');</span>
+<span class="string">});</span>
+
+<span class="string">app.listen(3000, () => {</span>
+<span class="string">  console.log('App running on port 3000');</span>
+<span class="string">});</span>
+<span class="string">EOF</span>
                 </div>
 
                 <h4>2️⃣ Write Dockerfile</h4>
                 <div class="dockerfile-block">
-                # Use official Node.js image
-                FROM node:18-alpine
-                
-                # Set working directory
-                WORKDIR /app
-                
-                # Copy package files first (layer caching!)
-                COPY package*.json ./
-                
-                # Install dependencies
-                RUN npm install
-                
-                # Copy application code
-                COPY . .
-                
-                # Expose port
-                EXPOSE 3000
-                
-                # Define startup command
-                CMD ["npm", "start"]
+                    <div class="code-header">
+                        <div class="code-title">Container Definition</div>
+                        <div class="code-actions">
+                            <button class="copy-btn" onclick="copyCodeBlock(this)" title="Copy code">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                            <button class="fullscreen-btn" onclick="toggleFullscreen(this)" title="Fullscreen">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M15 3h6v6"></path>
+                                    <path d="M9 21H3v-6"></path>
+                                    <path d="M21 3l-7 7"></path>
+                                    <path d="M3 21l7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-content">
+<span class="comment"># Use official Node.js image</span>
+<span class="command">FROM</span> <span class="string">node:18-alpine</span>
+
+<span class="comment"># Set working directory</span>
+<span class="command">WORKDIR</span> <span class="string">/app</span>
+
+<span class="comment"># Copy package files first (layer caching!)</span>
+<span class="command">COPY</span> <span class="string">package*.json</span> <span class="string">./</span>
+
+<span class="comment"># Install dependencies</span>
+<span class="command">RUN</span> <span class="string">npm install</span>
+
+<span class="comment"># Copy application code</span>
+<span class="command">COPY</span> <span class="string">.</span> <span class="string">.</span>
+
+<span class="comment"># Expose port</span>
+<span class="command">EXPOSE</span> <span class="string">3000</span>
+
+<span class="comment"># Define startup command</span>
+<span class="command">CMD</span> <span class="string">["npm", "start"]</span>
+                    </div>
                 </div>
 
                 <h4>3️⃣ Build the Image</h4>
                 <div class="code-block">
-                # Build with tag
-                docker build -t my-node-app:1.0 .
-                
-                # Watch the layers being created!
-                # Each step creates a new layer
-                
-                # List your images
-                docker images
-                
-                # Run your custom image
-                docker run -d -p 3000:3000 my-node-app:1.0
-                # Visit http://localhost:3000
+<span class="comment"># Build with tag</span>
+<span class="command">docker build <span class="flag">-t</span> <span class="string">my-node-app:1.0</span> <span class="string">.</span></span>
+
+<span class="comment"># Watch the layers being created!</span>
+<span class="comment"># Each step creates a new layer</span>
+
+<span class="comment"># List your images</span>
+<span class="command">docker images</span>
+
+<span class="comment"># Run your custom image</span>
+<span class="command">docker run <span class="flag">-d</span> <span class="flag">-p</span> <span class="string">3000:3000</span> <span class="string">my-node-app:1.0</span></span>
+<span class="comment"># Visit <span class="url">http://localhost:3000</span></span>
                 </div>
             </div>
             
@@ -524,10 +758,10 @@
                 
                 <h4>❌ Build fails at RUN command</h4>
                 <div class="code-block">
-                # Debug with interactive shell
-                docker run -it node:18-alpine sh
-                
-                # Test commands manually first
+<span class="comment"># Debug with interactive shell</span>
+<span class="command">docker run <span class="flag">-it</span> <span class="string">node:18-alpine</span> sh</span>
+
+<span class="comment"># Test commands manually first</span>
                 </div>
 
                 <h4>❌ Image is too large</h4>
@@ -536,22 +770,26 @@
                 </div>
                 
                 <div class="code-block">
-                # Create .dockerignore
-                node_modules
-                .git
-                *.md
-                .env
+<span class="comment"># Create .dockerignore</span>
+<span class="string">node_modules</span>
+<span class="string">.git</span>
+<span class="string">*.md</span>
+<span class="string">.env</span>
                 </div>
 
                 <h4>❌ Cannot find Dockerfile</h4>
                 <div class="code-block">
-                # Specify Dockerfile location
-                docker build -f path/to/Dockerfile -t myapp .
+<span class="comment"># Specify Dockerfile location</span>
+<span class="command">docker build <span class="flag">-f</span> <span class="string">path/to/Dockerfile</span> <span class="flag">-t</span> <span class="string">myapp</span> <span class="string">.</span></span>
                 </div>
             </div>
         </div>
 
-        <!-- Docker Compose Content -->
+        <!-- ====================================
+             DOCKER COMPOSE CONTENT
+             Objective: Multi-container application orchestration
+             Docs: YAML configuration, service definitions, networking
+             ==================================== -->
         <div data-node="compose">
             <div data-tab="concept">
                 <h3>🎭 Multi-Container Applications</h3>
@@ -579,70 +817,91 @@
                 
                 <h4>1️⃣ Create docker-compose.yml</h4>
                 <div class="yaml-block">
-                version: '3.8'
-                
-                services:
-                  web:
-                    build: .
-                    ports:
-                      - "3000:3000"
-                    depends_on:
-                      - db
-                      - redis
-                    environment:
-                      - DATABASE_URL=mongodb://db:27017/myapp
-                      - REDIS_URL=redis://redis:6379
-                    volumes:
-                      - ./src:/app/src
-                    networks:
-                      - app-network
-                
-                  db:
-                    image: mongo:latest
-                    ports:
-                      - "27017:27017"
-                    volumes:
-                      - mongo_data:/data/db
-                    environment:
-                      - MONGO_INITDB_ROOT_USERNAME=admin
-                      - MONGO_INITDB_ROOT_PASSWORD=secret
-                    networks:
-                      - app-network
-                
-                  redis:
-                    image: redis:alpine
-                    ports:
-                      - "6379:6379"
-                    networks:
-                      - app-network
-                
-                volumes:
-                  mongo_data:
-                
-                networks:
-                  app-network:
-                    driver: bridge
+                    <div class="code-header">
+                        <div class="code-title">Docker Compose Configuration</div>
+                        <div class="code-actions">
+                            <button class="copy-btn" onclick="copyCodeBlock(this)" title="Copy code">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                            <button class="fullscreen-btn" onclick="toggleFullscreen(this)" title="Fullscreen">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M15 3h6v6"></path>
+                                    <path d="M9 21H3v-6"></path>
+                                    <path d="M21 3l-7 7"></path>
+                                    <path d="M3 21l7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-content">
+<span class="variable">version</span>: <span class="string">'3.8'</span>
+
+<span class="variable">services</span>:
+  <span class="variable">web</span>:
+    <span class="variable">build</span>: <span class="string">.</span>
+    <span class="variable">ports</span>:
+      - <span class="string">"3000:3000"</span>
+    <span class="variable">depends_on</span>:
+      - <span class="string">db</span>
+      - <span class="string">redis</span>
+    <span class="variable">environment</span>:
+      - <span class="string">DATABASE_URL=mongodb://db:27017/myapp</span>
+      - <span class="string">REDIS_URL=redis://redis:6379</span>
+    <span class="variable">volumes</span>:
+      - <span class="string">./src:/app/src</span>
+    <span class="variable">networks</span>:
+      - <span class="string">app-network</span>
+
+  <span class="variable">db</span>:
+    <span class="variable">image</span>: <span class="string">mongo:latest</span>
+    <span class="variable">ports</span>:
+      - <span class="string">"27017:27017"</span>
+    <span class="variable">volumes</span>:
+      - <span class="string">mongo_data:/data/db</span>
+    <span class="variable">environment</span>:
+      - <span class="string">MONGO_INITDB_ROOT_USERNAME=admin</span>
+      - <span class="string">MONGO_INITDB_ROOT_PASSWORD=secret</span>
+    <span class="variable">networks</span>:
+      - <span class="string">app-network</span>
+
+  <span class="variable">redis</span>:
+    <span class="variable">image</span>: <span class="string">redis:alpine</span>
+    <span class="variable">ports</span>:
+      - <span class="string">"6379:6379"</span>
+    <span class="variable">networks</span>:
+      - <span class="string">app-network</span>
+
+<span class="variable">volumes</span>:
+  <span class="variable">mongo_data</span>:
+
+<span class="variable">networks</span>:
+  <span class="variable">app-network</span>:
+    <span class="variable">driver</span>: <span class="string">bridge</span>
+                    </div>
                 </div>
 
                 <h4>2️⃣ Essential Compose Commands</h4>
                 <div class="code-block">
-                # Start all services in background
-                docker-compose up -d
-                
-                # View all running services
-                docker-compose ps
-                
-                # View logs from all services
-                docker-compose logs -f
-                
-                # Scale a service
-                docker-compose up -d --scale web=3
-                
-                # Stop all services
-                docker-compose stop
-                
-                # Remove everything (containers, networks)
-                docker-compose down
+<span class="comment"># Start all services in background</span>
+<span class="command">docker-compose up <span class="flag">-d</span></span>
+
+<span class="comment"># View all running services</span>
+<span class="command">docker-compose ps</span>
+
+<span class="comment"># View logs from all services</span>
+<span class="command">docker-compose logs <span class="flag">-f</span></span>
+
+<span class="comment"># Scale a service</span>
+<span class="command">docker-compose up <span class="flag">-d</span> <span class="flag">--scale</span> <span class="string">web=3</span></span>
+
+<span class="comment"># Stop all services</span>
+<span class="command">docker-compose stop</span>
+
+<span class="comment"># Remove everything (containers, networks)</span>
+<span class="command">docker-compose down</span>
                 </div>
             </div>
             
@@ -651,30 +910,38 @@
                 
                 <h4>❌ Service can't connect to another service</h4>
                 <div class="code-block">
-                # Check if services are on same network
-                docker-compose ps
-                docker network ls
-                
-                # Use service name as hostname
-                # Example: mongodb://db:27017 (not localhost:27017)
+<span class="comment"># Check if services are on same network</span>
+<span class="command">docker-compose ps</span>
+<span class="command">docker network ls</span>
+
+<span class="comment"># Use service name as hostname</span>
+<span class="comment"># Example: <span class="string">mongodb://db:27017</span> (not <span class="string">localhost:27017</span>)</span>
                 </div>
 
                 <h4>❌ Port already in use</h4>
                 <div class="code-block">
-                # Change port mapping in compose file
-                ports:
-                  - "8080:80"  # host:container
+<span class="comment"># Change port mapping in compose file</span>
+<span class="variable">ports</span>:
+  - <span class="string">"8080:80"</span>
+<span class="comment"># host:container</span>
                 </div>
 
                 <h4>❌ Volume mount permission issues</h4>
                 <div class="code-block">
-                # Fix ownership
-                sudo chown -R $USER:$USER ./data
+<span class="comment"># Fix ownership</span>
+<span class="command">sudo chown <span class="flag">-R</span> <span class="variable">$USER</span>:<span class="variable">$USER</span> <span class="string">./data</span></span>
                 </div>
             </div>
         </div>
 
-        <!-- Add remaining nodes with minimal content for now -->
+        <!-- ====================================
+             REMAINING LEARNING TOPICS
+             Objective: Additional Docker concepts for complete learning path
+             Docs: Volumes, networking, registry, production, and Kubernetes
+                   These sections contain foundational content ready for expansion
+             ==================================== -->
+        
+        <!-- Data Persistence with Volumes -->
         <div data-node="volumes">
             <div data-tab="concept">
                 <h3>💾 Data Persistence</h3>
@@ -683,9 +950,21 @@
             <div data-tab="practical">
                 <h3>🛠️ Using Volumes</h3>
                 <div class="code-block">
-                # Create and use a named volume
-                docker volume create my-data
-                docker run -d -v my-data:/data nginx
+<span class="comment"># Create and use a named volume</span>
+<span class="command">docker volume create <span class="variable">my-data</span></span>
+<span class="command">docker run <span class="flag">-d</span> <span class="flag">-v</span> <span class="variable">my-data</span>:<span class="string">/data</span> nginx</span>
+
+<span class="comment"># List all volumes</span>
+<span class="command">docker volume ls</span>
+
+<span class="comment"># Inspect volume details</span>
+<span class="command">docker volume inspect <span class="variable">my-data</span></span>
+
+<span class="comment"># Bind mount (host directory to container)</span>
+<span class="command">docker run <span class="flag">-d</span> <span class="flag">-v</span> <span class="string">/host/data</span>:<span class="string">/container/data</span> nginx</span>
+
+<span class="comment"># Remove unused volumes</span>
+<span class="command">docker volume prune</span>
                 </div>
             </div>
             <div data-tab="troubleshoot">
@@ -694,6 +973,7 @@
             </div>
         </div>
 
+        <!-- Container Networking -->
         <div data-node="network">
             <div data-tab="concept">
                 <h3>🌐 Container Networking</h3>
@@ -702,9 +982,23 @@
             <div data-tab="practical">
                 <h3>🛠️ Network Commands</h3>
                 <div class="code-block">
-                # Create custom network
-                docker network create my-network
-                docker run -d --network my-network --name web nginx
+<span class="comment"># Create custom network</span>
+<span class="command">docker network create <span class="variable">my-network</span></span>
+
+<span class="comment"># Run container in custom network</span>
+<span class="command">docker run <span class="flag">-d</span> <span class="flag">--network</span> <span class="variable">my-network</span> <span class="flag">--name</span> <span class="string">web</span> nginx</span>
+
+<span class="comment"># List all networks</span>
+<span class="command">docker network ls</span>
+
+<span class="comment"># Inspect network details</span>
+<span class="command">docker network inspect <span class="variable">my-network</span></span>
+
+<span class="comment"># Connect existing container to network</span>
+<span class="command">docker network connect <span class="variable">my-network</span> <span class="variable">[container_id]</span></span>
+
+<span class="comment"># Remove unused networks</span>
+<span class="command">docker network prune</span>
                 </div>
             </div>
             <div data-tab="troubleshoot">
@@ -713,6 +1007,7 @@
             </div>
         </div>
 
+        <!-- Image Registry and CI/CD -->
         <div data-node="registry">
             <div data-tab="concept">
                 <h3>📤 Image Distribution</h3>
@@ -721,9 +1016,20 @@
             <div data-tab="practical">
                 <h3>🛠️ Push to Registry</h3>
                 <div class="code-block">
-                # Tag and push image
-                docker tag my-app:latest username/my-app:v1.0
-                docker push username/my-app:v1.0
+<span class="comment"># Login to Docker Hub</span>
+<span class="command">docker login</span>
+
+<span class="comment"># Tag image for registry</span>
+<span class="command">docker tag <span class="string">my-app:latest</span> <span class="string">username/my-app:v1.0</span></span>
+
+<span class="comment"># Push to Docker Hub</span>
+<span class="command">docker push <span class="string">username/my-app:v1.0</span></span>
+
+<span class="comment"># Pull from registry</span>
+<span class="command">docker pull <span class="string">username/my-app:v1.0</span></span>
+
+<span class="comment"># Search Docker Hub</span>
+<span class="command">docker search <span class="string">nginx</span></span>
                 </div>
             </div>
             <div data-tab="troubleshoot">
@@ -732,6 +1038,7 @@
             </div>
         </div>
 
+        <!-- Production Deployment -->
         <div data-node="production">
             <div data-tab="concept">
                 <h3>🎯 Production Considerations</h3>
@@ -740,9 +1047,30 @@
             <div data-tab="practical">
                 <h3>🚀 Production Setup</h3>
                 <div class="dockerfile-block">
-                # Add health checks to Dockerfile
-                HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-                    CMD curl -f http://localhost:3000/health || exit 1
+                    <div class="code-header">
+                        <div class="code-title">Container Definition</div>
+                        <div class="code-actions">
+                            <button class="copy-btn" onclick="copyCodeBlock(this)" title="Copy code">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                            <button class="fullscreen-btn" onclick="toggleFullscreen(this)" title="Fullscreen">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M15 3h6v6"></path>
+                                    <path d="M9 21H3v-6"></path>
+                                    <path d="M21 3l-7 7"></path>
+                                    <path d="M3 21l7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-content">
+<span class="comment"># Add health checks to Dockerfile</span>
+<span class="command">HEALTHCHECK</span> <span class="flag">--interval=30s</span> <span class="flag">--timeout=3s</span> <span class="flag">--start-period=5s</span> <span class="flag">--retries=3</span> \
+    <span class="command">CMD</span> <span class="string">curl -f http://localhost:3000/health || exit 1</span>
+                    </div>
                 </div>
             </div>
             <div data-tab="troubleshoot">
@@ -751,6 +1079,7 @@
             </div>
         </div>
 
+        <!-- Container Orchestration with Kubernetes -->
         <div data-node="orchestration">
             <div data-tab="concept">
                 <h3>🎭 Beyond Docker Compose</h3>
@@ -759,9 +1088,23 @@
             <div data-tab="practical">
                 <h3>🛠️ Basic Kubernetes</h3>
                 <div class="code-block">
-                # Install minikube for local development
-                minikube start
-                kubectl get pods
+<span class="comment"># Install minikube for local development</span>
+<span class="command">minikube start</span>
+
+<span class="comment"># Check cluster status</span>
+<span class="command">kubectl cluster-info</span>
+
+<span class="comment"># List all pods</span>
+<span class="command">kubectl get pods</span>
+
+<span class="comment"># Create deployment</span>
+<span class="command">kubectl create deployment <span class="string">nginx-deployment</span> <span class="flag">--image</span>=<span class="string">nginx</span></span>
+
+<span class="comment"># Expose deployment as service</span>
+<span class="command">kubectl expose deployment <span class="string">nginx-deployment</span> <span class="flag">--port</span>=<span class="string">80</span> <span class="flag">--type</span>=<span class="string">LoadBalancer</span></span>
+
+<span class="comment"># Scale deployment</span>
+<span class="command">kubectl scale deployment <span class="string">nginx-deployment</span> <span class="flag">--replicas</span>=<span class="string">3</span></span>
                 </div>
             </div>
             <div data-tab="troubleshoot">
@@ -772,6 +1115,194 @@
 
     </div>
 
+    <!-- ====================================
+         JAVASCRIPT APPLICATION LOGIC
+         Objective: Load interactive functionality
+         Docs: External script handles:
+               - Node selection and content loading
+               - Tab switching and view management
+               - Dynamic content population from database
+               - User interaction and state management
+         ==================================== -->
+    
+    <script>
+        // Automatically add headers to all code blocks on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find all code blocks that don't have headers yet
+            const codeBlocks = document.querySelectorAll('.code-block, .yaml-block, .dockerfile-block');
+            
+            codeBlocks.forEach(block => {
+                // Skip if block already has a header
+                if (block.querySelector('.code-header')) {
+                    return;
+                }
+                
+                // Determine block type and title
+                let title = 'Terminal Commands';
+                if (block.classList.contains('yaml-block')) {
+                    title = 'Docker Compose Configuration';
+                } else if (block.classList.contains('dockerfile-block')) {
+                    title = 'Container Definition';
+                }
+                
+                // Get all existing content
+                const existingContent = block.innerHTML;
+                
+                // Create new structure
+                block.innerHTML = `
+                    <div class="code-header">
+                        <div class="code-title">${title}</div>
+                        <div class="code-actions">
+                            <button class="copy-btn" onclick="copyCodeBlock(this)" title="Copy code">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                            <button class="fullscreen-btn" onclick="toggleFullscreen(this)" title="Fullscreen">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M15 3h6v6"></path>
+                                    <path d="M9 21H3v-6"></path>
+                                    <path d="M21 3l-7 7"></path>
+                                    <path d="M3 21l7-7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-content">
+                        ${existingContent}
+                    </div>
+                `;
+            });
+        });
+
+        // Copy code block functionality
+        function copyCodeBlock(button) {
+            try {
+                if (!button) {
+                    console.error('Copy button not found');
+                    return;
+                }
+
+                const codeBlock = button.closest('.code-block, .yaml-block, .dockerfile-block');
+                if (!codeBlock) {
+                    console.error('Code block not found');
+                    return;
+                }
+
+                const codeContent = codeBlock.querySelector('.code-content');
+                if (!codeContent) {
+                    console.error('Code content not found');
+                    return;
+                }
+
+                // Get the text content without HTML tags
+                const textToCopy = codeContent.innerText || codeContent.textContent;
+                
+                // Copy to clipboard
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Visual feedback
+                    const svgIcon = button.querySelector('svg');
+                    if (svgIcon) {
+                        svgIcon.style.display = 'none';
+                    }
+                    if (button.classList) {
+                        button.classList.add('copied');
+                    }
+                    
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        if (svgIcon) {
+                            svgIcon.style.display = 'block';
+                        }
+                        if (button.classList) {
+                            button.classList.remove('copied');
+                        }
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = textToCopy;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    // Visual feedback
+                    const svgIcon = button.querySelector('svg');
+                    if (svgIcon) {
+                        svgIcon.style.display = 'none';
+                    }
+                    if (button.classList) {
+                        button.classList.add('copied');
+                    }
+                    
+                    setTimeout(() => {
+                        if (svgIcon) {
+                            svgIcon.style.display = 'block';
+                        }
+                        if (button.classList) {
+                            button.classList.remove('copied');
+                        }
+                    }, 2000);
+                });
+            } catch (error) {
+                console.error('Error in copyCodeBlock:', error);
+            }
+        }
+
+        // Fullscreen toggle functionality
+        function toggleFullscreen(button) {
+            try {
+                if (!button) {
+                    console.error('Fullscreen button not found');
+                    return;
+                }
+
+                const codeBlock = button.closest('.code-block, .yaml-block, .dockerfile-block');
+                if (!codeBlock) {
+                    console.error('Code block not found');
+                    return;
+                }
+                
+                if (!document.fullscreenElement) {
+                    codeBlock.requestFullscreen?.().then(() => {
+                        // Update icon to minimize
+                        button.innerHTML = `
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 9V3h6"></path>
+                                <path d="M21 15v6h-6"></path>
+                                <path d="M3 3l7 7"></path>
+                                <path d="M21 21l-7-7"></path>
+                            </svg>
+                        `;
+                        button.title = "Exit fullscreen";
+                    }).catch(err => {
+                        console.error('Error entering fullscreen:', err);
+                    });
+                } else {
+                    document.exitFullscreen?.().then(() => {
+                        // Update icon to maximize
+                        button.innerHTML = `
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 3h6v6"></path>
+                                <path d="M9 21H3v-6"></path>
+                                <path d="M21 3l-7 7"></path>
+                                <path d="M3 21l7-7"></path>
+                            </svg>
+                        `;
+                        button.title = "Fullscreen";
+                    }).catch(err => {
+                        console.error('Error exiting fullscreen:', err);
+                    });
+                }
+            } catch (error) {
+                console.error('Error in toggleFullscreen:', error);
+            }
+        }
+    </script>
+    
     <script src="script.js"></script>
 </body>
 </html>

@@ -6,47 +6,47 @@ let currentTab = 'concept';
 // Node metadata (content is loaded from content.html)
 const nodeMetadata = {
     install: {
-        title: "🚀 Install Docker",
+        title: '<i class="fas fa-download"></i> Install Docker',
         badges: ["Essential", "15 mins", "Platform Specific"],
         breadcrumb: "Start → Install"
     },
     basics: {
-        title: "📦 Container Basics",
+        title: '<i class="fas fa-cube"></i> Container Basics',
         badges: ["Core Skills", "30 mins", "Hands-On"],
         breadcrumb: "Start → Install → Basics"
     },
     images: {
-        title: "🏗️ Build Custom Images",
+        title: '<i class="fas fa-hammer"></i> Build Custom Images',
         badges: ["Essential", "45 mins", "Creative"],
         breadcrumb: "Start → Install → Basics → Images"
     },
     compose: {
-        title: "🎼 Docker Compose",
+        title: '<i class="fas fa-layer-group"></i> Docker Compose',
         badges: ["Multi-Container", "45 mins", "Orchestration"],
         breadcrumb: "Start → Install → Basics → Images → Compose"
     },
     volumes: {
-        title: "💾 Data Persistence",
+        title: '<i class="fas fa-database"></i> Data Persistence',
         badges: ["Storage", "30 mins", "Critical"],
         breadcrumb: "Start → ... → Volumes"
     },
     network: {
-        title: "🌐 Networking",
+        title: '<i class="fas fa-network-wired"></i> Networking',
         badges: ["Connectivity", "40 mins", "Advanced"],
         breadcrumb: "Start → ... → Network"
     },
     registry: {
-        title: "📤 Registry & CI/CD",
+        title: '<i class="fas fa-cloud-upload-alt"></i> Registry & CI/CD',
         badges: ["Distribution", "45 mins", "DevOps"],
         breadcrumb: "Start → ... → Registry"
     },
     production: {
-        title: "⚙️ Production Deployment",
+        title: '<i class="fas fa-cogs"></i> Production Deployment',
         badges: ["Production", "1.5 hours", "Advanced"],
         breadcrumb: "Start → ... → Production"
     },
     orchestration: {
-        title: "☸️ Kubernetes Integration",
+        title: '<i class="fab fa-kubernetes"></i> Kubernetes Integration',
         badges: ["Advanced", "2 hours", "Enterprise"],
         breadcrumb: "Start → ... → Kubernetes"
     }
@@ -104,8 +104,8 @@ function updateInfoPanel() {
     
     const data = nodeMetadata[currentNode];
     
-    // Update header
-    document.getElementById('infoTitle').textContent = data.title;
+    // Update header with HTML content (for Font Awesome icons)
+    document.getElementById('infoTitle').innerHTML = data.title;
     
     // Update badges
     const badgesHtml = data.badges.map(badge => 
@@ -185,17 +185,17 @@ function resetView() {
     currentNode = null;
     
     // Reset info panel
-    document.getElementById('infoTitle').textContent = 'Welcome to Your Docker Journey! 🎯';
+    document.getElementById('infoTitle').innerHTML = 'Welcome to Your Docker Journey! <i class="fas fa-route"></i>';
     document.getElementById('infoBadges').innerHTML = 
         '<span class="info-badge">Beginner Friendly</span><span class="info-badge">Hands-On</span>';
     document.getElementById('breadcrumb').innerHTML = 
         '<span>Start</span> → Select a topic to begin';
     document.getElementById('tabContainer').style.display = 'none';
     
-    // Reset to welcome content
+    // Reset to welcome content with Font Awesome icons
     document.getElementById('infoContent').innerHTML = `
         <div class="info-section fade-in">
-            <h3>🎯 How This Works</h3>
+            <h3><i class="fas fa-bullseye"></i> How This Works</h3>
             <p>This interactive diagram will guide you through Docker step-by-step:</p>
             <ol class="step-list">
                 <li><strong>Click any topic</strong> in the diagram to start learning</li>
@@ -205,19 +205,19 @@ function resetView() {
             </ol>
             
             <div class="tip-box">
-                <strong>💡 Pro Tip:</strong> Keep a terminal open and try commands as you learn!
+                <strong><i class="fas fa-lightbulb"></i> Pro Tip:</strong> Keep a terminal open and try commands as you learn!
             </div>
 
-            <h3>📋 Prerequisites</h3>
+            <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
             <ul>
-                <li>✅ Basic command line knowledge</li>
-                <li>✅ A computer with admin access</li>
-                <li>✅ Internet connection for downloads</li>
-                <li>✅ 4GB+ RAM recommended</li>
+                <li><i class="fas fa-check"></i> Basic command line knowledge</li>
+                <li><i class="fas fa-check"></i> A computer with admin access</li>
+                <li><i class="fas fa-check"></i> Internet connection for downloads</li>
+                <li><i class="fas fa-check"></i> 4GB+ RAM recommended</li>
             </ul>
 
             <div class="success-box">
-                <strong>Ready?</strong> Click "🚀 Install Docker" to begin your journey!
+                <strong>Ready?</strong> Click "<i class="fas fa-download"></i> Install Docker" to begin your journey!
             </div>
         </div>
     `;
