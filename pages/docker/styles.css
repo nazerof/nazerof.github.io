@@ -204,12 +204,25 @@ body {
     line-height: 20px;
 }
 
+.node svg.node-icon {
+    stroke: #667eea;
+    fill: none;
+}
+
 .node.active .node-icon {
     color: white;
 }
 
+.node.active svg.node-icon {
+    stroke: white;
+}
+
 .node:hover .node-icon {
     color: #f093fb;
+}
+
+.node:hover svg.node-icon {
+    stroke: #f093fb;
 }
 
 /* ====================================
