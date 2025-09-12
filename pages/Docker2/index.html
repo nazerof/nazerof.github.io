@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Interactive Learning Diagram - Professional DevOps Guide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header">
+            <h1>🐳 Docker Complete Learning Path</h1>
+            <p>Interactive DevOps Journey - From Zero to Production</p>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <div class="view-controls">
+                <button class="control-btn active" onclick="dockerApp.showLayer('overview')">
+                    <span class="btn-icon">📊</span> Overview
+                </button>
+                <button class="control-btn" onclick="dockerApp.showLayer('detail')" id="detailBtn" style="display:none">
+                    <span class="btn-icon">🔍</span> Detailed Steps
+                </button>
+                <button class="control-btn" onclick="dockerApp.resetView()">
+                    <span class="btn-icon">🔄</span> Reset
+                </button>
+            </div>
+            
+            <div class="style-controls">
+                <label class="control-label">Node Style:</label>
+                <select id="nodeStyleSelector" onchange="dockerApp.changeNodeStyle(this.value)">
+                    <option value="modern">Modern Cards</option>
+                    <option value="circular">Circular Segments</option>
+                    <option value="mindmap">Mind Map</option>
+                </select>
+                
+                <label class="toggle-container">
+                    <input type="checkbox" id="subtitleToggle" checked onchange="dockerApp.toggleSubtitles()">
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Show Subtitles</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content-wrapper">
+            <!-- Diagram Section -->
+            <div class="diagram-section">
+                <div class="diagram-container" id="diagramContainer">
+                    <!-- SVG Canvas for connections -->
+                    <svg class="connection-svg" id="connectionSvg">
+                        <defs>
+                            <linearGradient id="gradientLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                            </linearGradient>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#667eea" />
+                            </marker>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <g id="connectionGroup"></g>
+                    </svg>
+                    
+                    <!-- Overview Layer -->
+                    <div class="diagram-layer" id="overviewLayer">
+                        <!-- Nodes will be dynamically generated here -->
+                    </div>
+                    
+                    <!-- Detail Layer -->
+                    <div class="diagram-layer" id="detailLayer" style="display: none;">
+                        <!-- Detail nodes will be dynamically generated here -->
+                    </div>
+                </div>
+                
+                <!-- Progress Tracker -->
+                <div class="progress-tracker" id="progressTracker">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="progressText">Ready to start your Docker journey!</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Information Panel -->
+            <div class="info-panel">
+                <!-- Info Header -->
+                <div class="info-header">
+                    <h2 id="infoTitle">Welcome to Your Docker Journey! 🎯</h2>
+                    <div id="infoBadges" class="badge-container">
+                        <span class="info-badge">Beginner Friendly</span>
+                        <span class="info-badge">Hands-On</span>
+                    </div>
+                </div>
+
+                <!-- Breadcrumb Navigation -->
+                <div class="breadcrumb" id="breadcrumb">
+                    <span class="breadcrumb-item active">Start</span>
+                    <span class="breadcrumb-separator">→</span>
+                    <span class="breadcrumb-item">Select a topic to begin</span>
+                </div>
+
+                <!-- Tab Navigation -->
+                <div class="tab-container" id="tabContainer" style="display: none;">
+                    <button class="tab-btn active" onclick="dockerApp.showTab('concept')">
+                        <span class="tab-icon">📚</span> Concept
+                    </button>
+                    <button class="tab-btn" onclick="dockerApp.showTab('practical')">
+                        <span class="tab-icon">💻</span> Practical
+                    </button>
+                    <button class="tab-btn" onclick="dockerApp.showTab('troubleshoot')">
+                        <span class="tab-icon">🔧</span> Troubleshoot
+                    </button>
+                </div>
+
+                <!-- Info Content -->
+                <div id="infoContent" class="info-content">
+                    <div class="info-section fade-in">
+                        <h3>🎯 How This Interactive Diagram Works</h3>
+                        <p>This comprehensive learning tool will guide you through Docker step-by-step:</p>
+                        <ol class="step-list">
+                            <li>
+                                <strong>Choose Your Visual Style</strong>
+                                <p>Select from three node designs: Modern Cards, Circular Segments, or Mind Map</p>
+                            </li>
+                            <li>
+                                <strong>Click Any Topic</strong>
+                                <p>Each node reveals detailed information with theory, practice, and troubleshooting</p>
+                            </li>
+                            <li>
+                                <strong>Follow the Learning Path</strong>
+                                <p>Progress through topics in the recommended order for optimal learning</p>
+                            </li>
+                            <li>
+                                <strong>Practice As You Learn</strong>
+                                <p>Copy commands directly and try them in your terminal</p>
+                            </li>
+                        </ol>
+                        
+                        <div class="tip-box">
+                            <strong>💡 Pro Tip:</strong> Toggle subtitles on/off for cleaner visualization. Keep a terminal window open alongside this tutorial!
+                        </div>
+
+                        <h3>📋 Prerequisites Check</h3>
+                        <div class="checklist">
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Basic command line knowledge</span>
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Computer with admin access</span>
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>Internet connection for downloads</span>
+                            </label>
+                            <label class="checklist-item">
+                                <input type="checkbox">
+                                <span>4GB+ RAM (8GB recommended)</span>
+                            </label>
+                        </div>
+
+                        <div class="success-box">
+                            <strong>🚀 Ready to Begin?</strong>
+                            <p>Click "Install Docker" in the diagram to start your DevOps journey!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions" id="quickActions" style="display: none;">
+                    <button class="action-btn" onclick="dockerApp.copyCode()">
+                        <span>📋</span> Copy Code
+                    </button>
+                    <button class="action-btn" onclick="dockerApp.openInNewTab()">
+                        <span>🔗</span> Resources
+                    </button>
+                    <button class="action-btn" onclick="dockerApp.markComplete()">
+                        <span>✅</span> Mark Complete
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Help Button -->
+        <button class="help-btn" onclick="dockerApp.toggleHelp()">
+            <span>?</span>
+        </button>
+
+        <!-- Help Overlay -->
+        <div class="help-overlay" id="helpOverlay" style="display: none;">
+            <div class="help-content">
+                <button class="close-btn" onclick="dockerApp.toggleHelp()">×</button>
+                <h3>🎮 Keyboard Shortcuts</h3>
+                <ul>
+                    <li><kbd>1-9</kbd> - Quick jump to topics</li>
+                    <li><kbd>Tab</kbd> - Switch between tabs</li>
+                    <li><kbd>S</kbd> - Toggle subtitles</li>
+                    <li><kbd>R</kbd> - Reset view</li>
+                    <li><kbd>?</kbd> - Toggle this help</li>
+                </ul>
+                <h3>🎨 Visual Styles</h3>
+                <p><strong>Modern Cards:</strong> Clean, card-based design with shadows</p>
+                <p><strong>Circular Segments:</strong> Radial layout inspired by pie charts</p>
+                <p><strong>Mind Map:</strong> Tree-like structure showing relationships</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

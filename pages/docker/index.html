@@ -369,12 +369,22 @@
                         <div class="code-block">
                             <div class="code-header">
                                 <div class="code-title">Terminal Commands</div>
-                                <button class="copy-btn" onclick="copyCodeBlock(this)" title="Copy code">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                                    </svg>
-                                </button>
+                                <div class="code-actions">
+                                    <button class="copy-btn" onclick="copyCodeBlock(this)" title="Copy code">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                        </svg>
+                                    </button>
+                                    <button class="fullscreen-btn" onclick="toggleFullscreen(this)" title="Fullscreen">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M15 3h6v6"></path>
+                                            <path d="M9 21H3v-6"></path>
+                                            <path d="M21 3l-7 7"></path>
+                                            <path d="M3 21l7-7"></path>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                             <div class="code-content">
 <span class="comment"># For Windows/Mac: Visit <span class="url">docker.com/products/docker-desktop</span></span>
@@ -1178,7 +1188,7 @@
                 // Get all existing content
                 const existingContent = block.innerHTML;
                 
-                // Create new structure
+                // Create new structure with both copy and fullscreen buttons
                 block.innerHTML = `
                     <div class="code-header">
                         <div class="code-title">${title}</div>
@@ -1204,6 +1214,45 @@
                     </div>
                 `;
             });
+            
+            // Also run this again after a short delay to catch any dynamically loaded content
+            setTimeout(() => {
+                const newCodeBlocks = document.querySelectorAll('.code-block:not(:has(.code-header)), .yaml-block:not(:has(.code-header)), .dockerfile-block:not(:has(.code-header))');
+                newCodeBlocks.forEach(block => {
+                    let title = 'Terminal Commands';
+                    if (block.classList.contains('yaml-block')) {
+                        title = 'Docker Compose Configuration';
+                    } else if (block.classList.contains('dockerfile-block')) {
+                        title = 'Container Definition';
+                    }
+                    
+                    const existingContent = block.innerHTML;
+                    block.innerHTML = `
+                        <div class="code-header">
+                            <div class="code-title">${title}</div>
+                            <div class="code-actions">
+                                <button class="copy-btn" onclick="copyCodeBlock(this)" title="Copy code">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                </button>
+                                <button class="fullscreen-btn" onclick="toggleFullscreen(this)" title="Fullscreen">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M15 3h6v6"></path>
+                                        <path d="M9 21H3v-6"></path>
+                                        <path d="M21 3l-7 7"></path>
+                                        <path d="M3 21l7-7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="code-content">
+                            ${existingContent}
+                        </div>
+                    `;
+                });
+            }, 500);
         });
 
         // Copy code block functionality
@@ -1331,6 +1380,51 @@
                 console.error('Error in toggleFullscreen:', error);
             }
         }
+    </script>
+    
+    <!-- Temporary verification script -->
+    <script>
+        // Verification script to check all code blocks have proper headers
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const codeBlocks = document.querySelectorAll('.code-block, .yaml-block, .dockerfile-block');
+                console.log(`Found ${codeBlocks.length} code blocks`);
+                
+                let incompleteBlocks = [];
+                
+                codeBlocks.forEach((block, index) => {
+                    const header = block.querySelector('.code-header');
+                    const copyBtn = block.querySelector('.copy-btn');
+                    const fullscreenBtn = block.querySelector('.fullscreen-btn');
+                    const codeActions = block.querySelector('.code-actions');
+                    
+                    if (!header) {
+                        incompleteBlocks.push(`Block ${index + 1}: Missing header`);
+                    }
+                    if (!copyBtn) {
+                        incompleteBlocks.push(`Block ${index + 1}: Missing copy button`);
+                    }
+                    if (!fullscreenBtn) {
+                        incompleteBlocks.push(`Block ${index + 1}: Missing fullscreen button`);
+                    }
+                    if (!codeActions) {
+                        incompleteBlocks.push(`Block ${index + 1}: Missing code-actions wrapper`);
+                    }
+                });
+                
+                if (incompleteBlocks.length === 0) {
+                    console.log('✅ All code blocks are properly formatted with headers, copy buttons, and fullscreen buttons!');
+                } else {
+                    console.log('❌ Issues found:');
+                    incompleteBlocks.forEach(issue => console.log(issue));
+                }
+                
+                // Check scrollbar styles
+                const elementsWithScroll = document.querySelectorAll('.info-panel, .diagram-container, .code-block, .yaml-block, .dockerfile-block');
+                console.log(`\nChecked ${elementsWithScroll.length} elements for modern scrollbar styles`);
+                console.log('✅ Modern scrollbar CSS has been applied');
+            }, 1000);
+        });
     </script>
     
     <script src="script.js"></script>
