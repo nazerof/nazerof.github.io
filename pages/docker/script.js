@@ -1,58 +1,79 @@
-// Global variables
+/* ====================================
+   DOCKER LEARNING PLATFORM - JAVASCRIPT
+   Objective: Interactive learning experience with dynamic content
+   Docs: Handles user interactions, content loading, and state management
+         for the Docker educational platform
+   ==================================== */
+
+/* ====================================
+   GLOBAL STATE MANAGEMENT
+   Objective: Track user's current position and preferences
+   Docs: Variables for tracking selected node, view layer, and active tab
+   ==================================== */
 let currentNode = null;
 let currentLayer = 'overview';
 let currentTab = 'concept';
 
-// Node metadata (content is loaded from content.html)
+/* ====================================
+   CONTENT METADATA CONFIGURATION
+   Objective: Define display properties for each learning topic
+   Docs: Contains titles, badges, breadcrumbs, and learning path information
+         for all nine Docker topics in the learning journey
+   ==================================== */
 const nodeMetadata = {
     install: {
-        title: '<i class="fas fa-download"></i> Install Docker',
+        title: "🚀 Install Docker",
         badges: ["Essential", "15 mins", "Platform Specific"],
         breadcrumb: "Start → Install"
     },
     basics: {
-        title: '<i class="fas fa-cube"></i> Container Basics',
+        title: "📦 Container Basics",
         badges: ["Core Skills", "30 mins", "Hands-On"],
         breadcrumb: "Start → Install → Basics"
     },
     images: {
-        title: '<i class="fas fa-hammer"></i> Build Custom Images',
+        title: "🏗️ Build Custom Images",
         badges: ["Essential", "45 mins", "Creative"],
         breadcrumb: "Start → Install → Basics → Images"
     },
     compose: {
-        title: '<i class="fas fa-layer-group"></i> Docker Compose',
+        title: "🎼 Docker Compose",
         badges: ["Multi-Container", "45 mins", "Orchestration"],
         breadcrumb: "Start → Install → Basics → Images → Compose"
     },
     volumes: {
-        title: '<i class="fas fa-database"></i> Data Persistence',
+        title: "💾 Data Persistence",
         badges: ["Storage", "30 mins", "Critical"],
         breadcrumb: "Start → ... → Volumes"
     },
     network: {
-        title: '<i class="fas fa-network-wired"></i> Networking',
+        title: "🌐 Networking",
         badges: ["Connectivity", "40 mins", "Advanced"],
         breadcrumb: "Start → ... → Network"
     },
     registry: {
-        title: '<i class="fas fa-cloud-upload-alt"></i> Registry & CI/CD',
+        title: "📤 Registry & CI/CD",
         badges: ["Distribution", "45 mins", "DevOps"],
         breadcrumb: "Start → ... → Registry"
     },
     production: {
-        title: '<i class="fas fa-cogs"></i> Production Deployment',
+        title: "⚙️ Production Deployment",
         badges: ["Production", "1.5 hours", "Advanced"],
         breadcrumb: "Start → ... → Production"
     },
     orchestration: {
-        title: '<i class="fab fa-kubernetes"></i> Kubernetes Integration',
+        title: "☸️ Kubernetes Integration",
         badges: ["Advanced", "2 hours", "Enterprise"],
         breadcrumb: "Start → ... → Kubernetes"
     }
 };
 
-// Function to get content from the loaded HTML
+/* ====================================
+   CONTENT RETRIEVAL SYSTEM
+   Objective: Load educational content from embedded database
+   Docs: Retrieves content from hidden contentDatabase div based on
+         node ID and tab selection, avoiding external file dependencies
+   ==================================== */
 function getContentFromHTML(nodeId, tabName) {
     const contentDatabase = document.getElementById('contentDatabase');
     if (!contentDatabase) {
@@ -75,7 +96,12 @@ function getContentFromHTML(nodeId, tabName) {
     return tabContent.innerHTML;
 }
 
-// Core functions
+/* ====================================
+   NODE SELECTION AND INTERACTION
+   Objective: Handle user clicks on diagram nodes
+   Docs: Manages node selection, visual state updates, and content loading
+         Updates active states and triggers content panel updates
+   ==================================== */
 function selectNode(nodeId) {
     // Remove active class from all nodes
     document.querySelectorAll('.node').forEach(node => {
@@ -99,21 +125,27 @@ function selectNode(nodeId) {
     }
 }
 
+/* ====================================
+   INFORMATION PANEL MANAGEMENT
+   Objective: Update content panel based on selected node and tab
+   Docs: Updates header information, badges, breadcrumbs, and loads
+         appropriate educational content for the selected topic
+   ==================================== */
 function updateInfoPanel() {
     if (!currentNode || !nodeMetadata[currentNode]) return;
     
     const data = nodeMetadata[currentNode];
     
-    // Update header with HTML content (for Font Awesome icons)
-    document.getElementById('infoTitle').innerHTML = data.title;
+    // Update header information
+    document.getElementById('infoTitle').textContent = data.title;
     
-    // Update badges
+    // Update learning badges
     const badgesHtml = data.badges.map(badge => 
         `<span class="info-badge">${badge}</span>`
     ).join('');
     document.getElementById('infoBadges').innerHTML = badgesHtml;
     
-    // Update breadcrumb
+    // Update breadcrumb navigation
     document.getElementById('breadcrumb').innerHTML = 
         data.breadcrumb.split(' → ').map((item, index) => 
             index === data.breadcrumb.split(' → ').length - 1 
@@ -121,19 +153,25 @@ function updateInfoPanel() {
                 : item
         ).join(' → ');
     
-    // Show tabs
+    // Show tabbed interface
     document.getElementById('tabContainer').style.display = 'flex';
     
-    // Update content
+    // Load and display current tab content
     showTab(currentTab);
 }
 
+/* ====================================
+   TAB SWITCHING FUNCTIONALITY
+   Objective: Handle content type switching (Concept/Practical/Troubleshoot)
+   Docs: Updates tab visual states and loads corresponding content from
+         the embedded database for the current topic
+   ==================================== */
 function showTab(tabName) {
     if (!currentNode || !nodeMetadata[currentNode]) return;
     
     currentTab = tabName;
     
-    // Update tab buttons
+    // Update active tab styling
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });
@@ -142,22 +180,28 @@ function showTab(tabName) {
         activeTab.classList.add('active');
     }
     
-    // Get content from HTML file
+    // Load content from embedded database
     const content = getContentFromHTML(currentNode, tabName);
     document.getElementById('infoContent').innerHTML = 
         `<div class="tab-content active fade-in">${content}</div>`;
 }
 
+/* ====================================
+   DIAGRAM LAYER MANAGEMENT
+   Objective: Switch between overview and detailed diagram views
+   Docs: Controls visibility of different SVG layers and manages
+         the transition between high-level and detailed learning paths
+   ==================================== */
 function showLayer(layer) {
     currentLayer = layer;
     
-    // Update control buttons
+    // Update control button states
     document.querySelectorAll('.control-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     event.target.classList.add('active');
     
-    // Show/hide layers
+    // Toggle layer visibility
     if (layer === 'overview') {
         document.getElementById('overviewLayer').style.display = 'block';
         document.getElementById('detailLayer').style.display = 'none';
@@ -168,34 +212,46 @@ function showLayer(layer) {
     }
 }
 
+/* ====================================
+   DETAILED VIEW FUNCTIONALITY
+   Objective: Show expanded learning paths for complex topics
+   Docs: Placeholder for future implementation of detailed sub-topic views
+   ==================================== */
 function showDetailedView() {
     console.log('Showing detailed view for:', currentNode);
     // Implementation for detailed view would go here
+    // Could include sub-topics, step-by-step breakdowns, etc.
 }
 
+/* ====================================
+   VIEW RESET FUNCTIONALITY
+   Objective: Return platform to initial welcome state
+   Docs: Clears all selections, resets UI elements, and shows welcome content
+   ==================================== */
 function resetView() {
-    // Reset to overview
-    showLayer('overview');
+    // Reset to overview layer
+    document.getElementById('overviewLayer').style.display = 'block';
+    document.getElementById('detailLayer').style.display = 'none';
     
-    // Clear selection
+    // Clear all node selections
     document.querySelectorAll('.node').forEach(node => {
         node.classList.remove('active');
     });
     
     currentNode = null;
     
-    // Reset info panel
-    document.getElementById('infoTitle').innerHTML = 'Welcome to Your Docker Journey! <i class="fas fa-route"></i>';
+    // Reset information panel to welcome state
+    document.getElementById('infoTitle').textContent = 'Welcome to Your Docker Journey! 🎯';
     document.getElementById('infoBadges').innerHTML = 
         '<span class="info-badge">Beginner Friendly</span><span class="info-badge">Hands-On</span>';
     document.getElementById('breadcrumb').innerHTML = 
         '<span>Start</span> → Select a topic to begin';
     document.getElementById('tabContainer').style.display = 'none';
     
-    // Reset to welcome content with Font Awesome icons
+    // Display welcome content with platform instructions
     document.getElementById('infoContent').innerHTML = `
         <div class="info-section fade-in">
-            <h3><i class="fas fa-bullseye"></i> How This Works</h3>
+            <h3>🎯 How This Works</h3>
             <p>This interactive diagram will guide you through Docker step-by-step:</p>
             <ol class="step-list">
                 <li><strong>Click any topic</strong> in the diagram to start learning</li>
@@ -205,28 +261,29 @@ function resetView() {
             </ol>
             
             <div class="tip-box">
-                <strong><i class="fas fa-lightbulb"></i> Pro Tip:</strong> Keep a terminal open and try commands as you learn!
+                <strong>💡 Pro Tip:</strong> Keep a terminal open and try commands as you learn!
             </div>
 
-            <h3><i class="fas fa-clipboard-list"></i> Prerequisites</h3>
+            <h3>📋 Prerequisites</h3>
             <ul>
-                <li><i class="fas fa-check"></i> Basic command line knowledge</li>
-                <li><i class="fas fa-check"></i> A computer with admin access</li>
-                <li><i class="fas fa-check"></i> Internet connection for downloads</li>
-                <li><i class="fas fa-check"></i> 4GB+ RAM recommended</li>
+                <li>✅ Basic command line knowledge</li>
+                <li>✅ A computer with admin access</li>
+                <li>✅ Internet connection for downloads</li>
+                <li>✅ 4GB+ RAM recommended</li>
             </ul>
 
             <div class="success-box">
-                <strong>Ready?</strong> Click "<i class="fas fa-download"></i> Install Docker" to begin your journey!
+                <strong>Ready?</strong> Click "🚀 Install Docker" to begin your journey!
             </div>
         </div>
     `;
-    
-    // Hide detail button
-    document.getElementById('detailBtn').style.display = 'none';
 }
 
-// Initialize when DOM is loaded
+/* ====================================
+   APPLICATION INITIALIZATION
+   Objective: Set up platform when page loads
+   Docs: Ensures DOM is ready before initializing the learning platform
+   ==================================== */
 document.addEventListener('DOMContentLoaded', function() {
     resetView();
 });
