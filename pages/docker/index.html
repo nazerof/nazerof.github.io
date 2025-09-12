@@ -1382,51 +1382,6 @@
         }
     </script>
     
-    <!-- Temporary verification script -->
-    <script>
-        // Verification script to check all code blocks have proper headers
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                const codeBlocks = document.querySelectorAll('.code-block, .yaml-block, .dockerfile-block');
-                console.log(`Found ${codeBlocks.length} code blocks`);
-                
-                let incompleteBlocks = [];
-                
-                codeBlocks.forEach((block, index) => {
-                    const header = block.querySelector('.code-header');
-                    const copyBtn = block.querySelector('.copy-btn');
-                    const fullscreenBtn = block.querySelector('.fullscreen-btn');
-                    const codeActions = block.querySelector('.code-actions');
-                    
-                    if (!header) {
-                        incompleteBlocks.push(`Block ${index + 1}: Missing header`);
-                    }
-                    if (!copyBtn) {
-                        incompleteBlocks.push(`Block ${index + 1}: Missing copy button`);
-                    }
-                    if (!fullscreenBtn) {
-                        incompleteBlocks.push(`Block ${index + 1}: Missing fullscreen button`);
-                    }
-                    if (!codeActions) {
-                        incompleteBlocks.push(`Block ${index + 1}: Missing code-actions wrapper`);
-                    }
-                });
-                
-                if (incompleteBlocks.length === 0) {
-                    console.log('✅ All code blocks are properly formatted with headers, copy buttons, and fullscreen buttons!');
-                } else {
-                    console.log('❌ Issues found:');
-                    incompleteBlocks.forEach(issue => console.log(issue));
-                }
-                
-                // Check scrollbar styles
-                const elementsWithScroll = document.querySelectorAll('.info-panel, .diagram-container, .code-block, .yaml-block, .dockerfile-block');
-                console.log(`\nChecked ${elementsWithScroll.length} elements for modern scrollbar styles`);
-                console.log('✅ Modern scrollbar CSS has been applied');
-            }, 1000);
-        });
-    </script>
-    
     <script src="script.js"></script>
 </body>
 </html>
