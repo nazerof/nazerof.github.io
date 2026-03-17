@@ -93,7 +93,8 @@
 
         /* Hero adjustments for blog post */
         .blog-post-hero {
-            height: 50vh;
+            height: auto;
+            padding: 120px 2rem 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -107,8 +108,7 @@
 
         @media (max-width: 768px) {
             .blog-post-hero {
-                height: 60vh !important;
-                padding-top: 80px;
+                padding: 100px 1.5rem 40px;
             }
 
             .blog-post-hero h1 {
@@ -174,7 +174,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero blog-post-hero" style="height: 50vh;">
+    <section class="hero blog-post-hero">
         <div class="hero-content">
             <h1>Scaling RPA: From Proof-of-Concept to 200+ Data Sources</h1>
             <div class="article-meta">
