@@ -15,22 +15,22 @@
             margin-bottom: 2rem;
             transition: transform 0.3s ease;
         }
-        
+
         .blog-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .blog-header {
             margin-bottom: 1rem;
         }
-        
+
         .blog-title {
             color: #667eea;
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
-        
+
         .blog-meta {
             color: #666;
             font-size: 0.9rem;
@@ -39,13 +39,13 @@
             gap: 1rem;
             margin-bottom: 1rem;
         }
-        
+
         .blog-excerpt {
             color: #666;
             margin-bottom: 1rem;
             line-height: 1.6;
         }
-        
+
         .read-more {
             display: inline-flex;
             align-items: center;
@@ -55,18 +55,21 @@
             font-weight: 500;
             transition: color 0.3s ease;
         }
-        
+
         .read-more:hover {
             color: #764ba2;
         }
-        
-        .coming-soon {
+
+        .coming-soon-badge {
+            display: inline-block;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            text-align: center;
-            padding: 3rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 15px;
-            margin-bottom: 2rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -80,9 +83,8 @@
             <ul class="nav-links">
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
                 <li><a href="blog.html" class="active">Blog</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="mobile-menu-toggle" id="mobile-menu-toggle">
                 <span></span>
@@ -100,17 +102,13 @@
                 <i class="fas fa-user"></i>
                 <span>About</span>
             </a>
+            <a href="projects.html" class="mobile-nav-link">
+                <i class="fas fa-project-diagram"></i>
+                <span>Projects</span>
+            </a>
             <a href="blog.html" class="mobile-nav-link">
                 <i class="fas fa-blog"></i>
                 <span>Blog</span>
-            </a>
-            <a href="services.html" class="mobile-nav-link">
-                <i class="fas fa-cogs"></i>
-                <span>Services</span>
-            </a>
-            <a href="contact.html" class="mobile-nav-link">
-                <i class="fas fa-envelope"></i>
-                <span>Contact</span>
             </a>
         </div>
     </nav>
@@ -118,122 +116,60 @@
     <!-- Blog Hero Section -->
     <section class="hero" style="height: 60vh;">
         <div class="hero-content">
-            <h1>My Blog</h1>
-            <p class="subtitle">Insights, tutorials, and thoughts on Data Science & Machine Learning</p>
+            <h1>Blog</h1>
+            <p class="subtitle">Perspectives on data science, automation, and applied AI</p>
         </div>
     </section>
 
     <!-- Blog Section -->
     <section class="section">
         <div class="container">
-            <!-- Coming Soon Notice -->
-            <div class="coming-soon fade-in">
-                <h2><i class="fas fa-rocket"></i> Blog Coming Soon!</h2>
-                <p style="font-size: 1.2rem; margin-top: 1rem;">I'm currently working on creating valuable content about Data Science, Machine Learning, and RPA. Stay tuned for in-depth tutorials, case studies, and insights from my professional experience.</p>
-                <div style="margin-top: 2rem;">
-                    <a href="contact.html" class="btn btn-primary">
-                        <i class="fas fa-bell"></i>
-                        Get Notified When It's Ready
-                    </a>
-                </div>
-            </div>
 
-            <!-- Preview of Upcoming Posts -->
-            <h2 style="text-align: center; margin-bottom: 3rem; color: #333;">Upcoming Posts</h2>
-
+            <!-- Blog Card 1 -->
             <div class="blog-card fade-in">
                 <div class="blog-header">
-                    <div class="blog-title">Building End-to-End RPA Solutions with Power Automate</div>
+                    <div class="blog-title">Scaling RPA: From Proof-of-Concept to 200+ Data Sources</div>
                     <div class="blog-meta">
-                        <span><i class="fas fa-calendar"></i> Coming February 2025</span>
-                        <span><i class="fas fa-clock"></i> 15 min read</span>
-                        <span><i class="fas fa-tag"></i> RPA, Power Automate</span>
+                        <span><i class="fas fa-tag"></i> Process Automation</span>
+                        <span><i class="fas fa-calendar"></i> Coming Soon</span>
                     </div>
                 </div>
                 <div class="blog-excerpt">
-                    A comprehensive guide to designing and implementing robust RPA systems using Microsoft Power Automate. This post will cover best practices, error handling, monitoring, and real-world case studies from my experience at EffectManager ApS.
+                    Lessons learned from building enterprise-scale RPA systems. How to handle error recovery, monitoring, and the transition from desktop flows to cloud-native automation.
                 </div>
-                <div class="skills-tags">
-                    <span class="skill-tag">Power Automate</span>
-                    <span class="skill-tag">RPA</span>
-                    <span class="skill-tag">Process Automation</span>
-                </div>
+                <span class="coming-soon-badge">Coming Soon</span>
             </div>
 
+            <!-- Blog Card 2 -->
             <div class="blog-card fade-in">
                 <div class="blog-header">
-                    <div class="blog-title">Time Series Forecasting for Supply Chain Optimization</div>
+                    <div class="blog-title">Building AI Agents Before the Hype</div>
                     <div class="blog-meta">
-                        <span><i class="fas fa-calendar"></i> Coming March 2025</span>
-                        <span><i class="fas fa-clock"></i> 20 min read</span>
-                        <span><i class="fas fa-tag"></i> Machine Learning, Forecasting</span>
+                        <span><i class="fas fa-tag"></i> Artificial Intelligence</span>
+                        <span><i class="fas fa-calendar"></i> Coming Soon</span>
                     </div>
                 </div>
                 <div class="blog-excerpt">
-                    Deep dive into advanced time series forecasting techniques for supply chain management. Learn how to implement Prophet, ARIMA models, and handle seasonality in real-world business contexts.
+                    In 2022, I built an autonomous database exploration agent that shaped a company's product roadmap. Here's what I learned about AI agents before LangChain and AutoGen made them mainstream.
                 </div>
-                <div class="skills-tags">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Prophet</span>
-                    <span class="skill-tag">Time Series</span>
-                    <span class="skill-tag">Machine Learning</span>
-                </div>
+                <span class="coming-soon-badge">Coming Soon</span>
             </div>
 
+            <!-- Blog Card 3 -->
             <div class="blog-card fade-in">
                 <div class="blog-header">
-                    <div class="blog-title">From Academic Research to Industry: My Data Science Journey</div>
+                    <div class="blog-title">From Teaching Math to Teaching Machines</div>
                     <div class="blog-meta">
-                        <span><i class="fas fa-calendar"></i> Coming April 2025</span>
-                        <span><i class="fas fa-clock"></i> 12 min read</span>
-                        <span><i class="fas fa-tag"></i> Career, Data Science</span>
+                        <span><i class="fas fa-tag"></i> Career & Perspective</span>
+                        <span><i class="fas fa-calendar"></i> Coming Soon</span>
                     </div>
                 </div>
                 <div class="blog-excerpt">
-                    Personal insights on transitioning from academic research in mathematics to applied data science in industry. Lessons learned, challenges faced, and advice for others making similar transitions.
+                    How eight years of mathematics education in the Middle East prepared me for a career in data science in Scandinavia. The unexpected parallels between classroom and codebase.
                 </div>
-                <div class="skills-tags">
-                    <span class="skill-tag">Career Development</span>
-                    <span class="skill-tag">Data Science</span>
-                    <span class="skill-tag">Academia</span>
-                </div>
+                <span class="coming-soon-badge">Coming Soon</span>
             </div>
 
-            <div class="blog-card fade-in">
-                <div class="blog-header">
-                    <div class="blog-title">Computer Vision for Document Processing: OCR and Beyond</div>
-                    <div class="blog-meta">
-                        <span><i class="fas fa-calendar"></i> Coming May 2025</span>
-                        <span><i class="fas fa-clock"></i> 18 min read</span>
-                        <span><i class="fas fa-tag"></i> Computer Vision, OCR</span>
-                    </div>
-                </div>
-                <div class="blog-excerpt">
-                    Explore advanced computer vision techniques for automated document processing. From basic OCR to intelligent document classification and data extraction using Azure Cognitive Services and custom ML models.
-                </div>
-                <div class="skills-tags">
-                    <span class="skill-tag">Computer Vision</span>
-                    <span class="skill-tag">OCR</span>
-                    <span class="skill-tag">Azure Cognitive Services</span>
-                    <span class="skill-tag">Document Processing</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Signup -->
-    <section class="section knowledge-sharing">
-        <div class="container">
-            <h2 class="section-title fade-in">Stay Updated</h2>
-            <div class="fade-in" style="text-align: center; max-width: 600px; margin: 0 auto;">
-                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-                    Get notified when new blog posts are published and receive exclusive insights about Data Science and Machine Learning.
-                </p>
-                <a href="contact.html" class="btn btn-primary" style="font-size: 1.1rem; padding: 1.2rem 2.5rem;">
-                    <i class="fas fa-envelope"></i>
-                    Subscribe to Updates
-                </a>
-            </div>
         </div>
     </section>
 
@@ -250,11 +186,11 @@
                 <a href="tel:+4542316710" class="social-link" title="Phone">
                     <i class="fas fa-phone"></i>
                 </a>
-                <a href="#" class="social-link" title="GitHub">
+                <a href="https://github.com/nazerof" class="social-link" title="GitHub" target="_blank">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
-            <p>&copy; 2025 Nazer Hdaifeh. All rights reserved.</p>
+            <p>&copy; 2026 Nazer Hdaifeh. All rights reserved.</p>
         </div>
     </footer>
 

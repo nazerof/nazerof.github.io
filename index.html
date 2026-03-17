@@ -13,11 +13,10 @@
         <div class="nav-container">
             <div class="logo">Nazer Hdaifeh</div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="pages/about.html">About</a></li>
+                <li><a href="pages/projects.html">Projects</a></li>
                 <li><a href="pages/blog.html">Blog</a></li>
-                <li><a href="pages/services.html">Services</a></li>
-                <li><a href="pages/contact.html">Contact</a></li>
             </ul>
             <div class="mobile-menu-toggle" id="mobile-menu-toggle">
                 <span></span>
@@ -35,17 +34,13 @@
                 <i class="fas fa-user"></i>
                 <span>About</span>
             </a>
+            <a href="pages/projects.html" class="mobile-nav-link">
+                <i class="fas fa-project-diagram"></i>
+                <span>Projects</span>
+            </a>
             <a href="pages/blog.html" class="mobile-nav-link">
                 <i class="fas fa-blog"></i>
                 <span>Blog</span>
-            </a>
-            <a href="pages/services.html" class="mobile-nav-link">
-                <i class="fas fa-cogs"></i>
-                <span>Services</span>
-            </a>
-            <a href="pages/contact.html" class="mobile-nav-link">
-                <i class="fas fa-envelope"></i>
-                <span>Contact</span>
             </a>
         </div>
     </nav>
@@ -54,89 +49,64 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1>Nazer Hdaifeh</h1>
-            <p class="subtitle">Data Scientist • Machine Learning Engineer • RPA Expert</p>
-            <p class="description">Master Engineer in Mathematical Modeling and Computation with specialization in Data Science and Machine Learning. Passionate about innovation, modeling, process optimization, and creating impactful digital solutions.</p>
+            <p class="subtitle">Data Scientist | ML Engineer | Automation Specialist</p>
+            <p class="description">Master Engineer in Mathematical Modeling and Computation. I build end-to-end data solutions — from ML pipelines and time-series forecasting to enterprise-scale automation with Azure and Power Automate.</p>
             <div class="cta-buttons">
-                <a href="pages/about.html" class="btn btn-primary">
-                    <i class="fas fa-user"></i>
-                    Learn More About Me
+                <a href="pages/projects.html" class="btn btn-primary">
+                    <i class="fas fa-project-diagram"></i>
+                    View Projects
                 </a>
-                <a href="#knowledge" class="btn btn-secondary">
-                    <i class="fas fa-share-alt"></i>
-                    Explore My Knowledge
-                </a>
-                <a href="mailto:nazerof@gmail.com" class="btn btn-primary">
-                    <i class="fas fa-envelope"></i>
-                    Get In Touch
+                <a href="pages/blog.html" class="btn btn-secondary">
+                    <i class="fas fa-blog"></i>
+                    Read My Blog
                 </a>
             </div>
         </div>
     </section>
 
-    
-    <!-- Knowledge Sharing Section -->
+    <!-- What I Work With Section -->
     <section id="knowledge" class="section knowledge-sharing">
         <div class="container">
-            <h2 class="section-title fade-in">Knowledge Sharing Areas</h2>
-            <p class="fade-in" style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Explore areas where I share my expertise and experience</p>
+            <h2 class="section-title fade-in">What I Work With</h2>
+            <p class="fade-in" style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Core areas where I design, build, and deliver solutions</p>
             <div class="knowledge-cards fade-in">
                 <div class="knowledge-card">
-                    <i class="fas fa-robot"></i>
-                    <h3>RPA & Process Automation</h3>
-                    <p>Learn about Robotic Process Automation, Power Automate, and how to streamline business processes with intelligent automation solutions.</p>
-                    <a href="#rpa-knowledge" class="btn btn-primary" style="margin-top: 1rem;">
-                        <i class="fas fa-arrow-right"></i>
-                        Explore RPA Knowledge
-                    </a>
-                </div>
-
-                <div class="knowledge-card">
                     <i class="fas fa-brain"></i>
-                    <h3>Machine Learning & Data Science</h3>
-                    <p>Dive into machine learning algorithms, data analysis techniques, and practical applications of AI in business contexts.</p>
-                    <a href="#ml-knowledge" class="btn btn-primary" style="margin-top: 1rem;">
+                    <h3>Data Science & ML</h3>
+                    <p>Time-series forecasting, classification models, anomaly detection. From PoC to production using Python, Scikit-learn, and Azure ML.</p>
+                    <a href="pages/projects.html" class="btn btn-primary" style="margin-top: 1rem;">
                         <i class="fas fa-arrow-right"></i>
-                        Explore ML Knowledge
+                        Learn More
                     </a>
                 </div>
 
                 <div class="knowledge-card">
-                    <i class="fas fa-cloud"></i>
-                    <h3>Azure & Cloud Solutions</h3>
-                    <p>Discover cloud architecture, Azure services, data pipelines, and how to build scalable solutions in the cloud.</p>
-                    <a href="#cloud-knowledge" class="btn btn-primary" style="margin-top: 1rem;">
+                    <i class="fas fa-database"></i>
+                    <h3>Data Engineering & ETL</h3>
+                    <p>Azure Data Factory, DataLake, PySpark. Building scalable data pipelines that unify legacy systems into clean, reliable architecture.</p>
+                    <a href="pages/projects.html" class="btn btn-primary" style="margin-top: 1rem;">
                         <i class="fas fa-arrow-right"></i>
-                        Explore Cloud Knowledge
+                        Learn More
                     </a>
                 </div>
 
                 <div class="knowledge-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Time Series & Forecasting</h3>
-                    <p>Master time series analysis, forecasting models, and predictive analytics for business intelligence and planning.</p>
-                    <a href="#forecasting-knowledge" class="btn btn-primary" style="margin-top: 1rem;">
+                    <i class="fas fa-robot"></i>
+                    <h3>Process Automation</h3>
+                    <p>Power Automate RPA at enterprise scale. Automating data operations, reporting workflows, and document processing.</p>
+                    <a href="pages/projects.html" class="btn btn-primary" style="margin-top: 1rem;">
                         <i class="fas fa-arrow-right"></i>
-                        Explore Forecasting
+                        Learn More
                     </a>
                 </div>
 
                 <div class="knowledge-card">
-                    <i class="fas fa-eye"></i>
-                    <h3>Computer Vision & OCR</h3>
-                    <p>Learn about image processing, object detection, OCR technologies, and automated document processing solutions.</p>
-                    <a href="#cv-knowledge" class="btn btn-primary" style="margin-top: 1rem;">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Agentic AI</h3>
+                    <p>LangChain, RAG systems, and AI agents deployed on Azure with Docker + CI/CD. Turning knowledge into self-service solutions.</p>
+                    <a href="pages/blog.html" class="btn btn-primary" style="margin-top: 1rem;">
                         <i class="fas fa-arrow-right"></i>
-                        Explore Computer Vision
-                    </a>
-                </div>
-
-                <div class="knowledge-card">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h3>STEM Education & Mentoring</h3>
-                    <p>Insights from years of STEM education, curriculum design, and mentoring students in technology and mathematics.</p>
-                    <a href="#education-knowledge" class="btn btn-primary" style="margin-top: 1rem;">
-                        <i class="fas fa-arrow-right"></i>
-                        Explore Education Insights
+                        Learn More
                     </a>
                 </div>
             </div>
@@ -156,14 +126,14 @@
                 <a href="tel:+4542316710" class="social-link" title="Phone">
                     <i class="fas fa-phone"></i>
                 </a>
-                <a href="#" class="social-link" title="GitHub">
+                <a href="https://github.com/nazerof" class="social-link" title="GitHub" target="_blank">
                     <i class="fab fa-github"></i>
                 </a>
             </div>
-            <p>&copy; 2025 Nazer Hdaifeh. All rights reserved.</p>
-            <p>Data Scientist | Machine Learning Engineer | RPA Expert</p>
+            <p>&copy; 2026 Nazer Hdaifeh. All rights reserved.</p>
+            <p>Data Scientist | ML Engineer | Automation Specialist</p>
             <p style="margin-top: 1rem; opacity: 0.7;">
-                <i class="fas fa-map-marker-alt"></i> Dybkjærvej, 8200 Aarhus, Denmark
+                <i class="fas fa-map-marker-alt"></i> Aarhus, Denmark
             </p>
         </div>
     </footer>
