@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building AI Agents Before the Hype - Nazer Hdaifeh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .blog-hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .blog-hero .hero-content {
+            max-width: 800px;
+        }
+
+        .blog-hero .blog-category {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .blog-hero h1 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+        }
+
+        .blog-hero .blog-date {
+            font-size: 1rem;
+            opacity: 0.85;
+            margin-top: 1rem;
+        }
+
+        .article-wrapper {
+            padding: 4rem 2rem;
+            background: #fff;
+        }
+
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 750px;
+            margin: 0 auto;
+            color: #444;
+        }
+
+        .article-body h2 {
+            color: #667eea;
+            font-size: 1.7rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .article-body p {
+            margin-bottom: 1.4rem;
+        }
+
+        .article-body .opening-line {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #555;
+            border-left: 4px solid #667eea;
+            padding-left: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.9;
+        }
+
+        .article-body code {
+            background: #f0f0f5;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #764ba2;
+        }
+
+        .article-body blockquote {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8eaff 100%);
+            border-left: 4px solid #667eea;
+            padding: 1.2rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .article-body ul {
+            margin-bottom: 1.4rem;
+            padding-left: 1.5rem;
+        }
+
+        .article-body li {
+            margin-bottom: 0.6rem;
+        }
+
+        .article-body strong {
+            color: #333;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 3rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            border: 2px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .article-divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 2px;
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .blog-hero {
+                height: auto;
+                min-height: 50vh;
+                padding-top: 100px;
+                padding-bottom: 2rem;
+            }
+
+            .blog-hero h1 {
+                font-size: 2rem;
+            }
+
+            .article-wrapper {
+                padding: 2.5rem 1.5rem;
+            }
+
+            .article-body {
+                font-size: 1.05rem;
+            }
+
+            .article-body h2 {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .article-wrapper {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../../index.html" style="color: inherit; text-decoration: none;">Nazer Hdaifeh</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav-menu" id="mobile-nav-menu">
+            <a href="../../index.html" class="mobile-nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="../about.html" class="mobile-nav-link">
+                <i class="fas fa-user"></i>
+                <span>About</span>
+            </a>
+            <a href="../projects.html" class="mobile-nav-link">
+                <i class="fas fa-project-diagram"></i>
+                <span>Projects</span>
+            </a>
+            <a href="../blog.html" class="mobile-nav-link">
+                <i class="fas fa-blog"></i>
+                <span>Blog</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Blog Post Hero -->
+    <section class="hero blog-hero">
+        <div class="hero-content">
+            <div class="blog-category"><i class="fas fa-robot"></i> Artificial Intelligence</div>
+            <h1>Building AI Agents Before the Hype</h1>
+            <p class="blog-date"><i class="fas fa-calendar-alt"></i> March 17, 2026 &nbsp;&bull;&nbsp; <i class="fas fa-clock"></i> 8 min read</p>
+        </div>
+    </section>
+
+    <!-- Article Body -->
+    <div class="article-wrapper">
+        <article class="article-body">
+
+            <p class="opening-line">In November 2022, a month before ChatGPT launched, I was sitting in a Copenhagen office writing an AI agent. Not because agents were trendy &mdash; nobody called them that yet &mdash; but because we had a problem only an autonomous system could solve.</p>
+
+            <p>I had just joined a small Danish analytics startup as a data scientist. The company had a PostgreSQL database holding years of aggregated employee and organizational data from dozens of clients. Somewhere in those tables were patterns that could become products. The question was: which ones?</p>
+
+            <p>Nobody at the company had the bandwidth to systematically explore the database. The founders had intuitions about what might be valuable, but intuition doesn't scale across hundreds of tables and thousands of columns. They needed someone &mdash; or something &mdash; that could look at all of it, spot what was interesting, and come back with concrete suggestions.</p>
+
+            <p>That something became my job. And the tool I built to do it was, in retrospect, an AI agent. I just didn't have that word for it.</p>
+
+            <h2>The Problem</h2>
+
+            <p>The core challenge was deceptively simple: we had data, and we needed ideas. Not dashboards, not reports &mdash; ideas. What product features could we build? What metrics could we surface that clients would pay for? What patterns in workforce behavior would surprise and inform HR leaders?</p>
+
+            <p>Manual exploration was out. You could spend a week writing queries against one client's dataset, find something interesting, and then realize it was an artifact of that specific company's structure. Or you could find a genuinely powerful signal and have no way of knowing whether it generalized across the client base. The search space was enormous, and the feedback loops were slow.</p>
+
+            <p>What we needed was a system that could do what a curious analyst does, but at a scale no individual could match: scan schemas, form hypotheses about relationships between columns, test those hypotheses with statistical rigor, discard dead ends quickly, and present only the findings worth a human's attention.</p>
+
+            <h2>What We Built</h2>
+
+            <p>The agent was written in Python. No LangChain &mdash; it didn't exist yet. No vector databases, no prompt chaining frameworks, no orchestration layers. The LLM involvement was minimal and late-stage; most of the intelligence was classical.</p>
+
+            <p>The architecture had four components:</p>
+
+            <ul>
+                <li><strong>Schema understanding.</strong> The agent started by reading database metadata: table names, column types, foreign key relationships, row counts. It built an internal graph of how the data was structured, which let it reason about what joins were possible and which columns were likely to be interesting based on their type and cardinality.</li>
+                <li><strong>Query planning.</strong> Based on the schema graph, the agent generated batches of SQL queries designed to test specific hypotheses. "Does column X correlate with column Y across clients?" "Is there a temporal trend in metric Z?" "Do companies above a certain size threshold behave differently?" Each query was tagged with the hypothesis it was testing.</li>
+                <li><strong>Statistical analysis.</strong> Raw query results went through a layer of automated analysis: correlation tests, distribution comparisons, anomaly detection, trend extraction. This layer filtered noise. A lot of hypotheses turned out to be either trivially true or statistically insignificant, and the system needed to know the difference.</li>
+                <li><strong>Report generation.</strong> The surviving findings were compiled into human-readable reports, ranked by potential product relevance. Each finding included the hypothesis, the evidence, the statistical confidence, and a plain-language interpretation of what it could mean for the business.</li>
+            </ul>
+
+            <p>The whole loop ran autonomously. I would point it at a database, give it broad parameters ("focus on retention-related metrics" or "look for departmental patterns"), and come back to a prioritized list of insights. Some were obvious. Some were noise. But a surprising number were genuinely interesting &mdash; interesting enough that several of them shaped the company's product roadmap for the following quarter.</p>
+
+            <h2>What Actually Worked</h2>
+
+            <p>The most important thing I learned was the surprising power of constraint.</p>
+
+            <p>We had no access to GPT-4. We had no framework that would auto-retry failed API calls or manage conversation memory for us. We had Python, SQL, and scipy. And that turned out to be an advantage, because it forced us to think clearly about what an agent actually needs.</p>
+
+            <p>Here's what I found matters:</p>
+
+            <p><strong>Schema understanding is everything.</strong> An agent that doesn't deeply understand its environment is just a random query generator. The time I spent building the schema graph &mdash; modeling table relationships, inferring column semantics from names and types, understanding which tables were fact tables vs. dimension tables &mdash; paid off more than anything else. When the agent "knew" what the data meant, its hypotheses were dramatically better.</p>
+
+            <p><strong>Query planning beats query volume.</strong> Early versions of the agent were profligate with queries. They would explore exhaustively, testing every possible column combination. This was slow, expensive, and produced mostly garbage. The breakthrough came when I shifted to hypothesis-driven exploration: form a specific, testable idea first, then write the minimum query to test it. Fewer queries, better results.</p>
+
+            <p><strong>Knowing when to stop is the hardest problem.</strong> The agent could always find <em>something</em>. More tables, more columns, more cross-joins. The challenge was teaching it that "mildly interesting" isn't worth reporting. I built increasingly aggressive filters &mdash; statistical significance thresholds, novelty scores, business relevance heuristics &mdash; and the quality of output was directly proportional to how ruthless those filters were.</p>
+
+            <p><strong>Error recovery needs to be a first-class concern.</strong> Databases are messy. Queries time out. Columns that look numeric contain strings. Tables that should have foreign key relationships don't. The agent hit errors constantly, and the difference between a useful agent and a broken script was entirely in how gracefully it handled the unexpected. I spent more time on error handling than on the "smart" parts.</p>
+
+            <h2>What's Changed (and What Hasn't)</h2>
+
+            <p>It's now 2026. Everyone is building AI agents. LangChain, LangGraph, AutoGen, CrewAI, OpenAI's Assistants API &mdash; the ecosystem is enormous. LLMs can generate SQL, interpret results in natural language, and even reason about multi-step plans. The scaffolding that took me weeks to build in 2022 can be assembled in an afternoon.</p>
+
+            <p>That's genuinely good. The grunt work of agent construction &mdash; tool calling, message routing, retry logic, memory management &mdash; shouldn't require custom code for every project. Frameworks should handle it, and they increasingly do.</p>
+
+            <p>But here's what I notice when I look at agent projects built primarily through frameworks: <strong>the hard parts haven't gotten easier.</strong></p>
+
+            <p><strong>Goal decomposition</strong> is still where most agents fail. An LLM can generate a plausible-sounding plan, but plausible-sounding and actually correct are different things. The agent that worked in 2022 succeeded because I hand-designed the decomposition: schema first, then hypotheses, then queries, then analysis. That sequencing reflected domain knowledge, not general intelligence. Framework-based agents that skip this step &mdash; that treat planning as something the LLM will figure out &mdash; tend to produce impressive demos and unreliable production systems.</p>
+
+            <p><strong>Error recovery</strong> is still mostly hand-rolled. Frameworks give you retry decorators and fallback chains, but real error recovery requires understanding <em>why</em> something failed and choosing an appropriate alternative. When my agent hit a query timeout, it didn't just retry &mdash; it restructured the query, sampled the data, or deprioritized that line of investigation. That logic was domain-specific and can't be abstracted away.</p>
+
+            <p><strong>Evaluation</strong> remains the unsolved problem. How do you know if your agent is actually good? In 2022, I evaluated mine by reading every report it generated and checking the statistical claims manually. It was tedious but thorough. Today's agent builders often evaluate with vibes: "it seems to work." The frameworks don't help here because evaluation is inherently task-specific.</p>
+
+            <p><strong>Knowing when to stop</strong> is still unsolved by any framework. The termination problem &mdash; when has the agent done enough? &mdash; is a domain knowledge question, not an architecture question. No amount of prompt engineering replaces understanding what "done" means for your specific use case.</p>
+
+            <hr class="article-divider">
+
+            <p>I don't say any of this to be contrarian about frameworks. I use LangGraph and LangChain in my current work. They are genuinely useful. But there is something about building agents the hard way &mdash; from scratch, with primitive tools, under real constraints &mdash; that teaches you where the actual complexity lives.</p>
+
+            <p>The complexity doesn't live in the orchestration layer. It lives in the domain model: what does your agent understand about the world it operates in? It lives in the evaluation criteria: how do you know success when you see it? It lives in the failure modes: what happens when the happy path breaks?</p>
+
+            <p>The best agents I've seen &mdash; in 2022 and in 2026 &mdash; are built by people who understand their problem domain deeply enough to encode that understanding into constraints, evaluation functions, and decomposition strategies. The framework is the easy part. The thinking is still hard.</p>
+
+            <p>And honestly? I think that's good news. It means the value isn't in knowing the latest framework. It's in knowing the problem well enough to tell a machine what to do about it. That skill transfers across every wave of tooling, and it's the same skill it's always been.</p>
+
+            <a href="../blog.html" class="back-link">
+                <i class="fas fa-arrow-left"></i>
+                Back to Blog
+            </a>
+
+        </article>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/nazerof" class="social-link" title="GitHub" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p>&copy; 2026 Nazer Hdaifeh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>
