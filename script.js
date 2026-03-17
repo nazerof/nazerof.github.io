@@ -77,24 +77,25 @@ document.querySelectorAll('.fade-in').forEach(el => {
 
 // Floating particles effect in hero section
 function createParticles() {
-    const hero = document.querySelector('.hero');
+    const hero = document.querySelector('.hero, .hero-compact, .blog-post-hero, .blog-hero, .article-hero');
     if (!hero) return;
-    const particleCount = 50;
+    const particleCount = 40;
 
     for (let i = 0; i < particleCount; i++) {
+        const size = Math.random() * 3 + 2; // 2-5px
         const particle = document.createElement('div');
         particle.className = 'particle';
         particle.style.cssText = `
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.5);
+            width: ${size}px;
+            height: ${size}px;
+            background: rgba(255, 255, 255, ${Math.random() * 0.4 + 0.3});
             border-radius: 50%;
             pointer-events: none;
-            animation: float ${Math.random() * 10 + 10}s infinite linear;
+            animation: float ${Math.random() * 8 + 6}s infinite linear;
             left: ${Math.random() * 100}%;
             top: ${Math.random() * 100}%;
-            animation-delay: ${Math.random() * 10}s;
+            animation-delay: ${Math.random() * 8}s;
         `;
         hero.appendChild(particle);
     }
@@ -104,7 +105,7 @@ const particleStyle = document.createElement('style');
 particleStyle.textContent = `
     @keyframes float {
         0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
-        100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        100% { transform: translateY(-400px) rotate(360deg); opacity: 0; }
     }
 `;
 document.head.appendChild(particleStyle);
