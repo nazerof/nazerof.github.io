@@ -1,0 +1,399 @@
+{
+  "course": {
+    "id": "{{COURSE_ID}}",
+    "version": "{{VERSION}}",
+    "metadata": {
+      "title": "{{COURSE_TITLE}}",
+      "subtitle": "{{COURSE_SUBTITLE}}",
+      "description": "{{COURSE_DESCRIPTION}}",
+      "category": {
+        "primary": "{{PRIMARY_CATEGORY}}",
+        "secondary": "{{SECONDARY_CATEGORY}}",
+        "tags": ["{{TAG_1}}", "{{TAG_2}}", "{{TAG_3}}", "{{TAG_4}}"]
+      },
+      "difficulty": "{{DIFFICULTY_LEVEL}}",
+      "estimatedHours": "{{ESTIMATED_HOURS}}",
+      "prerequisites": [
+        "{{PREREQUISITE_1}}",
+        "{{PREREQUISITE_2}}",
+        "{{PREREQUISITE_3}}"
+      ],
+      "learningObjectives": [
+        "{{OBJECTIVE_1}}",
+        "{{OBJECTIVE_2}}",
+        "{{OBJECTIVE_3}}",
+        "{{OBJECTIVE_4}}",
+        "{{OBJECTIVE_5}}"
+      ],
+      "targetAudience": [
+        "{{AUDIENCE_1}}",
+        "{{AUDIENCE_2}}",
+        "{{AUDIENCE_3}}",
+        "{{AUDIENCE_4}}"
+      ],
+      "author": {
+        "name": "{{AUTHOR_NAME}}",
+        "organization": "{{ORGANIZATION}}",
+        "lastUpdated": "{{LAST_UPDATED}}"
+      }
+    },
+    "learningPath": {
+      "nodes": [
+        {
+          "id": "{{NODE_ID}}",
+          "order": "{{ORDER_NUMBER}}",
+          "title": "{{NODE_TITLE}}",
+          "icon": "{{ICON_NAME}}",
+          "position": { "x": "{{X_POSITION}}", "y": "{{Y_POSITION}}" },
+          "metadata": {
+            "duration": "{{DURATION}}",
+            "difficulty": "{{NODE_DIFFICULTY}}",
+            "badges": ["{{BADGE_1}}", "{{BADGE_2}}", "{{BADGE_3}}"],
+            "breadcrumb": ["{{BREADCRUMB_1}}", "{{BREADCRUMB_2}}", "{{BREADCRUMB_3}}"],
+            "connections": {
+              "next": ["{{NEXT_NODE_ID}}"],
+              "previous": ["{{PREVIOUS_NODE_ID}}"]
+            }
+          },
+          "content": {
+            "concept": {
+              "sections": [
+                {
+                  "title": "{{CONCEPT_TITLE}}",
+                  "type": "explanation",
+                  "content": "{{CONCEPT_CONTENT}}",
+                  "icon": "{{CONCEPT_ICON}}",
+                  "subsections": [
+                    {
+                      "type": "{{SUBSECTION_TYPE}}",
+                      "items": [
+                        "{{ITEM_1}}",
+                        "{{ITEM_2}}",
+                        "{{ITEM_3}}"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "{{KEY_INSIGHT_TITLE}}",
+                  "type": "tip",
+                  "content": "{{TIP_CONTENT}}",
+                  "variant": "{{TIP_VARIANT}}"
+                },
+                {
+                  "title": "{{LIST_TITLE}}",
+                  "type": "list",
+                  "items": [
+                    {
+                      "title": "{{LIST_ITEM_TITLE_1}}",
+                      "description": "{{LIST_ITEM_DESCRIPTION_1}}"
+                    },
+                    {
+                      "title": "{{LIST_ITEM_TITLE_2}}",
+                      "description": "{{LIST_ITEM_DESCRIPTION_2}}"
+                    },
+                    {
+                      "title": "{{LIST_ITEM_TITLE_3}}",
+                      "description": "{{LIST_ITEM_DESCRIPTION_3}}"
+                    }
+                  ]
+                }
+              ]
+            },
+            "practical": {
+              "sections": [
+                {
+                  "title": "{{PRACTICAL_TITLE}}",
+                  "type": "{{SECTION_TYPE}}",
+                  "steps": [
+                    {
+                      "title": "{{STEP_TITLE}}",
+                      "description": "{{STEP_DESCRIPTION}}",
+                      "codeBlocks": [
+                        {
+                          "type": "{{CODE_TYPE}}",
+                          "title": "{{CODE_TITLE}}",
+                          "language": "{{LANGUAGE}}",
+                          "code": "{{CODE_CONTENT}}"
+                        }
+                      ]
+                    }
+                  ],
+                  "commands": [
+                    {
+                      "title": "{{COMMAND_TITLE}}",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "{{COMMAND_BLOCK_TITLE}}",
+                          "language": "bash",
+                          "code": "{{COMMAND_CODE}}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "{{SUCCESS_MESSAGE_TITLE}}",
+                  "type": "success",
+                  "content": "{{SUCCESS_MESSAGE}}"
+                }
+              ]
+            },
+            "troubleshoot": {
+              "sections": [
+                {
+                  "title": "{{TROUBLESHOOT_TITLE}}",
+                  "type": "troubleshooting",
+                  "issues": [
+                    {
+                      "problem": "{{PROBLEM_DESCRIPTION}}",
+                      "solution": "{{SOLUTION_DESCRIPTION}}",
+                      "type": "{{ISSUE_TYPE}}",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "{{FIX_TITLE}}",
+                          "language": "bash",
+                          "code": "{{FIX_CODE}}"
+                        }
+                      ],
+                      "checklist": [
+                        "{{CHECKLIST_ITEM_1}}",
+                        "{{CHECKLIST_ITEM_2}}",
+                        "{{CHECKLIST_ITEM_3}}"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "assessment": {
+              "questions": [
+                {
+                  "id": "{{QUESTION_ID}}",
+                  "type": "multiple-choice",
+                  "question": "{{QUESTION_TEXT}}",
+                  "options": [
+                    "{{OPTION_1}}",
+                    "{{OPTION_2}}",
+                    "{{OPTION_3}}",
+                    "{{OPTION_4}}"
+                  ],
+                  "correctAnswer": "{{CORRECT_ANSWER_INDEX}}",
+                  "explanation": "{{EXPLANATION}}"
+                },
+                {
+                  "id": "{{QUESTION_ID_2}}",
+                  "type": "true-false",
+                  "question": "{{TRUE_FALSE_QUESTION}}",
+                  "correctAnswer": "{{TRUE_OR_FALSE}}",
+                  "explanation": "{{TRUE_FALSE_EXPLANATION}}"
+                },
+                {
+                  "id": "{{QUESTION_ID_3}}",
+                  "type": "fill-blank",
+                  "question": "{{FILL_BLANK_QUESTION}}",
+                  "correctAnswer": "{{CORRECT_FILL_ANSWER}}",
+                  "acceptableAnswers": ["{{ACCEPTABLE_1}}", "{{ACCEPTABLE_2}}"],
+                  "explanation": "{{FILL_BLANK_EXPLANATION}}"
+                },
+                {
+                  "id": "{{QUESTION_ID_4}}",
+                  "type": "command-completion",
+                  "question": "{{COMMAND_QUESTION}}",
+                  "template": "{{COMMAND_TEMPLATE}}",
+                  "correctAnswer": "{{COMMAND_ANSWER}}",
+                  "explanation": "{{COMMAND_EXPLANATION}}"
+                },
+                {
+                  "id": "{{QUESTION_ID_5}}",
+                  "type": "ordering",
+                  "question": "{{ORDERING_QUESTION}}",
+                  "items": [
+                    "{{ORDER_ITEM_1}}",
+                    "{{ORDER_ITEM_2}}",
+                    "{{ORDER_ITEM_3}}",
+                    "{{ORDER_ITEM_4}}"
+                  ],
+                  "correctOrder": ["{{CORRECT_ORDER_INDICES}}"],
+                  "explanation": "{{ORDERING_EXPLANATION}}"
+                },
+                {
+                  "id": "{{QUESTION_ID_6}}",
+                  "type": "code-completion",
+                  "question": "{{CODE_COMPLETION_QUESTION}}",
+                  "template": "{{CODE_TEMPLATE}}",
+                  "correctAnswer": "{{CODE_COMPLETION_ANSWER}}",
+                  "explanation": "{{CODE_COMPLETION_EXPLANATION}}"
+                }
+              ],
+              "passingScore": "{{PASSING_SCORE}}"
+            },
+            "handson": {
+              "title": "{{HANDSON_TITLE}}",
+              "description": "{{HANDSON_DESCRIPTION}}",
+              "tasks": [
+                {
+                  "id": "{{TASK_ID}}",
+                  "title": "{{TASK_TITLE}}",
+                  "description": "{{TASK_DESCRIPTION}}",
+                  "requirements": [
+                    "{{REQUIREMENT_1}}",
+                    "{{REQUIREMENT_2}}",
+                    "{{REQUIREMENT_3}}"
+                  ],
+                  "hints": [
+                    "{{HINT_1}}",
+                    "{{HINT_2}}"
+                  ],
+                  "validation": {
+                    "type": "{{VALIDATION_TYPE}}",
+                    "command": "{{VALIDATION_COMMAND}}",
+                    "expectedPattern": "{{EXPECTED_PATTERN}}",
+                    "url": "{{TEST_URL}}",
+                    "expectedStatus": "{{EXPECTED_STATUS}}",
+                    "imageName": "{{IMAGE_NAME}}",
+                    "containerName": "{{CONTAINER_NAME}}",
+                    "filePath": "{{FILE_PATH}}",
+                    "maxSize": "{{MAX_SIZE}}",
+                    "checkMultiStage": "{{CHECK_MULTI_STAGE}}",
+                    "registry": "{{REGISTRY_URL}}",
+                    "services": ["{{SERVICE_1}}", "{{SERVICE_2}}"]
+                  },
+                  "points": "{{TASK_POINTS}}"
+                }
+              ],
+              "totalPoints": "{{TOTAL_POINTS}}",
+              "timeLimit": "{{TIME_LIMIT}}",
+              "difficulty": "{{HANDSON_DIFFICULTY}}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "templateInstructions": {
+    "usage": "Replace all {{PLACEHOLDER}} values with actual content",
+    "placeholderGuide": {
+      "courseLevel": {
+        "{{COURSE_ID}}": "Unique identifier (e.g., 'python-basics', 'react-fundamentals')",
+        "{{VERSION}}": "Version number (e.g., '1.0.0')",
+        "{{COURSE_TITLE}}": "Main course title",
+        "{{COURSE_SUBTITLE}}": "Descriptive subtitle with learning approach",
+        "{{COURSE_DESCRIPTION}}": "Comprehensive course description",
+        "{{PRIMARY_CATEGORY}}": "Main subject area (e.g., 'Programming', 'DevOps', 'Design')",
+        "{{SECONDARY_CATEGORY}}": "Sub-category (e.g., 'Web Development', 'Backend')",
+        "{{DIFFICULTY_LEVEL}}": "beginner | intermediate | advanced | beginner-to-advanced",
+        "{{ESTIMATED_HOURS}}": "Total course duration in hours"
+      },
+      "nodeLevel": {
+        "{{NODE_ID}}": "Unique node identifier",
+        "{{ORDER_NUMBER}}": "Sequential number for learning path",
+        "{{NODE_TITLE}}": "Lesson/module title",
+        "{{ICON_NAME}}": "Icon identifier for UI",
+        "{{DURATION}}": "Time needed for this node (e.g., '30 mins')",
+        "{{NODE_DIFFICULTY}}": "Difficulty level for this specific node"
+      },
+      "contentTypes": {
+        "explanation": "Conceptual explanation with text and examples",
+        "list": "Structured list of items with titles and descriptions",
+        "tip": "Important insight or key point",
+        "steps": "Sequential tutorial steps",
+        "command-reference": "Reference guide for commands/operations",
+        "tutorial": "Step-by-step guided practice",
+        "troubleshooting": "Common issues and solutions",
+        "success": "Success message or completion indicator"
+      },
+      "codeBlockTypes": {
+        "terminal": "Command line/shell commands",
+        "dockerfile": "Docker-specific files",
+        "yaml": "YAML configuration files", 
+        "json": "JSON data/configuration",
+        "javascript": "JavaScript code",
+        "python": "Python code",
+        "bash": "Bash scripts",
+        "text": "Plain text files"
+      },
+      "assessmentTypes": {
+        "multiple-choice": "Single correct answer from options",
+        "true-false": "Boolean question",
+        "fill-blank": "Complete the missing word/phrase",
+        "command-completion": "Complete a command or code snippet",
+        "ordering": "Arrange items in correct sequence",
+        "code-completion": "Complete code with proper syntax"
+      },
+      "validationTypes": {
+        "command-output": "Check command produces expected output",
+        "command-success": "Check command runs successfully",
+        "http-check": "Verify HTTP endpoint response",
+        "file-exists": "Check if file exists at path",
+        "image-exists": "Check if Docker image exists",
+        "file-exists-in-container": "Check file inside container",
+        "no-containers-running": "Verify cleanup completed",
+        "image-size-check": "Verify image size under limit",
+        "dockerfile-analysis": "Analyze Dockerfile structure",
+        "registry-push": "Verify image pushed to registry",
+        "compose-services-running": "Check services are running",
+        "volume-persistence-test": "Test data persistence",
+        "env-file-usage": "Check environment file usage",
+        "security-audit": "Security configuration check",
+        "monitoring-check": "Monitoring setup verification",
+        "deployment-test": "Deployment strategy test"
+      },
+      "tipVariants": {
+        "info": "Informational tip (blue)",
+        "warning": "Warning message (yellow/orange)", 
+        "success": "Success message (green)",
+        "error": "Error or critical info (red)"
+      }
+    },
+    "bestPractices": {
+      "content": [
+        "Start with clear learning objectives",
+        "Break complex topics into digestible chunks",
+        "Include practical examples and hands-on exercises",
+        "Provide troubleshooting for common issues",
+        "Use progressive difficulty (easy to hard)",
+        "Include assessments to verify understanding",
+        "Add visual elements (icons, badges) for engagement"
+      ],
+      "structure": [
+        "Each node should have concept → practical → troubleshoot → assess → handson",
+        "Connect nodes logically with prerequisites",
+        "Estimate realistic time requirements",
+        "Include multiple question types for variety",
+        "Provide hints for challenging hands-on tasks"
+      ],
+      "validation": [
+        "Make validation criteria specific and testable",
+        "Include multiple validation methods when possible",
+        "Provide clear success/failure indicators",
+        "Consider automated testing where applicable"
+      ]
+    },
+    "examples": {
+      "sampleCourseTopics": [
+        "Kubernetes Fundamentals",
+        "React Development Mastery", 
+        "Python Data Science Pipeline",
+        "AWS Cloud Architecture",
+        "Machine Learning Basics",
+        "Cybersecurity Essentials",
+        "Database Design & SQL",
+        "Mobile App Development",
+        "UI/UX Design Principles",
+        "DevSecOps Implementation"
+      ],
+      "sampleNodeTitles": [
+        "Setup & Installation",
+        "Core Concepts",
+        "Hands-on Practice",
+        "Advanced Features",
+        "Production Deployment",
+        "Best Practices",
+        "Troubleshooting Guide"
+      ]
+    }
+  }
+}
