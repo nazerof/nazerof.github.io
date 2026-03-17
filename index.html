@@ -6,6 +6,53 @@
     <title>Nazer Hdaifeh - Data Scientist & ML Engineer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .hero-compact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 120px 2rem 60px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-compact::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        .hero-compact .hero-content {
+            z-index: 2;
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+        .hero-compact h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .hero-compact .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        .hero-compact .description {
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .hero-compact { padding: 100px 1.5rem 40px; }
+            .hero-compact h1 { font-size: 2.2rem; }
+            .hero-compact .subtitle { font-size: 1rem; }
+            .hero-compact .description { font-size: 0.95rem; }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -14,7 +61,6 @@
             <div class="logo">Nazer Hdaifeh</div>
             <ul class="nav-links">
                 <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="pages/about.html">About</a></li>
                 <li><a href="pages/projects.html">Projects</a></li>
                 <li><a href="pages/blog.html">Blog</a></li>
             </ul>
@@ -24,15 +70,10 @@
                 <span></span>
             </div>
         </div>
-        <!-- Mobile Navigation Menu -->
         <div class="mobile-nav-menu" id="mobile-nav-menu">
             <a href="index.html" class="mobile-nav-link">
                 <i class="fas fa-home"></i>
                 <span>Home</span>
-            </a>
-            <a href="pages/about.html" class="mobile-nav-link">
-                <i class="fas fa-user"></i>
-                <span>About</span>
             </a>
             <a href="pages/projects.html" class="mobile-nav-link">
                 <i class="fas fa-project-diagram"></i>
@@ -45,8 +86,8 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
+    <!-- Hero Section (compact) -->
+    <section class="hero-compact">
         <div class="hero-content">
             <h1>Nazer Hdaifeh</h1>
             <p class="subtitle">Data Scientist | ML Engineer | Automation Specialist</p>
@@ -64,50 +105,260 @@
         </div>
     </section>
 
-    <!-- What I Work With Section -->
-    <section id="knowledge" class="section knowledge-sharing">
+    <!-- About Section -->
+    <section id="about" class="section about">
         <div class="container">
-            <h2 class="section-title fade-in">What I Work With</h2>
-            <p class="fade-in" style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">Core areas where I design, build, and deliver solutions</p>
-            <div class="knowledge-cards fade-in">
-                <div class="knowledge-card">
-                    <i class="fas fa-brain"></i>
-                    <h3>Data Science & ML</h3>
-                    <p>Time-series forecasting, classification models, anomaly detection. From PoC to production using Python, Scikit-learn, and Azure ML.</p>
-                    <a href="pages/projects.html" class="btn btn-primary" style="margin-top: 1rem;">
-                        <i class="fas fa-arrow-right"></i>
-                        Learn More
-                    </a>
+            <h2 class="section-title fade-in">About Me</h2>
+            <div class="about-content fade-in">
+                <div class="about-image">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="about-text">
+                    <h3>Data Scientist & ML Engineer</h3>
+                    <p>I specialize in building end-to-end data solutions — from ML forecasting models and automated data pipelines to enterprise-scale RPA systems. My work spans Azure cloud architecture, Python-based ML, and Power Automate automation.</p>
+                    <p>My path from mathematics teaching to data science gives me a rare combination: the ability to explain complex technical concepts clearly and the rigor to build production-grade systems.</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>(+45) 42316710</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>nazerof@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Aarhus, Denmark</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <span><a href="https://linkedin.com/in/nazer-hd" target="_blank" style="color: inherit; text-decoration: none;">linkedin.com/in/nazer-hd</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Work Experience</h2>
+            <div class="experience-grid fade-in">
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">Freelance Consultant</div>
+                            <div class="experience-company">Agentic AI & Data Science - Aarhus, Denmark</div>
+                            <div class="experience-date">May 2025 – Present</div>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        Building agentic AI solutions on Azure with Docker + CI/CD. Developing RAG-based knowledge systems and automated documentation workflows for enterprise teams.
+                    </div>
+                    <div class="skills-tags">
+                        <span class="skill-tag">AI Agents</span>
+                        <span class="skill-tag">RAG</span>
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">CI/CD</span>
+                    </div>
                 </div>
 
-                <div class="knowledge-card">
-                    <i class="fas fa-database"></i>
-                    <h3>Data Engineering & ETL</h3>
-                    <p>Azure Data Factory, DataLake, PySpark. Building scalable data pipelines that unify legacy systems into clean, reliable architecture.</p>
-                    <a href="pages/projects.html" class="btn btn-primary" style="margin-top: 1rem;">
-                        <i class="fas fa-arrow-right"></i>
-                        Learn More
-                    </a>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">Data Scientist</div>
+                            <div class="experience-company">EffectManager ApS - Skanderborg, Denmark</div>
+                            <div class="experience-date">Jun 2023 – April 2025</div>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        Led RPA development using Power Automate across 200+ Nordic retailers. Built automated Power BI reporting. Unified legacy pipelines into scalable Azure/DataLake architecture for end-to-end data processing.
+                    </div>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Power Automate</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">RPA</span>
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">ETL</span>
+                    </div>
                 </div>
 
-                <div class="knowledge-card">
-                    <i class="fas fa-robot"></i>
-                    <h3>Process Automation</h3>
-                    <p>Power Automate RPA at enterprise scale. Automating data operations, reporting workflows, and document processing.</p>
-                    <a href="pages/projects.html" class="btn btn-primary" style="margin-top: 1rem;">
-                        <i class="fas fa-arrow-right"></i>
-                        Learn More
-                    </a>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">Data Scientist</div>
+                            <div class="experience-company">Valuebeat ApS - Copenhagen, Denmark</div>
+                            <div class="experience-date">Nov 2022 – May 2023</div>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        Shaped product strategy by developing an AI agent to explore databases and suggest data-driven solutions. Developed models for approved suggestions, including employee attrition forecasting.
+                    </div>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">PCA</span>
+                    </div>
                 </div>
 
-                <div class="knowledge-card">
-                    <i class="fas fa-microchip"></i>
-                    <h3>Agentic AI</h3>
-                    <p>LangChain, RAG systems, and AI agents deployed on Azure with Docker + CI/CD. Turning knowledge into self-service solutions.</p>
-                    <a href="pages/blog.html" class="btn btn-primary" style="margin-top: 1rem;">
-                        <i class="fas fa-arrow-right"></i>
-                        Learn More
-                    </a>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">Student Researcher - ML Engineer</div>
+                            <div class="experience-company">Statistics Denmark - Copenhagen</div>
+                            <div class="experience-date">April 2022 – Oct 2022</div>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        Built an automated ML-based error detection system to identify data anomalies in national education records, improving data quality and reliability of official statistics.
+                    </div>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Statistical Analysis</span>
+                        <span class="skill-tag">Data Quality</span>
+                    </div>
+                </div>
+
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">Teaching Assistant - Deep Learning</div>
+                            <div class="experience-company">Technical University of Denmark (DTU)</div>
+                            <div class="experience-date">Aug 2021 – Dec 2021</div>
+                        </div>
+                    </div>
+                    <div class="experience-description">
+                        Facilitated hands-on learning in neural networks and deep learning by mentoring student projects, leading lab sessions, and co-designing course materials.
+                    </div>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Deep Learning</span>
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">Computer Vision</span>
+                        <span class="skill-tag">NLP</span>
+                        <span class="skill-tag">Teaching</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills">
+        <div class="container">
+            <h2 class="section-title fade-in">Skills & Technologies</h2>
+            <div class="skills-grid fade-in">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Programming</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">SQL</span>
+                        <span class="skill-item">R</span>
+                        <span class="skill-item">JavaScript</span>
+                        <span class="skill-item">C#</span>
+                        <span class="skill-item">HTML</span>
+                        <span class="skill-item">Markdown</span>
+                        <span class="skill-item">LaTeX</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-brain"></i> Machine Learning</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Scikit-learn</span>
+                        <span class="skill-item">PyTorch</span>
+                        <span class="skill-item">Azure AutoML</span>
+                        <span class="skill-item">Time Series</span>
+                        <span class="skill-item">Computer Vision</span>
+                        <span class="skill-item">Deep Learning</span>
+                        <span class="skill-item">LLM APIs</span>
+                        <span class="skill-item">Agentic AI</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Azure</span>
+                        <span class="skill-item">Google Cloud</span>
+                        <span class="skill-item">Azure Data Factory</span>
+                        <span class="skill-item">Azure DevOps</span>
+                        <span class="skill-item">GitHub Actions</span>
+                        <span class="skill-item">CI/CD</span>
+                        <span class="skill-item">Docker</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-robot"></i> Automation & RPA</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Power Automate</span>
+                        <span class="skill-item">RPA</span>
+                        <span class="skill-item">OCR</span>
+                        <span class="skill-item">REST API</span>
+                        <span class="skill-item">Process Automation</span>
+                        <span class="skill-item">Task Monitoring</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-chart-bar"></i> Data Analysis</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">pandas</span>
+                        <span class="skill-item">numpy</span>
+                        <span class="skill-item">Jupyter</span>
+                        <span class="skill-item">Power BI</span>
+                        <span class="skill-item">Streamlit</span>
+                        <span class="skill-item">ETL/ELT</span>
+                        <span class="skill-item">Statistical Analysis</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-users"></i> Soft Skills</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Leadership</span>
+                        <span class="skill-item">Team Working</span>
+                        <span class="skill-item">Problem Solving</span>
+                        <span class="skill-item">Communication</span>
+                        <span class="skill-item">Adaptability</span>
+                        <span class="skill-item">Mentoring</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Education</h2>
+            <div class="education-grid fade-in">
+                <div class="education-card">
+                    <div class="education-degree">Master of Engineering in Applied Mathematics & Computer Science</div>
+                    <div class="education-school">Technical University of Denmark (DTU) - Copenhagen</div>
+                    <div class="education-date">2019 – 2022</div>
+                    <p>Focused on Data Science, Machine Learning, and Signal Processing. Participated in interdisciplinary projects applying statistical and ML methods in real-world contexts.</p>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-degree">Bachelor of Engineering in Information Management Systems</div>
+                    <div class="education-school">Tishreen University - Latakia, Syria</div>
+                    <div class="education-date">2005 – 2010</div>
+                    <p>Focused on software development, IT infrastructure, and organizational information systems. Learned how IT systems align with business operations.</p>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-degree">Bachelor of Science in Mathematics</div>
+                    <div class="education-school">Tishreen University - Latakia, Syria</div>
+                    <div class="education-date">2004 – 2009</div>
+                    <p>In-depth knowledge in both abstract and applied mathematics including statistics, calculus, and algorithms. Built strong analytical foundations.</p>
                 </div>
             </div>
         </div>
