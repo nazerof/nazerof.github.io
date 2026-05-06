@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect with Nazer Hdaifeh</title>
+<meta name="description" content="Save Nazer Hdaifeh's contact, download CV, and connect on LinkedIn.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --grad: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --ink: #1f2733;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --accent: #667eea;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f5f7fb;
+    color: var(--ink);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 24px 18px 60px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(56, 67, 96, 0.12);
+  }
+  .hero {
+    background: var(--grad);
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px 70px;
+    position: relative;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 40px;
+    background: #fff;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .hero h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .hero .role {
+    margin-top: 6px;
+    font-size: 0.95rem;
+    opacity: 0.92;
+    font-weight: 500;
+  }
+  .hero .sub {
+    margin-top: 4px;
+    font-size: 0.82rem;
+    opacity: 0.78;
+  }
+  .photo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    border: 4px solid #fff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    margin: 0 auto -55px;
+    display: block;
+    position: relative;
+    z-index: 2;
+    background: #fff;
+  }
+  .body { padding: 70px 20px 22px; }
+
+  .intro {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin: 0 0 22px;
+  }
+  .intro strong { color: var(--ink); }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: var(--ink);
+    background: #fff;
+    border: 1.5px solid var(--line);
+    font-weight: 600;
+    font-size: 0.96rem;
+    transition: transform .12s ease, border-color .12s ease, box-shadow .12s ease;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 14px rgba(102, 126, 234, 0.12);
+  }
+  .btn .icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+  .btn .label { flex: 1; }
+  .btn .label .small {
+    display: block;
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 0.78rem;
+    margin-top: 1px;
+  }
+  .btn .arrow { color: var(--muted); font-size: 0.9rem; }
+
+  .btn.primary {
+    background: var(--grad);
+    color: #fff;
+    border-color: transparent;
+  }
+  .btn.primary .icon { background: rgba(255,255,255,0.2); }
+  .btn.primary .label .small { color: rgba(255,255,255,0.85); }
+  .btn.primary .arrow { color: rgba(255,255,255,0.85); }
+
+  .ic-vcard { background: #6366f1; }
+  .ic-cv     { background: #0e9f6e; }
+  .ic-li     { background: #0a66c2; }
+  .ic-mail   { background: #ef4444; }
+  .ic-tel    { background: #10b981; }
+  .ic-web    { background: #6b7280; }
+
+  .divider {
+    text-align: center;
+    color: #9ca3af;
+    font-size: 0.78rem;
+    margin: 18px 0 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
+
+  .perspark {
+    margin-top: 20px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 100%);
+    border: 1px solid #e0e7ff;
+    font-size: 0.85rem;
+    color: #3a3f5c;
+    line-height: 1.55;
+  }
+  .perspark strong { color: var(--accent); }
+  .perspark a { color: var(--accent); font-weight: 600; text-decoration: none; }
+
+  @media (min-width: 520px) {
+    .wrap { padding-top: 50px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="hero">
+        <h1>Nazer Hdaifeh</h1>
+        <div class="role">Founder &amp; CEO, PerSpark</div>
+        <div class="sub">AI &amp; Data Science Consultant &middot; Aarhus, Denmark</div>
+      </div>
+      <img class="photo" src="../Nazer_Hadifeh_pic1.jpg" alt="Nazer Hdaifeh">
+
+      <div class="body">
+        <p class="intro">
+          Thanks for connecting! Save my contact, grab my CV, or reach out directly &mdash;
+          whichever works best for you.
+        </p>
+
+        <div class="actions">
+          <a class="btn primary" href="../assets/nazer-hdaifeh.vcf" download>
+            <div class="icon"><i class="fas fa-id-card"></i></div>
+            <div class="label">
+              Save Contact
+              <span class="small">Add me to your phone (vCard)</span>
+            </div>
+            <i class="fas fa-arrow-right arrow"></i>
+          </a>
+
+          <a class="btn" href="../cv/Nazer_Hdaifeh_CV.pdf" download>
+            <div class="icon ic-cv"><i class="fas fa-file-pdf"></i></div>
+            <div class="label">
+              Download CV
+              <span class="small">PDF &middot; updated 2026</span>
+            </div>
+            <i class="fas fa-arrow-right arrow"></i>
+          </a>
+
+          <a class="btn" href="https://linkedin.com/in/nazer-hd" target="_blank" rel="noopener">
+            <div class="icon ic-li"><i class="fab fa-linkedin-in"></i></div>
+            <div class="label">
+              Connect on LinkedIn
+              <span class="small">linkedin.com/in/nazer-hd</span>
+            </div>
+            <i class="fas fa-arrow-right arrow"></i>
+          </a>
+
+          <a class="btn" href="mailto:nazerof@gmail.com">
+            <div class="icon ic-mail"><i class="fas fa-envelope"></i></div>
+            <div class="label">
+              Email
+              <span class="small">nazerof@gmail.com</span>
+            </div>
+            <i class="fas fa-arrow-right arrow"></i>
+          </a>
+
+          <a class="btn" href="tel:+4542316710">
+            <div class="icon ic-tel"><i class="fas fa-phone"></i></div>
+            <div class="label">
+              Call
+              <span class="small">+45 42 31 67 10</span>
+            </div>
+            <i class="fas fa-arrow-right arrow"></i>
+          </a>
+
+          <a class="btn" href="../index.html">
+            <div class="icon ic-web"><i class="fas fa-globe"></i></div>
+            <div class="label">
+              My Portfolio
+              <span class="small">Projects, blog, full bio</span>
+            </div>
+            <i class="fas fa-arrow-right arrow"></i>
+          </a>
+        </div>
+
+        <div class="perspark">
+          <strong>About PerSpark</strong> &mdash; I'm building an
+          AI-powered B2B2C learning platform that turns expertise into structured,
+          interactive courses. Currently in late product-development phase; focusing
+          next on project management, fundraising, teaming, and GTM. Curious?
+          <a href="https://www.perspark.com" target="_blank" rel="noopener">perspark.com &rarr;</a>
+        </div>
+
+        <div class="footer">
+          &copy; 2026 Nazer Hdaifeh &middot; <a href="../index.html">portfolio</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
