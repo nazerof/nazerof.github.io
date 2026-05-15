@@ -2,13 +2,13 @@ BEGIN:VCARD
 VERSION:3.0
 N:Hdaifeh;Nazer;;Mr.
 FN:Nazer Hdaifeh
-ORG:PerSpark
+ORG:HubsTime
 TITLE:Founder & CEO / AI & Data Science Consultant
 EMAIL;TYPE=INTERNET,WORK:nazerof@gmail.com
 TEL;TYPE=CELL,VOICE:+4542316710
 ADR;TYPE=WORK:;;Aarhus;;;;Denmark
 URL:https://linkedin.com/in/nazer-hd
 URL;TYPE=WEBSITE:https://nazerof.github.io
-URL;TYPE=COMPANY:https://www.perspark.com
-NOTE:Founder of PerSpark — AI-powered learning SaaS. Data Scientist & ML Engineer based in Aarhus, Denmark.
+URL;TYPE=COMPANY:https://www.hubstime.com
+NOTE:Founder of HubsTime — AI-powered learning SaaS. Data Scientist & ML Engineer based in Aarhus, Denmark.
 END:VCARD

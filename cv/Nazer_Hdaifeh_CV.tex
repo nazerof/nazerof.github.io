@@ -1,0 +1,977 @@
+%%%%
+% MTecknology's Resume
+%%%%
+% Author: Michael Lustfield
+% License: CC-BY-4
+% - https://creativecommons.org/licenses/by/4.0/legalcode.txt
+%%%%
+
+\documentclass[letterpaper,10pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% BEGIN_FILE: mteck.sty
+%% NOTE: Everything between here and END_FILE can
+%% be relocated to "mteck.sty" and then included with:
+%\usepackage{mteck}
+
+% Dependencies
+% NOTE: Some packages (lastpage, hyperref) require second build!
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{bookmark}
+\usepackage{lastpage}
+\usepackage{fontawesome5}
+\usepackage{academicons}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{pifont}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{pgffor}
+\usepackage{fontawesome5}
+\usepackage{adjustbox} 
+\usepackage{qrcode}
+\usepackage{tikz}
+\usetikzlibrary{shadows}
+\usepackage{fontawesome5}
+\usepackage{pifont}
+\usepackage{graphicx}
+% Sans-Serif
+%\usepackage[sfdefault]{FiraSans}
+%\usepackage[sfdefault]{roboto}
+%\usepackage[sfdefault]{noto-sans}
+%\usepackage[default]{sourcesanspro}
+
+% Serif
+\usepackage{CormorantGaramond}
+\usepackage{charter}
+
+% Colors
+% Use with \color{Name}
+% Can wrap entire heading with {\color{accent} [...] }
+\usepackage{xcolor}
+\definecolor{accentTitle}{HTML}{0e6e55}
+\definecolor{accentText}{HTML}{0e6e55}
+\definecolor{accentLine}{HTML}{a16f0b}
+
+% Misc. Options
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\urlstyle{same}
+
+% Adjust Margins
+\addtolength{\oddsidemargin}{-0.7in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-0.7in}
+\addtolength{\textheight}{1.4in}
+
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\setlength{\tabcolsep}{0pt}
+\setlength{\footskip}{3.7pt}
+\raggedbottom
+\raggedright
+
+% ATS Readability
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+%-----------------%
+% Custom Commands %
+%-----------------%
+\definecolor{charcoal}{RGB}{64,64,84} 
+% Centered title along with subtitle between HR
+% Usage: \documentTitle{Name}{Details}
+% \newcommand{\documentTitle}[2]{
+% \noindent
+%   \begin{center}
+%     {\Huge\color{accentTitle} #1}
+%     \vspace{10pt}
+%     {\color{accentLine} \hrule}
+%     \vspace{2pt}
+%     % {\footnotesize\color{accentTitle} #2}
+%     \footnotesize{#2}
+%     \vspace{2pt}
+%     {\color{accentLine} \hrule}
+%   \end{center}
+% }
+% Combined top header: styled name + contact info
+\newcommand{\fancyTitle}[6]{ % bgColor, First Name, Last Name, Subtitle, Name Color, Contact Info
+  % -- Colored banner with name and title --
+  \tikz[remember picture,overlay] {
+    \node[rectangle, fill=#1, anchor=north, minimum width=\paperwidth, minimum height=1.59cm] (header) at (current page.north) {};
+    \node[anchor=north, yshift=-2pt] (name) at (header.north) {
+      {\Huge \color{#5} #2 \textbf{#3} }
+    };
+    \node[draw=none, below] (description) at (name.south) {\color{#5}#4};
+  }
+  \vspace{0.2cm}
+
+  % -- Contact info line (same as old version) --
+  \noindent
+  \begin{center}
+    {\color{accentLine} \hrule}
+    \vspace{2pt}
+    \footnotesize{#6} % ← This is where you put: phone · email · LinkedIn · GitHub
+    \vspace{2pt}
+    {\color{accentLine} \hrule}
+  \end{center}
+}
+
+
+
+% Create a footer with correct padding
+% Usage: \documentFooter{\thepage of X}
+\newcommand{\documentFooter}[1]{
+  \setlength{\footskip}{10.25pt}
+  \fancyfoot[C]{\footnotesize #1}
+}
+
+% Simple wrapper to set up page numbering
+% Usage: \numberedPages
+% WARNING: Must run pdflatex twice!
+\newcommand{\numberedPages}{
+  \documentFooter{\thepage/\pageref{LastPage}}
+}
+
+% Section heading with horizontal rule
+% Usage: \section{Title}
+\titleformat{\section}{
+  \vspace{-9.5pt}
+  \color{accentText}%charcoal
+  \raggedright\large\bfseries
+}{}{0em}{}[\color{accentLine}\titlerule]
+
+% Section heading with separator and content on same line
+% Usage: \tinysection{Title}
+% \newcommand{\tinysection}[1]{
+%   \phantomsection
+%   \addcontentsline{toc}{section}{#1}
+%   {\large{\bfseries\color{accentText}#1} {\color{accentLine} |}}
+% }
+
+
+
+
+
+% \newcommand{\tinysectionwithpic}[3]{% #1=title, #2=description, #3=image path
+%   \noindent
+%   \begin{minipage}[t]{0.85\textwidth}
+%     {\large\bfseries\color{accentText} #1~{\color{accentLine}---}}
+%     {\small #2}
+%   \end{minipage}%
+%   \hfill
+%   \begin{minipage}[t]{0.11\textwidth}
+%     \raisebox{-3.0\baselineskip}{ % Pull image up slightly if needed
+%       \centering
+%       \tikz[baseline]{
+%         \clip (0,0) circle (1.25cm);
+%         \node at (0,0) {\includegraphics[width=2.5cm,height=2.5cm]{#3}};
+%       }
+%     }
+%   \end{minipage}
+% }
+
+
+\newcommand{\roundedImageBox}[2][2.4cm]{% [1]=size, {2}=image path
+  \tikz{
+    \path[draw=gray!60, fill=white, rounded corners=6pt, drop shadow={shadow xshift=0.5pt, shadow yshift=-0.5pt, opacity=0.25}]
+      (0,0) rectangle (#1,#1);
+    \clip[rounded corners=6pt] (0,0) rectangle (#1,#1);
+    \node[anchor=south west, inner sep=0pt] at (0,0) {\includegraphics[width=#1, height=#1]{#2}};
+  }
+}
+
+
+
+\newcommand{\tinysectionwithpic}[3]{% #1=title, #2=description, #3=image path
+  \noindent
+  \begin{minipage}[t]{0.85\textwidth}
+  % \raisebox{-6.0\baselineskip}
+    {\large\bfseries\color{accentText} #1~{\color{accentLine}---}}
+    \small #2
+  \end{minipage}%
+  \hfill
+  \begin{minipage}[t]{0.11\textwidth}
+    \centering
+    \raisebox{-5.0\baselineskip}
+    {
+      \roundedImageBox{#3}
+    }
+  \end{minipage}
+}
+% \newcommand{\tinysectionwithpic}[4][width=2.6cm]{% [1]=graphic size, #2=title, #3=description, #4=image path
+%   \noindent
+%   \begin{minipage}[t]{0.85\textwidth}
+%     {\large\bfseries\color{accentText} #2~{\color{accentLine}---}}
+%     \small #3
+%   \end{minipage}%
+%   \hfill
+%   \begin{minipage}[t]{0.11\textwidth}
+%     \centering
+%     \raisebox{-5.0\baselineskip}
+%     {
+%       \roundedImageBox[#1]{#4}
+%     }
+%   \end{minipage}
+% }
+
+
+
+
+% Indented line with arguments left/right aligned in document
+% Usage: \heading{Left}{Right}
+\newcommand{\heading}[2]{
+  \hspace{0pt}#1\hfill#2\\
+}
+
+% Adds \textbf to \heading
+\newcommand{\headingBf}[2]{
+  \heading{\textbf{#1}}{\textbf{#2}}
+}
+
+\newcommand{\headingBI}[2]{
+  \heading{\textbf{#1}}{\textit{#2}}
+}
+% Adds \textit to \heading
+\newcommand{\headingIt}[2]{
+  \heading{\textit{#1}}{\textit{#2}}
+}
+
+\newcommand{\headingIB}[2]{
+  \heading{\textit{#1}}{\textbf{#2}}
+}
+% Template for itemized lists
+% Usage: \begin{resume_list} [items] \end{resume_list}
+\newenvironment{resume_list}{
+  \vspace{-7pt}
+  \begin{itemize}[itemsep=-2px, parsep=1pt, leftmargin=30pt]
+}{
+  \end{itemize}
+  %\vspace{-2pt}
+}
+
+% Formats an item to use as an itemized title
+% Usage: \itemTitle{Title}
+\newcommand{\itemTitle}[1]{
+  \item[] \underline{#1}\vspace{0pt}
+}
+
+\newcommand{\MyVCardText}{BEGIN:VCARD
+VERSION:3.0
+N:Hdaifeh;Nazer;;Mr.
+FN:Nazer Hdaifeh
+EMAIL:nazerof@gmail.com
+TEL:+4542316710
+ORG:EffectManager ApS
+TITLE:Data Scientist
+URL:https://linkedin.com/in/nazer-hd
+END:VCARD}
+
+
+% -----------------------------------------------------------
+                     % Tags
+% -----------------------------------------------------------
+
+% Define tech tag styling %
+\newcommand{\techTag}[1]{%
+  \tcbox[
+    on line, 
+    size=fbox,
+    boxsep=1pt,
+    left=1pt,
+    right=1pt,
+    top=0pt,
+    bottom=0pt,
+    colframe=green!5,
+    colback=blue!5,
+    boxrule=0.3pt,
+    arc=3pt
+  ]{\scriptsize #1}%
+}
+
+% Tech tag list - INLINE only (NO itemize!)
+\newcommand{\techTags}[1]{%
+  \vspace{-3pt}
+  \noindent
+  \textcolor{gray!30}{\faTag}
+  \foreach \x in {#1} {\techTag{\x}\hspace{4pt}}%
+  \par
+}
+
+% CV tag for skills
+\newcommand{\cvtag}[1]{%
+  \tikz[baseline]\node[anchor=base,draw=black!30,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex]{\footnotesize #1};
+}
+
+
+% Expert skill tag
+\newcommand{\expertTag}[1]{%
+  \tikz[baseline]\node[
+    anchor=base,
+    draw=blue!60,
+    fill=blue!10,
+    rounded corners=2pt,
+    line width=0.3pt,
+    inner xsep=1.2ex,
+    inner ysep=0.8ex,
+    text height=1.5ex,
+    text depth=.25ex
+  ]{\scriptsize\textbf{#1}};
+}
+
+% Advanced skill tag
+\newcommand{\advancedTag}[1]{%
+  \tikz[baseline]\node[
+    anchor=base,
+    draw=green!20,
+    fill=green!10,
+    rounded corners=2pt,
+    line width=0.3pt,
+    inner xsep=0.25ex,
+    inner ysep=0.25ex,
+    text height=1.2ex,
+    text depth=.25ex
+  ]{\scriptsize\textbf{#1}};
+}
+
+% Intermediate skill tag
+\newcommand{\intermediateTag}[1]{%
+  \tikz[baseline]\node[
+    anchor=base,
+    draw=orange!60,
+    fill=orange!10,
+    rounded corners=2pt,
+    line width=0.3pt,
+    inner xsep=1.2ex,
+    inner ysep=0.8ex,
+    text height=1.5ex,
+    text depth=.25ex
+  ]{\scriptsize\textbf{#1}};
+}
+
+% Basic skill tag
+\newcommand{\basicTag}[1]{%
+  \tikz[baseline]\node[
+    anchor=base,
+    draw=gray!60,
+    fill=gray!10,
+    rounded corners=2pt,
+    line width=0.3pt,
+    inner xsep=1.2ex,
+    inner ysep=0.8ex,
+    text height=1.5ex,
+    text depth=.25ex
+  ]{\scriptsize\textbf{#1}};
+}
+
+% ----------------------------------------------
+% \newcommand{\ITCcompetence}[2]{ % input: Branch, description
+%   \adjustbox{valign=t}{\begin{minipage}{3.2cm}
+%     \raggedright
+%     \vspace{3pt}
+%     \renewcommand{\arraystretch}{1.3}
+%     \begin{tabular}{@{}l@{}}
+%       #1
+%     \end{tabular}
+%   \end{minipage}}
+%   \hfill
+%   % \vrule width 0.4pt height 1em depth 4em
+%   \raisebox{0.5\baselineskip}{\vrule width 0.4pt height 1.5em depth 1.5em}
+%   % \vline
+%   \hfill
+%   \adjustbox{valign=t}{\begin{minipage}{15cm}
+%     \centering
+%     #2
+%   \end{minipage}}
+% }
+
+
+\usepackage{tikz}
+\newcommand{\ITCcompetence}[2]{%
+  \noindent
+  \begin{tikzpicture}[baseline=(content.base)]
+    \node[anchor=base west] (left) at (0,0) {\begin{minipage}{3.2cm}
+      \raggedright #1
+    \end{minipage}};
+    \node[anchor=base west] (content) at ([xshift=1cm]left.east) {\begin{minipage}{15cm}
+      \centering #2
+    \end{minipage}};
+    \draw [gray!50, line width=0.5pt] (left.east |- content.north) -- (left.east |- content.south);
+  \end{tikzpicture}
+}
+
+
+
+% -------------------------------------------
+% Bullets used in itemized lists
+\renewcommand\labelitemi{--}
+
+%% END_FILE: mteck.sty
+%%%%%%%%%%%%%%%%%%%%%%
+
+
+%===================%
+% John Doe's Resume %
+%===================%
+
+%\numberedPages % NOTE: lastpage requires a second build
+%\documentFooter{\thepage of 2} % Does similar without using lastpage
+\begin{document}
+
+  %---------%
+  % Heading %
+  %---------%
+
+%  \documentTitle{Nazer Hdaifeh}{
+%   \href{tel:1234567890}{
+%     \raisebox{-0.05\height} \faPhone\ (+45) 42316710} ~ | ~
+%   \href{mailto:nazerof@gmail.com}{
+%     \raisebox{-0.15\height} \faEnvelope\ nazerof@gmail.com} ~ | ~
+%   \href{https://linkedin.com/in/nazer-hd}{
+%     \raisebox{-0.15\height} \faLinkedin\ linkedin.com/in/nazer-hd} ~ | ~
+%   \href{https://github.com/nazerof}{
+%     \raisebox{-0.15\height} \faGithub\ github.com/nazerof} ~ | ~
+%   \raisebox{-0.15\height} \faMapMarker\ Dybkjærvej, 8200 Aarhus
+% }
+\fancyTitle
+  {charcoal}      % background fill color charcoal
+  {Nazer}            % first name
+  {Hdaifeh}          % last name (bold)
+  {\faChartLine~Data Science \hspace{2mm}  \faDatabase~Data Engineering \hspace{2mm} \faCogs~RPA } % subtitle
+  {white}            % name color  white, accentText
+  {
+  \href{tel:1234567890}{
+    \raisebox{-0.05\height} \faPhone\ (+45) 42316710} ~ | ~
+  \href{mailto:nazerof@gmail.com}{
+    \raisebox{-0.15\height} \faEnvelope\ nazerof@gmail.com} ~ | ~
+  \href{https://linkedin.com/in/nazer-hd}{
+    \raisebox{-0.15\height} \faLinkedin\ linkedin.com/in/nazer-hd} ~ | ~
+  % \href{https://github.com/nazerof}{
+  %   \raisebox{-0.15\height} \faGithub\ github.com/nazerof} ~ | ~
+  \raisebox{-0.15\height} \faMapMarker\ Dybkjærvej, 8200 Aarhus
+}
+
+
+  %---------%
+  % Summary %
+  %---------%
+
+  % \tinysection{About me}
+  % A data scientist/ Machine Learning specialist / etc. with a M.Eng in Mathematical Modeling and Computation with a special focus on Machine Learning Engineering. Currently a Data Scientist at Effectmanager ApS, I develop Multiple automation systems, leverage cloud Computing services along with LLMs for managing and enriching Databases. In Addition, I implement advanced ML techniques for data preprocessing and predictive modeling. \\ My background in education management sharpened my ability to translate complex insights into strategic actions, fostering data-driven innovation and stakeholder trust.
+
+
+% \tinysectionwithpic{Professional Summary}{A data scientist/ Machine Learning specialist / etc. with a M.Eng in Mathematical Modeling and Computation with a special focus on Machine Learning Engineering. Currently a Data Scientist at Effectmanager ApS, I develop Multiple automation systems, leverage cloud Computing services along with LLMs for managing and enriching Databases. In Addition, I implement advanced ML techniques for data preprocessing and predictive modeling. \\ My background in education management sharpened my ability to translate complex insights into strategic actions, fostering data-driven innovation and stakeholder trust.}{Pics/IMG-1458.jpg}
+
+
+\tinysectionwithpic{About me}{Master Engineer in Mathematical Modeling and Computation specialising in Data Science, Machine Learning, and Agentic AI. Have built production automation, ML pipelines, and AI agents across Nordic enterprises. Currently freelancing on AI and automation projects while founding an AI-powered learning SaaS. Open to new challenges and collaborations on forward-thinking initiatives.}{../Nazer_Hadifeh_pic1.jpg}
+  %--------%
+  % Skills %
+  %--------%
+
+
+
+
+% -----------------------------------------
+
+\tcbset{highlightstyle/.style={
+  enhanced,
+  colback=gray!5,
+  colframe=gray!20,
+  boxrule=0pt,
+  arc=6pt,
+  left=6pt,
+  right=6pt,
+  top=0pt,
+  bottom=-12pt,
+  % sharp corners=south,
+  width=\linewidth,
+  before=\setlength{\parindent}{0pt}
+}}
+
+\newtcolorbox{highlightbox}[1][]{highlightstyle,#1}
+% ---------------------------------------
+
+  %------------%
+  % Experience %
+  %------------%
+
+\section*{{\faSuitcase} Work Experience}
+
+\begingroup
+\begin{highlightbox}[colback=blue!10,sharp corners=south]
+\headingBI{Freelance / Independent}{\textcolor{gray!90}{\footnotesize \faMapMarker*~Aarhus, Denmark}}
+\end{highlightbox}
+% \leftskip=2em
+\begin{highlightbox}[bottom=0pt,sharp corners=north]
+Operating across two parallel tracks: client-facing AI and automation consulting, and founding an AI-powered learning SaaS company.
+\par
+
+\headingBI{Agentic AI \& Data Science Consultant}{\footnotesize May 2025 -- Now}
+\begingroup
+\leftskip=2em
+Building agentic AI solutions on Azure with Docker and GitHub Actions, plus delivering hands-on DevOps/MLOps courses. Outcomes: faster knowledge operations, automated documentation flows, reusable blueprints, and upskilled cross-functional teams.
+\par
+\endgroup
+
+\vspace{4pt}
+\headingBI{Founder \& CEO of HubsTime (B2B2C AI-Powered Learning SaaS)}{\footnotesize Mar 2025 -- Now}
+\begingroup
+\leftskip=2em
+Building a multi-tenant SaaS for AI-powered course generation: Next.js 15 / FastAPI / PostgreSQL / Redis / LangGraph on Azure Container Apps. Owning cloud architecture, CI/CD, AI orchestration, and bilingual (ar/en, RTL) product design end-to-end. Now scaling toward project management, fundraising, teaming, and GTM.
+\par
+\endgroup
+\end{highlightbox}
+
+\techTags{LangChain, AutoGen, n8n, Copilot Studio, MCP, RAG, AI Agents, Next.js 15, FastAPI, PostgreSQL, LangGraph, Azure Container Apps}
+
+\par
+\endgroup
+
+
+\begin{highlightbox}[colback=blue!10,sharp corners=south]
+\headingBI{EffectManager ApS }{\textcolor{gray!70}{\footnotesize \faMapMarker*~Skanderborg, Denmark}}%{Skanderborg, Denmark}\textbar\ 
+\headingIt{\footnotesize Data Scientist}{\footnotesize Jun 2023 -- April 2025}\end{highlightbox}
+% \begingroup
+\begin{highlightbox}[bottom=-3pt,sharp corners=north]
+% \leftskip=2em
+Led RPA development using Power Automate to automate data gathering across 200+ Nordic retailers, eliminating manual processes. Enhanced legacy ML forecasting models with AI-driven time-series alternatives, improving supply chain accuracy through Streamlit PoC. Unified legacy pipelines into scalable Azure/GCS/OpenAI architecture, integrating with DataLake environments for end-to-end data processing.
+% I led several impactful projects that enhanced both technical operations and business decision-making:
+
+% \begin{resume_list}
+%   \itemTitle{RPA Development} 
+%     Developed an end-to-end Process Ropotic Automation system using Power Automate, significantly reducing manual data gathering efforts across over 200 Nordic retailers.
+
+%   \itemTitle{ML \& Business Intelligence} \
+%   Enhanced legacy baseline model for broader scenarios, introducing AI-driven, time-series alternatives, and improving the supply chain forecast accuracy, showcased in a Streamlit PoC.
+
+
+%     \itemTitle{AI transformation} \
+%     Applied AI-driven transformation by merging legacy pipelines into a unified architecture, implementing automated enrichment and object detection by utilizing PA, Azure, GCS and OpenAI. Delivered scalable, secure analytics across the company ecosystem.
+
+% \end{resume_list}
+\end{highlightbox}
+\techTags{RPA, Power Automate, MS 365, C\#, HTML, Azure VM, PowerShell, OpenAI, GCS, Python, Time Series Analysis, Machine Learning, Exploratory Data Analysis, Modeling, POC, MLOps, OCR, Computer Vision, GPT, Azure Functions, Azure Data Factory, DataLake ETL, Bitbucket}
+% \par
+% \endgroup
+
+% --------------------------------------------------------
+
+
+% % ---- compact experience block  ------------------------------------------
+% % \expEntry{Company}{City, Country}{Role}{Dates}{Itemised body}{Tag list}
+% \newcommand{\expEntry}[6]{%
+%   % ► company / dates  (sit on the same line – ATS reads them left→right)
+%   \headingBf{#1}{#4}\\[-2pt]
+%   % ► role  +  small location with icon
+%   \headingIt{#3}{\footnotesize\faMapMarker*~#2}\\[2pt]
+%   % ► main description (bullets, paragraphs, anything)
+%   #5
+%   % ► tech keywords (inline bubbles; still plain text for ATS)
+%   \techTags{#6}\vspace{8pt}
+% }
+
+% \expEntry
+%   {EffectManager ApS}
+%   {Skanderborg, Denmark}
+%   {Data Scientist}
+%   {Jun 2023 -- Present}
+%   {%
+%     \begin{highlightbox}
+%     \begin{resume_list}
+%       \itemTitle{Leaflet Automation}
+%         Developed an end-to-end robotic-process workflow in Power Automate that
+%         now harvests and uploads leaflets from 200 + Nordic retailers,
+%         eliminating 3.5 h/week of manual effort.
+
+%       \vspace{4pt}
+%       \itemTitle{Sales Baseline Calculation}
+%         Re-engineered legacy baseline models and introduced
+%         AI-driven time-series alternatives; delivered an interactive
+%         Streamlit PoC that lifted forecast accuracy for warehouse sales.
+
+%       \vspace{4pt}
+%       \itemTitle{Innobooster}
+%         Unified scattered data pipelines into a single Azure/GCP
+%         architecture; integrated V7 bounding-box OCR and GPT parsing to
+%         auto-enrich offers for downstream retail analytics.
+%     \end{resume_list}\end{highlightbox}
+%   }{Robotic Process Automation, Power Automate, MS 365, C\#, HTML, Azure VM, PowerShell, OpenAI, GCS, Python, Time Series Analysis, Machine Learning, Exploratory Data Analysis, Modeling, POC, MLOps, OCR, Computer Vision, GPT, Azure Functions, Azure Data Factory, ETL, Bitbucket}
+
+% \headingBI{EffectManager ApS }{\textcolor{gray!70}{\footnotesize \faMapMarker*~Skanderborg, Denmark}}%{Skanderborg, Denmark}\textbar\ 
+% \headingIt{Data Scientist}{\footnotesize Jun 2023 -- Now 2025}\end{highlightbox}
+
+
+% --------------------------------------------------------
+\vspace{12pt}
+\begingroup
+\begin{highlightbox}[colback=blue!10,sharp corners=south]
+\headingBI{Valuebeat ApS}{\textcolor{gray!90}{\footnotesize \faMapMarker*~Copenhagen, Denmark}}
+\headingIt{\footnotesize Data Scientist }{\footnotesize Nov 2022 -- May 2023}\end{highlightbox}
+% \leftskip=2em
+\begin{highlightbox}[bottom=0pt,sharp corners=north]
+Shaped product strategy by developing an AI agent to explore databases and suggest data-driven solutions, then developed models for approved suggestions, like predicting employee attrition forecasting.
+\end{highlightbox}
+% Shaped the company’s product strategy by Building an AI agent that explores  database and proposes product ideas based on available data.\\
+% Shaped product strategy by developing an AI agent to explore databases and suggest data-driven solutions. Then developed models for approved suggestions, like predicting employee attrition.
+
+\techTags{Python, SQL, PostgreSQL, Machine Learning, Exploratory Data analysis,Modeling, PCA, RAG(conceptual)}
+
+\par
+\endgroup
+
+  % \vspace{6pt}
+\begin{highlightbox}[colback=blue!10,sharp corners=south]
+\headingBI{Statistics Denmark}{\textcolor{gray!90}{\footnotesize \faMapMarker*~Copenhagen, Denmark}}
+\headingIt{\footnotesize Student Researcher | Machine Learning Engineer}{\footnotesize April 2022 -- Oct 2022}\end{highlightbox}
+    % \begingroup
+    % \leftskip=2em
+\begin{highlightbox}[bottom=0pt,sharp corners=north]
+Built an automated ML-based error detection system to identify data anomalies in national education records, improving data quality and enhancing the reliability of official statistics.
+\end{highlightbox}
+\techTags{Python, Machine Learning, Exploratory Data analysis,Modeling, Statistical Analysis, Sampleing, Data cleaning, Visulization}
+    % \par
+    % \endgroup
+
+
+\vspace{12pt}
+\begingroup
+\begin{highlightbox}[colback=blue!10,sharp corners=south]
+\headingBI{Technical University of Denmark (DTU)}{\textcolor{gray!90}{\footnotesize \faMapMarker*~Copenhagen, Denmark}}
+\headingIt{\footnotesize Teaching Assistant | Deep Learning Course}{\footnotesize Aug 2021 -- Dec 2021}\end{highlightbox}
+    % \leftskip=2em
+\begin{highlightbox}[bottom=0pt,sharp corners=north]
+Facilitated hands-on learning in neural networks and deep learning by mentoring student projects, leading lab sessions, and co-designing course materials.
+\end{highlightbox}
+\techTags{Neural Networks, Deep Learning, Mentoring, Teaching, PyTorch, Jupyter, Computer Vision, NLP,  Data Labeling, Curriculum Design, Python}
+    \par
+    \endgroup
+
+\vspace{12pt}
+% \begingroup
+\begin{highlightbox}[colback=blue!10,sharp corners=south]
+\headingBI{Advanced Schools}{\textcolor{gray!90}{\footnotesize \faMapMarker*~Riyadh City, Saudi Arabia}}\end{highlightbox}
+% \leftskip=2em
+\begin{highlightbox}[bottom=0pt,sharp corners=north]
+Evolving from STEM teacher to Department Manager and American Diploma Director.
+\par
+% \endgroup
+% \vspace{6pt}
+\headingBI{Department Manager | American Diploma Director}{\footnotesize 2016-2018}
+\begingroup
+\leftskip=2em
+Aligning educational delivery with 21-Century standards, while embedding technology with the management process, I have overseen curriculum planning and implementing data-driven development and action plans.\\
+\par
+\endgroup
+% \vspace{6pt}
+
+\headingBI{Mathematics Teacher}{\footnotesize 2010 -- 2016}
+\begingroup
+\leftskip=2em
+Delivered STEM education based on both local and U.S. curriculum standards, promoting critical thinking. Contributed to curriculum development and assessment design, embedding technology and student-centered methods.
+\par
+\endgroup
+\end{highlightbox}
+
+\techTags{Leadership, Strategic Planning, Curriculum Design, Academic Management, Team Building, STEM Education, EdTech, Critical Thinking, Assessment Design, Student-Centered Learning}
+
+
+% \newpage
+  %-----------%
+  % Education %
+  %-----------%
+
+\section*{{\faGraduationCap} Education}
+\begin{highlightbox}[colback=blue!10,sharp corners=south]
+\headingBI{Technical University of Denmark (DTU)}{\textcolor{gray!90}
+{\footnotesize \faMapMarker*~Copenhagen, Denmark}}
+\headingIt{Master of Engineering in Applied Mathematics \& Computer Science}{\footnotesize 2019 -- 2022}\end{highlightbox}
+\begin{highlightbox}[bottom=0pt,sharp corners=north]\vspace{6pt}
+\begin{resume_list}
+  \item Focused on Data Science, Machine Learning, and Signal Processing.
+  \item Participated in interdisciplinary projects applying statistical and ML methods in real-world contexts.
+  \item Solid knowledge in data analysis and model development through hands-on coursework and team collaboration.
+\end{resume_list}\end{highlightbox}
+
+\vspace{5pt}
+\begin{highlightbox}[colback=blue!10,sharp corners=south]
+\headingBI{Tishreen University}{\textcolor{gray!90}
+{\footnotesize \faMapMarker*~Latakia, Syria}}
+\headingIt{Bachelor of Engineering in Information Management Systems}{\footnotesize 2005 -- 2010}
+\end{highlightbox}
+\begin{highlightbox}[bottom=0pt,sharp corners=north]\vspace{6pt}
+\begin{resume_list}
+  \item Focused on software development, IT infrastructure, and organizational information systems.
+  \item Learned how IT systems align with and support business operations and decision-making.
+\end{resume_list}\end{highlightbox}
+
+\vspace{5pt}
+\begin{highlightbox}[colback=blue!10,sharp corners=south]
+\headingBI{Tishreen University}{\textcolor{gray!90}
+{\footnotesize \faMapMarker*~Latakia, Syria}}
+\headingIt{Bachelor of Science in Mathematics}{\footnotesize 2004 -- 2009}
+\end{highlightbox}
+\begin{highlightbox}[bottom=0pt,sharp corners=north]\vspace{6pt}
+\begin{resume_list}
+  \item In-depth knowledge in both abstract and applied mathematics including statistics, calculus, and algorithms.
+  \item Built strong analytical and problem-solving foundations critical for advanced data science and modeling work.
+\end{resume_list}\end{highlightbox}
+% \newpage
+  %----------------------------%
+  % Extracurricular Activities %
+  %----------------------------%
+\vspace{5pt}
+
+\section*{{\faDesktop} Skills}
+
+\ITCcompetence{
+  \scriptsize\textcolor{gray!80}{\faCode}~\textbf{Programming} \\
+  \scriptsize\textcolor{gray!80}{\faChartLine}~\textbf{Data Analysis}\\
+  \scriptsize\textcolor{gray!80}{\faBrain}~\textbf{Machine Learning} \\
+  % \scriptsize\textcolor{gray!80}{\faChartBar}~\textbf{Modeling \& Forecasting}
+}{
+  \centering
+  \scriptsize
+  \expertTag{Python} \advancedTag{SQL} \intermediateTag{R} \basicTag{JavaScript}
+  \advancedTag{Markdown} \advancedTag{\LaTeX}
+  \expertTag{pandas} \expertTag{numpy} \expertTag{Jupyter Notebooks}
+  \advancedTag{RStudio} \intermediateTag{Matlab}
+  \advancedTag{Azure AutoML} \expertTag{Scikit-learn} \expertTag{PyTorch}
+  \expertTag{Streamlit} \intermediateTag{Dash} \intermediateTag{Shiny}
+  \expertTag{Time Series Forecasting} \expertTag{Regression Models}
+  \expertTag{Classification Models} \expertTag{Clustering Models}\expertTag{Computer Vision Models} \expertTag{Cross-validation} 
+  \advancedTag{statsmodels} \advancedTag{Prophet} \expertTag{LLM APIs}
+}\\
+\vspace{2pt}
+% \ITCcompetence{
+%   \textcolor{gray!80}{\faBrain}~\textbf{Machine Learning} \\
+%   \textcolor{gray!80}{\faChartBar}~\textbf{Modeling \& Forecasting}
+% }{
+%   \centering
+%   \advancedTag{Azure AutoML} \expertTag{Scikit-learn} \expertTag{PyTorch}
+%   \expertTag{Streamlit} \intermediateTag{Dash} \intermediateTag{Shiny}
+%   \expertTag{Time Series Forecasting} \advancedTag{Regression Models}
+%   \advancedTag{Classification Models} \advancedTag{Cross-validation}
+%   \advancedTag{statsmodels} \advancedTag{Prophet} \advancedTag{Power BI}
+% }\\
+\vspace{2pt}
+\ITCcompetence{%\vspace{3pt}\\
+  \scriptsize\textcolor{gray!80}{\faCloud}~\textbf{Cloud} \\
+  \scriptsize\textcolor{gray!80}{\faDatabase}~\textbf{Data Engineering} \\
+  \scriptsize\textcolor{gray!80}{\faCodeBranch}~\textbf{DevOps \& CI/CD}
+}{
+  \centering
+  \scriptsize
+  \expertTag{DataLake} \expertTag{PySpark}
+  \expertTag{Azure Data Factory} \intermediateTag{Databricks}
+  \expertTag{Azure DevOps} \advancedTag{Google Cloud GCS}
+  \advancedTag{Google Cloud IAM} \intermediateTag{GitHub Actions}
+  \expertTag{ETL/ELT} \expertTag{Data Cleaning}
+  \advancedTag{Data Pipelines} \expertTag{CSV/JSON Transformation}
+  \advancedTag{Power BI Automation} \expertTag{Git}
+  \expertTag{GitHub} \expertTag{Bitbucket}
+  \advancedTag{CI/CD Pipelines}
+}\\
+ \vspace{2pt}
+\ITCcompetence{\\
+  \scriptsize\textcolor{gray!80}{\faCogs}~\textbf{ Automation \& Integration}
+  % \textcolor{gray!80}{\faUsers}~\textbf{Tools \& Collaboration}
+}{
+  \centering
+  \scriptsize
+  \expertTag{Power Automate (Cloud/Desktop)}\advancedTag{RPA} \advancedTag{OCR}
+  \advancedTag{REST API Integration}
+  \expertTag{AI Product Extraction} \advancedTag{OCR Labeling Pipelines}
+  \expertTag{Streamlit PoC}
+  \advancedTag{Automated Reporting} \advancedTag{Error Handling}
+  \advancedTag{Logging Pipelines} \advancedTag{Task Monitoring}
+  \advancedTag{System Scaling}
+}\\
+ \vspace{2pt}
+\ITCcompetence{%\vspace{3pt}\\
+  \scriptsize\textcolor{gray!80}{\faUsers}~\textbf{Tools \& Collaboration}
+}{
+  \centering
+  \scriptsize
+  \expertTag{MS Office Suite (Excel)}
+  \advancedTag{Overleaf} \advancedTag{Notion} \advancedTag{Trello}
+  \expertTag{Scrum Methodology} \expertTag{Agile Ceremonies}
+  \expertTag{Cross-functional Teams} \advancedTag{Confluence}
+  \advancedTag{Documentation} \advancedTag{Mentoring}
+}\\
+ \vspace{2pt}
+\ITCcompetence{%\vspace{3pt}\\
+  \scriptsize\textcolor{gray!80}{\faComments}~\textbf{Soft Skills}
+}{
+  \centering
+  \scriptsize
+\cvtag{Curiosity}\cvtag{Flexibility}\cvtag{Autonomy}\cvtag{Conflict resolution}\cvtag{Adaptability} \cvtag{Eye for Details}\cvtag{Problem Solving}\cvtag{Team Working}\cvtag{Leadership}\cvtag{Communication}\cvtag{Ambitious}
+}\\
+\vspace{8pt}
+{\scriptsize
+\noindent
+\expertTag{Expert}~
+\advancedTag{Advanced}~
+\intermediateTag{Intermediate}~
+\basicTag{Basic}
+}
+
+% \vspace{8pt}
+% \noindent\color{gray!30}\rule{\linewidth}{0.3pt}
+% \vspace{4pt}
+% \hfill
+% {\footnotesize
+% \expertTag{Expert}~
+% \advancedTag{Advanced}~
+% \intermediateTag{Intermediate}~
+% \basicTag{Basic}
+% }
+
+
+
+% \section*{{\faDesktop} Skills}
+
+% \begin{tabularx}{\textwidth}{>{\bfseries}l X}
+% \textcolor{gray!80}{\faCode}\hspace{5pt} Programming & Python (Highly Specialized), SQL (SQL Server, PostgreSQL), R, JavaScript (Basic), Markdown, \LaTeX \\
+% \textcolor{gray!80}{\faChartLine}\hspace{5pt} Data Analysis & pandas, numpy, Jupyter Notebooks (Highly Specialized), RStudio, Matlab (Intermediate) \\
+% \textcolor{gray!80}{\faBrain}\hspace{5pt} ML \& DL & Azure AutoML, Scikit-learn (Advanced), PyTorch (Advanced), Streamlit (Advanced), Dash (Intermediate), Shiny (Intermediate) \\
+% \textcolor{gray!80}{\faChartBar}\hspace{5pt} Modeling \& Forecasting & Time series forecasting, regression \& classification models, model validation, BI reporting, statsmodels, Prophet, Power BI \\
+% \textcolor{gray!80}{\faDatabase}\hspace{5pt} Data Engineering & Data pipelines, Azure Data Factory, ETL/ELT, data cleaning, Power BI automation, CSV/JSON handling \\
+% \textcolor{gray!80}{\faCloud}\hspace{5pt} Cloud Platforms & Azure (Blob Storage, Key Vault, Data Factory, AutoML, DevOps), GCP (GCS, IAM), GitHub Actions \\
+% \textcolor{gray!80}{\faCogs}\hspace{5pt} Automation & Power Automate (Cloud/Desktop), Trello API, PDF automation, RPA, OCR, REST APIs \\
+% \textcolor{gray!80}{\faLaptopCode}\hspace{5pt} Web \& Apps & Flask, Streamlit, HTML/CSS (Basic), Jupyter Rise Extension \\
+% \textcolor{gray!80}{\faCodeBranch}\hspace{5pt} DevOps & Git, GitHub, Bitbucket, CI/CD, Azure DevOps, GitHub Actions \\
+% \textcolor{gray!80}{\faWrench}\hspace{5pt} Optimization & Automated reporting (Power BI), leaflet scraping bots, error handling, logging, task tracking \\
+% \textcolor{gray!80}{\faTools}\hspace{5pt} Tools & Power BI, MS Office (Excel, Word, PowerPoint – Highly Specialized), Overleaf, Notion, Trello \\
+% \textcolor{gray!80}{\faProjectDiagram}\hspace{5pt} Methodologies & Scrum, Agile \\
+% \end{tabularx}
+
+% \section*{{\faDesktop} Courses \& Events}
+
+% \begin{itemize}[label=\ding{228}, leftmargin=3em, itemsep=0.15em]
+%   \item IBM Full Stack Software Developer – Coursera (Ongoing)
+%   \item Machine Learning with Graphs and GNN – Stanford University (Ongoing)
+%   \item Dansk3 (MU1, MU2, MU3) – CLAVIS, Aarhus (2019–2022)
+%   \item Education Global Conference – AdvancEd Organization, Riyadh (2016)
+%   \item Differentiated Teaching and Learning Strategies – AIAA Conference, Riyadh (2016)
+%   \item One-on-one English conversation training – Cambly (2012–2014)
+%   \item English Fluency (Pre-Intermediate to IELTS level) – British Council, Riyadh (2015)
+%   \item 21st-Century Teaching Methods (cooperative, constructive, etc.) – Advanced Schools, Riyadh (2010–2015)
+%   \item Math pedagogy workshops (LMS, audiovisual aids, smart boards, projectors)
+% \end{itemize}
+
+% \section*{{\faDesktop} Courses \& Events}
+
+% \vspace{4pt}
+% \begin{itemize}[label=\ding{228}, leftmargin=3em, itemsep=2pt, parsep=0pt, topsep=2pt]
+%   \item {\footnotesize \textbf{IBM Full Stack Software Developer} \hfill \textit{Coursera (Ongoing)}}
+%   \item {\footnotesize \textbf{Machine Learning with Graphs and GNN} \hfill \textit{Stanford University (Ongoing)}}
+%   \item {\footnotesize \textbf{Dansk3 (MU1, MU2, MU3)} \hfill \textit{CLAVIS, Aarhus (2019–2022)}}
+%   \item {\footnotesize \textbf{Education Global Conference} \hfill \textit{AdvancEd Organization, Riyadh (2016)}}
+%   \item {\footnotesize \textbf{Differentiated Teaching and Learning Strategies} \hfill \textit{AIAA Conference, Riyadh (2016)}}
+%   \item {\footnotesize \textbf{One-on-one English Conversation Training} \hfill \textit{Cambly (2012–2014)}}
+%   \item {\footnotesize \textbf{English Fluency (Pre-Intermediate to IELTS)} \hfill \textit{British Council, Riyadh (2015)}}
+%   \item {\footnotesize \textbf{21st-Century Teaching Methods (cooperative, etc.)} \hfill \textit{Advanced Schools, Riyadh (2010–2015)}}
+%   \item {\footnotesize \textbf{Math Pedagogy Workshops (LMS, audiovisual aids, etc.)}}
+% \end{itemize}
+\section*{{\faDesktop} Courses \& Events}
+
+\vspace{4pt}
+\begin{itemize}[label=\textcolor{gray!80}{\ding{228}}, leftmargin=3em, itemsep=2pt, parsep=0pt, topsep=2pt]
+\item {\footnotesize \textbf{Project Management}  \hfill
+   \quad \hspace*{1.5em}\textcolor{gray!80}{\faMapMarker*~Aarhus Business Academy} \hspace*{1.5em} \textcolor{gray!80}{\faCalendar*}~\textit{2025}}
+  \item {\footnotesize \textbf{Generative AI Applications}  \hfill
+   \quad \hspace*{1.5em}\textcolor{gray!80}{\faMapMarker*~Microsoft} \hspace*{1.5em} \textcolor{gray!80}{\faCalendar*}~\textit{2025}}
+    \item {\footnotesize \textbf{Web Development}  \hfill
+   \quad \hspace*{1.5em}\textcolor{gray!80}{\faMapMarker*~Microsoft} \hspace*{1.5em} \textcolor{gray!80}{\faCalendar*}~\textit{2024}}
+  \item {\footnotesize \textbf{Microsoft Power Automate} \hfill 
+  \hspace*{1.5em}\textcolor{gray!80}{\faMapMarker*~Microsoft} \hspace*{1.5em} \textcolor{gray!80}{\faCalendar*}~\textit{2023}}
+
+  \item {\footnotesize \textbf{Dansk3 (MU1, MU2, MU3)} \hfill
+   \quad \hspace*{1.5em}\textcolor{gray!80}{\faMapMarker*~CLAVIS, Aarhus} \hspace*{1.5em} \textcolor{gray!80}{\faCalendar*}~\textit{2019–2022}}
+
+  % \item {\footnotesize \textbf{Education Global Conference} \hfill 
+  % \quad \hspace*{1.5em}\textcolor{gray!80}{\faMapMarker*~AdvancEd Organization, Riyadh} \hspace*{1.5em} \textcolor{gray!80}{\faCalendar*}~\textit{2016}}
+
+  \item {\footnotesize \textbf{Differentiated Teaching and Learning Strategies} \hfill 
+  \quad \hspace*{1.5em}\textcolor{gray!80}{\faMapMarker*~AIAA Conference, Riyadh} \hspace*{1.5em} \textcolor{gray!80}{\faCalendar*}~\textit{2016}}
+
+
+  \item {\footnotesize \textbf{English Fluency (Pre-Intermediate to IELTS)} \hfill 
+  \quad \hspace*{1.5em}\textcolor{gray!80}{\faMapMarker*~ British Council, Riyadh}\hspace*{1.5em} \textcolor{gray!80}{\faCalendar*}~ \textit{2015}}
+
+  \item {\footnotesize \textbf{STEM Pedagogy, 21st-Century Learning Workshops (LMS, Cooperative, etc.)} \hfill 
+  \quad \hspace*{1.5em}\textcolor{gray!80}{\faMapMarker*~Advanced Schools, Riyadh} \hspace*{1.5em} \textcolor{gray!80}{\faCalendar*}~\textit{2010–2015}}
+
+  % \item {\footnotesize \textbf{Math Pedagogy Workshops (LMS, audiovisual aids, etc.)} \hfill
+  % \hspace*{1.5em} \faCalendar\hspace{2pt} \textit{2010–2015} \quad \faMapMarker\hspace{2pt} Advanced Schools, Riyadh}
+\end{itemize}
+
+% \section*{}
+\vspace{16pt}
+\noindent
+\begin{minipage}[t]{0.28\textwidth}
+  \centering
+  \footnotesize\textbf{------------- Languages -------------}\vspace{2pt}
+
+  \vspace{5pt}
+    {\scriptsize
+    \faLanguage\*~Arabic -- Native Language\\[3pt]
+    \faFlagUsa\*~English -- Professional Knowledge\\[3pt]
+    \faFlag\*~Danish -- Basic Knowledge
+    }
+
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.28\textwidth}
+  \centering
+  \footnotesize\textbf{------------- Other Interests -------------}\vspace{2pt}
+
+  \vspace{5pt}
+  {\scriptsize
+\begin{tabular}{ll}
+  \faChessKing\hspace{3pt} Chess & \faFilm\hspace{3pt} Movies \\
+  \faDumbbell\hspace{3pt} Gym & \faBook\hspace{3pt} Books \\
+  \faPlane\hspace{3pt} Travels & ~
+\end{tabular}
+
+  }
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.38\textwidth}
+  \centering
+  \footnotesize\textbf{------------------ Add Me :) ------------------}\vspace{2pt}
+
+  \vspace{5pt}
+{\scriptsize
+\noindent
+\begin{minipage}[c]{0.6\textwidth}
+    \centering
+  Thank you for reading.\\ You are welcome to add my contact details via the QR code.
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.35\textwidth}
+  \centering
+  \includegraphics[width=1.5cm]{../assets/qr-add-me.png}\\
+  % \footnotesize\textit{Scan to save contact}
+  % \qrcode[height=1.5cm]{\MyVCardText}
+  % \qrcode[height=1.5cm]{https://1drv.ms/b/c/8d6a997d18a1fa16/EYOHLwfK0BxMls5DpXQtO0oBNU581YmoNtZENP4ouWsn-A?e=a327BM}
+\end{minipage}
+}
+
+\end{minipage}
+
+\section{\faBullhorn \quad References}
+Available upon request :)
+
+
+
+\end{document}

@@ -94,7 +94,7 @@ f_small = load_font(22)
 
 # Header text (white on gradient)
 draw.text((CARD_W // 2, 70), "Nazer Hdaifeh", font=f_name, fill=(255, 255, 255), anchor="mm")
-draw.text((CARD_W // 2, 140), "Founder & CEO, PerSpark", font=f_role, fill=(255, 255, 255), anchor="mm")
+draw.text((CARD_W // 2, 140), "Founder & CEO, HubsTime", font=f_role, fill=(255, 255, 255), anchor="mm")
 draw.text((CARD_W // 2, 185), "AI & Data Science Consultant   ·   Aarhus", font=f_small, fill=(230, 230, 245), anchor="mm")
 
 # QR placement (resize for clarity)
