@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CI/CD for a Team of One - Nazer Hdaifeh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        /* Article body styles */
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 750px;
+            margin: 0 auto;
+            color: #444;
+        }
+
+        .article-body h2 {
+            color: #667eea;
+            font-size: 1.6rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .article-body p {
+            margin-bottom: 1.4rem;
+        }
+
+        .article-body strong {
+            color: #333;
+        }
+
+        .article-body blockquote {
+            border-left: 4px solid #667eea;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background: #f8f9ff;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .article-body code {
+            background: #f0f0f5;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #667eea;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .back-to-blog:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .article-footer {
+            text-align: center;
+            padding: 3rem 0 1rem;
+            border-top: 1px solid #eee;
+            margin-top: 3rem;
+        }
+
+        /* Hero adjustments for blog post */
+        .blog-post-hero {
+            height: auto;
+            padding: 120px 2rem 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-post-hero h1 {
+            font-size: 2.8rem;
+            max-width: 800px;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 768px) {
+            .blog-post-hero {
+                padding: 100px 1.5rem 40px;
+            }
+
+            .blog-post-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-body {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+
+            .article-body h2 {
+                font-size: 1.35rem;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-post-hero h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../../index.html" style="color: inherit; text-decoration: none;">Nazer Hdaifeh</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav-menu" id="mobile-nav-menu">
+            <a href="../../index.html" class="mobile-nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="../projects.html" class="mobile-nav-link">
+                <i class="fas fa-project-diagram"></i>
+                <span>Projects</span>
+            </a>
+            <a href="../blog.html" class="mobile-nav-link">
+                <i class="fas fa-blog"></i>
+                <span>Blog</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero blog-post-hero">
+        <div class="hero-content">
+            <h1>CI/CD for a Team of One</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-calendar"></i> July 2026</span>
+                <span><i class="fas fa-tag"></i> DevOps</span>
+                <span><i class="fas fa-clock"></i> 7 min read</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="section">
+        <div class="container">
+            <article class="article-body">
+
+                <p>Continuous integration and continuous delivery are usually sold as a team sport. The pitch is about protecting a group of engineers from each other: catching the bug before it reaches a teammate, keeping the shared branch deployable, letting many people ship without stepping on each other. All of that is true. But it leaves a lot of solo builders thinking CI/CD is an overhead they can skip until they are bigger.</p>
+
+                <p>I think that is exactly backwards. I build and run HubsTime, a production SaaS, mostly on my own. And running it has convinced me that CI/CD matters <strong>more</strong> when you are a team of one, not less. When there is no second engineer, the pipeline is the only teammate you have. It is the only thing standing between a tired solo developer and their own worst instincts at the end of a long day.</p>
+
+                <h2>When You're the Only Reviewer, the Pipeline Is the Review</h2>
+
+                <p>On a team, code review is a second pair of eyes. Someone who did not write the code looks at it before it ships and catches the thing you were too close to see. Working alone, you do not have that second pair of eyes. What you have instead is a machine that can be configured to be reliably skeptical on your behalf.</p>
+
+                <p>That is what a CI pipeline is for a solo developer: an automated reviewer that never gets tired, never assumes you know what you are doing, and never waves something through because it is late and the change looks small. Every push runs the tests. Every push runs the linter and the type checks. Every push confirms the thing actually builds in a clean environment, not just on the machine where it happened to work. None of this requires another human. All of it does the job another human would have done, which is to disagree with you at the moment you are least able to disagree with yourself.</p>
+
+                <h2>Make Deploys Boring</h2>
+
+                <p>The single most valuable thing CI/CD gives a solo operator is a boring deploy. A deploy should not be an event. It should not involve a sequence of remembered steps, a specific order of operations, or a held breath. It should be the least interesting thing that happens all day.</p>
+
+                <p>Boring is the goal because interesting deploys are where solo developers get hurt. The manual deploy that works fine forty times and then, on the forty-first, at the end of a long day, skips a step. When shipping is a repeatable, automated process &mdash; the same pipeline, the same steps, every time &mdash; you remove the entire category of failure that comes from a human doing a delicate multi-step process while distracted. I want deploying my product to be so uneventful that I barely notice I did it.</p>
+
+                <h2>The Rollback Is the Feature</h2>
+
+                <p>New solo builders tend to optimize their pipeline for deploy speed. How fast can I get a change to production? That is the wrong thing to obsess over. When you are alone, the more important question is: how fast can I <strong>undo</strong> a change to production?</p>
+
+                <p>On a team, when a bad deploy goes out, several people notice and several people can respond. Alone, you might be the only person who will ever notice, and you might notice at an inconvenient time. The thing that saves you is not deploying quickly. It is being able to roll back quickly and confidently, so that a mistake costs minutes instead of an evening. That means keeping releases small enough to reason about, and keeping the previous version one clear step away at all times. A fast rollback turns most production mistakes from crises into footnotes.</p>
+
+                <blockquote>The point of CI/CD for one person is the same as for fifty: to make the boring, safe path the easy path, so that doing the right thing does not depend on being alert.</blockquote>
+
+                <h2>The Guardrails a Solo Developer Actually Needs</h2>
+
+                <p>You do not need a heavyweight process to get most of the benefit. A few guardrails carry the load.</p>
+
+                <p><strong>Let the pipeline gate, not your judgment.</strong> The rule "I will not deploy on a Friday evening" is good, but it relies on discipline you may not have at 6pm on a Friday. Better to have the pipeline enforce what matters: tests must pass, the build must be clean, and the deploy is the same automated path regardless of your mood.</p>
+
+                <p><strong>Keep secrets out of the code.</strong> This is basic, and it is exactly the kind of thing that slips when nobody is reviewing your commits. Secrets belong in the pipeline's secret store, injected at deploy time, never in the repository. A solo developer with no reviewer is the most likely person to accidentally commit a key, and the least likely to have someone catch it.</p>
+
+                <p><strong>Have a staging environment that resembles production enough to matter.</strong> It does not have to be a perfect replica. It has to be close enough that "it worked in staging" is real information and not wishful thinking. For a solo operator, staging is the closest thing you have to a colleague trying your change before your users do.</p>
+
+                <h2>What Scales From One to a Team</h2>
+
+                <p>Here is the part that connects the solo experience to why any of this matters for a company. The habits that keep a one-person project safe are the same habits that let a team move fast without hurting each other. Automated tests, a boring repeatable deploy, a trustworthy rollback, secrets handled properly, a staging environment that means something &mdash; none of that changes character when you add people. It just becomes shared.</p>
+
+                <p>The solo version and the team version of good CI/CD are the same discipline at different scales. Which means the practices you build running your own thing alone are not a smaller, lesser version of "real" engineering. They are the same engineering, learned in the most demanding setting there is: the one where you are the developer, the reviewer, the on-call, and the person whose evening is at stake if you get it wrong.</p>
+
+                <p>I did not build a pipeline for HubsTime because a process told me to. I built it because I am the only safety net my product has, and I would rather that safety net be a machine that is reliably careful than a human who is only sometimes careful. That, in one sentence, is the whole case for CI/CD when your team is a team of one.</p>
+
+                <div class="article-footer">
+                    <a href="../blog.html" class="back-to-blog">
+                        <i class="fas fa-arrow-left"></i> Back to Blog
+                    </a>
+                </div>
+
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/nazerof" class="social-link" title="GitHub" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p>&copy; 2026 Nazer Hdaifeh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>

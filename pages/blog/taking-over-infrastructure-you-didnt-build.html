@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taking Over Infrastructure You Didn't Build - Nazer Hdaifeh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        /* Article body styles */
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 750px;
+            margin: 0 auto;
+            color: #444;
+        }
+
+        .article-body h2 {
+            color: #667eea;
+            font-size: 1.6rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .article-body p {
+            margin-bottom: 1.4rem;
+        }
+
+        .article-body strong {
+            color: #333;
+        }
+
+        .article-body blockquote {
+            border-left: 4px solid #667eea;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background: #f8f9ff;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .article-body code {
+            background: #f0f0f5;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #667eea;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .back-to-blog:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .article-footer {
+            text-align: center;
+            padding: 3rem 0 1rem;
+            border-top: 1px solid #eee;
+            margin-top: 3rem;
+        }
+
+        /* Hero adjustments for blog post */
+        .blog-post-hero {
+            height: auto;
+            padding: 120px 2rem 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-post-hero h1 {
+            font-size: 2.8rem;
+            max-width: 800px;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 768px) {
+            .blog-post-hero {
+                padding: 100px 1.5rem 40px;
+            }
+
+            .blog-post-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-body {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+
+            .article-body h2 {
+                font-size: 1.35rem;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-post-hero h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../../index.html" style="color: inherit; text-decoration: none;">Nazer Hdaifeh</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav-menu" id="mobile-nav-menu">
+            <a href="../../index.html" class="mobile-nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="../projects.html" class="mobile-nav-link">
+                <i class="fas fa-project-diagram"></i>
+                <span>Projects</span>
+            </a>
+            <a href="../blog.html" class="mobile-nav-link">
+                <i class="fas fa-blog"></i>
+                <span>Blog</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero blog-post-hero">
+        <div class="hero-content">
+            <h1>Taking Over Infrastructure You Didn't Build</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-calendar"></i> July 2026</span>
+                <span><i class="fas fa-tag"></i> DevOps</span>
+                <span><i class="fas fa-clock"></i> 8 min read</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="section">
+        <div class="container">
+            <article class="article-body">
+
+                <p>Most infrastructure work is not greenfield. You rarely get to design a clean system from an empty page. Far more often, you inherit something that already works, that already has real users depending on it, that was built by someone under time pressure, and that nobody ever fully wrote down. Somewhere there is one person who understands how it all fits together, and that person is tired.</p>
+
+                <p>I have seen this from both ends. At a Nordic SaaS company I took a tangle of scattered, half-documented data pipelines and unified them into a single coherent architecture, which meant first understanding a system I had not designed. And I run my own product, HubsTime, where I am the person who carries the whole thing in my head. Being on the second side taught me, viscerally, how risky the first side is. A system that only one person understands is not an asset. It is a liability wearing the costume of an asset.</p>
+
+                <p>So this is what I have learned about taking over infrastructure you did not build, and doing it without breaking the thing you just inherited.</p>
+
+                <h2>The First Rule: Don't Change Anything Yet</h2>
+
+                <p>The strongest instinct when you inherit a messy system is to start fixing it. You see a fragile manual step, an oddly named resource, a script that clearly should not work, and you want to clean it up on day one. This instinct is how you cause your first outage.</p>
+
+                <p>The reason is simple: you do not yet know why anything is the way it is. That strange manual step might be a workaround for a problem that will come roaring back the moment you automate it away. That oddly named resource might be referenced by something you have not found yet. Early on, your job is not to improve the system. It is to <strong>understand</strong> it. You cannot safely change what you cannot yet explain.</p>
+
+                <h2>Build a Map Before You Build Anything</h2>
+
+                <p>The first real deliverable when taking over infrastructure is not a fix. It is a map. Before touching anything, I want to be able to answer, on paper, a specific set of questions.</p>
+
+                <p>What actually runs, and where? What talks to what? What is scheduled, and what is triggered by a human? Where do the secrets live, and how do they get rotated? What has broken before, and how was it fixed? What is the one component that, if it failed at 2am, would ruin everyone's night?</p>
+
+                <p>Writing these answers down does two things. It turns knowledge that lived in one person's head into something the team can hold, which is the entire point of taking over. And it surfaces the gaps, because the questions you cannot answer are a precise list of where the risk is hiding. The map is never complete on the first pass. That is fine. An incomplete map that everyone can read beats a complete one that exists only in someone's memory.</p>
+
+                <h2>Find the Tribal Knowledge and Get It Out of the Person</h2>
+
+                <p>Every inherited system has a keeper: the founder, the first engineer, the CTO who built it while also doing three other jobs. This person is simultaneously your best resource and the single biggest risk in the whole setup. Best resource, because they can answer in thirty seconds what would take you a day to reverse-engineer. Biggest risk, because if the plan is for the knowledge to stay in their head, you have not actually taken anything over. You have just added a second person to the bottleneck.</p>
+
+                <p>The work here is deliberate extraction. Sit with them while something deploys. Ask them to walk through a recovery they have done before. Especially, capture the ugly parts: the manual failover, the "oh you also have to restart this other thing," the step that is not in any document because it only comes up when things go wrong. The measure of success is not that you now understand the system. It is that the runbook does, so that understanding no longer depends on any single person being reachable.</p>
+
+                <h2>Stabilize Before You Modernize</h2>
+
+                <p>Once you can see the system and the knowledge is out of one person's head, there is a real temptation to jump straight to the exciting work: rebuild it properly, move it to infrastructure as code, adopt the modern stack. That is the right destination. It is the wrong next step.</p>
+
+                <p>The right order is stabilize, then modernize. Stabilization means making the system observable and its scariest manual steps safer, without changing its fundamental shape. Add monitoring and alerting first, so that you can actually see what the system is doing rather than finding out from an angry user. Then take the two or three manual steps most likely to cause a bad night and make them more robust: a script instead of a memory, a checklist instead of a hope. Only once the system is legible and its worst edges are sanded down do you start the deeper refactor toward reproducible, code-managed infrastructure.</p>
+
+                <p>Modernizing an unstable system you do not yet understand is how you convert a system that is fragile-but-working into one that is fragile-and-broken.</p>
+
+                <blockquote>You have successfully taken over infrastructure when the person you took it from can go on holiday, leave their laptop at home, and nothing about that decision makes anyone nervous.</blockquote>
+
+                <h2>The Real Goal: Turn One Person's Knowledge Into the Team's</h2>
+
+                <p>It is worth being clear about what taking over infrastructure is actually for, because it is easy to frame it as heroics. It is not about becoming the new single point of failure, the new person who carries everything and answers every page. That is just moving the bottleneck, not removing it.</p>
+
+                <p>The real goal is to take work and knowledge that currently live in one overloaded person, often a founder or a CTO who built the thing while wearing five hats, and turn them into documented, automated, shared processes that the team owns. Provisioning that used to be a careful manual ritual becomes a reviewed change in a repository. Monitoring that used to live in one person's intuition becomes alerts that anyone can see. The recovery steps that used to be tribal knowledge become a runbook that a new hire could follow.</p>
+
+                <p>When that shift happens, something changes beyond reliability. The person who was carrying it all gets their evenings and their focus back, and the organisation stops being one resignation away from not understanding its own systems. That, more than any particular tool or automation, is what taking over infrastructure is really worth.</p>
+
+                <h2>What Stays With Me</h2>
+
+                <p>Inheriting systems has taught me a discipline that greenfield work never would have. Slow down before you speed up. Write the map before you draw on it. Get the knowledge out of the person and into a place the team can reach. Stabilize before you modernize. And measure your success not by how indispensable you have become, but by how dispensable you have made the fragile, single-person setup you started with.</p>
+
+                <p>The systems I am proudest of are not the ones I designed from scratch. They are the ones I received as a mess held together by one exhausted person, and handed back as something a whole team could understand and trust.</p>
+
+                <div class="article-footer">
+                    <a href="../blog.html" class="back-to-blog">
+                        <i class="fas fa-arrow-left"></i> Back to Blog
+                    </a>
+                </div>
+
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/nazerof" class="social-link" title="GitHub" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p>&copy; 2026 Nazer Hdaifeh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>

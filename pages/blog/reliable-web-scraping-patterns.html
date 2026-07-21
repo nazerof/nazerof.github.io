@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reliable Web Scraping: Patterns That Outlive the Tool - Nazer Hdaifeh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        /* Article body styles */
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 750px;
+            margin: 0 auto;
+            color: #444;
+        }
+
+        .article-body h2 {
+            color: #667eea;
+            font-size: 1.6rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .article-body p {
+            margin-bottom: 1.4rem;
+        }
+
+        .article-body strong {
+            color: #333;
+        }
+
+        .article-body blockquote {
+            border-left: 4px solid #667eea;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background: #f8f9ff;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .article-body code {
+            background: #f0f0f5;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #667eea;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .back-to-blog:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .article-footer {
+            text-align: center;
+            padding: 3rem 0 1rem;
+            border-top: 1px solid #eee;
+            margin-top: 3rem;
+        }
+
+        /* Hero adjustments for blog post */
+        .blog-post-hero {
+            height: auto;
+            padding: 120px 2rem 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-post-hero h1 {
+            font-size: 2.8rem;
+            max-width: 800px;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 768px) {
+            .blog-post-hero {
+                padding: 100px 1.5rem 40px;
+            }
+
+            .blog-post-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-body {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+
+            .article-body h2 {
+                font-size: 1.35rem;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-post-hero h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../../index.html" style="color: inherit; text-decoration: none;">Nazer Hdaifeh</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav-menu" id="mobile-nav-menu">
+            <a href="../../index.html" class="mobile-nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="../projects.html" class="mobile-nav-link">
+                <i class="fas fa-project-diagram"></i>
+                <span>Projects</span>
+            </a>
+            <a href="../blog.html" class="mobile-nav-link">
+                <i class="fas fa-blog"></i>
+                <span>Blog</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero blog-post-hero">
+        <div class="hero-content">
+            <h1>Reliable Web Scraping: Patterns That Outlive the Tool</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-calendar"></i> April 2026</span>
+                <span><i class="fas fa-tag"></i> Web Scraping</span>
+                <span><i class="fas fa-clock"></i> 8 min read</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="section">
+        <div class="container">
+            <article class="article-body">
+
+                <p>Scrapers break. Not sometimes, not rarely, not when someone is careless. They break reliably, predictably, as a baseline fact of the job. This is the uncomfortable truth that separates web scraping from most other kinds of software: the system on the other end of the wire was not designed for you, and it changes without telling anyone.</p>
+
+                <p>I spent two years running a scraping fleet across 200+ retailer portals. The toolkit was mostly Power Automate Cloud and Desktop with C# scripting for the harder cases, with Python handling data transformations downstream. A different job, with a different team, would have picked a different stack &mdash; Python with requests and BeautifulSoup, or Scrapy, or Playwright, or any of a dozen other reasonable choices. And here is the thing I want to argue: the specific tool matters much less than people think. What makes a scraping system hold together is a set of patterns that apply across every tool, and what makes it fragile is ignoring them for clever code.</p>
+
+                <p>This post is about those patterns. The tool you choose should be the last decision you make, not the first.</p>
+
+                <h2>Why Scraping Is Fragile in a Way General Automation Isn't</h2>
+
+                <p>Most automated systems fail at well-defined boundaries. An API returns a 500. A database connection times out. A file is missing. The failure modes are enumerable, the recovery strategies are standard, and if you have written one retry loop you have more or less written them all.</p>
+
+                <p>Scraping does not work this way. The failure modes are not enumerable because they depend on decisions someone else made on their end, for reasons unrelated to you. A marketing team decides to redesign the login page. An engineer adds a new CSS class and removes an old one. A server that used to return JSON now returns HTML with a JavaScript payload. A rate limiter is tightened. A cookie is renamed. None of these are failures of your code. All of them look like failures of your code.</p>
+
+                <p>This is the cognitive shift you have to make when moving from general automation to scraping. Your code is not the unit that needs to be robust. Your <strong>system</strong> is. The code will break, and it will break often. What matters is whether the system around the code can notice, recover, and keep running.</p>
+
+                <h2>Login and Session Patterns That Survive Across Tools</h2>
+
+                <p>Authentication is where most scrapers die first, because it is the point where the target system has the most freedom to change things and the least obligation to announce it.</p>
+
+                <p>A login flow that worked on Monday can fail on Tuesday for at least a dozen reasons that look alike from the outside. The form ID changed. A new CSRF token is required. The submit button is now inside a JavaScript handler that your HTTP client does not trigger. The login is now behind an SSO redirect. The session cookie rotates more aggressively. A captcha appeared. Multi-factor authentication was enabled for your test account.</p>
+
+                <p>The patterns that survive all of this have nothing to do with the specific tool:</p>
+
+                <p><strong>Make the login a separate, observable step.</strong> If your scraper does login and data retrieval in the same function, you lose the ability to tell which one failed. Every login attempt should log: did we reach the login page, did the form submit, did we get a redirect to the expected post-login URL, did our session cookie appear. This is not optional instrumentation. It is the difference between a five-minute diagnosis and a three-hour one.</p>
+
+                <p><strong>Treat session cookies as inventory.</strong> Keep a clear picture of which accounts have valid sessions, when they last refreshed, and when they are due to expire. Cookie rotation is the single most common reason a "working" scraper silently stops working. If you cannot answer "which of my accounts has a valid session right now?" with confidence, your system is fragile.</p>
+
+                <p><strong>Separate account health from data freshness.</strong> "The account can log in" and "the data we got is usable" are two different questions with two different alerts. A scraper that logs in, lands on the right page, and pulls an empty export is not failing in a way most error handlers would catch. It is, however, failing in a way that will quietly corrupt your downstream data for a week before anyone notices.</p>
+
+                <h2>Parsing Strategies That Survive Portal Redesigns</h2>
+
+                <p>Every scraper developer eventually learns the same lesson about selectors. You write a clever XPath that walks from the page root down to the exact <code>&lt;div&gt;</code> containing the data you want. It works beautifully. Three weeks later the portal ships a minor redesign, an extra wrapper <code>&lt;div&gt;</code> appears somewhere up the tree, and every path breaks at once.</p>
+
+                <p>The instinct is to make the selector smarter, more tolerant, more flexible. This works for a while and then fails worse, because a smart selector that silently matches the wrong element is more dangerous than one that loudly matches nothing.</p>
+
+                <p>The patterns that hold up:</p>
+
+                <p><strong>Anchor on semantics, not structure.</strong> If the field you want is labelled "Order Total" in human-readable text somewhere on the page, prefer selectors that find "Order Total" and then look near it over selectors that traverse a structural path. Structural paths break on redesigns; visible labels change far less often because they serve a user, not a developer.</p>
+
+                <p><strong>Prefer stable attributes when they exist.</strong> An <code>id</code>, a <code>data-*</code> attribute, or an <code>aria-label</code> is often more stable than a CSS class. Classes get renamed during refactors. IDs and data attributes usually survive because they have contract-like uses elsewhere in the system.</p>
+
+                <p><strong>Treat every extracted field as potentially missing.</strong> A scraper that assumes "if login worked, all fields will be present" is writing itself a time bomb. Every field extraction should have a clear answer to "what do we do when this is missing?" Log and move on is often correct. Fail loudly is sometimes correct. Silently substitute a default is almost never correct.</p>
+
+                <p><strong>Validate the shape of the output at the boundary.</strong> Before the extracted data leaves the scraper and enters your pipeline, it should pass a schema check. Not an exhaustive one. Just enough to catch "we got a page, but it was the session-expired page, not the data page" or "we got the data page, but the revenue column is now a currency-prefixed string instead of a number." Most silent corruption I have seen in scraping systems was preventable with ten lines of validation at the boundary.</p>
+
+                <h2>Detecting Upstream Change Before the Data Goes Wrong</h2>
+
+                <p>The monitoring conversation in scraping is different from the monitoring conversation in normal software. In normal software you watch for errors, latency, and throughput. In scraping you watch for all of that, plus a category that does not have a standard name but absolutely needs one: <strong>silent success</strong>.</p>
+
+                <p>A scraper that runs without errors, returns data, and writes it to storage can still be broken. The data can be yesterday's. The data can be partial. The data can be the right shape but wrong numbers because the portal is now A/B testing a new layout and your selector picked the placeholder. None of these trigger an exception. None of these show up in a "failed runs" dashboard. All of these are failures.</p>
+
+                <p>The detection patterns that catch silent success:</p>
+
+                <p><strong>Volume baselines per source.</strong> If retailer X typically returns between 400 and 600 rows per daily run, a run that returns 50 is a signal even if nothing threw an exception. Absolute thresholds (less than 100 rows always alerts) are blunter but sometimes more reliable than statistical ones, especially when your data is noisy.</p>
+
+                <p><strong>Freshness checks on timestamps.</strong> Many portals expose a "last updated" or "report date" somewhere on the page or in the export. Scrape it. Compare it to now. If yesterday's run got data from three days ago, something is stale on their end, your end, or both, and you need to know before the business does.</p>
+
+                <p><strong>Cross-source anomaly detection.</strong> If forty sources all returned slightly less data than usual today, that is probably a real business event. If one source returned dramatically less, that is probably a broken scraper. The comparison is cheap to compute and catches problems that per-source thresholds miss.</p>
+
+                <p><strong>Sentinel extractions.</strong> Pick one or two fields from each source that should be present in almost every run, even for edge cases. If the sentinel is missing, the extraction failed, regardless of what else looks fine. For a retailer portal, this might be the account name in the header, or the date of the current reporting period. It is a cheap canary.</p>
+
+                <blockquote>The worst scraping incidents I have seen were all silent for at least a week. The fix, in every case, was not better scraping. It was better detection of when the scraper was lying to us.</blockquote>
+
+                <h2>When the Right Answer Is to Stop Scraping</h2>
+
+                <p>This is the section that will make nobody in a scraping-heavy business happy, but it is the one I am most sure of.</p>
+
+                <p>Not everything that can be scraped should be scraped. Some sources are structurally hostile to scraping, and the maintenance cost of continuing is higher than the value of the data. The honest signs that you have crossed that line:</p>
+
+                <p>The source has an API you could be using and you are not, because someone decided a long time ago that integrating with the API was harder than scraping. This is often true in the short term and almost always wrong in the long term. An API is a contract. A web page is not. Every scraping engineer who has ever tried to defend a scraper in its second year agrees with this; we just have trouble convincing the people who made the original decision.</p>
+
+                <p>The source changes more than once a quarter in ways that break your scraper. At some point this stops being a scraping problem and starts being a relationship problem: the source is not stable enough to build a production dependency on. If the data is important, the right move is to escalate and ask for a feed, an export, or a partnership. If the data is not important enough to justify that ask, it is probably not important enough to keep scraping either.</p>
+
+                <p>The source has meaningful anti-bot defences. Modern anti-bot systems are not obstacles to work around. They are a signal that the source does not want to be scraped, and escalating the cat-and-mouse game is expensive, fragile, and in some jurisdictions legally questionable. There are specific domains where this kind of adversarial scraping is the product (brand protection, fraud monitoring, security research), and in those domains you invest heavily in the anti-bot arms race because that is the work. For most other use cases, hitting meaningful anti-bot friction is a sign to step back.</p>
+
+                <p>The data you are pulling is available somewhere cheaper. A commercial data provider, a public dataset, a partner feed. It is worth checking, honestly, whether the value of rolling your own scraper is higher than the value of buying or negotiating access. Sometimes it is. Often it is not.</p>
+
+                <h2>What Stays</h2>
+
+                <p>Two years of scraping taught me that the tooling conversations are mostly noise. Python or Power Automate or Playwright or Scrapy, picked for the right reasons, will all do the job. What separates a scraping system that lasts from one that does not is the discipline around it.</p>
+
+                <p><strong>Instrument everything that can fail silently.</strong> The login, the selectors, the output volume, the data freshness. Every one of these will go wrong eventually, and every one of them can go wrong without a visible error.</p>
+
+                <p><strong>Validate at the boundary.</strong> The scraper is not the product. The data is the product. A scraper that produces plausible-looking garbage is worse than one that loudly fails.</p>
+
+                <p><strong>Anchor parsing on semantics.</strong> Portal redesigns are not a bug, they are a fact of the industry. Your parsing strategy should assume them and survive them.</p>
+
+                <p><strong>Know when to stop.</strong> Some sources are not worth scraping. Some data is not worth the maintenance. The senior engineer on a scraping team is, more than anything else, the person who can make that judgment honestly.</p>
+
+                <p>Scrapers break. The point is not to build one that never breaks. The point is to build a system around it that notices, recovers, and tells you the truth about what is happening on the other side of a wire you do not own.</p>
+
+                <div class="article-footer">
+                    <a href="../blog.html" class="back-to-blog">
+                        <i class="fas fa-arrow-left"></i> Back to Blog
+                    </a>
+                </div>
+
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/nazerof" class="social-link" title="GitHub" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p>&copy; 2026 Nazer Hdaifeh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>
