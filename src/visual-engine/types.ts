@@ -92,11 +92,20 @@ export interface TimelineScene {
   visualReferences?: DiagramReference[];
 }
 
+export interface SvgMotionRendererOptions {
+  clockLabel?: string;
+  processLabel: string;
+  capacityLabel: string;
+  outputLabel: string;
+  sourceLabel: string;
+}
+
 export interface MotionDefinition extends VisualCore {
   kind: "motion";
   durationSeconds: number;
   scenes: TimelineScene[];
   reducedMotionSteps: string[];
+  rendererOptions?: { svgMotion: SvgMotionRendererOptions };
 }
 
 export interface NarrativeBeat {
@@ -125,6 +134,7 @@ export interface NarrativeDefinition extends VisualCore {
   captions: Array<{ start: number; end: number; text: string }>;
   conclusion: string;
   transcript: string;
+  rendererOptions?: { svgMotion: SvgMotionRendererOptions };
 }
 
 export type VisualDefinition = DiagramDefinition | MotionDefinition | NarrativeDefinition;
@@ -136,6 +146,7 @@ export interface NormalizedTimeline {
   scenes: TimelineScene[];
   accessibility: VisualCore["accessibility"];
   reducedMotionSteps: string[];
+  rendererOptions?: { svgMotion: SvgMotionRendererOptions };
 }
 
 export interface ValidationIssue {

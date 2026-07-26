@@ -7,7 +7,8 @@ export function normalizeMotion(definition: MotionDefinition): NormalizedTimelin
     durationSeconds: definition.durationSeconds,
     scenes: definition.scenes.map((scene) => ({ ...scene })),
     accessibility: definition.accessibility,
-    reducedMotionSteps: definition.reducedMotionSteps
+    reducedMotionSteps: definition.reducedMotionSteps,
+    rendererOptions: definition.rendererOptions
   };
 }
 
@@ -36,6 +37,7 @@ export function compileNarrative(definition: NarrativeDefinition): NormalizedTim
     durationSeconds: definition.durationSeconds,
     scenes,
     accessibility: definition.accessibility,
-    reducedMotionSteps: definition.storyBeats.map((beat) => `${beat.goal} ${beat.displayText}`)
+    reducedMotionSteps: definition.storyBeats.map((beat) => `${beat.goal} ${beat.displayText}`),
+    rendererOptions: definition.rendererOptions
   };
 }

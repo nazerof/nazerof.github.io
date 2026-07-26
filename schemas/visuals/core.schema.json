@@ -64,6 +64,18 @@
         "queued": { "type": "integer", "minimum": 0, "maximum": 250 },
         "failures": { "type": "integer", "minimum": 0, "maximum": 250 }
       }
+    },
+    "svgMotionRendererOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["processLabel", "capacityLabel", "outputLabel", "sourceLabel"],
+      "properties": {
+        "clockLabel": { "$ref": "#/$defs/text" },
+        "processLabel": { "$ref": "#/$defs/text" },
+        "capacityLabel": { "$ref": "#/$defs/text" },
+        "outputLabel": { "$ref": "#/$defs/text" },
+        "sourceLabel": { "$ref": "#/$defs/text" }
+      }
     }
   }
 }

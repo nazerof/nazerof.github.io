@@ -4,6 +4,18 @@ import { MotionPlayer } from "./motion-player";
 import type { DiagramDefinition, NarrativeDefinition, VisualDefinition } from "./types";
 import { loadVisualPackage } from "./validation";
 
+const packageLoads = new Map<string, ReturnType<typeof loadVisualPackage>>();
+
+function loadSharedVisualPackage(packageUrl: URL): ReturnType<typeof loadVisualPackage> {
+  const key = packageUrl.href;
+  const existing = packageLoads.get(key);
+  if (existing) return existing;
+  const pending = loadVisualPackage(packageUrl);
+  packageLoads.set(key, pending);
+  pending.catch(() => packageLoads.delete(key));
+  return pending;
+}
+
 async function initializeHost(host: HTMLElement): Promise<void> {
   const packagePath = host.dataset.visualPackage;
   const visualId = host.dataset.visualId;
@@ -11,7 +23,7 @@ async function initializeHost(host: HTMLElement): Promise<void> {
   if (!packagePath || !visualId || !runtime) return;
   host.setAttribute("aria-busy", "true");
   try {
-    const context = await loadVisualPackage(new URL(packagePath, window.location.href));
+    const context = await loadSharedVisualPackage(new URL(packagePath, window.location.href));
     const definition = context.definitions.get(visualId);
     if (!definition) throw new Error(`${visualId} /: definition not found`);
     if (definition.kind === "diagram") {

@@ -29,7 +29,11 @@
     "kind": { "const": "motion" },
     "durationSeconds": { "type": "number", "minimum": 15, "maximum": 30 },
     "scenes": { "type": "array", "minItems": 3, "maxItems": 30, "items": { "$ref": "#/$defs/scene" } },
-    "reducedMotionSteps": { "type": "array", "minItems": 3, "maxItems": 12, "items": { "$ref": "core.schema.json#/$defs/text" } }
+    "reducedMotionSteps": { "type": "array", "minItems": 3, "maxItems": 12, "items": { "$ref": "core.schema.json#/$defs/text" } },
+    "rendererOptions": {
+      "type": "object", "additionalProperties": false, "required": ["svgMotion"],
+      "properties": { "svgMotion": { "$ref": "core.schema.json#/$defs/svgMotionRendererOptions" } }
+    }
   },
   "unevaluatedProperties": false
 }

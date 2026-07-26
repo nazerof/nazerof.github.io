@@ -16,6 +16,15 @@
   "viewport": { "width": 960, "height": 540 },
   "requiredCapabilities": ["svg", "timeline", "reduced-motion"],
   "durationSeconds": 24,
+  "rendererOptions": {
+    "svgMotion": {
+      "clockLabel": "06:00",
+      "processLabel": "Scheduler",
+      "capacityLabel": "execution slots",
+      "outputLabel": "Validated output",
+      "sourceLabel": "flows"
+    }
+  },
   "scenes": [
     { "id": "ten-smooth", "start": 0, "duration": 3, "title": "Ten flows", "displayText": "10 flows fit comfortably", "narration": "With ten sources, every flow can start at six and finish smoothly.", "stage": "smooth", "learningObjectiveRefs": ["understand-scheduling-collisions"], "conceptRefs": ["scheduling"], "easing": "ease-in-out", "enter": "fade", "metrics": { "sources": 10, "capacity": 20, "queued": 0, "failures": 0 } },
     { "id": "fifty-growth", "start": 3, "duration": 3, "title": "Growth", "displayText": "50 flows still target 06:00", "narration": "At fifty sources, the same schedule creates competition for limited capacity.", "stage": "growth", "learningObjectiveRefs": ["understand-scheduling-collisions"], "conceptRefs": ["scheduling", "concurrency"], "easing": "ease-in-out", "enter": "slide-up", "metrics": { "sources": 50, "capacity": 20, "queued": 30, "failures": 0 } },

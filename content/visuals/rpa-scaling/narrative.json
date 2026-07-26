@@ -19,6 +19,15 @@
   "premise": "Automation at scale stops being mainly about writing flows and becomes the discipline of operating a system.",
   "durationSeconds": 66,
   "timingPolicy": "explicit",
+  "rendererOptions": {
+    "svgMotion": {
+      "clockLabel": "Scale",
+      "processLabel": "Automation estate",
+      "capacityLabel": "operating capacity",
+      "outputLabel": "Reliable outcomes",
+      "sourceLabel": "sources"
+    }
+  },
   "storyBeats": [
     { "id": "beginning", "start": 0, "duration": 10, "goal": "Recognize why a small automation estate feels easy.", "displayText": "10 connectors: simple, visible, memorable", "narration": "The first ten connectors feel simple. You know every source, remember every exception, and can personally watch each run.", "stage": "manageable", "learningObjectiveRefs": ["understand-operational-scale"], "conceptRefs": ["scheduling"], "emphasis": "normal", "pauseAfter": 0, "metrics": { "sources": 10, "capacity": 20, "queued": 0, "failures": 0 } },
     { "id": "growth", "start": 10, "duration": 12, "goal": "Identify the point where individual knowledge stops scaling.", "displayText": "50 sources: coordination replaces memory", "narration": "At fifty sources, memory stops being an operating model. Credentials expire, schedules collide, dependencies appear, and failures become harder to attribute.", "stage": "growth", "learningObjectiveRefs": ["understand-operational-scale"], "conceptRefs": ["scheduling", "concurrency"], "emphasis": "strong", "pauseAfter": 0, "metrics": { "sources": 50, "capacity": 20, "queued": 30, "failures": 6 } },

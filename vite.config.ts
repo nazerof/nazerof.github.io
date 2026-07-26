@@ -2,6 +2,7 @@ import { defineConfig } from "vitest/config";
 import { resolve } from "node:path";
 
 export default defineConfig({
+  base: "./",
   resolve: {
     alias: {
       "@excalidraw/mermaid-to-excalidraw": resolve(import.meta.dirname, "src/visual-engine/excalidraw-mermaid-disabled.ts")

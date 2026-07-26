@@ -75,23 +75,29 @@ export class MotionPlayer {
       role: "img",
       "aria-label": this.timeline.accessibility.label
     });
+    const labels = this.timeline.rendererOptions?.svgMotion ?? {
+      processLabel: "Process",
+      capacityLabel: "capacity",
+      outputLabel: "Output",
+      sourceLabel: "items"
+    };
     const background = svgElement("rect", { x: "0", y: "0", width: "960", height: "540", rx: "18", class: "motion-bg" });
     this.title = svgElement("text", { x: "480", y: "58", "text-anchor": "middle", class: "motion-title" });
     this.message = svgElement("text", { x: "480", y: "98", "text-anchor": "middle", class: "motion-message" });
     const clock = svgElement("text", { x: "80", y: "168", class: "motion-label" });
-    clock.textContent = "06:00";
+    clock.textContent = labels.clockLabel ?? "";
     const scheduler = svgElement("rect", { x: "55", y: "190", width: "170", height: "90", rx: "14", class: "motion-box" });
     const schedulerLabel = svgElement("text", { x: "140", y: "243", "text-anchor": "middle", class: "motion-box-label" });
-    schedulerLabel.textContent = "Scheduler";
+    schedulerLabel.textContent = labels.processLabel;
     const arrowOne = svgElement("path", { d: "M 225 235 H 345", class: "motion-arrow" });
     const capacity = svgElement("rect", { x: "345", y: "170", width: "230", height: "130", rx: "14", class: "motion-capacity" });
     const capacityLabel = svgElement("text", { x: "460", y: "200", "text-anchor": "middle", class: "motion-label" });
-    capacityLabel.textContent = "20 execution slots";
+    capacityLabel.textContent = labels.capacityLabel;
     this.sourceDots = svgElement("g", { class: "motion-dots" });
     const arrowTwo = svgElement("path", { d: "M 575 235 H 690", class: "motion-arrow" });
     const output = svgElement("rect", { x: "690", y: "190", width: "210", height: "90", rx: "14", class: "motion-output" });
     const outputLabel = svgElement("text", { x: "795", y: "243", "text-anchor": "middle", class: "motion-box-label" });
-    outputLabel.textContent = "Validated output";
+    outputLabel.textContent = labels.outputLabel;
     this.sources = svgElement("text", { x: "80", y: "360", class: "motion-metric" });
     const queueTrack = svgElement("rect", { x: "280", y: "340", width: "400", height: "36", rx: "8", class: "motion-queue-track" });
     this.queue = svgElement("rect", { x: "280", y: "340", width: "0", height: "36", rx: "8", class: "motion-queue" });
@@ -188,7 +194,9 @@ export class MotionPlayer {
     }
     this.title.textContent = scene.title;
     this.message.textContent = scene.displayText;
-    this.sources.textContent = `${scene.metrics.sources} sources`;
+    this.sources.textContent = `${scene.metrics.sources} ${labels.sourceLabel}`;
+    this.container.querySelector<SVGTextElement>(".motion-capacity + .motion-label")!.textContent =
+      `${scene.metrics.capacity} ${labels.capacityLabel}`;
     const width = Math.min(400, (scene.metrics.queued / Math.max(scene.metrics.sources, 1)) * 400);
     this.queue.setAttribute("width", String(width));
     this.queueLabel.textContent = `${scene.metrics.queued} queued`;

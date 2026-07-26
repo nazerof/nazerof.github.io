@@ -37,8 +37,8 @@ ajv.addSchema(diagramSchema);
 ajv.addSchema(motionSchema);
 ajv.addSchema(narrativeSchema);
 
-const forbiddenKeys = /^(?:on[a-z]+|html|innerhtml|dangerouslysetinnerhtml|script|javascript|callback|expression|module|import|css)$/i;
-const unsafeValue = /(?:<\s*\/?\s*(?:script|iframe|object|embed|style)|javascript\s*:|data\s*:\s*text\/html|\beval\s*\(|\bFunction\s*\()/i;
+const forbiddenKeys = /^(?:__proto__|prototype|constructor|on[a-z]+|html|innerhtml|dangerouslysetinnerhtml|script|javascript|callback|expression|module|import|css)$/i;
+const unsafeValue = /(?:<\s*\/?\s*[a-z][^>]*>|\bon[a-z]+\s*=|javascript\s*:|data\s*:\s*text\/html|\beval\s*\(|\bFunction\s*\()/i;
 
 function issue(definitionId: string, path: string, reason: string): ValidationIssue {
   return { definitionId, path: path || "/", reason };
@@ -162,7 +162,9 @@ function validateTimeline(
     if (item.start + item.duration > definition.durationSeconds + 0.001) {
       issues.push(issue(definition.id, `${itemPath}/${index}/duration`, "scene extends beyond timeline duration"));
     }
-    if (index > 0 && item.start < items[index - 1].start + items[index - 1].duration) {
+    if (index > 0 && item.start < items[index - 1].start) {
+      issues.push(issue(definition.id, `${itemPath}/${index}/start`, "scenes must be ordered by start time"));
+    } else if (index > 0 && item.start < items[index - 1].start + items[index - 1].duration) {
       issues.push(issue(definition.id, `${itemPath}/${index}/start`, "scene overlaps the previous scene"));
     }
   });
@@ -178,8 +180,11 @@ function validateReferences(context: ValidationContext): ValidationIssue[] {
     const items = definition.kind === "motion" ? definition.scenes : definition.storyBeats;
     items.forEach((item, itemIndex) => item.visualReferences?.forEach((reference, refIndex) => {
       const base = `/${definition.kind === "motion" ? "scenes" : "storyBeats"}/${itemIndex}/visualReferences/${refIndex}`;
-      if (!context.definitions.has(reference.visualId)) {
+      const referencedVisual = context.definitions.get(reference.visualId);
+      if (!referencedVisual) {
         issues.push(issue(definition.id, `${base}/visualId`, `unknown visual "${reference.visualId}"`));
+      } else if (referencedVisual.kind !== "diagram") {
+        issues.push(issue(definition.id, `${base}/visualId`, `visual "${reference.visualId}" is not a diagram`));
       }
       reference.focusNodes.forEach((nodeId, nodeIndex) => {
         if (!nodes.has(nodeId)) issues.push(issue(definition.id, `${base}/focusNodes/${nodeIndex}`, `unknown diagram node "${nodeId}"`));

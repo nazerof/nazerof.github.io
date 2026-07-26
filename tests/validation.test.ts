@@ -45,6 +45,13 @@ describe("visual package validation", () => {
     expect(reasons(context)).toContain("unknown diagram node");
   });
 
+  it("rejects diagram references targeting another visual kind", () => {
+    const context = loadContext();
+    const motion = context.definitions.get("scheduling-collision") as MotionDefinition;
+    motion.scenes[2].visualReferences![0].visualId = "automation-becomes-operations";
+    expect(reasons(context)).toContain("is not a diagram");
+  });
+
   it("rejects excessive element counts", () => {
     const context = loadContext();
     const diagram = context.definitions.get("rpa-operating-architecture") as DiagramDefinition;
@@ -76,10 +83,20 @@ describe("visual package validation", () => {
     expect(reasons(context)).toContain("extends beyond timeline duration");
   });
 
+  it("rejects scenes that are not ordered by start time", () => {
+    const context = loadContext();
+    const motion = context.definitions.get("scheduling-collision") as MotionDefinition;
+    [motion.scenes[1], motion.scenes[2]] = [motion.scenes[2], motion.scenes[1]];
+    expect(reasons(context)).toContain("ordered by start time");
+  });
+
   it("rejects unsafe URLs, HTML, executable fields, and invalid assets", () => {
     expect(() => parseUntrustedJson('{"id":"x","url":"javascript:alert(1)"}', "unsafe")).toThrow("unsafe");
     expect(() => parseUntrustedJson('{"id":"x","text":"<script>alert(1)</script>"}', "unsafe")).toThrow("unsafe");
     expect(() => parseUntrustedJson('{"id":"x","onClick":"doThing"}', "unsafe")).toThrow("forbidden");
+    expect(() => parseUntrustedJson('{"id":"x","text":"<div>raw HTML</div>"}', "unsafe")).toThrow("unsafe");
+    expect(() => parseUntrustedJson('{"id":"x","text":"<svg onload=\\"alert(1)\\"></svg>"}', "unsafe")).toThrow("unsafe");
+    expect(() => parseUntrustedJson('{"__proto__":{"polluted":true}}', "unsafe")).toThrow("forbidden");
     const context = loadContext();
     (context.visualPackage as unknown as Record<string, unknown>).assets = ["https://example.com/file.svg"];
     expect(reasons(context)).toContain("additionalProperties");

@@ -44,7 +44,11 @@
       }
     },
     "conclusion": { "$ref": "core.schema.json#/$defs/text" },
-    "transcript": { "type": "string", "minLength": 100, "maxLength": 10000 }
+    "transcript": { "type": "string", "minLength": 100, "maxLength": 10000 },
+    "rendererOptions": {
+      "type": "object", "additionalProperties": false, "required": ["svgMotion"],
+      "properties": { "svgMotion": { "$ref": "core.schema.json#/$defs/svgMotionRendererOptions" } }
+    }
   },
   "unevaluatedProperties": false
 }
