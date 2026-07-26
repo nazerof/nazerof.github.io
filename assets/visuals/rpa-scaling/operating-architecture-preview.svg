@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title description">
+  <title id="title">Reliable automation operating architecture</title>
+  <desc id="description">Scheduler and orchestration feed a bounded execution layer, validation and storage, while structured monitoring gives operators visibility into happy and failure paths.</desc>
+  <defs>
+    <marker id="happy" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#2b8a3e"/></marker>
+    <marker id="failure" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#c92a2a"/></marker>
+    <marker id="observe" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7048e8"/></marker>
+    <style>
+      text{font-family:system-ui,sans-serif;fill:#253046}.group{fill:#f8f9ff;stroke:#c5ccef;stroke-width:2}.node{fill:#dbe4ff;stroke:#5f3dc4;stroke-width:2}.boundary{fill:#fff3bf;stroke:#e67700;stroke-width:2}.monitor{fill:#e5dbff;stroke:#7048e8;stroke-width:2}.storage{fill:#d3f9d8;stroke:#2b8a3e;stroke-width:2}.label{font-size:15px;font-weight:700;text-anchor:middle}.group-label{font-size:16px;font-weight:700;fill:#4c51bf}.happy{fill:none;stroke:#2b8a3e;stroke-width:3;marker-end:url(#happy)}.failure{fill:none;stroke:#c92a2a;stroke-width:3;stroke-dasharray:8 6;marker-end:url(#failure)}.observe{fill:none;stroke:#7048e8;stroke-width:3;stroke-dasharray:4 5;marker-end:url(#observe)}.legend{font-size:14px}
+    </style>
+  </defs>
+  <rect width="1200" height="650" rx="18" fill="#fff"/>
+  <rect class="group" x="25" y="28" width="410" height="155" rx="16"/><text class="group-label" x="45" y="55">ORCHESTRATION</text>
+  <rect class="group" x="455" y="28" width="720" height="255" rx="16"/><text class="group-label" x="475" y="55">EXECUTION &amp; FAILURE ISOLATION</text>
+  <rect class="group" x="455" y="300" width="720" height="125" rx="16"/><text class="group-label" x="475" y="327">VALIDATED DATA PATH</text>
+  <rect class="group" x="25" y="445" width="1150" height="150" rx="16"/><text class="group-label" x="45" y="472">OBSERVABILITY &amp; OPERATOR RESPONSE</text>
+  <g><rect class="node" x="50" y="80" width="145" height="65" rx="12"/><text class="label" x="122" y="118">Scheduler</text></g>
+  <g><rect class="node" x="235" y="80" width="175" height="65" rx="12"/><text class="label" x="322" y="106"><tspan x="322">Dependency-aware</tspan><tspan x="322" dy="20">orchestration</tspan></text></g>
+  <g><rect class="boundary" x="480" y="80" width="160" height="65" rx="12"/><text class="label" x="560" y="106"><tspan x="560">Concurrency</tspan><tspan x="560" dy="20">queue</tspan></text></g>
+  <g><rect class="node" x="680" y="72" width="185" height="65" rx="12"/><text class="label" x="772" y="98"><tspan x="772">Authentication</tspan><tspan x="772" dy="20">&amp; sessions</tspan></text></g>
+  <g><rect class="node" x="680" y="172" width="185" height="65" rx="12"/><text class="label" x="772" y="198"><tspan x="772">Source-specific</tspan><tspan x="772" dy="20">connectors</tspan></text></g>
+  <g><rect class="boundary" x="915" y="72" width="220" height="65" rx="12"/><text class="label" x="1025" y="98"><tspan x="1025">Retry + backoff</tspan><tspan x="1025" dy="20">+ jitter</tspan></text></g>
+  <g><rect class="boundary" x="915" y="172" width="220" height="65" rx="12"/><text class="label" x="1025" y="210">Circuit breaker</text></g>
+  <g><rect class="node" x="680" y="340" width="185" height="60" rx="12"/><text class="label" x="772" y="376">Data validation</text></g>
+  <g><rect class="storage" x="915" y="340" width="220" height="60" rx="12"/><text class="label" x="1025" y="366"><tspan x="1025">Downstream</tspan><tspan x="1025" dy="20">data pipeline</tspan></text></g>
+  <g><rect class="monitor" x="70" y="495" width="160" height="65" rx="12"/><text class="label" x="150" y="533">Structured logs</text></g>
+  <g><rect class="monitor" x="275" y="495" width="165" height="65" rx="12"/><text class="label" x="357" y="521"><tspan x="357">Heartbeat</tspan><tspan x="357" dy="20">monitoring</tspan></text></g>
+  <g><rect class="monitor" x="480" y="495" width="165" height="65" rx="12"/><text class="label" x="562" y="521"><tspan x="562">Validation</tspan><tspan x="562" dy="20">monitoring</tspan></text></g>
+  <g><rect class="monitor" x="685" y="495" width="165" height="65" rx="12"/><text class="label" x="767" y="521"><tspan x="767">Trend</tspan><tspan x="767" dy="20">monitoring</tspan></text></g>
+  <g><rect class="monitor" x="925" y="488" width="210" height="80" rx="12"/><text class="label" x="1030" y="523"><tspan x="1030">Operator visibility</tspan><tspan x="1030" dy="20">&amp; dashboard</tspan></text></g>
+  <path class="happy" d="M195 112H235"/><path class="happy" d="M410 112H480"/><path class="happy" d="M640 112C660 112 655 204 680 204"/><path class="happy" d="M772 137V172"/><path class="happy" d="M772 237V340"/><path class="happy" d="M865 370H915"/>
+  <path class="failure" d="M865 204C890 204 890 105 915 105"/><path class="failure" d="M1025 137V172"/><path class="failure" d="M915 205C880 205 890 260 560 260V145"/>
+  <path class="observe" d="M680 220C520 440 230 400 150 495"/><path class="observe" d="M230 528H275"/><path class="observe" d="M772 400C720 450 610 450 562 495"/><path class="observe" d="M1025 400C990 455 830 450 767 495"/><path class="observe" d="M440 528H925"/><path class="observe" d="M645 540H925"/><path class="observe" d="M850 528H925"/>
+  <text class="legend" x="50" y="625" fill="#2b8a3e">━━ Happy path</text><text class="legend" x="210" y="625" fill="#c92a2a">┅┅ Failure and recovery</text><text class="legend" x="430" y="625" fill="#7048e8">┈┈ Observability</text>
+</svg>

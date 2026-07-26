@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nazerof.github.io/schemas/visuals/narrative.schema.json",
+  "allOf": [{ "$ref": "core.schema.json#/$defs/core" }],
+  "type": "object",
+  "required": ["audience", "premise", "durationSeconds", "timingPolicy", "storyBeats", "captions", "conclusion", "transcript"],
+  "properties": {
+    "kind": { "const": "narrative" },
+    "audience": { "$ref": "core.schema.json#/$defs/text" },
+    "premise": { "$ref": "core.schema.json#/$defs/text" },
+    "durationSeconds": { "type": "number", "minimum": 45, "maximum": 90 },
+    "timingPolicy": { "const": "explicit" },
+    "storyBeats": {
+      "type": "array", "minItems": 4, "maxItems": 20,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "start", "duration", "goal", "displayText", "narration", "stage", "learningObjectiveRefs", "conceptRefs", "emphasis", "pauseAfter", "metrics"],
+        "properties": {
+          "id": { "$ref": "core.schema.json#/$defs/id" },
+          "start": { "type": "number", "minimum": 0, "maximum": 90 },
+          "duration": { "type": "number", "exclusiveMinimum": 0, "maximum": 30 },
+          "goal": { "$ref": "core.schema.json#/$defs/text" },
+          "displayText": { "$ref": "core.schema.json#/$defs/text" },
+          "narration": { "$ref": "core.schema.json#/$defs/text" },
+          "stage": { "enum": ["manageable", "growth", "coordination", "operations", "decision", "conclusion"] },
+          "learningObjectiveRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "core.schema.json#/$defs/id" } },
+          "conceptRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "core.schema.json#/$defs/id" } },
+          "emphasis": { "enum": ["normal", "strong"] },
+          "pauseAfter": { "type": "number", "minimum": 0, "maximum": 3 },
+          "metrics": { "$ref": "core.schema.json#/$defs/metrics" },
+          "visualReferences": { "type": "array", "maxItems": 3, "items": { "$ref": "core.schema.json#/$defs/diagramReference" } }
+        }
+      }
+    },
+    "captions": {
+      "type": "array", "minItems": 1, "maxItems": 50,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["start", "end", "text"],
+        "properties": {
+          "start": { "type": "number", "minimum": 0, "maximum": 90 },
+          "end": { "type": "number", "exclusiveMinimum": 0, "maximum": 90 },
+          "text": { "type": "string", "minLength": 1, "maxLength": 700 }
+        }
+      }
+    },
+    "conclusion": { "$ref": "core.schema.json#/$defs/text" },
+    "transcript": { "type": "string", "minLength": 100, "maxLength": 10000 },
+    "rendererOptions": {
+      "type": "object", "additionalProperties": false, "required": ["svgMotion"],
+      "properties": { "svgMotion": { "$ref": "core.schema.json#/$defs/svgMotionRendererOptions" } }
+    }
+  },
+  "unevaluatedProperties": false
+}

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nazerof.github.io/schemas/visuals/package.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "source", "audience", "learningObjectives", "concepts", "theme", "visuals"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "id": { "$ref": "core.schema.json#/$defs/id" },
+    "source": {
+      "type": "object", "additionalProperties": false, "required": ["type", "path"],
+      "properties": {
+        "type": { "const": "article" },
+        "path": { "const": "pages/blog/rpa-scaling.html" }
+      }
+    },
+    "audience": {
+      "type": "object", "additionalProperties": false, "required": ["level", "roles"],
+      "properties": {
+        "level": { "enum": ["beginner", "intermediate", "advanced"] },
+        "roles": { "type": "array", "minItems": 1, "maxItems": 10, "items": { "$ref": "core.schema.json#/$defs/text" } }
+      }
+    },
+    "learningObjectives": {
+      "type": "array", "minItems": 3, "maxItems": 10,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id", "text"],
+        "properties": { "id": { "$ref": "core.schema.json#/$defs/id" }, "text": { "$ref": "core.schema.json#/$defs/text" } }
+      }
+    },
+    "concepts": { "type": "array", "minItems": 1, "maxItems": 30, "uniqueItems": true, "items": { "$ref": "core.schema.json#/$defs/id" } },
+    "theme": { "const": "portfolio-default" },
+    "visuals": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["id", "kind", "path"],
+        "properties": {
+          "id": { "$ref": "core.schema.json#/$defs/id" },
+          "kind": { "enum": ["diagram", "motion", "narrative"] },
+          "path": { "type": "string", "pattern": "^(diagram|motion|narrative)\\.json$" }
+        }
+      }
+    }
+  }
+}
