@@ -20,7 +20,6 @@
 - JSON Schema validation boundary and conservative input limits.
 - Framework-agnostic TypeScript types, semantic validation, and normalized motion timeline.
 - Narrative-to-motion compiler.
-- SVG/DOM motion renderer and accessible controls.
 - Diagram semantic adapter boundary.
 - Prompt/evaluation workflow.
 
@@ -29,6 +28,7 @@
 - Package schema needs course/module/lesson IDs, source citations, localization, and tenant-safe asset IDs.
 - Narrative needs richer assessment and learner-controlled branching.
 - Renderer capabilities need version negotiation.
+- The SVG/DOM renderer, domain metrics, stages, node kinds, and renderer labels need generalized HubsTime contracts.
 - Provenance needs model, prompt version, repair history, human approval, and policy status.
 
 ## Portfolio-specific

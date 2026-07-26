@@ -36,6 +36,7 @@ export class MotionPlayer {
   private title!: SVGTextElement;
   private message!: SVGTextElement;
   private sources!: SVGTextElement;
+  private capacityLabel!: SVGTextElement;
   private queue!: SVGRectElement;
   private queueLabel!: SVGTextElement;
   private failures!: SVGTextElement;
@@ -91,8 +92,8 @@ export class MotionPlayer {
     schedulerLabel.textContent = labels.processLabel;
     const arrowOne = svgElement("path", { d: "M 225 235 H 345", class: "motion-arrow" });
     const capacity = svgElement("rect", { x: "345", y: "170", width: "230", height: "130", rx: "14", class: "motion-capacity" });
-    const capacityLabel = svgElement("text", { x: "460", y: "200", "text-anchor": "middle", class: "motion-label" });
-    capacityLabel.textContent = labels.capacityLabel;
+    this.capacityLabel = svgElement("text", { x: "460", y: "200", "text-anchor": "middle", class: "motion-label" });
+    this.capacityLabel.textContent = labels.capacityLabel;
     this.sourceDots = svgElement("g", { class: "motion-dots" });
     const arrowTwo = svgElement("path", { d: "M 575 235 H 690", class: "motion-arrow" });
     const output = svgElement("rect", { x: "690", y: "190", width: "210", height: "90", rx: "14", class: "motion-output" });
@@ -105,7 +106,7 @@ export class MotionPlayer {
     this.failures = svgElement("text", { x: "80", y: "425", class: "motion-failure" });
     const legend = svgElement("text", { x: "80", y: "485", class: "motion-legend" });
     legend.textContent = "● active flow   ▰ queued work   ⚠ failed flow";
-    svg.append(background, this.title, this.message, clock, scheduler, schedulerLabel, arrowOne, capacity, capacityLabel, this.sourceDots, arrowTwo, output, outputLabel, this.sources, queueTrack, this.queue, this.queueLabel, this.failures, legend);
+    svg.append(background, this.title, this.message, clock, scheduler, schedulerLabel, arrowOne, capacity, this.capacityLabel, this.sourceDots, arrowTwo, output, outputLabel, this.sources, queueTrack, this.queue, this.queueLabel, this.failures, legend);
 
     const controls = document.createElement("div");
     controls.className = "visual-controls";
@@ -182,6 +183,12 @@ export class MotionPlayer {
   }
 
   private render(): void {
+    const labels = this.timeline.rendererOptions?.svgMotion ?? {
+      processLabel: "Process",
+      capacityLabel: "capacity",
+      outputLabel: "Output",
+      sourceLabel: "items"
+    };
     const scene = this.activeScene();
     if (scene.id !== this.sceneId) {
       this.sceneId = scene.id;
@@ -195,8 +202,7 @@ export class MotionPlayer {
     this.title.textContent = scene.title;
     this.message.textContent = scene.displayText;
     this.sources.textContent = `${scene.metrics.sources} ${labels.sourceLabel}`;
-    this.container.querySelector<SVGTextElement>(".motion-capacity + .motion-label")!.textContent =
-      `${scene.metrics.capacity} ${labels.capacityLabel}`;
+    this.capacityLabel.textContent = `${scene.metrics.capacity} ${labels.capacityLabel}`;
     const width = Math.min(400, (scene.metrics.queued / Math.max(scene.metrics.sources, 1)) * 400);
     this.queue.setAttribute("width", String(width));
     this.queueLabel.textContent = `${scene.metrics.queued} queued`;

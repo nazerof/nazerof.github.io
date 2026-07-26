@@ -14,7 +14,7 @@ Visual definitions are untrusted data.
 
 Element types, stages, easing, animation entry presets, theme, locale, capabilities, node kinds, and flow kinds are closed enums. Renderers select modules in application code; data cannot select imports or callbacks.
 
-Build validation is authoritative and runtime validation protects against stale or tampered static assets. Validation errors include definition ID, JSON path, and reason. Invalid visuals fail independently while article HTML and fallbacks remain available.
+Build validation is authoritative and runtime validation protects against stale or tampered static assets. Validation errors include definition ID, JSON path, and reason. Definitions are validated as one package, so an invalid definition disables all interactive package hosts; article HTML, static previews, fallbacks, and the transcript remain available.
 
 ## Current limits
 

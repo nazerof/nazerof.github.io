@@ -46,7 +46,7 @@ HubsTime still needs persistence, tenant authorization, source citations, locali
 - Excalidraw free-form edits do not round-trip to the compact Diagram DSL.
 - Diagram layout is intentionally explicit rather than handled by a general layout engine.
 - Motion visuals are a bounded domain renderer, not a universal element/track system.
-- Runtime JSON is fetched three times because each host independently loads the package; browser caching prevents repeated transfers, but a shared in-memory promise would be a future optimization.
+- Runtime package loading is shared in memory across hosts, producing one package request and one request per definition.
 - No real browser automation suite existed before this change; interaction tests use jsdom and deployment verification uses the static build/server.
 - There is no persistent edit storage, audio, video rendering, localization, branching narrative, or runtime AI.
 
@@ -56,11 +56,11 @@ Measured production output:
 
 | Asset | Raw | Gzip |
 |---|---:|---:|
-| Initial visual runtime JavaScript | 151,499 bytes | 43,705 bytes |
-| Initial visual runtime CSS | 3,945 bytes | 1,320 bytes |
-| Lazy diagram-editor entry | 761,860 bytes | 231,158 bytes |
+| Initial visual runtime JavaScript | 153,002 bytes | 44,041 bytes |
+| Initial visual runtime CSS | 3,945 bytes | 1,294 bytes |
+| Lazy diagram-editor entry | 713,729 bytes | 217,107 bytes |
 
-The complete lazy Excalidraw output is approximately 4.7 MB across 81 generated files on disk. Mermaid conversion is explicitly replaced with a disabled build-time stub because it is outside scope; this avoids shipping its renderer graph. None of the Excalidraw JavaScript or CSS is requested until “Open interactive diagram” is selected. Static preview dimensions prevent layout shift. Motion renders at most 20 representative SVG flow markers rather than one marker per source.
+The complete output is 4,690,935 raw bytes across 81 generated files (1,731,017 bytes gzip and 1,461,611 bytes Brotli at maximum compression). Opening the editor requests 14 local assets totaling 1,488,497 raw bytes rather than the full output. Mermaid conversion is explicitly replaced with a disabled build-time stub because it is outside scope; this avoids shipping its renderer graph. None of the Excalidraw JavaScript or CSS is requested until “Open interactive diagram” is selected. Excalidraw may attempt its public font fallback CDN if a local font subset is unavailable. Static preview dimensions prevent layout shift. Motion renders at most 20 representative SVG flow markers rather than one marker per source.
 
 ## Accessibility
 
@@ -74,7 +74,7 @@ The complete lazy Excalidraw output is approximately 4.7 MB across 81 generated 
 
 ## Security and validation
 
-Build-time and runtime validation enforce file size, nesting, schema version, strict fields, ID/reference integrity, timeline bounds, caption/transcript coverage, same-origin fetching, and allowlisted capabilities/presets/easing/types. Tests cover unsafe URLs, raw HTML, executable fields, excessive content, broken references, and invalid timing. Renderers do not use `eval`, `Function`, `innerHTML`, dynamic module paths from data, or arbitrary CSS.
+Build-time and runtime validation enforce file size, nesting, schema version, strict fields, ID/reference integrity, ordered timeline bounds, caption/transcript coverage, same-origin fetching, and allowlisted capabilities/presets/easing/types. Tests cover unsafe URLs, raw HTML and SVG event handlers, prototype-pollution keys, executable fields, excessive content, broken references, and invalid timing. Renderers do not use `eval`, `Function`, `innerHTML`, dynamic module paths from data, or arbitrary CSS.
 
 ## Deployment
 

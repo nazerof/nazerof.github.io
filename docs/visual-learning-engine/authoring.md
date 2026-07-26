@@ -15,6 +15,7 @@ The JSON files in `content/visuals/rpa-scaling/` are canonical. Excalidraw scene
 - `diagram.json` contains semantic nodes, edges, groups, notes, positions, and accessible labels.
 - `motion.json` contains a seconds-based sequence compiled directly to a normalized timeline.
 - `narrative.json` contains educational story beats, narration, captions, and transcript; it compiles to the same normalized timeline.
+- Motion and narrative may provide optional, renderer-namespaced `rendererOptions.svgMotion` labels. Learning objectives, concepts, timing, and metrics remain independent of these presentation hints.
 
 External contracts are JSON Schemas in `schemas/visuals/`. Internal renderer contracts are TypeScript types in `src/visual-engine/types.ts`.
 
