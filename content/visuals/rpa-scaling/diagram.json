@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0",
+  "id": "rpa-operating-architecture",
+  "kind": "diagram",
+  "title": "Operating architecture for more than 200 automation sources",
+  "description": "A resilient automation architecture separating orchestration, execution, validation, observability, and operator response.",
+  "learningObjectiveRefs": ["understand-operating-architecture"],
+  "conceptRefs": ["scheduling", "concurrency", "retry", "backoff", "validation", "monitoring", "failure-isolation"],
+  "locale": "en",
+  "direction": "ltr",
+  "theme": "portfolio-default",
+  "accessibility": {
+    "label": "Architecture diagram for reliable automation at scale",
+    "longDescription": "A dependency-aware scheduler sends work through a concurrency queue to authenticated source connectors. Retry with backoff and jitter is isolated by a circuit breaker. Validated results enter downstream storage. Structured logs feed heartbeat, validation, and trend monitors, which provide an operator dashboard. Failure paths return to isolation and operator visibility."
+  },
+  "viewport": { "width": 1200, "height": 720 },
+  "requiredCapabilities": ["edit", "export"],
+  "groups": [
+    { "id": "orchestration", "label": "Orchestration" },
+    { "id": "execution", "label": "Execution and isolation" },
+    { "id": "data", "label": "Data path" },
+    { "id": "observability", "label": "Observability" }
+  ],
+  "nodes": [
+    { "id": "scheduler", "label": "Scheduler", "kind": "scheduler", "group": "orchestration", "x": 40, "y": 70, "width": 150, "height": 70, "accessibilityLabel": "Scheduler starts work at planned times." },
+    { "id": "dependency-orchestrator", "label": "Dependency-aware orchestration", "kind": "service", "group": "orchestration", "x": 230, "y": 70, "width": 210, "height": 70, "accessibilityLabel": "Orchestrator orders dependent work." },
+    { "id": "queue", "label": "Concurrency queue", "kind": "boundary", "group": "execution", "x": 480, "y": 70, "width": 170, "height": 70, "accessibilityLabel": "Queue protects limited execution capacity." },
+    { "id": "session-manager", "label": "Authentication and sessions", "kind": "service", "group": "execution", "x": 700, "y": 20, "width": 190, "height": 70, "accessibilityLabel": "Session manager supplies valid credentials." },
+    { "id": "connectors", "label": "Source-specific connectors", "kind": "connector", "group": "execution", "x": 700, "y": 120, "width": 190, "height": 70, "accessibilityLabel": "Connectors retrieve data from each source." },
+    { "id": "retry-boundary", "label": "Retry + backoff + jitter", "kind": "boundary", "group": "execution", "x": 930, "y": 20, "width": 190, "height": 70, "accessibilityLabel": "Retries are delayed and spread out." },
+    { "id": "circuit-breaker", "label": "Circuit breaker", "kind": "boundary", "group": "execution", "x": 930, "y": 120, "width": 190, "height": 70, "accessibilityLabel": "Circuit breaker isolates repeated source failures." },
+    { "id": "validator", "label": "Data validation", "kind": "process", "group": "data", "x": 700, "y": 260, "width": 190, "height": 70, "accessibilityLabel": "Validator checks schema, freshness, and volume." },
+    { "id": "storage", "label": "Downstream data pipeline", "kind": "storage", "group": "data", "x": 930, "y": 260, "width": 190, "height": 70, "accessibilityLabel": "Validated data enters downstream storage and processing." },
+    { "id": "structured-logs", "label": "Structured logs", "kind": "monitor", "group": "observability", "x": 250, "y": 430, "width": 170, "height": 70, "accessibilityLabel": "Every execution emits structured status and context." },
+    { "id": "heartbeat-monitor", "label": "Heartbeat monitoring", "kind": "monitor", "group": "observability", "x": 470, "y": 390, "width": 170, "height": 70, "accessibilityLabel": "Heartbeat monitoring detects work that never ran." },
+    { "id": "validation-monitor", "label": "Validation monitoring", "kind": "monitor", "group": "observability", "x": 470, "y": 480, "width": 170, "height": 70, "accessibilityLabel": "Validation monitoring detects implausible output." },
+    { "id": "trend-monitor", "label": "Trend monitoring", "kind": "monitor", "group": "observability", "x": 690, "y": 480, "width": 170, "height": 70, "accessibilityLabel": "Trend monitoring detects gradual source degradation." },
+    { "id": "operator-dashboard", "label": "Operator dashboard", "kind": "dashboard", "group": "observability", "x": 930, "y": 430, "width": 190, "height": 90, "accessibilityLabel": "Dashboard gives operators actionable visibility." }
+  ],
+  "edges": [
+    { "id": "schedule-order", "from": "scheduler", "to": "dependency-orchestrator", "label": "planned runs", "flow": "happy" },
+    { "id": "order-queue", "from": "dependency-orchestrator", "to": "queue", "label": "ordered work", "flow": "happy" },
+    { "id": "queue-connectors", "from": "queue", "to": "connectors", "label": "capacity available", "flow": "happy" },
+    { "id": "sessions-connectors", "from": "session-manager", "to": "connectors", "label": "valid session", "flow": "happy" },
+    { "id": "connectors-validator", "from": "connectors", "to": "validator", "label": "raw result", "flow": "happy" },
+    { "id": "validator-storage", "from": "validator", "to": "storage", "label": "valid data", "flow": "happy" },
+    { "id": "connectors-retry", "from": "connectors", "to": "retry-boundary", "label": "retryable failure", "flow": "failure" },
+    { "id": "retry-circuit", "from": "retry-boundary", "to": "circuit-breaker", "label": "failure threshold", "flow": "failure" },
+    { "id": "circuit-queue", "from": "circuit-breaker", "to": "queue", "label": "isolated recovery", "flow": "failure" },
+    { "id": "execution-logs", "from": "connectors", "to": "structured-logs", "label": "execution events", "flow": "observability" },
+    { "id": "logs-heartbeat", "from": "structured-logs", "to": "heartbeat-monitor", "label": "run status", "flow": "observability" },
+    { "id": "validator-monitor", "from": "validator", "to": "validation-monitor", "label": "quality result", "flow": "observability" },
+    { "id": "storage-trend", "from": "storage", "to": "trend-monitor", "label": "volume history", "flow": "observability" },
+    { "id": "heartbeat-dashboard", "from": "heartbeat-monitor", "to": "operator-dashboard", "label": "missing run", "flow": "observability" },
+    { "id": "validation-dashboard", "from": "validation-monitor", "to": "operator-dashboard", "label": "invalid output", "flow": "observability" },
+    { "id": "trend-dashboard", "from": "trend-monitor", "to": "operator-dashboard", "label": "degradation", "flow": "observability" }
+  ],
+  "notes": [
+    { "id": "happy-path-note", "text": "The happy path is scheduled, capacity-limited, authenticated, validated, and observable.", "nodeRefs": ["scheduler", "queue", "connectors", "validator", "storage"] },
+    { "id": "failure-path-note", "text": "Failures retry gradually, stop at a threshold, and remain visible to operators.", "nodeRefs": ["retry-boundary", "circuit-breaker", "operator-dashboard"] }
+  ],
+  "layout": { "direction": "left-to-right", "spacing": 40 }
+}

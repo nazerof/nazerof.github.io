@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nazerof.github.io/schemas/visuals/motion.schema.json",
+  "$defs": {
+    "scene": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "start", "duration", "title", "displayText", "narration", "stage", "learningObjectiveRefs", "conceptRefs", "easing", "enter", "metrics"],
+      "properties": {
+        "id": { "$ref": "core.schema.json#/$defs/id" },
+        "start": { "type": "number", "minimum": 0, "maximum": 90 },
+        "duration": { "type": "number", "exclusiveMinimum": 0, "maximum": 30 },
+        "title": { "$ref": "core.schema.json#/$defs/text" },
+        "displayText": { "$ref": "core.schema.json#/$defs/text" },
+        "narration": { "$ref": "core.schema.json#/$defs/text" },
+        "stage": { "enum": ["smooth", "growth", "collision", "queue", "failure", "stagger", "recovery", "manageable", "coordination", "operations", "decision", "conclusion"] },
+        "learningObjectiveRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "core.schema.json#/$defs/id" } },
+        "conceptRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "core.schema.json#/$defs/id" } },
+        "easing": { "enum": ["linear", "ease-in-out"] },
+        "enter": { "enum": ["fade", "slide-up", "none"] },
+        "metrics": { "$ref": "core.schema.json#/$defs/metrics" },
+        "visualReferences": { "type": "array", "maxItems": 3, "items": { "$ref": "core.schema.json#/$defs/diagramReference" } }
+      }
+    }
+  },
+  "allOf": [{ "$ref": "core.schema.json#/$defs/core" }],
+  "type": "object",
+  "required": ["durationSeconds", "scenes", "reducedMotionSteps"],
+  "properties": {
+    "kind": { "const": "motion" },
+    "durationSeconds": { "type": "number", "minimum": 15, "maximum": 30 },
+    "scenes": { "type": "array", "minItems": 3, "maxItems": 30, "items": { "$ref": "#/$defs/scene" } },
+    "reducedMotionSteps": { "type": "array", "minItems": 3, "maxItems": 12, "items": { "$ref": "core.schema.json#/$defs/text" } }
+  },
+  "unevaluatedProperties": false
+}

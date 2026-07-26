@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0",
+  "id": "automation-becomes-operations",
+  "kind": "narrative",
+  "title": "Automation becomes operations",
+  "description": "A structured learning journey from ten manageable connectors to operating more than two hundred reliable sources.",
+  "learningObjectiveRefs": ["understand-operational-scale"],
+  "conceptRefs": ["scheduling", "concurrency", "retry", "validation", "monitoring", "failure-isolation"],
+  "locale": "en",
+  "direction": "ltr",
+  "theme": "portfolio-default",
+  "accessibility": {
+    "label": "Learning narrative about automation becoming an operations problem",
+    "longDescription": "Six scenes explain how a small set of connectors can be managed from memory, how growth introduces coordination and credential problems, why monitoring and recovery become product capabilities, how the final difficult sources consume disproportionate effort, and how to decide when automation is no longer the right solution."
+  },
+  "viewport": { "width": 960, "height": 540 },
+  "requiredCapabilities": ["svg", "timeline", "captions", "reduced-motion"],
+  "audience": "Automation engineers and technical decision makers scaling unattended data collection",
+  "premise": "Automation at scale stops being mainly about writing flows and becomes the discipline of operating a system.",
+  "durationSeconds": 66,
+  "timingPolicy": "explicit",
+  "storyBeats": [
+    { "id": "beginning", "start": 0, "duration": 10, "goal": "Recognize why a small automation estate feels easy.", "displayText": "10 connectors: simple, visible, memorable", "narration": "The first ten connectors feel simple. You know every source, remember every exception, and can personally watch each run.", "stage": "manageable", "learningObjectiveRefs": ["understand-operational-scale"], "conceptRefs": ["scheduling"], "emphasis": "normal", "pauseAfter": 0, "metrics": { "sources": 10, "capacity": 20, "queued": 0, "failures": 0 } },
+    { "id": "growth", "start": 10, "duration": 12, "goal": "Identify the point where individual knowledge stops scaling.", "displayText": "50 sources: coordination replaces memory", "narration": "At fifty sources, memory stops being an operating model. Credentials expire, schedules collide, dependencies appear, and failures become harder to attribute.", "stage": "growth", "learningObjectiveRefs": ["understand-operational-scale"], "conceptRefs": ["scheduling", "concurrency"], "emphasis": "strong", "pauseAfter": 0, "metrics": { "sources": 50, "capacity": 20, "queued": 30, "failures": 6 } },
+    { "id": "coordination", "start": 22, "duration": 12, "goal": "Connect scale to orchestration and observability needs.", "displayText": "Coordination, credentials, and observability dominate", "narration": "The work is no longer just connector logic. Dependency-aware orchestration, session health, concurrency control, and useful observability determine whether data arrives.", "stage": "coordination", "learningObjectiveRefs": ["understand-operational-scale"], "conceptRefs": ["concurrency", "monitoring"], "emphasis": "normal", "pauseAfter": 0, "metrics": { "sources": 100, "capacity": 20, "queued": 45, "failures": 10 }, "visualReferences": [{ "type": "diagram-reference", "visualId": "rpa-operating-architecture", "focusNodes": ["dependency-orchestrator", "session-manager", "queue", "structured-logs"] }] },
+    { "id": "operational-reality", "start": 34, "duration": 12, "goal": "Understand why reliability capabilities become part of the product.", "displayText": "200+ sources: error handling is the product", "narration": "Beyond two hundred sources, validation, retries, recovery, and monitoring are not supporting features. They are the product that makes unattended automation trustworthy.", "stage": "operations", "learningObjectiveRefs": ["understand-operational-scale"], "conceptRefs": ["retry", "validation", "monitoring", "failure-isolation"], "emphasis": "strong", "pauseAfter": 0, "metrics": { "sources": 220, "capacity": 20, "queued": 20, "failures": 5 }, "visualReferences": [{ "type": "diagram-reference", "visualId": "rpa-operating-architecture", "focusNodes": ["retry-boundary", "validator", "heartbeat-monitor", "operator-dashboard"] }] },
+    { "id": "decision-point", "start": 46, "duration": 10, "goal": "Evaluate the disproportionate cost of the final difficult sources.", "displayText": "The final 20% consumes most maintenance", "narration": "The last sources are often unstable, low-volume, or costly to fail. Full automation can create more risk than a reliable manual process.", "stage": "decision", "learningObjectiveRefs": ["understand-operational-scale"], "conceptRefs": ["failure-isolation"], "emphasis": "strong", "pauseAfter": 0, "metrics": { "sources": 220, "capacity": 20, "queued": 10, "failures": 3 } },
+    { "id": "conclusion", "start": 56, "duration": 10, "goal": "Apply a four-question operating decision.", "displayText": "Automate deliberately. Operate visibly. Stop honestly.", "narration": "Reliable automation asks four questions: what should be automated, how will it operate, how will failure be detected, and when is automation no longer the right solution?", "stage": "conclusion", "learningObjectiveRefs": ["understand-operational-scale"], "conceptRefs": ["validation", "monitoring"], "emphasis": "strong", "pauseAfter": 0, "metrics": { "sources": 220, "capacity": 20, "queued": 2, "failures": 1 } }
+  ],
+  "captions": [
+    { "start": 0, "end": 10, "text": "The first ten connectors feel simple. You know every source, remember every exception, and can personally watch each run." },
+    { "start": 10, "end": 22, "text": "At fifty sources, memory stops being an operating model. Credentials expire, schedules collide, dependencies appear, and failures become harder to attribute." },
+    { "start": 22, "end": 34, "text": "The work is no longer just connector logic. Dependency-aware orchestration, session health, concurrency control, and useful observability determine whether data arrives." },
+    { "start": 34, "end": 46, "text": "Beyond two hundred sources, validation, retries, recovery, and monitoring are not supporting features. They are the product that makes unattended automation trustworthy." },
+    { "start": 46, "end": 56, "text": "The last sources are often unstable, low-volume, or costly to fail. Full automation can create more risk than a reliable manual process." },
+    { "start": 56, "end": 66, "text": "Reliable automation asks four questions: what should be automated, how will it operate, how will failure be detected, and when is automation no longer the right solution?" }
+  ],
+  "conclusion": "Reliable automation requires deliberate scope, visible operation, explicit failure detection, and the honesty to stop.",
+  "transcript": "The first ten connectors feel simple. You know every source, remember every exception, and can personally watch each run.\n\nAt fifty sources, memory stops being an operating model. Credentials expire, schedules collide, dependencies appear, and failures become harder to attribute.\n\nThe work is no longer just connector logic. Dependency-aware orchestration, session health, concurrency control, and useful observability determine whether data arrives.\n\nBeyond two hundred sources, validation, retries, recovery, and monitoring are not supporting features. They are the product that makes unattended automation trustworthy.\n\nThe last sources are often unstable, low-volume, or costly to fail. Full automation can create more risk than a reliable manual process.\n\nReliable automation asks four questions: what should be automated, how will it operate, how will failure be detected, and when is automation no longer the right solution?"
+}

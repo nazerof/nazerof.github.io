@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0",
+  "id": "scheduling-collision",
+  "kind": "motion",
+  "title": "Why every flow at 06:00 stops scaling",
+  "description": "A 24-second explanation of concurrency saturation, queue growth, cascading failure, and staggered recovery.",
+  "learningObjectiveRefs": ["understand-scheduling-collisions"],
+  "conceptRefs": ["scheduling", "concurrency", "retry", "backoff", "failure-isolation"],
+  "locale": "en",
+  "direction": "ltr",
+  "theme": "portfolio-default",
+  "accessibility": {
+    "label": "Animated explanation of scheduling collisions",
+    "longDescription": "Ten flows fit within execution capacity. As fifty and then more than two hundred sources target 06:00, capacity fills, a queue grows, timeouts retry together, and failures cascade. Staggered schedules, backoff with jitter, and failure isolation restore stable throughput."
+  },
+  "viewport": { "width": 960, "height": 540 },
+  "requiredCapabilities": ["svg", "timeline", "reduced-motion"],
+  "durationSeconds": 24,
+  "scenes": [
+    { "id": "ten-smooth", "start": 0, "duration": 3, "title": "Ten flows", "displayText": "10 flows fit comfortably", "narration": "With ten sources, every flow can start at six and finish smoothly.", "stage": "smooth", "learningObjectiveRefs": ["understand-scheduling-collisions"], "conceptRefs": ["scheduling"], "easing": "ease-in-out", "enter": "fade", "metrics": { "sources": 10, "capacity": 20, "queued": 0, "failures": 0 } },
+    { "id": "fifty-growth", "start": 3, "duration": 3, "title": "Growth", "displayText": "50 flows still target 06:00", "narration": "At fifty sources, the same schedule creates competition for limited capacity.", "stage": "growth", "learningObjectiveRefs": ["understand-scheduling-collisions"], "conceptRefs": ["scheduling", "concurrency"], "easing": "ease-in-out", "enter": "slide-up", "metrics": { "sources": 50, "capacity": 20, "queued": 30, "failures": 0 } },
+    { "id": "two-hundred-collision", "start": 6, "duration": 3, "title": "Collision", "displayText": "200+ flows collide at 06:00", "narration": "Beyond two hundred sources, the six o'clock spike overwhelms every execution slot.", "stage": "collision", "learningObjectiveRefs": ["understand-scheduling-collisions"], "conceptRefs": ["scheduling", "concurrency"], "easing": "ease-in-out", "enter": "fade", "metrics": { "sources": 220, "capacity": 20, "queued": 200, "failures": 0 }, "visualReferences": [{ "type": "diagram-reference", "visualId": "rpa-operating-architecture", "focusNodes": ["scheduler", "queue"] }] },
+    { "id": "queue-growth", "start": 9, "duration": 3, "title": "Queue growth", "displayText": "Waiting time consumes timeout budgets", "narration": "The queue grows, leaving less time for each connector to complete.", "stage": "queue", "learningObjectiveRefs": ["understand-scheduling-collisions"], "conceptRefs": ["concurrency"], "easing": "linear", "enter": "slide-up", "metrics": { "sources": 220, "capacity": 20, "queued": 200, "failures": 20 } },
+    { "id": "cascade", "start": 12, "duration": 3, "title": "Cascade", "displayText": "Synchronized retries amplify failure", "narration": "Timeouts retry together, turning one bottleneck into a cascading failure.", "stage": "failure", "learningObjectiveRefs": ["understand-scheduling-collisions"], "conceptRefs": ["retry"], "easing": "ease-in-out", "enter": "fade", "metrics": { "sources": 220, "capacity": 20, "queued": 180, "failures": 80 }, "visualReferences": [{ "type": "diagram-reference", "visualId": "rpa-operating-architecture", "focusNodes": ["queue", "retry-boundary", "circuit-breaker"] }] },
+    { "id": "stagger", "start": 15, "duration": 3, "title": "Stagger", "displayText": "Spread work across time", "narration": "Dependency-aware staggering removes the single execution spike.", "stage": "stagger", "learningObjectiveRefs": ["understand-scheduling-collisions"], "conceptRefs": ["scheduling"], "easing": "ease-in-out", "enter": "slide-up", "metrics": { "sources": 220, "capacity": 20, "queued": 60, "failures": 20 } },
+    { "id": "isolate", "start": 18, "duration": 3, "title": "Isolate", "displayText": "Backoff, jitter, and circuit breakers", "narration": "Backoff and jitter spread retries, while circuit breakers isolate unhealthy sources.", "stage": "recovery", "learningObjectiveRefs": ["understand-scheduling-collisions"], "conceptRefs": ["backoff", "failure-isolation"], "easing": "ease-in-out", "enter": "fade", "metrics": { "sources": 220, "capacity": 20, "queued": 20, "failures": 5 } },
+    { "id": "stable", "start": 21, "duration": 3, "title": "Stable throughput", "displayText": "Bounded work. Visible failures. Stable output.", "narration": "The system now operates within capacity and makes remaining failures visible.", "stage": "recovery", "learningObjectiveRefs": ["understand-scheduling-collisions"], "conceptRefs": ["concurrency", "failure-isolation"], "easing": "ease-in-out", "enter": "fade", "metrics": { "sources": 220, "capacity": 20, "queued": 5, "failures": 2 } }
+  ],
+  "reducedMotionSteps": [
+    "At 10 sources, all scheduled work fits within the 20 available execution slots.",
+    "At 50 sources, 30 jobs queue; at more than 200, the queue dominates the run window.",
+    "Timeouts and synchronized retries amplify the bottleneck into cascading failure.",
+    "Staggering, backoff with jitter, and circuit breakers restore bounded, stable execution."
+  ]
+}

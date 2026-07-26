@@ -6,6 +6,7 @@
     <title>Scaling RPA: From Proof-of-Concept to 200+ Data Sources - Nazer Hdaifeh</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../assets/visual-engine/visual-engine.css">
     <style>
         /* Article body styles */
         .article-body {
@@ -208,6 +209,22 @@
 
                 <p><strong>Error cascading</strong> was the one that really hurt. A single failed authentication upstream can cascade through dependent flows. If your token refresh fails at 5:45 AM, every flow scheduled between 6:00 and 8:00 that depends on that token will fail. And they will fail in ways that look like different problems&mdash;timeouts here, empty responses there, malformed data somewhere else. Debugging a cascade at 9 AM, when stakeholders are asking where the morning report is, teaches you to build isolation between flows faster than any best-practice document ever could.</p>
 
+                <section class="visual-learning-host" data-visual-package="../../content/visuals/rpa-scaling/package.json" data-visual-id="scheduling-collision" aria-labelledby="scheduling-collision-title">
+                    <p class="visual-kicker">Interactive explanation · 24 seconds</p>
+                    <h3 id="scheduling-collision-title">Why every flow at 06:00 stops scaling</h3>
+                    <p class="visual-summary">See how limited concurrency turns one convenient start time into queues, synchronized retries, and cascading failures&mdash;then how staggered scheduling restores stable throughput.</p>
+                    <div class="visual-static-fallback">
+                        <ol>
+                            <li>Ten flows fit within the available execution capacity.</li>
+                            <li>At fifty and then more than two hundred sources, the 06:00 queue consumes timeout budgets.</li>
+                            <li>Synchronized retries amplify failures.</li>
+                            <li>Staggering, backoff with jitter, and circuit breakers bound the work.</li>
+                        </ol>
+                    </div>
+                    <div class="visual-runtime" aria-live="polite"><p>Loading validated motion definition&hellip;</p></div>
+                    <noscript><p><strong>JavaScript is optional:</strong> the four steps above contain the full lesson.</p></noscript>
+                </section>
+
                 <h2>The Monitoring Problem</h2>
 
                 <p>Here is something nobody tells you about large-scale RPA: the automation itself is the easy part. Knowing whether it worked is the hard part.</p>
@@ -217,6 +234,19 @@
                 <p>We built a layered observability approach out of necessity. The first layer was <strong>heartbeat monitoring</strong>&mdash;did the flow run at all? Not "did it succeed," just "did it start and finish." A flow that silently fails to trigger is harder to catch than one that runs and throws an error. The second layer was <strong>data validation</strong>&mdash;did the output make sense? Row counts, date ranges, basic schema checks. A flow can "succeed" while pulling yesterday's data or an empty file. The third layer was <strong>trend detection</strong>&mdash;is the data volume for retailer X declining week over week? That usually means the portal changed something and our connector is silently pulling partial data.</p>
 
                 <p>The dashboard we eventually built was not sophisticated technology. It was a simple status page backed by a structured log. Green, yellow, red. But it took us far too long to build it, because when you are in the trenches adding new connectors, building the thing that tells you whether the other things are working feels like a distraction. It is not. It is the most important thing you will build.</p>
+
+                <section class="visual-learning-host" data-visual-package="../../content/visuals/rpa-scaling/package.json" data-visual-id="rpa-operating-architecture" aria-labelledby="rpa-architecture-title">
+                    <p class="visual-kicker">Editable architecture diagram</p>
+                    <h3 id="rpa-architecture-title">The operating system around 200+ automations</h3>
+                    <p class="visual-summary">The architecture separates scheduling, bounded execution, failure isolation, validation, and operator visibility. Solid green lines show successful data flow, dashed red lines show failure recovery, and purple dotted lines show observability.</p>
+                    <img class="visual-preview" src="../../assets/visuals/rpa-scaling/operating-architecture-preview.svg" width="1200" height="650" alt="Scheduler and dependency orchestration feed a concurrency queue, authenticated connectors, validation, and downstream storage. Retry, backoff, and a circuit breaker isolate failures. Structured logs feed heartbeat, validation, and trend monitoring shown in an operator dashboard.">
+                    <details>
+                        <summary>Structured diagram description</summary>
+                        <p>The scheduler passes planned runs to dependency-aware orchestration and then a concurrency queue. Authentication supplies sessions to source connectors. Successful results pass through data validation into the downstream pipeline. Retry with backoff and jitter leads to a circuit breaker when failures persist, then returns isolated recovery work to the queue. Structured execution logs, validation results, and stored volume histories feed heartbeat, validation, and trend monitors, all visible in the operator dashboard.</p>
+                    </details>
+                    <div class="visual-runtime" aria-live="polite"><p>Loading validated diagram definition&hellip;</p></div>
+                    <noscript><p>The static diagram and structured description provide the complete architecture. Enable JavaScript only to edit and export a copy.</p></noscript>
+                </section>
 
                 <h2>Error Handling Is the Actual Product</h2>
 
@@ -256,6 +286,32 @@
 
                 <p>The most important lesson was the simplest: automation at scale is not a development problem. It is an operations problem. Building the flows is the beginning. Running them reliably, monitoring them honestly, and knowing when to stop&mdash;that is the actual work.</p>
 
+                <section class="visual-learning-host" data-visual-package="../../content/visuals/rpa-scaling/package.json" data-visual-id="automation-becomes-operations" aria-labelledby="automation-operations-title">
+                    <p class="visual-kicker">Guided learning narrative · 66 seconds</p>
+                    <h3 id="automation-operations-title">Automation becomes operations</h3>
+                    <p class="visual-summary">Follow the decision journey from ten manageable connectors to a system where reliability, recovery, and knowing when to stop are part of the product.</p>
+                    <div class="visual-static-fallback">
+                        <ol>
+                            <li><strong>Beginning:</strong> ten connectors are simple, visible, and memorable.</li>
+                            <li><strong>Escalation:</strong> at fifty sources, coordination replaces memory.</li>
+                            <li><strong>Operational reality:</strong> beyond two hundred, validation and recovery become product capabilities.</li>
+                            <li><strong>Decision:</strong> the final difficult sources can cost more to automate than they return.</li>
+                            <li><strong>Conclusion:</strong> automate deliberately, operate visibly, and stop honestly.</li>
+                        </ol>
+                    </div>
+                    <div class="visual-runtime" aria-live="polite"><p>Loading validated narrative definition&hellip;</p></div>
+                    <details class="visual-transcript">
+                        <summary>Read the complete transcript</summary>
+                        <p>The first ten connectors feel simple. You know every source, remember every exception, and can personally watch each run.</p>
+                        <p>At fifty sources, memory stops being an operating model. Credentials expire, schedules collide, dependencies appear, and failures become harder to attribute.</p>
+                        <p>The work is no longer just connector logic. Dependency-aware orchestration, session health, concurrency control, and useful observability determine whether data arrives.</p>
+                        <p>Beyond two hundred sources, validation, retries, recovery, and monitoring are not supporting features. They are the product that makes unattended automation trustworthy.</p>
+                        <p>The last sources are often unstable, low-volume, or costly to fail. Full automation can create more risk than a reliable manual process.</p>
+                        <p>Reliable automation asks four questions: what should be automated, how will it operate, how will failure be detected, and when is automation no longer the right solution?</p>
+                    </details>
+                    <noscript><p><strong>JavaScript is optional:</strong> the learning sequence and complete transcript remain available above.</p></noscript>
+                </section>
+
                 <div class="article-footer">
                     <a href="../blog.html" class="back-to-blog">
                         <i class="fas fa-arrow-left"></i> Back to Blog
@@ -279,5 +335,6 @@
     </footer>
 
     <script src="../../script.js"></script>
+    <script type="module" src="../../assets/visual-engine/visual-engine.js"></script>
 </body>
 </html>

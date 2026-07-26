@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0",
+  "id": "rpa-scaling-visual-package",
+  "source": { "type": "article", "path": "pages/blog/rpa-scaling.html" },
+  "audience": {
+    "level": "intermediate",
+    "roles": ["automation engineer", "data professional", "technical decision maker"]
+  },
+  "learningObjectives": [
+    { "id": "understand-operational-scale", "text": "Explain why automation changes from a scripting problem into an operations problem at scale." },
+    { "id": "understand-scheduling-collisions", "text": "Explain how simultaneous scheduling creates queues, timeouts, and cascading failures." },
+    { "id": "understand-operating-architecture", "text": "Identify the architectural components required for reliable automation at scale." }
+  ],
+  "concepts": ["scheduling", "concurrency", "retry", "backoff", "validation", "monitoring", "failure-isolation"],
+  "theme": "portfolio-default",
+  "visuals": [
+    { "id": "rpa-operating-architecture", "kind": "diagram", "path": "diagram.json" },
+    { "id": "scheduling-collision", "kind": "motion", "path": "motion.json" },
+    { "id": "automation-becomes-operations", "kind": "narrative", "path": "narrative.json" }
+  ]
+}
