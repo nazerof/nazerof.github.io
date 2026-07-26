@@ -58,9 +58,9 @@ Measured production output:
 |---|---:|---:|
 | Initial visual runtime JavaScript | 151,499 bytes | 43,705 bytes |
 | Initial visual runtime CSS | 3,945 bytes | 1,320 bytes |
-| Lazy diagram-editor entry | 761,850 bytes | 231,181 bytes |
+| Lazy diagram-editor entry | 761,860 bytes | 231,158 bytes |
 
-The complete lazy Excalidraw output is approximately 8.3 MB across 179 generated files on disk. None of the Excalidraw JavaScript or CSS is requested until “Open interactive diagram” is selected. Static preview dimensions prevent layout shift. Motion renders at most 20 representative SVG flow markers rather than one marker per source.
+The complete lazy Excalidraw output is approximately 4.7 MB across 81 generated files on disk. Mermaid conversion is explicitly replaced with a disabled build-time stub because it is outside scope; this avoids shipping its renderer graph. None of the Excalidraw JavaScript or CSS is requested until “Open interactive diagram” is selected. Static preview dimensions prevent layout shift. Motion renders at most 20 representative SVG flow markers rather than one marker per source.
 
 ## Accessibility
 

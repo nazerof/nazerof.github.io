@@ -1,6 +1,12 @@
 import { defineConfig } from "vitest/config";
+import { resolve } from "node:path";
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "@excalidraw/mermaid-to-excalidraw": resolve(import.meta.dirname, "src/visual-engine/excalidraw-mermaid-disabled.ts")
+    }
+  },
   test: {
     environment: "jsdom",
     include: ["tests/**/*.test.ts"],
