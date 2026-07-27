@@ -1,0 +1,206 @@
+.visual-learning-host {
+  --visual-accent: #667eea;
+  --visual-accent-dark: #4c51bf;
+  --visual-ink: #253046;
+  --visual-muted: #5f6b7a;
+  margin: 2.5rem 0;
+  padding: 1.25rem;
+  border: 1px solid #dfe4f2;
+  border-radius: 16px;
+  background: #fbfcff;
+  box-shadow: 0 8px 24px rgba(46, 61, 110, 0.08);
+}
+
+.visual-learning-host h3 {
+  margin: 0 0 0.45rem;
+  color: var(--visual-ink);
+  font-size: 1.3rem;
+}
+
+.visual-kicker {
+  margin: 0 0 0.35rem;
+  color: var(--visual-accent-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.visual-summary,
+.visual-save-note {
+  color: var(--visual-muted);
+  font-size: 0.95rem;
+}
+
+.visual-preview {
+  width: 100%;
+  height: auto;
+  margin: 0.8rem 0;
+  border: 1px solid #dfe4f2;
+  border-radius: 12px;
+  background: white;
+}
+
+.visual-runtime {
+  min-height: 3rem;
+}
+
+.visual-learning-host[data-visual-ready="true"] .visual-static-fallback {
+  display: none;
+}
+
+.visual-open-editor,
+.visual-control,
+.visual-editor-toolbar button {
+  border: 2px solid var(--visual-accent);
+  border-radius: 999px;
+  background: white;
+  color: var(--visual-accent-dark);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 650;
+  padding: 0.55rem 0.9rem;
+}
+
+.visual-open-editor:hover,
+.visual-control:hover,
+.visual-editor-toolbar button:hover {
+  background: var(--visual-accent);
+  color: white;
+}
+
+.visual-open-editor:focus-visible,
+.visual-control:focus-visible,
+.visual-editor-toolbar button:focus-visible,
+.visual-seek:focus-visible,
+.visual-speed:focus-visible,
+.visual-player:focus-visible {
+  outline: 3px solid #ffb703;
+  outline-offset: 3px;
+}
+
+.visual-player svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+
+.motion-bg { fill: #f4f6ff; }
+.motion-title { fill: #253046; font: 700 28px system-ui, sans-serif; }
+.motion-message { fill: #526079; font: 18px system-ui, sans-serif; }
+.motion-label { fill: #536079; font: 600 16px system-ui, sans-serif; }
+.motion-box { fill: #dbe4ff; stroke: #667eea; stroke-width: 3; }
+.motion-capacity { fill: #fff; stroke: #667eea; stroke-width: 3; }
+.motion-output { fill: #d3f9d8; stroke: #2b8a3e; stroke-width: 3; }
+.motion-box-label { fill: #253046; font: 700 18px system-ui, sans-serif; }
+.motion-arrow { fill: none; stroke: #526079; stroke-width: 5; }
+.motion-dot { fill: #2b8a3e; }
+.motion-dot-waiting { fill: #f59f00; stroke: #6f4e00; stroke-width: 2; }
+.motion-metric { fill: #253046; font: 700 24px system-ui, sans-serif; }
+.motion-queue-track { fill: #e9ecef; }
+.motion-queue { fill: #f59f00; }
+.motion-queue-label { fill: #253046; font: 700 16px system-ui, sans-serif; }
+.motion-failure { fill: #a61e1e; font: 700 20px system-ui, sans-serif; }
+.motion-legend { fill: #526079; font: 15px system-ui, sans-serif; }
+
+.visual-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-top: 0.9rem;
+}
+
+.visual-seek {
+  flex: 1 1 180px;
+  accent-color: var(--visual-accent);
+}
+
+.visual-speed {
+  border: 1px solid #aab4cb;
+  border-radius: 8px;
+  padding: 0.45rem;
+  background: white;
+}
+
+.visual-progress {
+  min-width: 4.5rem;
+  color: var(--visual-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.visual-caption {
+  min-height: 3.4rem;
+  margin-top: 0.8rem;
+  padding: 0.75rem 1rem;
+  border-left: 4px solid var(--visual-accent);
+  background: white;
+  color: var(--visual-ink);
+}
+
+.visual-reduced-heading {
+  font-weight: 700;
+  color: var(--visual-ink);
+}
+
+.visual-editor-toolbar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.8rem 0;
+}
+
+.visual-editor-canvas {
+  width: 100%;
+  height: min(72vh, 720px);
+  min-height: 480px;
+  border: 1px solid #dfe4f2;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.visual-editor-shell.is-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  padding: 1rem;
+  overflow: auto;
+  background: white;
+}
+
+.visual-editor-shell.is-fullscreen .visual-editor-canvas {
+  height: calc(100vh - 130px);
+}
+
+.visual-error {
+  padding: 0.8rem;
+  border-left: 4px solid #c92a2a;
+  background: #fff5f5;
+  color: #8f1616;
+}
+
+.visual-transcript {
+  margin-top: 1rem;
+}
+
+.visual-transcript summary {
+  cursor: pointer;
+  color: var(--visual-accent-dark);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .visual-learning-host { padding: 1rem; }
+  .visual-editor-canvas { min-height: 70vh; }
+  .visual-player .motion-message { font-size: 15px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .visual-learning-host *, .visual-learning-host *::before, .visual-learning-host *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

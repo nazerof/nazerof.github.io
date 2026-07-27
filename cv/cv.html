@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nazer Hdaifeh — CV</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --ink: #1f2733;
+    --muted: #5a6473;
+    --line: #d8dde5;
+    --accent: #0e6e55;
+    --accent-soft: #e8f3ef;
+    --gold: #a16f0b;
+    --tag-bg: #eef2f7;
+    --tag-ink: #2a3340;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Helvetica Neue', Arial, 'Segoe UI', sans-serif;
+    color: var(--ink);
+    background: #fff;
+    font-size: 10.5pt;
+    line-height: 1.35;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 0;
+    background: #fff;
+  }
+  /* Header */
+  .header {
+    background: #2c3340;
+    color: #fff;
+    padding: 22px 28px 18px;
+  }
+  .header h1 {
+    margin: 0;
+    font-size: 28pt;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+  .header h1 strong { font-weight: 700; }
+  .header .tagline {
+    margin-top: 4px;
+    font-size: 10.5pt;
+    color: #cfd6e0;
+    letter-spacing: 0.3px;
+  }
+  .header .tagline i { margin-right: 4px; color: #8fc8b4; }
+  .contact-bar {
+    border-bottom: 1px solid var(--gold);
+    border-top: 1px solid var(--gold);
+    padding: 8px 28px;
+    font-size: 9.5pt;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+  }
+  .contact-bar a { color: var(--muted); text-decoration: none; }
+  .contact-bar i { margin-right: 4px; color: var(--accent); }
+
+  .body { padding: 14px 28px 24px; }
+
+  h2.section {
+    color: var(--accent);
+    font-size: 12pt;
+    font-weight: 700;
+    margin: 14px 0 6px;
+    padding-bottom: 3px;
+    border-bottom: 1.2px solid var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  h2.section i { margin-right: 6px; }
+
+  /* About */
+  .about {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    background: var(--accent-soft);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+  }
+  .about-photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: top;
+    flex-shrink: 0;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .about-text { font-size: 10pt; color: var(--ink); }
+  .about-text strong { color: var(--accent); }
+
+  /* Experience */
+  .exp { margin-top: 8px; }
+  .exp-item { margin-bottom: 9px; }
+  .exp-head {
+    background: #f1f6f9;
+    border-radius: 4px 4px 0 0;
+    padding: 5px 10px;
+    border-left: 3px solid var(--accent);
+  }
+  .exp-row1 {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 10.5pt;
+  }
+  .exp-row1 .loc {
+    font-weight: 400;
+    color: var(--muted);
+    font-size: 9pt;
+  }
+  .exp-row2 {
+    display: flex;
+    justify-content: space-between;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 9.5pt;
+    margin-top: 1px;
+  }
+  .exp-body {
+    background: #fafbfc;
+    border-radius: 0 0 4px 4px;
+    padding: 6px 10px;
+    border-left: 3px solid var(--line);
+    font-size: 10pt;
+  }
+  .tags {
+    margin-top: 5px;
+    line-height: 1.8;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 7.8pt;
+    background: var(--tag-bg);
+    color: var(--tag-ink);
+    border: 1px solid #dfe5ee;
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin-right: 3px;
+    white-space: nowrap;
+  }
+  .tag.expert { background: #e0ecff; border-color: #b9d2ff; color: #1c3d76; }
+  .tag.adv { background: #e6f7ec; border-color: #c1e7cf; color: #1f5a36; }
+  .tag.int { background: #fff3e0; border-color: #ffd9a8; color: #7a4711; }
+  .tag.basic { background: #f0f0f0; border-color: #d6d6d6; color: #555; }
+
+  /* Education */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .edu-card {
+    background: #fafbfc;
+    border-left: 3px solid var(--gold);
+    border-radius: 0 4px 4px 0;
+    padding: 6px 10px;
+    font-size: 9.5pt;
+  }
+  .edu-card .deg { font-weight: 700; color: var(--ink); font-size: 10pt; }
+  .edu-card .school { color: var(--accent); font-style: italic; }
+  .edu-card .date { color: var(--muted); font-size: 8.5pt; float: right; }
+
+  /* Skills */
+  .skill-block { margin-top: 6px; }
+  .skill-row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 10px;
+    padding: 4px 0;
+    border-bottom: 1px dashed var(--line);
+    align-items: center;
+  }
+  .skill-row:last-child { border-bottom: none; }
+  .skill-cat {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 9.5pt;
+  }
+  .skill-cat i { color: var(--muted); margin-right: 4px; }
+
+  /* Footer info */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+    font-size: 9pt;
+  }
+  .footer-card {
+    background: #fafbfc;
+    padding: 8px 10px;
+    border-radius: 4px;
+    border-top: 2px solid var(--accent);
+  }
+  .footer-card h4 {
+    margin: 0 0 4px;
+    color: var(--accent);
+    font-size: 9.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .footer-card .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1px 0;
+  }
+  .footer-card .row span:first-child i {
+    color: var(--muted);
+    margin-right: 4px;
+  }
+
+  @page { size: A4; margin: 0; }
+  @media print {
+    .page { box-shadow: none; }
+    body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <h1>Nazer <strong>Hdaifeh</strong></h1>
+    <div class="tagline">
+      <i class="fas fa-rocket"></i>Founder &amp; CEO, HubsTime
+      &nbsp;&middot;&nbsp;
+      <i class="fas fa-cogs"></i>AI &amp; Automation Consultant
+      &nbsp;&middot;&nbsp;
+      <i class="fas fa-brain"></i>Data Scientist / ML Engineer
+    </div>
+  </div>
+
+  <div class="contact-bar">
+    <span><i class="fas fa-phone"></i><a href="tel:+4542316710">+45 42 31 67 10</a></span>
+    <span><i class="fas fa-envelope"></i><a href="mailto:nazerof@gmail.com">nazerof@gmail.com</a></span>
+    <span><i class="fab fa-linkedin"></i><a href="https://linkedin.com/in/nazer-hd">linkedin.com/in/nazer-hd</a></span>
+    <span><i class="fas fa-globe"></i><a href="https://nazerof.github.io">nazerof.github.io</a></span>
+    <span><i class="fas fa-map-marker-alt"></i>Aarhus, Denmark</span>
+  </div>
+
+  <div class="body">
+
+    <div class="about">
+      <img class="about-photo" src="../Nazer_Hadifeh_pic1.jpg" alt="Nazer">
+      <div class="about-text">
+        <strong>Master Engineer in Mathematical Modeling &amp; Computation (DTU)</strong> with 5+ years across data science, ML, and enterprise automation. Founder of <strong>HubsTime</strong> &mdash; a B2B2C AI-powered SaaS learning platform &mdash; and freelance consultant integrating Agentic AI with RPA pipelines. I bridge production ML, cloud architecture, and product thinking to ship measurable outcomes.
+      </div>
+    </div>
+
+    <h2 class="section"><i class="fas fa-suitcase"></i>Work Experience</h2>
+    <div class="exp">
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div class="exp-row1"><span>HubsTime <span style="font-weight:400;color:var(--muted);">&mdash; AI-Powered Learning Platform</span></span><span class="loc"><i class="fas fa-map-marker-alt"></i> Aarhus, Denmark</span></div>
+          <div class="exp-row2"><span>Founder &amp; CEO</span><span>Mar 2025 &mdash; Present</span></div>
+        </div>
+        <div class="exp-body">
+          Building a B2B2C SaaS platform for AI-powered course generation: Next.js 15 / FastAPI / PostgreSQL / Redis / LangGraph on Azure Container Apps. Owning cloud architecture, CI/CD, AI orchestration, multi-tenant data modeling, and bilingual (ar/en, RTL) product design end-to-end. Now scaling toward project management, fundraising, and GTM.
+          <div class="tags">
+            <span class="tag">Next.js 15</span><span class="tag">React 19</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span><span class="tag">LangGraph</span><span class="tag">Azure Container Apps</span><span class="tag">Multi-tenant SaaS</span><span class="tag">Product Strategy</span><span class="tag">Fundraising</span><span class="tag">GTM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div class="exp-row1"><span>Freelance &mdash; Agentic AI &amp; Data Science Consultant</span><span class="loc"><i class="fas fa-map-marker-alt"></i> Aarhus, Denmark</span></div>
+          <div class="exp-row2"><span>Independent Consultant</span><span>May 2025 &mdash; Present</span></div>
+        </div>
+        <div class="exp-body">
+          Designing Agentic AI frameworks (LangChain / AutoGen) that orchestrate and supercharge traditional RPA workflows. Deploying on Azure with Docker + GitHub Actions. Delivered faster knowledge operations, automated documentation flows, and reusable enterprise blueprints.
+          <div class="tags">
+            <span class="tag">AI Agents</span><span class="tag">RAG</span><span class="tag">LangChain</span><span class="tag">AutoGen</span><span class="tag">n8n</span><span class="tag">Copilot Studio</span><span class="tag">MCP</span><span class="tag">Docker</span><span class="tag">Azure</span><span class="tag">CI/CD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div class="exp-row1"><span>EffectManager ApS</span><span class="loc"><i class="fas fa-map-marker-alt"></i> Skanderborg, Denmark</span></div>
+          <div class="exp-row2"><span>Data Scientist</span><span>Jun 2023 &mdash; Apr 2025</span></div>
+        </div>
+        <div class="exp-body">
+          Led RPA development (Power Automate; logic transferable to Blue Prism) for 200+ Nordic retailers, architecting high-scale, production-grade automation. Enhanced legacy ML forecasting with AI-driven time-series alternatives, improving supply-chain accuracy through Streamlit PoC. Unified legacy pipelines into a scalable Azure / GCS / OpenAI architecture with DataLake integration.
+          <div class="tags">
+            <span class="tag">RPA</span><span class="tag">Power Automate</span><span class="tag">Azure</span><span class="tag">DataLake</span><span class="tag">OpenAI</span><span class="tag">Time Series</span><span class="tag">MLOps</span><span class="tag">OCR</span><span class="tag">Computer Vision</span><span class="tag">Python</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div class="exp-row1"><span>Valuebeat ApS</span><span class="loc"><i class="fas fa-map-marker-alt"></i> Copenhagen, Denmark</span></div>
+          <div class="exp-row2"><span>Data Scientist</span><span>Nov 2022 &mdash; May 2023</span></div>
+        </div>
+        <div class="exp-body">
+          Shaped product strategy by developing an AI agent that explores databases and surfaces data-driven solutions; built models for approved suggestions including employee-attrition forecasting.
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">PostgreSQL</span><span class="tag">ML</span><span class="tag">PCA</span><span class="tag">RAG (conceptual)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div class="exp-row1"><span>Statistics Denmark</span><span class="loc"><i class="fas fa-map-marker-alt"></i> Copenhagen, Denmark</span></div>
+          <div class="exp-row2"><span>Student Researcher / ML Engineer</span><span>Apr &mdash; Oct 2022</span></div>
+        </div>
+        <div class="exp-body">
+          Built an automated ML-based error-detection system for national education records, raising data quality and reliability of official statistics.
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">ML</span><span class="tag">Statistical Analysis</span><span class="tag">Sampling</span><span class="tag">Visualization</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div class="exp-row1"><span>Technical University of Denmark (DTU)</span><span class="loc"><i class="fas fa-map-marker-alt"></i> Copenhagen, Denmark</span></div>
+          <div class="exp-row2"><span>Teaching Assistant &mdash; Deep Learning</span><span>Aug &mdash; Dec 2021</span></div>
+        </div>
+        <div class="exp-body">
+          Mentored student projects, led lab sessions, and co-designed materials for DTU's Deep Learning course (PyTorch, CV, NLP).
+          <div class="tags">
+            <span class="tag">PyTorch</span><span class="tag">Deep Learning</span><span class="tag">Computer Vision</span><span class="tag">NLP</span><span class="tag">Mentoring</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-head">
+          <div class="exp-row1"><span>Advanced Schools</span><span class="loc"><i class="fas fa-map-marker-alt"></i> Riyadh, Saudi Arabia</span></div>
+          <div class="exp-row2"><span>Department Manager &amp; American Diploma Director / Math Teacher</span><span>2010 &mdash; 2018</span></div>
+        </div>
+        <div class="exp-body">
+          Evolved from STEM teacher to Department Manager and American Diploma Director: aligned delivery with 21st-century standards, embedded technology in management, and ran data-driven curriculum and action plans.
+          <div class="tags">
+            <span class="tag">Leadership</span><span class="tag">Strategy</span><span class="tag">Curriculum Design</span><span class="tag">Team Building</span><span class="tag">EdTech</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <h2 class="section"><i class="fas fa-graduation-cap"></i>Education</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="date">2019 &ndash; 2022</div>
+        <div class="deg">M.Eng &mdash; Applied Mathematics &amp; Computer Science</div>
+        <div class="school">Technical University of Denmark (DTU)</div>
+        <div style="font-size:9pt;color:var(--muted);margin-top:2px;">Specialization: Data Science, ML, Signal Processing</div>
+      </div>
+      <div class="edu-card">
+        <div class="date">2005 &ndash; 2010</div>
+        <div class="deg">B.Eng &mdash; Information Management Systems</div>
+        <div class="school">Tishreen University, Latakia</div>
+        <div style="font-size:9pt;color:var(--muted);margin-top:2px;">Software development, IT infrastructure, organizational systems</div>
+      </div>
+      <div class="edu-card" style="grid-column:1 / -1;">
+        <div class="date">2004 &ndash; 2009</div>
+        <div class="deg">B.Sc &mdash; Mathematics</div>
+        <div class="school">Tishreen University, Latakia</div>
+        <div style="font-size:9pt;color:var(--muted);margin-top:2px;">Statistics, calculus, algorithms &mdash; analytical foundations for DS &amp; ML</div>
+      </div>
+    </div>
+
+    <h2 class="section"><i class="fas fa-laptop-code"></i>Skills</h2>
+    <div class="skill-block">
+      <div class="skill-row">
+        <div class="skill-cat"><i class="fas fa-code"></i>Programming</div>
+        <div>
+          <span class="tag expert">Python</span><span class="tag adv">SQL</span><span class="tag int">R</span><span class="tag basic">JavaScript</span><span class="tag adv">Markdown</span><span class="tag adv">LaTeX</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat"><i class="fas fa-brain"></i>ML &amp; AI</div>
+        <div>
+          <span class="tag expert">Scikit-learn</span><span class="tag expert">PyTorch</span><span class="tag expert">LLM APIs</span><span class="tag expert">Agentic AI</span><span class="tag expert">RAG</span><span class="tag adv">LangChain</span><span class="tag adv">AutoGen</span><span class="tag adv">Azure AutoML</span><span class="tag expert">Time Series</span><span class="tag expert">Computer Vision</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat"><i class="fas fa-cloud"></i>Cloud &amp; DevOps</div>
+        <div>
+          <span class="tag expert">Azure</span><span class="tag adv">Google Cloud</span><span class="tag expert">Azure Data Factory</span><span class="tag adv">Databricks</span><span class="tag expert">Docker</span><span class="tag adv">GitHub Actions</span><span class="tag expert">CI/CD</span><span class="tag expert">Git</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat"><i class="fas fa-cogs"></i>Automation &amp; RPA</div>
+        <div>
+          <span class="tag expert">Power Automate</span><span class="tag adv">Blue Prism (logic)</span><span class="tag adv">OCR</span><span class="tag adv">REST APIs</span><span class="tag expert">n8n</span><span class="tag adv">Copilot Studio</span><span class="tag adv">MCP</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat"><i class="fas fa-chart-bar"></i>Data &amp; BI</div>
+        <div>
+          <span class="tag expert">pandas</span><span class="tag expert">numpy</span><span class="tag expert">Streamlit</span><span class="tag adv">Power BI</span><span class="tag expert">ETL/ELT</span><span class="tag expert">PySpark</span><span class="tag expert">DataLake</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-cat"><i class="fas fa-users"></i>Soft Skills</div>
+        <div>
+          <span class="tag">Leadership</span><span class="tag">Problem Solving</span><span class="tag">Communication</span><span class="tag">Adaptability</span><span class="tag">Mentoring</span><span class="tag">Cross-functional Teaming</span><span class="tag">Scrum / Agile</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-card">
+        <h4><i class="fas fa-language"></i> Languages</h4>
+        <div class="row"><span>Arabic</span><span>Native</span></div>
+        <div class="row"><span>English</span><span>Professional</span></div>
+        <div class="row"><span>Danish</span><span>Basic</span></div>
+      </div>
+      <div class="footer-card">
+        <h4><i class="fas fa-certificate"></i> Recent Courses</h4>
+        <div class="row"><span>Project Management</span><span>2025</span></div>
+        <div class="row"><span>Generative AI Apps</span><span>2025</span></div>
+        <div class="row"><span>Web Development</span><span>2024</span></div>
+        <div class="row"><span>Power Automate</span><span>2023</span></div>
+      </div>
+      <div class="footer-card">
+        <h4><i class="fas fa-heart"></i> Interests</h4>
+        <div class="row"><span><i class="fas fa-chess-king"></i>Chess</span><span><i class="fas fa-film"></i>Movies</span></div>
+        <div class="row"><span><i class="fas fa-dumbbell"></i>Gym</span><span><i class="fas fa-book"></i>Books</span></div>
+        <div class="row"><span><i class="fas fa-plane"></i>Travel</span><span>&nbsp;</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

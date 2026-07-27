@@ -1,0 +1,1 @@
+async function e(){throw Error(`Mermaid conversion is not available in this proof of concept.`)}export{e as parseMermaidToExcalidraw};

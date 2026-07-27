@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nazerof.github.io/schemas/visuals/core.schema.json",
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{1,63}$" },
+    "text": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "core": {
+      "type": "object",
+      "required": ["schemaVersion", "id", "kind", "title", "description", "learningObjectiveRefs", "conceptRefs", "locale", "direction", "theme", "accessibility", "viewport", "requiredCapabilities"],
+      "properties": {
+        "schemaVersion": { "const": "1.0" },
+        "id": { "$ref": "#/$defs/id" },
+        "kind": { "enum": ["diagram", "motion", "narrative"] },
+        "title": { "$ref": "#/$defs/text" },
+        "description": { "$ref": "#/$defs/text" },
+        "learningObjectiveRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+        "conceptRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+        "locale": { "const": "en" },
+        "direction": { "const": "ltr" },
+        "theme": { "const": "portfolio-default" },
+        "accessibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["label", "longDescription"],
+          "properties": {
+            "label": { "$ref": "#/$defs/text" },
+            "longDescription": { "type": "string", "minLength": 20, "maxLength": 3000 }
+          }
+        },
+        "viewport": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["width", "height"],
+          "properties": {
+            "width": { "type": "integer", "minimum": 320, "maximum": 1920 },
+            "height": { "type": "integer", "minimum": 180, "maximum": 1080 }
+          }
+        },
+        "requiredCapabilities": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": { "enum": ["edit", "export", "svg", "timeline", "captions", "reduced-motion"] }
+        }
+      }
+    },
+    "diagramReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "visualId", "focusNodes"],
+      "properties": {
+        "type": { "const": "diagram-reference" },
+        "visualId": { "$ref": "#/$defs/id" },
+        "focusNodes": { "type": "array", "minItems": 1, "maxItems": 10, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sources", "capacity", "queued", "failures"],
+      "properties": {
+        "sources": { "type": "integer", "minimum": 0, "maximum": 250 },
+        "capacity": { "type": "integer", "minimum": 1, "maximum": 250 },
+        "queued": { "type": "integer", "minimum": 0, "maximum": 250 },
+        "failures": { "type": "integer", "minimum": 0, "maximum": 250 }
+      }
+    },
+    "svgMotionRendererOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["processLabel", "capacityLabel", "outputLabel", "sourceLabel"],
+      "properties": {
+        "clockLabel": { "$ref": "#/$defs/text" },
+        "processLabel": { "$ref": "#/$defs/text" },
+        "capacityLabel": { "$ref": "#/$defs/text" },
+        "outputLabel": { "$ref": "#/$defs/text" },
+        "sourceLabel": { "$ref": "#/$defs/text" }
+      }
+    }
+  }
+}

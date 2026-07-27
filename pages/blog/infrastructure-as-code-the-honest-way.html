@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infrastructure as Code, From Someone Who Did It by Hand First - Nazer Hdaifeh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        /* Article body styles */
+        .article-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 750px;
+            margin: 0 auto;
+            color: #444;
+        }
+
+        .article-body h2 {
+            color: #667eea;
+            font-size: 1.6rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .article-body p {
+            margin-bottom: 1.4rem;
+        }
+
+        .article-body strong {
+            color: #333;
+        }
+
+        .article-body blockquote {
+            border-left: 4px solid #667eea;
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background: #f8f9ff;
+            border-radius: 0 10px 10px 0;
+            font-style: italic;
+            color: #555;
+        }
+
+        .article-body code {
+            background: #f0f0f5;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #667eea;
+        }
+
+        .article-body pre {
+            background: #1e1e2e;
+            color: #e0e0f0;
+            padding: 1.25rem 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 2rem 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .article-body pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+            font-size: 0.9rem;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .back-to-blog:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .article-footer {
+            text-align: center;
+            padding: 3rem 0 1rem;
+            border-top: 1px solid #eee;
+            margin-top: 3rem;
+        }
+
+        /* Hero adjustments for blog post */
+        .blog-post-hero {
+            height: auto;
+            padding: 120px 2rem 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-post-hero h1 {
+            font-size: 2.8rem;
+            max-width: 800px;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 768px) {
+            .blog-post-hero {
+                padding: 100px 1.5rem 40px;
+            }
+
+            .blog-post-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-body {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+
+            .article-body h2 {
+                font-size: 1.35rem;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-post-hero h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../../index.html" style="color: inherit; text-decoration: none;">Nazer Hdaifeh</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../blog.html" class="active">Blog</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav-menu" id="mobile-nav-menu">
+            <a href="../../index.html" class="mobile-nav-link">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="../projects.html" class="mobile-nav-link">
+                <i class="fas fa-project-diagram"></i>
+                <span>Projects</span>
+            </a>
+            <a href="../blog.html" class="mobile-nav-link">
+                <i class="fas fa-blog"></i>
+                <span>Blog</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero blog-post-hero">
+        <div class="hero-content">
+            <h1>Infrastructure as Code, From Someone Who Did It by Hand First</h1>
+            <div class="article-meta">
+                <span><i class="fas fa-calendar"></i> July 2026</span>
+                <span><i class="fas fa-tag"></i> DevOps</span>
+                <span><i class="fas fa-clock"></i> 8 min read</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="section">
+        <div class="container">
+            <article class="article-body">
+
+                <p>There is a specific kind of quiet panic that only happens at night, alone, in front of a production system you own. Something that worked an hour ago is now broken. You made a few changes in between. You cannot fully remember what they were, or in what order, or which one mattered. The knowledge of how the system got into its current state lives in three places: your short-term memory, your shell history, and a browser tab you have already closed.</p>
+
+                <p>I have been in that chair. I run HubsTime, a SaaS product I built and operate end-to-end, and before that I spent two years building and running automation and cloud systems at a Nordic SaaS company. For most of that time my infrastructure was, to be honest, imperative and partly manual: a portal click here, a script run there, a setting changed in a dashboard and never written down. It worked. Right up until the moment I needed to reproduce it, review it, or undo it.</p>
+
+                <p>This post is about the road from that world to Infrastructure as Code. I am going to be honest about where I am on that road, because the honesty is the point. I am not writing this as someone who has run declarative infrastructure at scale for a decade. I am writing it as a practitioner who ran infrastructure the hard way first, felt exactly the pain that IaC solves, and is now moving deliberately toward it.</p>
+
+                <h2>The Problem Isn't That Manual Infrastructure Is Hard</h2>
+
+                <p>Manual infrastructure is not hard. That is the trap. Clicking through a cloud console to create a resource, or SSHing in to change a config, is easy. It feels productive. You get the thing done in ten minutes and move on.</p>
+
+                <p>The problem is that manual infrastructure is <strong>unrepeatable</strong>. Every manual change is a decision that exists nowhere except in the current state of the system and, briefly, in your head. There is no record of why you did it. There is no way for anyone else to see it, question it, or reproduce it. And when something breaks, there is no diff to look at, because there is no previous version to diff against.</p>
+
+                <p>Everything good about how we treat application code &mdash; version control, code review, the ability to roll back to yesterday, the ability to recreate an environment from scratch &mdash; simply does not exist for infrastructure that lives as a sequence of remembered clicks. You would never ship application code by editing files directly on the production server and hoping you remember what you changed. Yet that is exactly how a lot of infrastructure gets managed, including mine, for longer than I would like to admit.</p>
+
+                <h2>What "As Code" Actually Buys You</h2>
+
+                <p>Strip away the tool names and the promise of Infrastructure as Code is simple. It is the promise of turning your infrastructure into a set of text files that describe what should exist, and then letting a tool make reality match those files.</p>
+
+                <p>Once your infrastructure is text, it inherits everything text already has in a mature engineering workflow. It goes in version control, so there is a history of every change and who made it. It goes through review, so a second person (or, for a solo project, a slower and more careful version of yourself) can look before it ships. It can be rolled back, because a previous version of a file is a thing that exists. And it can be reproduced, because the file is the source of truth, not the current mood of a server.</p>
+
+                <p>None of that is about a specific product. It is a discipline that happens to be enabled by putting infrastructure into files. The tool is the last decision, not the first.</p>
+
+                <h2>You're Probably Already Doing Part of It</h2>
+
+                <p>Here is the thing that made the transition feel less like a cliff and more like a ramp: if you run any kind of modern deployment, you are already doing a version of this.</p>
+
+                <p>A CI/CD pipeline is infrastructure as code. When I define a GitHub Actions workflow that builds, tests, and deploys on every push, I am describing a process in a file, versioning it, and letting a machine execute it identically every time. A Dockerfile is infrastructure as code &mdash; it is a text description of an environment that anyone can rebuild byte-for-byte. A provisioning script checked into a repository is a primitive but real form of it.</p>
+
+                <p>I had been doing all of that for a while. My deployments run through pipelines. My services are containerized. That is the config-as-code half of the story, and it is genuinely a strong foundation. What I was missing was the other half: the declarative management of the cloud resources those pipelines deploy onto. The pipeline was code. The resource group, the storage, the networking underneath it were still clicks.</p>
+
+                <h2>The Jump From Imperative to Declarative</h2>
+
+                <p>The mental shift that took me the longest was the one from imperative to declarative thinking, so it is the part worth explaining plainly.</p>
+
+                <p>An imperative script says: <em>do these steps in this order</em>. Create this, then configure that, then connect them. It works, but it assumes it is running against a known starting point. Run it twice and it might fail, or duplicate things, or error out because the resource already exists. It describes a journey, not a destination.</p>
+
+                <p>Declarative Infrastructure as Code, the kind you write in a tool like Terraform, flips this around. You do not describe the steps. You describe the <strong>desired end state</strong>, and the tool figures out the difference between what exists now and what you asked for, and makes only the changes needed to close that gap. The kind of thing I am now writing looks like this:</p>
+
+                <pre><code>resource "azurerm_resource_group" "app" {
+  name     = "hubstime-prod"
+  location = "West Europe"
+}
+
+resource "azurerm_storage_account" "media" {
+  name                     = "hubstimemedia"
+  resource_group_name      = azurerm_resource_group.app.name
+  location                 = azurerm_resource_group.app.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+}</code></pre>
+
+                <p>That is not a set of commands. It is a statement of fact about what should exist. Three ideas clicked for me once I started working this way, and they are the ideas worth internalizing:</p>
+
+                <p><strong>State.</strong> The tool keeps a record of what it believes it has created. That record is what lets it tell the difference between "this is new" and "this already exists and matches" and "this exists but has drifted from the file." State is the thing that makes the whole approach possible, and treating it carelessly is the fastest way to hurt yourself.</p>
+
+                <p><strong>Plan before apply.</strong> Before making any change, the tool shows you a preview: exactly what it will create, change, or destroy. Reading a plan before applying it is the closest thing infrastructure has to a code review diff, and it has already stopped me from doing things I would have regretted.</p>
+
+                <p><strong>Drift.</strong> When someone changes a resource by hand, outside the code, the real world drifts away from the files. A declarative tool can detect that drift and tell you about it. This single capability is the answer to the 2am problem I opened with: the file is the truth, and anything that disagrees with the file is visible.</p>
+
+                <h2>The Principles That Survive the Tool Choice</h2>
+
+                <p>Terraform is what I am learning, but the same way I would argue about scraping or automation, the tool matters less than the discipline around it. The principles that hold regardless of whether you use Terraform, Bicep, Pulumi, or something else:</p>
+
+                <p><strong>Idempotency.</strong> Applying the same configuration twice should leave you in the same place as applying it once. If running your setup again would break or duplicate things, it is not yet infrastructure as code, it is just a script in a trench coat.</p>
+
+                <p><strong>Small, reviewable changes.</strong> A giant infrastructure change is as dangerous as a giant code change, and harder to reason about because the blast radius includes things that are expensive to recreate. Small changes, each with a readable plan, each reversible.</p>
+
+                <p><strong>One source of truth.</strong> The moment infrastructure can be changed both in code and by hand in a console, the code stops being trustworthy. The point of the whole exercise is that the files are authoritative. That requires the discipline to stop clicking.</p>
+
+                <p><strong>Treat infrastructure changes like code changes.</strong> Pull requests, review, a history you can read, a way to roll back. Not because a process document says so, but because infrastructure failures are more expensive than application failures and deserve at least as much care.</p>
+
+                <blockquote>The real test of your infrastructure is not whether it runs today. It is whether you could rebuild it from scratch, from a set of files, without needing to remember anything.</blockquote>
+
+                <h2>Where I Am, Honestly</h2>
+
+                <p>I am in the middle of this journey, not at the end of it. My strong ground is the config-as-code side: CI/CD pipelines, containerized deployments, scripted cloud automation, the practices that make shipping repeatable. The declarative management of infrastructure itself, with Terraform and the surrounding ecosystem, is something I am actively learning by doing rather than something I would claim deep mastery of. I would rather say that plainly than pretend otherwise, because the people who will one day rely on my infrastructure deserve to know the difference between what I have done for years and what I have done for weeks.</p>
+
+                <p>What I would tell the version of me sitting in that chair at 2am is short. Stop treating your infrastructure as a series of clicks you will somehow remember. Start treating it as a file you can diff, review, and rebuild from. The tool you use to do that is the least interesting part of the decision. The decision to make your infrastructure legible, to yourself and to whoever comes after you, is the whole game.</p>
+
+                <div class="article-footer">
+                    <a href="../blog.html" class="back-to-blog">
+                        <i class="fas fa-arrow-left"></i> Back to Blog
+                    </a>
+                </div>
+
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/nazerof" class="social-link" title="GitHub" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p>&copy; 2026 Nazer Hdaifeh. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>
