@@ -32,7 +32,7 @@ async function initializeHost(host: HTMLElement): Promise<void> {
       new MotionPlayer(runtime, normalizeMotion(definition));
     } else {
       const narrative = definition as NarrativeDefinition;
-      new MotionPlayer(runtime, compileNarrative(narrative), narrative.captions);
+      new MotionPlayer(runtime, compileNarrative(narrative), narrative.captions, "journey");
     }
     host.dataset.visualReady = "true";
   } catch (error) {

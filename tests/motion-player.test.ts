@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { MotionDefinition } from "../src/visual-engine/types";
-import { normalizeMotion } from "../src/visual-engine/compiler";
+import type { MotionDefinition, NarrativeDefinition } from "../src/visual-engine/types";
+import { compileNarrative, normalizeMotion } from "../src/visual-engine/compiler";
 import { MotionPlayer } from "../src/visual-engine/motion-player";
 import { loadContext } from "./fixtures";
 
@@ -21,7 +21,9 @@ class MockIntersectionObserver {
 }
 
 describe("motion player", () => {
-  const motion = loadContext().definitions.get("scheduling-collision") as MotionDefinition;
+  const context = loadContext();
+  const motion = context.definitions.get("scheduling-collision") as MotionDefinition;
+  const narrative = context.definitions.get("automation-becomes-operations") as NarrativeDefinition;
 
   beforeEach(() => {
     MockIntersectionObserver.instances = [];
@@ -80,5 +82,50 @@ describe("motion player", () => {
     document.dispatchEvent(new Event("visibilitychange"));
     expect(container.querySelector('[aria-label="Play"]')).not.toBeNull();
     Object.defineProperty(document, "hidden", { configurable: true, value: false });
+  });
+
+  it("renders one clickable chapter per scene and jumps to it", () => {
+    const container = document.createElement("div");
+    new MotionPlayer(container, normalizeMotion(motion));
+    const chapters = container.querySelectorAll<HTMLButtonElement>(".visual-chapter");
+    expect(chapters).toHaveLength(motion.scenes.length);
+    chapters[2].click();
+    expect(container.querySelector(".visual-progress")?.textContent).toContain(`${Math.floor(motion.scenes[2].start)} / 24s`);
+    expect(chapters[2].getAttribute("aria-current")).toBe("step");
+  });
+
+  it("shows the poster before playback and hides it on play", () => {
+    const container = document.createElement("div");
+    const player = new MotionPlayer(container, normalizeMotion(motion));
+    const poster = container.querySelector<HTMLButtonElement>(".visual-poster")!;
+    expect(poster.classList.contains("is-hidden")).toBe(false);
+    poster.click();
+    expect(poster.classList.contains("is-hidden")).toBe(true);
+    expect(container.querySelector('[aria-label="Pause"]')).not.toBeNull();
+    player.destroy();
+  });
+
+  it("captions the active scene and updates on seek", () => {
+    const container = document.createElement("div");
+    new MotionPlayer(container, normalizeMotion(motion));
+    expect(container.querySelector(".visual-caption-body")?.textContent).toBe(motion.scenes[0].narration);
+    const seek = container.querySelector<HTMLInputElement>(".visual-seek")!;
+    seek.value = "13";
+    seek.dispatchEvent(new Event("input"));
+    const active = [...motion.scenes].reverse().find((scene) => 13 >= scene.start)!;
+    expect(container.querySelector(".visual-caption-body")?.textContent).toBe(active.narration);
+    expect(container.querySelector(".visual-caption-kicker")?.textContent).toContain(active.displayText);
+  });
+
+  it("renders the journey variant with a milestone rail and narrative captions", () => {
+    const container = document.createElement("div");
+    new MotionPlayer(container, compileNarrative(narrative), narrative.captions, "journey");
+    expect(container.querySelectorAll(".vs-milestone")).toHaveLength(4);
+    const seek = container.querySelector<HTMLInputElement>(".visual-seek")!;
+    seek.value = "30";
+    seek.dispatchEvent(new Event("input"));
+    const caption = narrative.captions.find(({ start, end }) => 30 >= start && 30 < end)!;
+    expect(container.querySelector(".visual-caption-body")?.textContent).toBe(caption.text);
+    expect(container.querySelectorAll(".vs-milestone.is-active")).toHaveLength(1);
   });
 });
