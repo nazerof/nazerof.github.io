@@ -212,7 +212,7 @@
                 <section class="visual-learning-host" data-visual-package="../../content/visuals/rpa-scaling/package.json" data-visual-id="scheduling-collision" aria-labelledby="scheduling-collision-title">
                     <p class="visual-kicker">Interactive explanation · 24 seconds</p>
                     <h3 id="scheduling-collision-title">Why every flow at 06:00 stops scaling</h3>
-                    <p class="visual-summary">See how limited concurrency turns one convenient start time into queues, synchronized retries, and cascading failures&mdash;then how staggered scheduling restores stable throughput.</p>
+                    <p class="visual-summary">Watch flows stream from sources through the 06:00 gate into twenty execution slots, overflow into the queue, cascade into failures&mdash;and recover once starts are staggered. Play the animation, scrub the timeline, or jump between the eight chapters.</p>
                     <div class="visual-static-fallback">
                         <ol>
                             <li>Ten flows fit within the available execution capacity.</li>
@@ -221,7 +221,7 @@
                             <li>Staggering, backoff with jitter, and circuit breakers bound the work.</li>
                         </ol>
                     </div>
-                    <div class="visual-runtime" aria-live="polite"><p>Loading validated motion definition&hellip;</p></div>
+                    <div class="visual-runtime"><p>Loading validated motion definition&hellip;</p></div>
                     <noscript><p><strong>JavaScript is optional:</strong> the four steps above contain the full lesson.</p></noscript>
                 </section>
 
@@ -239,12 +239,12 @@
                     <p class="visual-kicker">Editable architecture diagram</p>
                     <h3 id="rpa-architecture-title">The operating system around 200+ automations</h3>
                     <p class="visual-summary">The architecture separates scheduling, bounded execution, failure isolation, validation, and operator visibility. Solid green lines show successful data flow, dashed red lines show failure recovery, and purple dotted lines show observability.</p>
-                    <img class="visual-preview" src="../../assets/visuals/rpa-scaling/operating-architecture-preview.svg" width="1200" height="650" alt="Scheduler and dependency orchestration feed a concurrency queue, authenticated connectors, validation, and downstream storage. Retry, backoff, and a circuit breaker isolate failures. Structured logs feed heartbeat, validation, and trend monitoring shown in an operator dashboard.">
+                    <img class="visual-preview" src="../../assets/visuals/rpa-scaling/operating-architecture-preview.svg" width="1200" height="720" alt="Scheduler and dependency orchestration feed a concurrency queue, authenticated connectors, validation, and downstream storage. Retry, backoff, and a circuit breaker isolate failures. Structured logs feed heartbeat, validation, and trend monitoring shown in an operator dashboard.">
                     <details>
                         <summary>Structured diagram description</summary>
                         <p>The scheduler passes planned runs to dependency-aware orchestration and then a concurrency queue. Authentication supplies sessions to source connectors. Successful results pass through data validation into the downstream pipeline. Retry with backoff and jitter leads to a circuit breaker when failures persist, then returns isolated recovery work to the queue. Structured execution logs, validation results, and stored volume histories feed heartbeat, validation, and trend monitors, all visible in the operator dashboard.</p>
                     </details>
-                    <div class="visual-runtime" aria-live="polite"><p>Loading validated diagram definition&hellip;</p></div>
+                    <div class="visual-runtime"><p>Loading validated diagram definition&hellip;</p></div>
                     <noscript><p>The static diagram and structured description provide the complete architecture. Enable JavaScript only to edit and export a copy.</p></noscript>
                 </section>
 
@@ -289,7 +289,7 @@
                 <section class="visual-learning-host" data-visual-package="../../content/visuals/rpa-scaling/package.json" data-visual-id="automation-becomes-operations" aria-labelledby="automation-operations-title">
                     <p class="visual-kicker">Guided learning narrative · 66 seconds</p>
                     <h3 id="automation-operations-title">Automation becomes operations</h3>
-                    <p class="visual-summary">Follow the decision journey from ten manageable connectors to a system where reliability, recovery, and knowing when to stop are part of the product.</p>
+                    <p class="visual-summary">Follow the journey from ten manageable connectors to an operated system: the scale rail climbs 10 &rarr; 50 &rarr; 100 &rarr; 200+, capacity fills, and reliability work becomes the product. Six narrated chapters with captions&mdash;play, scrub, or jump anywhere.</p>
                     <div class="visual-static-fallback">
                         <ol>
                             <li><strong>Beginning:</strong> ten connectors are simple, visible, and memorable.</li>
@@ -299,7 +299,7 @@
                             <li><strong>Conclusion:</strong> automate deliberately, operate visibly, and stop honestly.</li>
                         </ol>
                     </div>
-                    <div class="visual-runtime" aria-live="polite"><p>Loading validated narrative definition&hellip;</p></div>
+                    <div class="visual-runtime"><p>Loading validated narrative definition&hellip;</p></div>
                     <details class="visual-transcript">
                         <summary>Read the complete transcript</summary>
                         <p>The first ten connectors feel simple. You know every source, remember every exception, and can personally watch each run.</p>

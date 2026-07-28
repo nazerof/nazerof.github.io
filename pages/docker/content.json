@@ -1,0 +1,1250 @@
+{
+  "course": {
+    "id": "docker-fundamentals",
+    "version": "1.0.0",
+    "metadata": {
+      "title": "Docker Complete Learning Path",
+      "subtitle": "Interactive DevOps Journey - From Zero to Production",
+      "description": "Master Docker containerization from installation to orchestration with hands-on labs and real-world scenarios",
+      "category": {
+        "primary": "DevOps",
+        "secondary": "Delivery",
+        "tags": ["containerization", "microservices", "cloud-native", "CI/CD"]
+      },
+      "difficulty": "beginner-to-advanced",
+      "estimatedHours": 12,
+      "prerequisites": [
+        "Basic command line knowledge",
+        "A computer with admin access",
+        "Internet connection for downloads",
+        "4GB+ RAM recommended"
+      ],
+      "learningObjectives": [
+        "Install and configure Docker on any platform",
+        "Build and manage containers effectively",
+        "Create custom Docker images with Dockerfiles",
+        "Orchestrate multi-container applications",
+        "Implement production-ready deployments"
+      ],
+      "targetAudience": [
+        "Software Developers",
+        "DevOps Engineers",
+        "System Administrators",
+        "Technical Students"
+      ],
+      "author": {
+        "name": "DevOps Learning Platform",
+        "organization": "Tech Education Inc",
+        "lastUpdated": "2024-01-15"
+      }
+    },
+    "learningPath": {
+      "nodes": [
+        {
+          "id": "install",
+          "order": 1,
+          "title": "Install Docker",
+          "icon": "download",
+          "position": { "x": 150, "y": 100 },
+          "metadata": {
+            "duration": "15 mins",
+            "difficulty": "beginner",
+            "badges": ["Essential", "15 mins", "Platform Specific"],
+            "breadcrumb": ["Start", "Install"],
+            "connections": {
+              "next": ["basics"],
+              "previous": []
+            }
+          },
+          "content": {
+            "concept": {
+              "sections": [
+                {
+                  "title": "What is Docker?",
+                  "type": "explanation",
+                  "content": "Docker is a platform that packages your application and all its dependencies into a 'container' - think of it as a lightweight, portable box that runs the same everywhere.",
+                  "icon": "question"
+                },
+                {
+                  "title": "Why Docker Matters",
+                  "type": "list",
+                  "items": [
+                    {
+                      "title": "No more 'works on my machine'",
+                      "description": "Containers run identically everywhere"
+                    },
+                    {
+                      "title": "Instant environment setup",
+                      "description": "New team members productive in minutes"
+                    },
+                    {
+                      "title": "Resource efficient",
+                      "description": "Unlike VMs, containers share the host OS kernel"
+                    }
+                  ]
+                },
+                {
+                  "title": "Key Insight",
+                  "type": "tip",
+                  "content": "Docker containers are NOT virtual machines. They're much lighter and faster!",
+                  "variant": "info"
+                }
+              ]
+            },
+            "practical": {
+              "sections": [
+                {
+                  "title": "Installation Steps",
+                  "type": "steps",
+                  "steps": [
+                    {
+                      "title": "Download Docker Desktop",
+                      "description": "Get the appropriate version for your OS",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Linux Installation",
+                          "language": "bash",
+                          "code": "# For Windows/Mac: Visit docker.com/products/docker-desktop\n# For Linux Ubuntu/Debian:\ncurl -fsSL https://get.docker.com -o get-docker.sh\nsudo sh get-docker.sh"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Verify Installation",
+                      "description": "Check that Docker is properly installed",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Version Check",
+                          "language": "bash",
+                          "code": "docker --version\n# Expected: Docker version 24.x.x, build xxxxx"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Test with Hello World",
+                      "description": "Run your first container",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Hello World Test",
+                          "language": "bash",
+                          "code": "docker run hello-world\n# This downloads a test image and runs it"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Enable Docker Service (Linux)",
+                      "description": "Set up Docker to start automatically",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Service Setup",
+                          "language": "bash",
+                          "code": "sudo systemctl enable docker\nsudo systemctl start docker\nsudo usermod -aG docker $USER\n# Log out and back in for group changes"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "Success Indicator",
+                  "type": "success",
+                  "content": "If you see 'Hello from Docker!' - you're ready to go!"
+                }
+              ]
+            },
+            "troubleshoot": {
+              "sections": [
+                {
+                  "title": "Common Installation Issues",
+                  "type": "troubleshooting",
+                  "issues": [
+                    {
+                      "problem": "Cannot connect to Docker daemon",
+                      "solution": "Start Docker service",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Fix Docker Daemon",
+                          "language": "bash",
+                          "code": "# Fix: Start Docker service\nsudo systemctl start docker\n# Or on Mac/Windows: Open Docker Desktop app"
+                        }
+                      ]
+                    },
+                    {
+                      "problem": "Permission denied on Linux",
+                      "solution": "Add user to docker group",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Fix Permissions",
+                          "language": "bash",
+                          "code": "# Fix: Add user to docker group\nsudo usermod -aG docker $USER\nnewgrp docker\n# Or logout/login"
+                        }
+                      ]
+                    },
+                    {
+                      "problem": "WSL2 Issues on Windows",
+                      "solution": "Enable WSL2 in Windows Features, install WSL2 kernel update from Microsoft",
+                      "type": "warning"
+                    },
+                    {
+                      "problem": "Virtualization Disabled",
+                      "solution": "Enable virtualization in BIOS/UEFI settings (Intel VT-x or AMD-V)",
+                      "type": "info"
+                    }
+                  ]
+                }
+              ]
+            },
+            "assessment": {
+              "questions": [
+                {
+                  "id": "q1",
+                  "type": "multiple-choice",
+                  "question": "What is the main difference between Docker containers and virtual machines?",
+                  "options": [
+                    "Containers are bigger than VMs",
+                    "Containers share the host OS kernel, VMs have their own OS",
+                    "VMs are more portable than containers",
+                    "There is no difference"
+                  ],
+                  "correctAnswer": 1,
+                  "explanation": "Containers share the host operating system's kernel, making them much lighter and faster than VMs which require their own full OS."
+                },
+                {
+                  "id": "q2",
+                  "type": "true-false",
+                  "question": "Docker Desktop is required for Linux installations.",
+                  "correctAnswer": false,
+                  "explanation": "Docker Desktop is for Windows and Mac. Linux can install Docker Engine directly using the command line."
+                },
+                {
+                  "id": "q3",
+                  "type": "fill-blank",
+                  "question": "The command to verify Docker installation is: docker ___",
+                  "correctAnswer": "--version",
+                  "acceptableAnswers": ["--version", "-v"],
+                  "explanation": "Use 'docker --version' or 'docker -v' to check the installed Docker version."
+                }
+              ],
+              "passingScore": 70
+            },
+            "handson": {
+              "title": "Your First Docker Setup Challenge",
+              "description": "Complete a full Docker installation and verification process",
+              "tasks": [
+                {
+                  "id": "task1",
+                  "title": "Install Docker",
+                  "description": "Install Docker on your system using the appropriate method for your OS",
+                  "validation": {
+                    "type": "command-output",
+                    "command": "docker --version",
+                    "expectedPattern": "Docker version \\d+\\.\\d+\\.\\d+"
+                  },
+                  "points": 20
+                },
+                {
+                  "id": "task2",
+                  "title": "Run Hello World",
+                  "description": "Successfully run the hello-world container",
+                  "validation": {
+                    "type": "command-output",
+                    "command": "docker run hello-world",
+                    "expectedPattern": "Hello from Docker!"
+                  },
+                  "points": 30
+                },
+                {
+                  "id": "task3",
+                  "title": "Pull an Image",
+                  "description": "Pull the nginx:alpine image from Docker Hub",
+                  "hints": [
+                    "Use the 'docker pull' command",
+                    "Specify the image name with tag: nginx:alpine"
+                  ],
+                  "validation": {
+                    "type": "image-exists",
+                    "imageName": "nginx:alpine"
+                  },
+                  "points": 25
+                },
+                {
+                  "id": "task4",
+                  "title": "List Docker Images",
+                  "description": "Display all Docker images on your system",
+                  "validation": {
+                    "type": "command-success",
+                    "command": "docker images"
+                  },
+                  "points": 25
+                }
+              ],
+              "totalPoints": 100,
+              "timeLimit": "30 minutes",
+              "difficulty": "beginner"
+            }
+          }
+        },
+        {
+          "id": "basics",
+          "order": 2,
+          "title": "Container Basics",
+          "icon": "box",
+          "position": { "x": 550, "y": 100 },
+          "metadata": {
+            "duration": "30 mins",
+            "difficulty": "beginner",
+            "badges": ["Core Skills", "30 mins", "Hands-On"],
+            "breadcrumb": ["Start", "Install", "Basics"],
+            "connections": {
+              "next": ["images"],
+              "previous": ["install"]
+            }
+          },
+          "content": {
+            "concept": {
+              "sections": [
+                {
+                  "title": "Container Fundamentals",
+                  "type": "explanation",
+                  "content": "Containers are running instances of Docker images. Think of it this way:",
+                  "subsections": [
+                    {
+                      "type": "analogy",
+                      "items": [
+                        "Image = Recipe/Blueprint (like a class in programming)",
+                        "Container = Actual dish/Instance (like an object)",
+                        "Registry = Cookbook library (Docker Hub)"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "Container Lifecycle",
+                  "type": "tip",
+                  "content": "States: Created → Running → Paused/Stopped → Removed",
+                  "variant": "info"
+                },
+                {
+                  "title": "Key Concepts",
+                  "type": "list",
+                  "items": [
+                    {
+                      "title": "Isolation",
+                      "description": "Each container has its own filesystem, network, process space"
+                    },
+                    {
+                      "title": "Layers",
+                      "description": "Images built in layers, containers add writable layer on top"
+                    },
+                    {
+                      "title": "Ephemeral",
+                      "description": "Containers are temporary by default - data lost on removal"
+                    }
+                  ]
+                }
+              ]
+            },
+            "practical": {
+              "sections": [
+                {
+                  "title": "Essential Docker Commands",
+                  "type": "command-reference",
+                  "commands": [
+                    {
+                      "title": "Pull an Image",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Image Management",
+                          "language": "bash",
+                          "code": "# Download nginx web server image\ndocker pull nginx:latest\n\n# List downloaded images\ndocker images"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Run Your First Container",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Container Execution",
+                          "language": "bash",
+                          "code": "# Run nginx in foreground (Ctrl+C to stop)\ndocker run nginx\n\n# Run in background (detached)\ndocker run -d nginx\n\n# Run with port mapping (host:container)\ndocker run -d -p 8080:80 nginx\n# Visit http://localhost:8080"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Manage Containers",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Container Management",
+                          "language": "bash",
+                          "code": "# List running containers\ndocker ps\n\n# List all containers (including stopped)\ndocker ps -a\n\n# Stop a container\ndocker stop [container_id]\n\n# Start a stopped container\ndocker start [container_id]\n\n# Remove a container\ndocker rm [container_id]"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Interact with Containers",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Container Interaction",
+                          "language": "bash",
+                          "code": "# View logs\ndocker logs [container_id]\ndocker logs -f [container_id]\n# Follow logs in real-time\n\n# Execute commands inside container\ndocker exec -it [container_id] bash\n# Type 'exit' to leave\n\n# Copy files to/from container\ndocker cp file.txt [container_id]:/path/\ndocker cp [container_id]:/path/file.txt ."
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "Practice Exercise",
+                  "type": "success",
+                  "content": "Practice: Run MongoDB with mongo-express UI!",
+                  "codeBlocks": [
+                    {
+                      "type": "terminal",
+                      "title": "MongoDB Stack Setup",
+                      "language": "bash",
+                      "code": "# Create network\ndocker network create mongo-network\n\n# Run MongoDB\ndocker run -d \\\n    --name mongodb \\\n    --network mongo-network \\\n    -e MONGO_INITDB_ROOT_USERNAME=admin \\\n    -e MONGO_INITDB_ROOT_PASSWORD=pass \\\n    mongo\n\n# Run Mongo Express\ndocker run -d \\\n    --name mongo-express \\\n    --network mongo-network \\\n    -p 8081:8081 \\\n    -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin \\\n    -e ME_CONFIG_MONGODB_ADMINPASSWORD=pass \\\n    -e ME_CONFIG_MONGODB_SERVER=mongodb \\\n    mongo-express\n\n# Visit http://localhost:8081"
+                    }
+                  ]
+                }
+              ]
+            },
+            "troubleshoot": {
+              "sections": [
+                {
+                  "title": "Common Container Issues",
+                  "type": "troubleshooting",
+                  "issues": [
+                    {
+                      "problem": "Container exits immediately",
+                      "solution": "Check logs to see why",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Debug Exit",
+                          "language": "bash",
+                          "code": "docker logs [container_id]\n# Look for error messages"
+                        }
+                      ]
+                    },
+                    {
+                      "problem": "Port already in use",
+                      "solution": "Find what's using the port or use a different one",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Port Conflict Resolution",
+                          "language": "bash",
+                          "code": "# Find what's using the port\nsudo lsof -i :8080\n# Linux/Mac\nnetstat -ano | findstr :8080\n# Windows\n\n# Use different port\ndocker run -p 8090:80 nginx"
+                        }
+                      ]
+                    },
+                    {
+                      "problem": "Cannot connect to container",
+                      "solution": "Check port mapping and container status",
+                      "checklist": [
+                        "Check port mapping: -p hostPort:containerPort",
+                        "Ensure container is running: docker ps",
+                        "Check firewall settings"
+                      ]
+                    },
+                    {
+                      "problem": "No space left on device",
+                      "solution": "Clean up unused Docker resources",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Cleanup Commands",
+                          "language": "bash",
+                          "code": "# Clean up unused resources\ndocker system prune -a\n\n# Remove stopped containers\ndocker container prune\n\n# Remove unused images\ndocker image prune -a"
+                        }
+                      ]
+                    },
+                    {
+                      "problem": "Container name conflicts",
+                      "solution": "Remove existing container or use different name",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Name Conflict Resolution",
+                          "language": "bash",
+                          "code": "# Remove container with same name\ndocker rm [container_name]\n\n# Or use auto-generated names\ndocker run nginx\n# Docker assigns random name"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "assessment": {
+              "questions": [
+                {
+                  "id": "q1",
+                  "type": "multiple-choice",
+                  "question": "What is the difference between 'docker run' and 'docker start'?",
+                  "options": [
+                    "They do the same thing",
+                    "'docker run' creates a new container, 'docker start' starts an existing stopped container",
+                    "'docker start' is faster than 'docker run'",
+                    "'docker run' is for images, 'docker start' is for containers"
+                  ],
+                  "correctAnswer": 1,
+                  "explanation": "'docker run' creates and starts a new container from an image, while 'docker start' restarts an existing stopped container."
+                },
+                {
+                  "id": "q2",
+                  "type": "command-completion",
+                  "question": "Complete the command to run nginx on port 8080",
+                  "template": "docker run -d ___ nginx",
+                  "correctAnswer": "-p 8080:80",
+                  "explanation": "The -p flag maps host port 8080 to container port 80."
+                },
+                {
+                  "id": "q3",
+                  "type": "multiple-choice",
+                  "question": "Which command shows only running containers?",
+                  "options": [
+                    "docker ps -a",
+                    "docker ps",
+                    "docker container ls --all",
+                    "docker images"
+                  ],
+                  "correctAnswer": 1,
+                  "explanation": "'docker ps' shows only running containers. Add '-a' to see all containers including stopped ones."
+                }
+              ],
+              "passingScore": 70
+            },
+            "handson": {
+              "title": "Container Management Challenge",
+              "description": "Master basic container operations",
+              "tasks": [
+                {
+                  "id": "task1",
+                  "title": "Run a Web Server",
+                  "description": "Run an nginx container accessible on port 8080",
+                  "validation": {
+                    "type": "http-check",
+                    "url": "http://localhost:8080",
+                    "expectedStatus": 200
+                  },
+                  "points": 25
+                },
+                {
+                  "id": "task2",
+                  "title": "Container Inspection",
+                  "description": "Find and display the IP address of your running container",
+                  "hints": [
+                    "Use 'docker inspect' command",
+                    "Look for NetworkSettings.IPAddress"
+                  ],
+                  "validation": {
+                    "type": "command-output",
+                    "command": "docker inspect [container_name] | grep IPAddress",
+                    "expectedPattern": "\\d+\\.\\d+\\.\\d+\\.\\d+"
+                  },
+                  "points": 25
+                },
+                {
+                  "id": "task3",
+                  "title": "Execute Commands",
+                  "description": "Create a file inside the running nginx container",
+                  "validation": {
+                    "type": "file-exists-in-container",
+                    "containerName": "nginx",
+                    "filePath": "/usr/share/nginx/html/test.html"
+                  },
+                  "points": 25
+                },
+                {
+                  "id": "task4",
+                  "title": "Clean Up",
+                  "description": "Stop and remove all containers you created",
+                  "validation": {
+                    "type": "no-containers-running"
+                  },
+                  "points": 25
+                }
+              ],
+              "totalPoints": 100,
+              "timeLimit": "45 minutes",
+              "difficulty": "beginner"
+            }
+          }
+        },
+        {
+          "id": "images",
+          "order": 3,
+          "title": "Build Images",
+          "icon": "layers",
+          "position": { "x": 950, "y": 100 },
+          "metadata": {
+            "duration": "45 mins",
+            "difficulty": "intermediate",
+            "badges": ["Essential", "45 mins", "Creative"],
+            "breadcrumb": ["Start", "Install", "Basics", "Images"],
+            "connections": {
+              "next": ["compose"],
+              "previous": ["basics"]
+            }
+          },
+          "content": {
+            "concept": {
+              "sections": [
+                {
+                  "title": "Understanding Docker Images",
+                  "type": "explanation",
+                  "content": "Images are the blueprints for containers. They contain:",
+                  "subsections": [
+                    {
+                      "type": "list",
+                      "items": [
+                        {
+                          "title": "Base OS",
+                          "description": "Minimal Linux distribution (Alpine, Ubuntu, etc.)"
+                        },
+                        {
+                          "title": "Runtime",
+                          "description": "Language/framework (Node.js, Python, Java)"
+                        },
+                        {
+                          "title": "Application Code",
+                          "description": "Your actual application"
+                        },
+                        {
+                          "title": "Configuration",
+                          "description": "Environment variables, exposed ports"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "title": "Image Layers",
+                  "type": "tip",
+                  "content": "Each instruction in Dockerfile creates a new layer. Layers are cached and reused!",
+                  "variant": "info"
+                },
+                {
+                  "title": "Image Naming",
+                  "type": "explanation",
+                  "content": "Format: [registry/]username/imagename:tag",
+                  "examples": [
+                    "docker.io/library/nginx:latest (full name)",
+                    "nginx:latest (short form)",
+                    "myapp:v1.2.3 (custom versioning)"
+                  ]
+                }
+              ]
+            },
+            "practical": {
+              "sections": [
+                {
+                  "title": "Create Your First Image",
+                  "type": "tutorial",
+                  "steps": [
+                    {
+                      "title": "Create a Simple Node.js App",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Project Setup",
+                          "language": "bash",
+                          "code": "# Create project directory\nmkdir my-node-app && cd my-node-app\n\n# Create package.json\ncat > package.json << EOF\n{\n  \"name\": \"docker-app\",\n  \"version\": \"1.0.0\",\n  \"main\": \"server.js\",\n  \"scripts\": {\n    \"start\": \"node server.js\"\n  },\n  \"dependencies\": {\n    \"express\": \"^4.18.0\"\n  }\n}\nEOF\n\n# Create server.js\ncat > server.js << EOF\nconst express = require('express');\nconst app = express();\n\napp.get('/', (req, res) => {\n  res.send('<h1>Hello from Docker! 🐳</h1>');\n});\n\napp.listen(3000, () => {\n  console.log('App running on port 3000');\n});\nEOF"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Write Dockerfile",
+                      "codeBlocks": [
+                        {
+                          "type": "dockerfile",
+                          "title": "Dockerfile",
+                          "language": "dockerfile",
+                          "code": "# Use official Node.js image\nFROM node:18-alpine\n\n# Set working directory\nWORKDIR /app\n\n# Copy package files first (layer caching!)\nCOPY package*.json ./\n\n# Install dependencies\nRUN npm install\n\n# Copy application code\nCOPY . .\n\n# Expose port\nEXPOSE 3000\n\n# Define startup command\nCMD [\"npm\", \"start\"]"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Build the Image",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Build Process",
+                          "language": "bash",
+                          "code": "# Build with tag\ndocker build -t my-node-app:1.0 .\n\n# Watch the layers being created!\n# Each step creates a new layer\n\n# List your images\ndocker images\n\n# Run your custom image\ndocker run -d -p 3000:3000 my-node-app:1.0\n# Visit http://localhost:3000"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "troubleshoot": {
+              "sections": [
+                {
+                  "title": "Build Troubleshooting",
+                  "type": "troubleshooting",
+                  "issues": [
+                    {
+                      "problem": "Build fails at RUN command",
+                      "solution": "Debug with interactive shell",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Debug Build",
+                          "language": "bash",
+                          "code": "# Debug with interactive shell\ndocker run -it node:18-alpine sh\n\n# Test commands manually first"
+                        }
+                      ]
+                    },
+                    {
+                      "problem": "Image is too large",
+                      "solution": "Use alpine images, multi-stage builds, .dockerignore file",
+                      "codeBlocks": [
+                        {
+                          "type": "text",
+                          "title": ".dockerignore",
+                          "language": "text",
+                          "code": "node_modules\n.git\n*.md\n.env"
+                        }
+                      ]
+                    },
+                    {
+                      "problem": "Cannot find Dockerfile",
+                      "solution": "Specify Dockerfile location",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Specify Dockerfile",
+                          "language": "bash",
+                          "code": "# Specify Dockerfile location\ndocker build -f path/to/Dockerfile -t myapp ."
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "assessment": {
+              "questions": [
+                {
+                  "id": "q1",
+                  "type": "ordering",
+                  "question": "Arrange these Dockerfile instructions in the optimal order for layer caching:",
+                  "items": [
+                    "COPY . .",
+                    "FROM node:18-alpine",
+                    "RUN npm install",
+                    "COPY package*.json ./",
+                    "WORKDIR /app"
+                  ],
+                  "correctOrder": [1, 4, 3, 2, 0],
+                  "explanation": "Copy package files and install dependencies before copying application code to maximize layer cache reuse."
+                },
+                {
+                  "id": "q2",
+                  "type": "multiple-choice",
+                  "question": "What is the purpose of .dockerignore file?",
+                  "options": [
+                    "To ignore Docker commands",
+                    "To exclude files from being copied into the image",
+                    "To hide containers from docker ps",
+                    "To skip certain Dockerfile instructions"
+                  ],
+                  "correctAnswer": 1,
+                  "explanation": ".dockerignore prevents specified files and directories from being copied into the Docker image during build."
+                }
+              ],
+              "passingScore": 70
+            },
+            "handson": {
+              "title": "Custom Image Building Challenge",
+              "description": "Build and optimize a multi-stage Docker image",
+              "tasks": [
+                {
+                  "id": "task1",
+                  "title": "Create a Python Flask App",
+                  "description": "Build a simple Flask application with Docker",
+                  "requirements": [
+                    "Create a Flask app that returns JSON",
+                    "Write an efficient Dockerfile",
+                    "Image size should be under 100MB"
+                  ],
+                  "validation": {
+                    "type": "image-size-check",
+                    "maxSize": "100MB"
+                  },
+                  "points": 40
+                },
+                {
+                  "id": "task2",
+                  "title": "Multi-stage Build",
+                  "description": "Create a multi-stage Dockerfile for production optimization",
+                  "requirements": [
+                    "Use multi-stage build pattern",
+                    "Separate build and runtime stages",
+                    "Final image should exclude development dependencies"
+                  ],
+                  "validation": {
+                    "type": "dockerfile-analysis",
+                    "checkMultiStage": true
+                  },
+                  "points": 30
+                },
+                {
+                  "id": "task3",
+                  "title": "Push to Registry",
+                  "description": "Tag and push your image to Docker Hub or local registry",
+                  "validation": {
+                    "type": "registry-push",
+                    "registry": "localhost:5000"
+                  },
+                  "points": 30
+                }
+              ],
+              "totalPoints": 100,
+              "timeLimit": "60 minutes",
+              "difficulty": "intermediate"
+            }
+          }
+        },
+        {
+          "id": "compose",
+          "order": 4,
+          "title": "Docker Compose",
+          "icon": "stack",
+          "position": { "x": 150, "y": 300 },
+          "metadata": {
+            "duration": "60 mins",
+            "difficulty": "intermediate",
+            "badges": ["Orchestration", "60 mins", "Multi-Container"],
+            "breadcrumb": ["Start", "Install", "Basics", "Images", "Compose"],
+            "connections": {
+              "next": ["production"],
+              "previous": ["images"]
+            }
+          },
+          "content": {
+            "concept": {
+              "sections": [
+                {
+                  "title": "What is Docker Compose?",
+                  "type": "explanation",
+                  "content": "Docker Compose is a tool for defining and running multi-container Docker applications using a YAML file.",
+                  "icon": "stack"
+                },
+                {
+                  "title": "Key Benefits",
+                  "type": "list",
+                  "items": [
+                    {
+                      "title": "Declarative Configuration",
+                      "description": "Define entire application stack in a single file"
+                    },
+                    {
+                      "title": "Service Orchestration",
+                      "description": "Manage relationships between containers"
+                    },
+                    {
+                      "title": "Development Simplicity",
+                      "description": "One command to start entire application"
+                    },
+                    {
+                      "title": "Environment Consistency",
+                      "description": "Same setup across dev, test, and production"
+                    }
+                  ]
+                },
+                {
+                  "title": "Core Concepts",
+                  "type": "tip",
+                  "content": "Services → Networks → Volumes → Environment Variables",
+                  "variant": "info"
+                }
+              ]
+            },
+            "practical": {
+              "sections": [
+                {
+                  "title": "Your First Docker Compose Application",
+                  "type": "tutorial",
+                  "steps": [
+                    {
+                      "title": "Create docker-compose.yml",
+                      "codeBlocks": [
+                        {
+                          "type": "yaml",
+                          "title": "Basic Compose File",
+                          "language": "yaml",
+                          "code": "version: '3.8'\n\nservices:\n  web:\n    image: nginx:alpine\n    ports:\n      - \"8080:80\"\n    volumes:\n      - ./html:/usr/share/nginx/html\n    depends_on:\n      - api\n\n  api:\n    build: ./api\n    ports:\n      - \"3000:3000\"\n    environment:\n      - NODE_ENV=development\n      - DB_HOST=database\n    depends_on:\n      - database\n\n  database:\n    image: postgres:13\n    environment:\n      POSTGRES_DB: myapp\n      POSTGRES_USER: user\n      POSTGRES_PASSWORD: password\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n    ports:\n      - \"5432:5432\"\n\nvolumes:\n  postgres_data:\n\nnetworks:\n  default:\n    name: myapp-network"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Essential Compose Commands",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Compose Operations",
+                          "language": "bash",
+                          "code": "# Start all services\ndocker-compose up\n\n# Start in background\ndocker-compose up -d\n\n# Build and start\ndocker-compose up --build\n\n# Stop all services\ndocker-compose down\n\n# Stop and remove volumes\ndocker-compose down -v\n\n# View running services\ndocker-compose ps\n\n# View logs\ndocker-compose logs\ndocker-compose logs web\n\n# Execute commands in service\ndocker-compose exec web sh"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Advanced Compose Features",
+                      "codeBlocks": [
+                        {
+                          "type": "yaml",
+                          "title": "Production Compose",
+                          "language": "yaml",
+                          "code": "version: '3.8'\n\nservices:\n  app:\n    build:\n      context: .\n      dockerfile: Dockerfile.prod\n    restart: unless-stopped\n    healthcheck:\n      test: [\"CMD\", \"curl\", \"-f\", \"http://localhost:3000/health\"]\n      interval: 30s\n      timeout: 10s\n      retries: 5\n    deploy:\n      replicas: 3\n      resources:\n        limits:\n          memory: 512M\n        reservations:\n          memory: 256M\n    networks:\n      - app-network\n\n  nginx:\n    image: nginx:alpine\n    restart: unless-stopped\n    ports:\n      - \"80:80\"\n      - \"443:443\"\n    volumes:\n      - ./nginx.conf:/etc/nginx/nginx.conf\n      - ./ssl:/etc/ssl/certs\n    depends_on:\n      - app\n    networks:\n      - app-network\n\nnetworks:\n  app-network:\n    driver: bridge\n\nvolumes:\n  app_data:\n    driver: local"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "troubleshoot": {
+              "sections": [
+                {
+                  "title": "Common Compose Issues",
+                  "type": "troubleshooting",
+                  "issues": [
+                    {
+                      "problem": "Service connection refused",
+                      "solution": "Use service names for internal communication",
+                      "codeBlocks": [
+                        {
+                          "type": "yaml",
+                          "title": "Service Communication",
+                          "language": "yaml",
+                          "code": "# Correct: Use service name\nDB_HOST=database\n\n# Wrong: Use localhost\nDB_HOST=localhost"
+                        }
+                      ]
+                    },
+                    {
+                      "problem": "Port conflicts",
+                      "solution": "Change host port mapping",
+                      "codeBlocks": [
+                        {
+                          "type": "yaml",
+                          "title": "Port Mapping",
+                          "language": "yaml",
+                          "code": "ports:\n  - \"8080:80\"  # host:container\n  - \"8081:80\"  # different host port"
+                        }
+                      ]
+                    },
+                    {
+                      "problem": "Services start in wrong order",
+                      "solution": "Use depends_on and healthchecks",
+                      "codeBlocks": [
+                        {
+                          "type": "yaml",
+                          "title": "Service Dependencies",
+                          "language": "yaml",
+                          "code": "web:\n  depends_on:\n    database:\n      condition: service_healthy\ndatabase:\n  healthcheck:\n    test: [\"CMD\", \"pg_isready\"]\n    interval: 5s"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "assessment": {
+              "questions": [
+                {
+                  "id": "q1",
+                  "type": "multiple-choice",
+                  "question": "How do services communicate with each other in Docker Compose?",
+                  "options": [
+                    "Using localhost",
+                    "Using service names as hostnames",
+                    "Using IP addresses",
+                    "Using external networks only"
+                  ],
+                  "correctAnswer": 1,
+                  "explanation": "Docker Compose creates a default network where services can communicate using service names as hostnames."
+                },
+                {
+                  "id": "q2",
+                  "type": "code-completion",
+                  "question": "Complete the volume mapping to persist database data:",
+                  "template": "volumes:\\n  - ___:/var/lib/postgresql/data",
+                  "correctAnswer": "postgres_data",
+                  "explanation": "Named volumes persist data beyond container lifecycle."
+                }
+              ],
+              "passingScore": 70
+            },
+            "handson": {
+              "title": "Full-Stack Application Challenge",
+              "description": "Build a complete web application with frontend, backend, and database",
+              "tasks": [
+                {
+                  "id": "task1",
+                  "title": "Create Multi-Service App",
+                  "description": "Set up a React frontend, Node.js API, and PostgreSQL database",
+                  "validation": {
+                    "type": "compose-services-running",
+                    "services": ["frontend", "backend", "database"]
+                  },
+                  "points": 50
+                },
+                {
+                  "id": "task2",
+                  "title": "Add Persistent Storage",
+                  "description": "Configure volumes for database persistence",
+                  "validation": {
+                    "type": "volume-persistence-test"
+                  },
+                  "points": 25
+                },
+                {
+                  "id": "task3",
+                  "title": "Environment Configuration",
+                  "description": "Use .env file for environment-specific settings",
+                  "validation": {
+                    "type": "env-file-usage"
+                  },
+                  "points": 25
+                }
+              ],
+              "totalPoints": 100,
+              "timeLimit": "90 minutes",
+              "difficulty": "intermediate"
+            }
+          }
+        },
+        {
+          "id": "production",
+          "order": 5,
+          "title": "Production Deployment",
+          "icon": "rocket",
+          "position": { "x": 550, "y": 300 },
+          "metadata": {
+            "duration": "90 mins",
+            "difficulty": "advanced",
+            "badges": ["Production", "90 mins", "Deployment"],
+            "breadcrumb": ["Start", "Install", "Basics", "Images", "Compose", "Production"],
+            "connections": {
+              "next": [],
+              "previous": ["compose"]
+            }
+          },
+          "content": {
+            "concept": {
+              "sections": [
+                {
+                  "title": "Production Considerations",
+                  "type": "explanation",
+                  "content": "Moving from development to production requires attention to security, performance, monitoring, and reliability.",
+                  "icon": "shield"
+                },
+                {
+                  "title": "Production Checklist",
+                  "type": "list",
+                  "items": [
+                    {
+                      "title": "Security",
+                      "description": "Non-root users, secrets management, network policies"
+                    },
+                    {
+                      "title": "Performance",
+                      "description": "Resource limits, health checks, caching"
+                    },
+                    {
+                      "title": "Monitoring",
+                      "description": "Logging, metrics, alerting"
+                    },
+                    {
+                      "title": "Reliability",
+                      "description": "Restart policies, backup strategies, rollback plans"
+                    }
+                  ]
+                },
+                {
+                  "title": "Production vs Development",
+                  "type": "tip",
+                  "content": "Different images, configurations, and infrastructure for production",
+                  "variant": "warning"
+                }
+              ]
+            },
+            "practical": {
+              "sections": [
+                {
+                  "title": "Production Docker Setup",
+                  "type": "tutorial",
+                  "steps": [
+                    {
+                      "title": "Secure Dockerfile",
+                      "codeBlocks": [
+                        {
+                          "type": "dockerfile",
+                          "title": "Production Dockerfile",
+                          "language": "dockerfile",
+                          "code": "# Multi-stage build for smaller image\nFROM node:18-alpine AS builder\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci --only=production\n\n# Production stage\nFROM node:18-alpine AS production\n\n# Create non-root user\nRUN addgroup -g 1001 -S nodejs\nRUN adduser -S nextjs -u 1001\n\n# Set working directory\nWORKDIR /app\n\n# Copy built application\nCOPY --from=builder --chown=nextjs:nodejs /app .\n\n# Switch to non-root user\nUSER nextjs\n\n# Health check\nHEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \\\n  CMD curl -f http://localhost:3000/health || exit 1\n\nEXPOSE 3000\nCMD [\"npm\", \"start\"]"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Production Compose",
+                      "codeBlocks": [
+                        {
+                          "type": "yaml",
+                          "title": "docker-compose.prod.yml",
+                          "language": "yaml",
+                          "code": "version: '3.8'\n\nservices:\n  app:\n    build:\n      context: .\n      dockerfile: Dockerfile.prod\n    restart: unless-stopped\n    environment:\n      - NODE_ENV=production\n    env_file:\n      - .env.prod\n    deploy:\n      resources:\n        limits:\n          memory: 512M\n          cpus: '0.5'\n        reservations:\n          memory: 256M\n    healthcheck:\n      test: [\"CMD\", \"curl\", \"-f\", \"http://localhost:3000/health\"]\n      interval: 30s\n      timeout: 10s\n      retries: 5\n      start_period: 40s\n    logging:\n      driver: \"json-file\"\n      options:\n        max-size: \"10m\"\n        max-file: \"3\"\n    networks:\n      - app-network\n\n  nginx:\n    image: nginx:alpine\n    restart: unless-stopped\n    ports:\n      - \"80:80\"\n      - \"443:443\"\n    volumes:\n      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro\n      - ./ssl:/etc/ssl/certs:ro\n      - ./static:/var/www/static:ro\n    depends_on:\n      app:\n        condition: service_healthy\n    logging:\n      driver: \"json-file\"\n      options:\n        max-size: \"10m\"\n        max-file: \"3\"\n    networks:\n      - app-network\n\n  redis:\n    image: redis:7-alpine\n    restart: unless-stopped\n    command: redis-server --requirepass ${REDIS_PASSWORD}\n    volumes:\n      - redis_data:/data\n    deploy:\n      resources:\n        limits:\n          memory: 128M\n    networks:\n      - app-network\n\nvolumes:\n  redis_data:\n    driver: local\n\nnetworks:\n  app-network:\n    driver: bridge\n    ipam:\n      config:\n        - subnet: 172.20.0.0/16"
+                        }
+                      ]
+                    },
+                    {
+                      "title": "Deployment Script",
+                      "codeBlocks": [
+                        {
+                          "type": "bash",
+                          "title": "deploy.sh",
+                          "language": "bash",
+                          "code": "#!/bin/bash\nset -e\n\necho \"🚀 Starting production deployment...\"\n\n# Pull latest images\ndocker-compose -f docker-compose.prod.yml pull\n\n# Build application\ndocker-compose -f docker-compose.prod.yml build --no-cache\n\n# Run database migrations\ndocker-compose -f docker-compose.prod.yml run --rm app npm run migrate\n\n# Stop old containers\ndocker-compose -f docker-compose.prod.yml down\n\n# Start new containers\ndocker-compose -f docker-compose.prod.yml up -d\n\n# Wait for health checks\necho \"⏳ Waiting for services to be healthy...\"\nsleep 30\n\n# Verify deployment\nif docker-compose -f docker-compose.prod.yml ps | grep -q \"Up (healthy)\"; then\n  echo \"✅ Deployment successful!\"\n  # Clean up old images\n  docker image prune -f\nelse\n  echo \"❌ Deployment failed!\"\n  docker-compose -f docker-compose.prod.yml logs\n  exit 1\nfi\n\necho \"🎉 Production deployment complete!\""
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "troubleshoot": {
+              "sections": [
+                {
+                  "title": "Production Troubleshooting",
+                  "type": "troubleshooting",
+                  "issues": [
+                    {
+                      "problem": "Container crashes in production",
+                      "solution": "Check logs and resource limits",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Debug Production Issues",
+                          "language": "bash",
+                          "code": "# Check container status\ndocker-compose ps\n\n# View logs\ndocker-compose logs --tail=100 app\n\n# Check resource usage\ndocker stats\n\n# Inspect container\ndocker inspect [container_id]"
+                        }
+                      ]
+                    },
+                    {
+                      "problem": "Performance issues",
+                      "solution": "Monitor and adjust resource limits",
+                      "checklist": [
+                        "Check CPU and memory usage",
+                        "Review application logs for bottlenecks",
+                        "Optimize Docker image size",
+                        "Use appropriate restart policies"
+                      ]
+                    },
+                    {
+                      "problem": "Security vulnerabilities",
+                      "solution": "Regular updates and security scanning",
+                      "codeBlocks": [
+                        {
+                          "type": "terminal",
+                          "title": "Security Scanning",
+                          "language": "bash",
+                          "code": "# Scan images for vulnerabilities\ndocker scout quickview\ndocker scout cves myapp:latest\n\n# Update base images regularly\ndocker pull node:18-alpine\ndocker-compose build --no-cache"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "assessment": {
+              "questions": [
+                {
+                  "id": "q1",
+                  "type": "multiple-choice",
+                  "question": "What is the main security benefit of multi-stage Docker builds?",
+                  "options": [
+                    "Faster build times",
+                    "Smaller final image with only production dependencies",
+                    "Better caching",
+                    "Easier debugging"
+                  ],
+                  "correctAnswer": 1,
+                  "explanation": "Multi-stage builds allow you to exclude development tools and dependencies from the final production image."
+                },
+                {
+                  "id": "q2",
+                  "type": "multiple-choice",
+                  "question": "Which restart policy is best for production applications?",
+                  "options": [
+                    "no",
+                    "always",
+                    "unless-stopped",
+                    "on-failure"
+                  ],
+                  "correctAnswer": 2,
+                  "explanation": "'unless-stopped' ensures containers restart automatically unless explicitly stopped, ideal for production services."
+                }
+              ],
+              "passingScore": 80
+            },
+            "handson": {
+              "title": "Production Deployment Challenge",
+              "description": "Deploy a complete application to production with proper security and monitoring",
+              "tasks": [
+                {
+                  "id": "task1",
+                  "title": "Security Hardening",
+                  "description": "Implement production security measures",
+                  "requirements": [
+                    "Non-root user in containers",
+                    "Resource limits configured",
+                    "Secrets management implemented",
+                    "Health checks defined"
+                  ],
+                  "validation": {
+                    "type": "security-audit",
+                    "checks": ["non-root-user", "resource-limits", "health-checks"]
+                  },
+                  "points": 40
+                },
+                {
+                  "id": "task2",
+                  "title": "Monitoring Setup",
+                  "description": "Configure logging and monitoring",
+                  "validation": {
+                    "type": "monitoring-check",
+                    "services": ["prometheus", "grafana"]
+                  },
+                  "points": 30
+                },
+                {
+                  "id": "task3",
+                  "title": "Zero-Downtime Deployment",
+                  "description": "Implement rolling update deployment strategy",
+                  "validation": {
+                    "type": "deployment-test",
+                    "strategy": "rolling-update"
+                  },
+                  "points": 30
+                }
+              ],
+              "totalPoints": 100,
+              "timeLimit": "120 minutes",
+              "difficulty": "advanced"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

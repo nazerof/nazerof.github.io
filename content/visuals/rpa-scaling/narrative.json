@@ -13,7 +13,7 @@
     "label": "Learning narrative about automation becoming an operations problem",
     "longDescription": "Six scenes explain how a small set of connectors can be managed from memory, how growth introduces coordination and credential problems, why monitoring and recovery become product capabilities, how the final difficult sources consume disproportionate effort, and how to decide when automation is no longer the right solution."
   },
-  "viewport": { "width": 960, "height": 540 },
+  "viewport": { "width": 960, "height": 440 },
   "requiredCapabilities": ["svg", "timeline", "captions", "reduced-motion"],
   "audience": "Automation engineers and technical decision makers scaling unattended data collection",
   "premise": "Automation at scale stops being mainly about writing flows and becomes the discipline of operating a system.",
@@ -23,7 +23,7 @@
     "svgMotion": {
       "clockLabel": "Scale",
       "processLabel": "Automation estate",
-      "capacityLabel": "operating capacity",
+      "capacityLabel": "parallel runs",
       "outputLabel": "Reliable outcomes",
       "sourceLabel": "sources"
     }

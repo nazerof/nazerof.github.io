@@ -1,0 +1,1008 @@
+/* ====================================
+   GLOBAL STYLES & RESET
+   Objective: Foundation styles and browser normalization
+   Docs: Sets consistent box model, removes default margins/padding,
+         establishes base typography and responsive units
+   ==================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ====================================
+   BODY & MAIN LAYOUT
+   Objective: Primary container styling and background
+   Docs: Gradient background, typography system, full viewport coverage
+   ==================================== */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* ====================================
+   HEADER SECTION STYLES
+   Objective: Platform branding and introduction display
+   Docs: Glassmorphism effect, responsive typography, text shadows
+   ==================================== */
+.header {
+    text-align: center;
+    color: white;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.header h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.header p {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    opacity: 0.95;
+}
+
+/* ====================================
+   CONTENT LAYOUT STRUCTURE
+   Objective: Two-column responsive layout for diagram and info panel
+   Docs: Flexbox layout with proper overflow handling and spacing
+   ==================================== */
+.content-wrapper {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* ====================================
+   DIAGRAM SECTION STYLES
+   Objective: Interactive SVG container and controls
+   Docs: Diagram wrapper with controls for layer switching and view management
+   ==================================== */
+.diagram-section {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ====================================
+   INFORMATION PANEL STYLES
+   Objective: Content display area with dynamic information
+   Docs: Right panel for showing detailed learning content and navigation
+   ==================================== */
+.info-panel {
+    width: 35%;
+    min-width: 350px;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Modern scrollbar for info panel */
+.info-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.info-panel::-webkit-scrollbar-track {
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 4px;
+}
+
+.info-panel::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.3);
+    border-radius: 4px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.info-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.5);
+}
+
+/* Firefox scrollbar for info panel */
+.info-panel {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(102, 126, 234, 0.3) rgba(102, 126, 234, 0.1);
+}
+
+/* ====================================
+   DIAGRAM CONTROLS AND INTERACTIONS
+   Objective: Layer switching and diagram view management
+   Docs: Control buttons for overview/detail modes and reset functionality
+   ==================================== */
+.layer-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    padding: 8px 16px;
+    border: none;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.control-btn.active {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+}
+
+/* ====================================
+   SVG DIAGRAM CONTAINER AND STYLING
+   Objective: Interactive diagram display and node styling
+   Docs: SVG container with grid background, node interactions, and visual states
+   ==================================== */
+.diagram-container {
+    flex: 1;
+    position: relative;
+    overflow: auto;
+    background: radial-gradient(circle, #f0f0f0 1px, transparent 1px);
+    background-size: 20px 20px;
+    border-radius: 15px;
+}
+
+/* Modern scrollbar for diagram container */
+.diagram-container::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.diagram-container::-webkit-scrollbar-track {
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 5px;
+}
+
+.diagram-container::-webkit-scrollbar-thumb {
+    background: rgba(102, 126, 234, 0.3);
+    border-radius: 5px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.diagram-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(102, 126, 234, 0.5);
+}
+
+.diagram-container::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Firefox scrollbar for diagram container */
+.diagram-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(102, 126, 234, 0.3) rgba(102, 126, 234, 0.1);
+}
+
+.diagram-svg {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+}
+
+/* ====================================
+   SVG NODE STYLES AND INTERACTIONS
+   Objective: Visual styling for clickable learning nodes
+   Docs: Node appearance, hover effects, active states, and animations
+   ==================================== */
+.node {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.node rect {
+    fill: white;
+    stroke: #667eea;
+    stroke-width: 3;
+    rx: 10;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.node:hover rect {
+    stroke: #f093fb;
+    stroke-width: 4;
+    filter: drop-shadow(0 8px 16px rgba(102, 126, 234, 0.3));
+}
+
+.node.active rect {
+    fill: url(#activeGradient);
+    stroke: #f5576c;
+    stroke-width: 4;
+}
+
+.node text {
+    fill: #333;
+    font-weight: 600;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+.node.active text {
+    fill: white;
+}
+
+.node-icon {
+    font-size: 20px;
+    color: #667eea;
+    text-align: center;
+    display: block;
+    line-height: 20px;
+}
+
+.node svg.node-icon {
+    stroke: #667eea;
+    fill: none;
+}
+
+.node.active .node-icon {
+    color: white;
+}
+
+.node.active svg.node-icon {
+    stroke: white;
+}
+
+.node:hover .node-icon {
+    color: #f093fb;
+}
+
+.node:hover svg.node-icon {
+    stroke: #f093fb;
+}
+
+/* ====================================
+   SVG CONNECTION LINES
+   Objective: Visual connections between learning topics
+   Docs: Styled edges showing learning path flow with directional arrows
+   ==================================== */
+.edge {
+    stroke: #667eea;
+    stroke-width: 2;
+    fill: none;
+    opacity: 0.6;
+    marker-end: url(#arrowhead);
+}
+
+.edge.detail {
+    stroke: #f5576c;
+    marker-end: url(#arrowhead-detail);
+}
+
+/* ====================================
+   INFORMATION PANEL CONTENT STYLING
+   Objective: Content area formatting and visual hierarchy
+   Docs: Headers, badges, sections, and content organization
+   ==================================== */
+.info-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #667eea;
+}
+
+.info-header h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.info-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 15px;
+    font-size: 12px;
+    margin-right: 8px;
+    margin-top: 8px;
+}
+
+.info-section {
+    margin-bottom: 25px;
+}
+
+.info-section h3 {
+    color: #667eea;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-section p, .info-section li {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 8px;
+}
+
+/* ====================================
+   MODERN CODE BLOCKS - WEB COMPONENT STYLE
+   Objective: ChatGPT-inspired professional code display
+   Docs: Modern styling with dark theme, glass morphism effects,
+         and professional typography inspired by modern code editors
+   ==================================== */
+
+/* CSS Reset for code blocks to prevent conflicts */
+.code-block, .yaml-block, .dockerfile-block,
+.code-block *, .yaml-block *, .dockerfile-block * {
+    box-sizing: border-box;
+}
+
+.code-block::before, .yaml-block::before, .dockerfile-block::before,
+.code-block::after, .yaml-block::after, .dockerfile-block::after {
+    display: none !important;
+    content: none !important;
+}
+
+:root {
+    /* Modern code block theming variables */
+    --cb-bg: #0b0f18;              /* panel background */
+    --cb-border: #1b2333;          /* panel border */
+    --cb-header-bg: #0e1421;       /* header background */
+    --cb-header-fg: #d6deeb;       /* header text */
+    --cb-accent: #4f8cff;          /* focus / accent */
+    --cb-code-fg: #e6edf3;         /* code text */
+    --cb-muted: #7f8da3;           /* muted text */
+    --cb-shadow: 0 10px 30px rgba(2,12,27,.45);
+    --cb-radius: 14px;
+    --cb-font: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --cb-font-ui: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Base panel styling for all code blocks */
+.code-block, .yaml-block, .dockerfile-block {
+    background: var(--cb-bg) !important;
+    border: 1px solid var(--cb-border) !important;
+    border-radius: var(--cb-radius) !important;
+    box-shadow: var(--cb-shadow) !important;
+    overflow: hidden !important;
+    margin: 20px 0 !important;
+    font-family: var(--cb-font) !important;
+    position: relative !important;
+    padding: 0 !important;
+    /* Reset any potential conflicting styles */
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+/* Modern header styling */
+.code-block .code-header,
+.yaml-block .code-header,
+.dockerfile-block .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.6rem 0.8rem;
+    background: var(--cb-header-bg);
+    border-bottom: 1px solid var(--cb-border);
+    /* backdrop-filter: saturate(140%) blur(6px); */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Title section with badge and label */
+.code-block .code-title,
+.yaml-block .code-title,
+.dockerfile-block .code-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    color: var(--cb-header-fg);
+    letter-spacing: 0.2px;
+    font-size: 0.92rem;
+    white-space: nowrap;
+    font-family: var(--cb-font-ui);
+}
+
+/* Language badge styling */
+.code-block .code-title::before {
+    content: "TERMINAL";
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #4f8cff;
+    background: color-mix(in oklab, #4f8cff 15%, transparent);
+    border: 1px solid color-mix(in oklab, #4f8cff 40%, transparent);
+    padding: 0.14rem 0.5rem;
+    border-radius: 999px;
+}
+
+.yaml-block .code-title::before {
+    content: "YAML";
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #38ef7d;
+    background: color-mix(in oklab, #38ef7d 15%, transparent);
+    border: 1px solid color-mix(in oklab, #38ef7d 40%, transparent);
+    padding: 0.14rem 0.5rem;
+    border-radius: 999px;
+}
+
+.dockerfile-block .code-title::before {
+    content: "DOCKER";
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #2196f3;
+    background: color-mix(in oklab, #2196f3 15%, transparent);
+    border: 1px solid color-mix(in oklab, #2196f3 40%, transparent);
+    padding: 0.14rem 0.5rem;
+    border-radius: 999px;
+}
+
+/* Actions container */
+.code-block .code-actions,
+.yaml-block .code-actions,
+.dockerfile-block .code-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+/* Modern copy and fullscreen button styling */
+.code-block .copy-btn,
+.yaml-block .copy-btn,
+.dockerfile-block .copy-btn,
+.code-block .fullscreen-btn,
+.yaml-block .fullscreen-btn,
+.dockerfile-block .fullscreen-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    color: var(--cb-header-fg);
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.05s ease;
+    font-size: 0;
+    position: relative;
+}
+
+.code-block .copy-btn svg,
+.yaml-block .copy-btn svg,
+.dockerfile-block .copy-btn svg,
+.code-block .fullscreen-btn svg,
+.yaml-block .fullscreen-btn svg,
+.dockerfile-block .fullscreen-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.code-block .copy-btn:hover,
+.yaml-block .copy-btn:hover,
+.dockerfile-block .copy-btn:hover,
+.code-block .fullscreen-btn:hover,
+.yaml-block .fullscreen-btn:hover,
+.dockerfile-block .fullscreen-btn:hover {
+    background: #131b2b;
+    border-color: #1d2940;
+}
+
+.code-block .copy-btn:active,
+.yaml-block .copy-btn:active,
+.dockerfile-block .copy-btn:active,
+.code-block .fullscreen-btn:active,
+.yaml-block .fullscreen-btn:active,
+.dockerfile-block .fullscreen-btn:active {
+    transform: translateY(1px);
+}
+
+.code-block .copy-btn:focus-visible,
+.yaml-block .copy-btn:focus-visible,
+.dockerfile-block .copy-btn:focus-visible,
+.code-block .fullscreen-btn:focus-visible,
+.yaml-block .fullscreen-btn:focus-visible,
+.dockerfile-block .fullscreen-btn:focus-visible {
+    outline: none;
+    border-color: var(--cb-accent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--cb-accent) 35%, transparent);
+}
+
+/* Code content area */
+.code-block .code-content,
+.yaml-block .code-content,
+.dockerfile-block .code-content {
+    position: relative;
+    margin: 0;
+    padding: 1rem 1.1rem;
+    overflow: auto;
+    font: 13.5px/1.6 var(--cb-font);
+    color: var(--cb-code-fg);
+    tab-size: 2;
+    -moz-tab-size: 2;
+    white-space: nowrap;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+/* Modern scrollbar styling for code blocks */
+.code-block .code-content::-webkit-scrollbar,
+.yaml-block .code-content::-webkit-scrollbar,
+.dockerfile-block .code-content::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.code-block .code-content::-webkit-scrollbar-track,
+.yaml-block .code-content::-webkit-scrollbar-track,
+.dockerfile-block .code-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.code-block .code-content::-webkit-scrollbar-thumb,
+.yaml-block .code-content::-webkit-scrollbar-thumb,
+.dockerfile-block .code-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-block .code-content::-webkit-scrollbar-thumb:hover,
+.yaml-block .code-content::-webkit-scrollbar-thumb:hover,
+.dockerfile-block .code-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.code-block .code-content::-webkit-scrollbar-corner,
+.yaml-block .code-content::-webkit-scrollbar-corner,
+.dockerfile-block .code-content::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Firefox scrollbar styling */
+.code-block .code-content,
+.yaml-block .code-content,
+.dockerfile-block .code-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) rgba(255, 255, 255, 0.05);
+}
+
+/* Copy success animation */
+.copy-btn.copied {
+    background: #28a745 !important;
+    color: white !important;
+}
+
+.copy-btn.copied svg {
+    display: none;
+}
+
+.copy-btn.copied::after {
+    content: "✓";
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Fullscreen styling for code blocks */
+.code-block.fullscreen,
+.yaml-block.fullscreen,
+.dockerfile-block.fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+}
+
+.code-block.fullscreen .code-content,
+.yaml-block.fullscreen .code-content,
+.dockerfile-block.fullscreen .code-content {
+    height: calc(100vh - 60px) !important;
+    overflow: auto !important;
+    padding: 2rem !important;
+    font-size: 16px !important;
+    line-height: 1.8 !important;
+}
+
+.code-block.fullscreen .code-header,
+.yaml-block.fullscreen .code-header,
+.dockerfile-block.fullscreen .code-header {
+    padding: 1rem 2rem !important;
+    font-size: 1.1rem !important;
+}
+
+/* Fullscreen backdrop */
+.fullscreen-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9998;
+    backdrop-filter: blur(4px);
+}
+
+/* Tooltip functionality */
+.copy-btn {
+    position: relative;
+}
+
+.copy-btn::after {
+    content: "Copy";
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%);
+    bottom: calc(100% + 8px);
+    background: #111827;
+    color: #e5e7eb;
+    border: 1px solid #1f2937;
+    border-radius: 8px;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.72rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    font-family: var(--cb-font-ui);
+}
+
+.copy-btn:hover::after {
+    opacity: 1;
+}
+
+.copy-btn.copied::after {
+    content: "Copied!";
+}
+
+/* ====================================
+   SYNTAX HIGHLIGHTING - MODERN THEME
+   Objective: Professional syntax highlighting with modern color palette
+   Docs: Consistent highlighting across all code block types
+   ==================================== */
+
+/* Comments */
+.code-block .comment,
+.yaml-block .comment,
+.dockerfile-block .comment {
+    color: #7f8da3;
+    font-style: italic;
+    display: block;
+    margin: 4px 0;
+    opacity: 0.8;
+}
+
+/* Commands and instructions */
+.code-block .command,
+.dockerfile-block .command {
+    color: #4f8cff;
+    font-weight: 600;
+    display: block;
+    margin: 2px 0;
+}
+
+/* Flags and options */
+.code-block .flag,
+.dockerfile-block .flag {
+    color: #ffc947;
+    font-weight: 500;
+}
+
+/* Strings and values */
+.code-block .string,
+.yaml-block .string,
+.dockerfile-block .string {
+    color: #7ee787;
+}
+
+/* Variables and placeholders */
+.code-block .variable,
+.yaml-block .variable,
+.dockerfile-block .variable {
+    color: #f79000;
+    font-weight: 600;
+}
+
+/* URLs and links */
+.code-block .url,
+.yaml-block .url {
+    color: #ff7b72;
+    text-decoration: underline;
+}
+
+/* Output and results */
+.code-block .output {
+    color: #90e0ef;
+    opacity: 0.9;
+}
+
+/* YAML specific elements */
+.yaml-block .key {
+    color: #7ee787;
+    font-weight: 600;
+}
+
+.yaml-block .colon {
+    color: var(--cb-code-fg);
+    margin: 0 0.2em;
+}
+
+.yaml-block .value {
+    color: #ffa657;
+}
+
+.yaml-block .number {
+    color: #79c0ff;
+}
+
+.yaml-block .boolean {
+    color: #ff7b72;
+    font-weight: 600;
+}
+
+.yaml-block .null {
+    color: #7f8da3;
+    font-style: italic;
+}
+
+.yaml-block .array-dash {
+    color: #79c0ff;
+    font-weight: bold;
+    margin-right: 0.3em;
+}
+
+/* YAML indentation classes */
+.yaml-block .indent-0 { margin-left: 0; }
+.yaml-block .indent-1 { margin-left: 1rem; }
+.yaml-block .indent-2 { margin-left: 2rem; }
+.yaml-block .indent-3 { margin-left: 3rem; }
+.yaml-block .indent-4 { margin-left: 4rem; }
+
+/* ====================================
+   EDUCATIONAL CONTENT BOXES
+   Objective: Visual distinction for different types of information
+   Docs: Color-coded boxes for tips, warnings, and success messages
+         with consistent styling and visual hierarchy
+   ==================================== */
+.tip-box {
+    background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+    border-left: 4px solid #fdcb6e;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 10px 0;
+}
+
+.tip-box strong {
+    color: #d63031;
+}
+
+.warning-box {
+    background: linear-gradient(135deg, #fab1a0, #ff7675);
+    border-left: 4px solid #d63031;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 10px 0;
+    color: white;
+}
+
+.success-box {
+    background: linear-gradient(135deg, #55efc4, #00b894);
+    border-left: 4px solid #00b894;
+    padding: 12px;
+    border-radius: 8px;
+    margin: 10px 0;
+    color: white;
+}
+
+/* ====================================
+   LIST STYLING AND NUMBERING
+   Objective: Enhanced list presentation with custom numbering
+   Docs: Step-by-step lists with visual counters and proper spacing
+   ==================================== */
+.step-list {
+    counter-reset: step-counter;
+    list-style: none;
+    padding-left: 0;
+}
+
+.step-list li {
+    counter-increment: step-counter;
+    margin-bottom: 15px;
+    padding-left: 40px;
+    position: relative;
+}
+
+.step-list li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* ====================================
+   PROGRESS AND NAVIGATION COMPONENTS
+   Objective: User progress tracking and breadcrumb navigation
+   Docs: Visual indicators for learning progress and current position
+   ==================================== */
+.progress-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 10px;
+}
+
+.progress-step {
+    flex: 1;
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    color: #666;
+    position: relative;
+}
+
+.progress-step.completed {
+    color: #00b894;
+    font-weight: bold;
+}
+
+.progress-step.current {
+    color: #667eea;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+/* ====================================
+   ANIMATIONS AND TRANSITIONS
+   Objective: Smooth user interactions and visual feedback
+   Docs: Keyframe animations for engaging user experience
+   ==================================== */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+/* ====================================
+   TABBED INTERFACE STYLING
+   Objective: Content organization with tab-based navigation
+   Docs: Tab buttons and active states for content switching
+   ==================================== */
+.tab-container {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.tab-btn {
+    padding: 8px 16px;
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 3px solid transparent;
+    font-weight: 600;
+}
+
+.tab-btn.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+/* ====================================
+   BREADCRUMB NAVIGATION
+   Objective: Show current position in learning path
+   Docs: Visual indicator of user's progress through topics
+   ==================================== */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.breadcrumb span {
+    color: #667eea;
+    font-weight: 600;
+}
+
+/* ====================================
+   RESPONSIVE DESIGN
+   Objective: Mobile-first responsive layout adaptation
+   Docs: Breakpoints and layout adjustments for different screen sizes
+   ==================================== */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+    
+    .info-panel {
+        width: 100%;
+        min-width: unset;
+        max-height: 40vh;
+    }
+}
+
+/* Copy Button Animation */
+.copy-btn.copied {
+    background: #28a745 !important;
+    color: white !important;
+}
+
+.copy-btn.copied::after {
+    content: " ✓";
+}

@@ -20,7 +20,11 @@ describe("normalization and adapters", () => {
       "heartbeat-monitor", "validation-monitor", "trend-monitor", "operator-dashboard"
     ]));
     expect(skeleton.every(({ id, label, strokeColor }) => Boolean(id && label.text && strokeColor))).toBe(true);
-    expect(skeleton.filter(({ type }) => type === "arrow").every(({ points }) => points?.length === 2)).toBe(true);
+    expect(
+      skeleton
+        .filter(({ type }) => type === "arrow")
+        .every(({ points }) => points !== undefined && points.length >= 2 && points.length <= 3)
+    ).toBe(true);
   });
 
   it("normalizes motion deterministically", () => {

@@ -19,6 +19,10 @@ The JSON files in `content/visuals/rpa-scaling/` are canonical. Excalidraw scene
 
 External contracts are JSON Schemas in `schemas/visuals/`. Internal renderer contracts are TypeScript types in `src/visual-engine/types.ts`.
 
+## Timeline renderer
+
+`MotionPlayer` renders both motion and narrative definitions as an animated pipeline stage (sources → schedule gate → execution slots → validated output, with a queue lane and failure badge). Scene `metrics` are tweened continuously, so values glide between scenes instead of jumping. The scene `stage` drives presentation through two lookup tables: a tone (`calm`, `strain`, `critical`, `improving`, `stable`) that colors the focus ring and pulses, and a focus zone that the guided-attention ring glides to. Narrative definitions render as the `journey` variant (a 10 → 50 → 100 → 200+ milestone rail replaces the clock gate); motion definitions render as `schedule` (a clock chip that fans out into staggered start times during `stagger`/`recovery`/`conclusion` stages). Chrome around the SVG — poster overlay, play/replay/seek with chapter ticks, chapter rail, and an `aria-live` caption that updates once per scene — is plain HTML. The reduced-motion fallback replaces the whole player with the ordered `reducedMotionSteps` list.
+
 ## Authoring workflow
 
 1. Add or update package-level learning semantics.
