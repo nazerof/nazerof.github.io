@@ -1,35 +1,181 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title description">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title description">
   <title id="title">Reliable automation operating architecture</title>
-  <desc id="description">Scheduler and orchestration feed a bounded execution layer, validation and storage, while structured monitoring gives operators visibility into happy and failure paths.</desc>
+  <desc id="description">Scheduler and dependency-aware orchestration feed a concurrency queue and authenticated connectors. Failures loop through retry with backoff and a circuit breaker back to the queue. Validated data reaches the downstream pipeline. Structured logs, heartbeat, validation, and trend monitoring give operators a dashboard view of the whole system.</desc>
   <defs>
-    <marker id="happy" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#2b8a3e"/></marker>
-    <marker id="failure" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#c92a2a"/></marker>
-    <marker id="observe" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7048e8"/></marker>
+    <marker id="m-happy" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087f5b"/></marker>
+    <marker id="m-fail" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#c92a2a"/></marker>
+    <marker id="m-obs" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7048e8"/></marker>
+    <filter id="node-shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="2.2" flood-color="#1f2a44" flood-opacity="0.13"/>
+    </filter>
     <style>
-      text{font-family:system-ui,sans-serif;fill:#253046}.group{fill:#f8f9ff;stroke:#c5ccef;stroke-width:2}.node{fill:#dbe4ff;stroke:#5f3dc4;stroke-width:2}.boundary{fill:#fff3bf;stroke:#e67700;stroke-width:2}.monitor{fill:#e5dbff;stroke:#7048e8;stroke-width:2}.storage{fill:#d3f9d8;stroke:#2b8a3e;stroke-width:2}.label{font-size:15px;font-weight:700;text-anchor:middle}.group-label{font-size:16px;font-weight:700;fill:#4c51bf}.happy{fill:none;stroke:#2b8a3e;stroke-width:3;marker-end:url(#happy)}.failure{fill:none;stroke:#c92a2a;stroke-width:3;stroke-dasharray:8 6;marker-end:url(#failure)}.observe{fill:none;stroke:#7048e8;stroke-width:3;stroke-dasharray:4 5;marker-end:url(#observe)}.legend{font-size:14px}
+      text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+      .lane{fill:#f7f8fd;stroke:#e3e7f4;stroke-width:1.5}
+      .lane-label{font-size:13px;font-weight:700;fill:#5f6b7a;letter-spacing:.09em}
+      .node{fill:#ffffff;stroke-width:2;filter:url(#node-shadow)}
+      .n-core{stroke:#4c51bf}
+      .n-bound{stroke:#e67700}
+      .n-mon{stroke:#7048e8}
+      .n-store{stroke:#087f5b}
+      .label{font-size:15px;font-weight:600;fill:#253046;text-anchor:middle}
+      .icon{fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+      .i-core{stroke:#4c51bf}
+      .i-bound{stroke:#e67700}
+      .i-mon{stroke:#7048e8}
+      .i-store{stroke:#087f5b}
+      .happy{fill:none;stroke:#087f5b;stroke-width:2.5;marker-end:url(#m-happy)}
+      .fail{fill:none;stroke:#c92a2a;stroke-width:2.5;stroke-dasharray:7 5;marker-end:url(#m-fail)}
+      .obs{fill:none;stroke:#7048e8;stroke-width:2.2;stroke-dasharray:2 5;stroke-linecap:round;marker-end:url(#m-obs)}
+      .elabel{font-size:12px;font-weight:600;fill:#4a5568;paint-order:stroke;stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;text-anchor:middle}
+      .badge-dot{fill:#4c51bf}
+      .badge-num{font-size:11px;font-weight:700;fill:#ffffff;text-anchor:middle}
+      .legend{font-size:13px;font-weight:600;fill:#5f6b7a}
     </style>
   </defs>
-  <rect width="1200" height="650" rx="18" fill="#fff"/>
-  <rect class="group" x="25" y="28" width="410" height="155" rx="16"/><text class="group-label" x="45" y="55">ORCHESTRATION</text>
-  <rect class="group" x="455" y="28" width="720" height="255" rx="16"/><text class="group-label" x="475" y="55">EXECUTION &amp; FAILURE ISOLATION</text>
-  <rect class="group" x="455" y="300" width="720" height="125" rx="16"/><text class="group-label" x="475" y="327">VALIDATED DATA PATH</text>
-  <rect class="group" x="25" y="445" width="1150" height="150" rx="16"/><text class="group-label" x="45" y="472">OBSERVABILITY &amp; OPERATOR RESPONSE</text>
-  <g><rect class="node" x="50" y="80" width="145" height="65" rx="12"/><text class="label" x="122" y="118">Scheduler</text></g>
-  <g><rect class="node" x="235" y="80" width="175" height="65" rx="12"/><text class="label" x="322" y="106"><tspan x="322">Dependency-aware</tspan><tspan x="322" dy="20">orchestration</tspan></text></g>
-  <g><rect class="boundary" x="480" y="80" width="160" height="65" rx="12"/><text class="label" x="560" y="106"><tspan x="560">Concurrency</tspan><tspan x="560" dy="20">queue</tspan></text></g>
-  <g><rect class="node" x="680" y="72" width="185" height="65" rx="12"/><text class="label" x="772" y="98"><tspan x="772">Authentication</tspan><tspan x="772" dy="20">&amp; sessions</tspan></text></g>
-  <g><rect class="node" x="680" y="172" width="185" height="65" rx="12"/><text class="label" x="772" y="198"><tspan x="772">Source-specific</tspan><tspan x="772" dy="20">connectors</tspan></text></g>
-  <g><rect class="boundary" x="915" y="72" width="220" height="65" rx="12"/><text class="label" x="1025" y="98"><tspan x="1025">Retry + backoff</tspan><tspan x="1025" dy="20">+ jitter</tspan></text></g>
-  <g><rect class="boundary" x="915" y="172" width="220" height="65" rx="12"/><text class="label" x="1025" y="210">Circuit breaker</text></g>
-  <g><rect class="node" x="680" y="340" width="185" height="60" rx="12"/><text class="label" x="772" y="376">Data validation</text></g>
-  <g><rect class="storage" x="915" y="340" width="220" height="60" rx="12"/><text class="label" x="1025" y="366"><tspan x="1025">Downstream</tspan><tspan x="1025" dy="20">data pipeline</tspan></text></g>
-  <g><rect class="monitor" x="70" y="495" width="160" height="65" rx="12"/><text class="label" x="150" y="533">Structured logs</text></g>
-  <g><rect class="monitor" x="275" y="495" width="165" height="65" rx="12"/><text class="label" x="357" y="521"><tspan x="357">Heartbeat</tspan><tspan x="357" dy="20">monitoring</tspan></text></g>
-  <g><rect class="monitor" x="480" y="495" width="165" height="65" rx="12"/><text class="label" x="562" y="521"><tspan x="562">Validation</tspan><tspan x="562" dy="20">monitoring</tspan></text></g>
-  <g><rect class="monitor" x="685" y="495" width="165" height="65" rx="12"/><text class="label" x="767" y="521"><tspan x="767">Trend</tspan><tspan x="767" dy="20">monitoring</tspan></text></g>
-  <g><rect class="monitor" x="925" y="488" width="210" height="80" rx="12"/><text class="label" x="1030" y="523"><tspan x="1030">Operator visibility</tspan><tspan x="1030" dy="20">&amp; dashboard</tspan></text></g>
-  <path class="happy" d="M195 112H235"/><path class="happy" d="M410 112H480"/><path class="happy" d="M640 112C660 112 655 204 680 204"/><path class="happy" d="M772 137V172"/><path class="happy" d="M772 237V340"/><path class="happy" d="M865 370H915"/>
-  <path class="failure" d="M865 204C890 204 890 105 915 105"/><path class="failure" d="M1025 137V172"/><path class="failure" d="M915 205C880 205 890 260 560 260V145"/>
-  <path class="observe" d="M680 220C520 440 230 400 150 495"/><path class="observe" d="M230 528H275"/><path class="observe" d="M772 400C720 450 610 450 562 495"/><path class="observe" d="M1025 400C990 455 830 450 767 495"/><path class="observe" d="M440 528H925"/><path class="observe" d="M645 540H925"/><path class="observe" d="M850 528H925"/>
-  <text class="legend" x="50" y="625" fill="#2b8a3e">━━ Happy path</text><text class="legend" x="210" y="625" fill="#c92a2a">┅┅ Failure and recovery</text><text class="legend" x="430" y="625" fill="#7048e8">┈┈ Observability</text>
+
+  <rect width="1200" height="720" rx="18" fill="#ffffff"/>
+
+  <!-- Lanes -->
+  <rect class="lane" x="36" y="40" width="700" height="122" rx="14"/>
+  <text class="lane-label" x="52" y="62">ORCHESTRATION</text>
+  <rect class="lane" x="760" y="24" width="424" height="312" rx="14"/>
+  <text class="lane-label" x="1168" y="330" text-anchor="end">EXECUTION &amp; FAILURE ISOLATION</text>
+  <rect class="lane" x="760" y="344" width="424" height="100" rx="14"/>
+  <text class="lane-label" x="1168" y="438" text-anchor="end">VALIDATED DATA PATH</text>
+  <rect class="lane" x="36" y="446" width="1148" height="270" rx="14"/>
+  <text class="lane-label" x="52" y="462">OBSERVABILITY &amp; OPERATOR RESPONSE</text>
+
+  <!-- Happy path edges -->
+  <path class="happy" d="M210 106 H260"/>
+  <path class="happy" d="M490 106 H540"/>
+  <path class="happy" d="M730 106 H752 V186 H780"/>
+  <path class="happy" d="M880 102 V150"/>
+  <path class="happy" d="M880 222 V360"/>
+  <path class="happy" d="M980 395 H1010"/>
+
+  <!-- Failure / recovery edges -->
+  <path class="fail" d="M980 186 H1010"/>
+  <path class="fail" d="M1095 222 V260"/>
+  <path class="fail" d="M1010 291 H570 V142"/>
+
+  <!-- Observability edges -->
+  <path class="obs" d="M780 200 H48 V505 H60"/>
+  <path class="obs" d="M240 505 H330"/>
+  <path class="obs" d="M780 395 H300 V591 H330"/>
+  <path class="obs" d="M1095 430 V455 H540 V679 H510"/>
+  <path class="obs" d="M510 501 H985 V570 H1010"/>
+  <path class="obs" d="M510 591 H1010"/>
+  <path class="obs" d="M510 661 H985 V620 H1010"/>
+
+  <!-- Nodes -->
+  <g>
+    <rect class="node n-core" x="50" y="70" width="160" height="72" rx="12"/>
+    <g class="icon i-core"><circle cx="76" cy="106" r="9"/><path d="M76 100 V106 L81 109"/></g>
+    <text class="label" x="142" y="111">Scheduler</text>
+  </g>
+  <g>
+    <rect class="node n-core" x="260" y="70" width="230" height="72" rx="12"/>
+    <g class="icon i-core"><rect x="281" y="92" width="8" height="8" rx="2"/><rect x="271" y="112" width="8" height="8" rx="2"/><rect x="291" y="112" width="8" height="8" rx="2"/><path d="M285 100 V106 M285 106 H275 V112 M285 106 H295 V112"/></g>
+    <text class="label" x="387" y="101">Dependency-aware<tspan x="387" dy="20">orchestration</tspan></text>
+  </g>
+  <g>
+    <rect class="node n-bound" x="540" y="70" width="190" height="72" rx="12"/>
+    <g class="icon i-bound"><path d="M558 96 H578 M558 106 H574 M558 116 H570"/></g>
+    <text class="label" x="647" y="101">Concurrency<tspan x="647" dy="20">queue</tspan></text>
+  </g>
+  <g>
+    <rect class="node n-core" x="780" y="40" width="200" height="62" rx="12"/>
+    <g class="icon i-core"><circle cx="800" cy="65" r="6"/><path d="M804 69 L814 79 M810 75 L814 71 M812 77 L816 73"/></g>
+    <text class="label" x="892" y="66">Authentication<tspan x="892" dy="20">&amp; sessions</tspan></text>
+  </g>
+  <g>
+    <rect class="node n-core" x="780" y="150" width="200" height="72" rx="12"/>
+    <g class="icon i-core"><path d="M798 176 V182 M806 176 V182 M796 182 H808 V190 A6 6 0 0 1 796 190 Z M802 196 V202"/></g>
+    <text class="label" x="892" y="181">Source-specific<tspan x="892" dy="20">connectors</tspan></text>
+  </g>
+  <g>
+    <rect class="node n-bound" x="1010" y="150" width="170" height="72" rx="12"/>
+    <g class="icon i-bound"><path d="M1027 190 A9 9 0 1 1 1039 193"/><path d="M1039 187 V194 H1032"/></g>
+    <text class="label" x="1104" y="181">Retry + backoff<tspan x="1104" dy="20">+ jitter</tspan></text>
+  </g>
+  <g>
+    <rect class="node n-bound" x="1010" y="260" width="170" height="62" rx="12"/>
+    <g class="icon i-bound"><path d="M1034 279 L1027 291 H1033 L1026 303 M1038 285 H1046 M1038 297 H1046"/></g>
+    <text class="label" x="1104" y="296">Circuit breaker</text>
+  </g>
+  <g>
+    <rect class="node n-core" x="780" y="360" width="200" height="70" rx="12"/>
+    <g class="icon i-core"><circle cx="802" cy="395" r="10"/><path d="M797 395 L801 399 L808 391"/></g>
+    <text class="label" x="892" y="400">Data validation</text>
+  </g>
+  <g>
+    <rect class="node n-store" x="1010" y="360" width="170" height="70" rx="12"/>
+    <g class="icon i-store"><ellipse cx="1034" cy="384" rx="10" ry="4.5"/><path d="M1024 384 V404 A10 4.5 0 0 0 1044 404 V384 M1024 394 A10 4.5 0 0 0 1044 394"/></g>
+    <text class="label" x="1104" y="390">Downstream<tspan x="1104" dy="20">data pipeline</tspan></text>
+  </g>
+  <g>
+    <rect class="node n-mon" x="60" y="470" width="180" height="70" rx="12"/>
+    <g class="icon i-mon"><rect x="78" y="490" width="20" height="26" rx="3"/><path d="M83 498 H93 M83 504 H93 M83 510 H90"/></g>
+    <text class="label" x="162" y="510">Structured logs</text>
+  </g>
+  <g>
+    <rect class="node n-mon" x="330" y="470" width="180" height="62" rx="12"/>
+    <g class="icon i-mon"><path d="M344 501 H352 L356 493 L362 509 L366 501 H374"/></g>
+    <text class="label" x="432" y="495">Heartbeat<tspan x="432" dy="19">monitoring</tspan></text>
+  </g>
+  <g>
+    <rect class="node n-mon" x="330" y="560" width="180" height="62" rx="12"/>
+    <g class="icon i-mon"><rect x="346" y="578" width="22" height="26" rx="3"/><path d="M352 590 L356 594 L363 585"/></g>
+    <text class="label" x="432" y="585">Validation<tspan x="432" dy="19">monitoring</tspan></text>
+  </g>
+  <g>
+    <rect class="node n-mon" x="330" y="650" width="180" height="58" rx="12"/>
+    <g class="icon i-mon"><path d="M346 671 L354 681 L360 675 L372 688"/><path d="M372 681 V688 H365"/></g>
+    <text class="label" x="442" y="684">Trend monitoring</text>
+  </g>
+  <g>
+    <rect class="node n-mon" x="1010" y="540" width="170" height="110" rx="12"/>
+    <g class="icon i-mon"><path d="M1030 586 A14 14 0 0 1 1058 586"/><path d="M1044 586 L1052 578"/><path d="M1028 586 H1032 M1056 586 H1060"/></g>
+    <text class="label" x="1107" y="581">Operator<tspan x="1107" dy="20">dashboard</tspan></text>
+    <g>
+      <circle cx="1063" cy="625" r="6" fill="#087f5b"/>
+      <circle cx="1095" cy="625" r="6" fill="#e67700"/>
+      <circle cx="1127" cy="625" r="6" fill="#c92a2a"/>
+    </g>
+  </g>
+
+  <!-- Edge labels (painted above nodes so halos stay clean) -->
+  <text class="elabel" x="235" y="158">planned runs</text>
+  <text class="elabel" x="515" y="158">ordered work</text>
+  <text class="elabel" x="702" y="160" text-anchor="end">capacity available</text>
+  <text class="elabel" x="890" y="130" text-anchor="start">valid session</text>
+  <text class="elabel" x="995" y="138">retryable failure</text>
+  <text class="elabel" x="1103" y="248" text-anchor="start">failure threshold</text>
+  <text class="elabel" x="750" y="283">isolated recovery</text>
+  <text class="elabel" x="894" y="341" text-anchor="start">raw result</text>
+  <text class="elabel" x="995" y="348">valid data</text>
+  <text class="elabel" x="400" y="192">execution events</text>
+  <text class="elabel" x="285" y="494">run status</text>
+  <text class="elabel" x="560" y="387">quality result</text>
+  <text class="elabel" x="800" y="459">volume history</text>
+  <text class="elabel" x="700" y="493">missing run</text>
+  <text class="elabel" x="700" y="583">invalid output</text>
+  <text class="elabel" x="700" y="653">degradation</text>
+
+  <!-- Happy-path sequence badges -->
+  <g><circle class="badge-dot" cx="235" cy="106" r="9"/><text class="badge-num" x="235" y="110">1</text></g>
+  <g><circle class="badge-dot" cx="515" cy="106" r="9"/><text class="badge-num" x="515" y="110">2</text></g>
+  <g><circle class="badge-dot" cx="752" cy="146" r="9"/><text class="badge-num" x="752" y="150">3</text></g>
+  <g><circle class="badge-dot" cx="880" cy="310" r="9"/><text class="badge-num" x="880" y="314">4</text></g>
+  <g><circle class="badge-dot" cx="995" cy="395" r="9"/><text class="badge-num" x="995" y="399">5</text></g>
+
+  <!-- Legend -->
+  <g>
+    <path d="M560 700 H596" stroke="#087f5b" stroke-width="2.5" fill="none"/>
+    <text class="legend" x="604" y="704">Happy path</text>
+    <path d="M700 700 H736" stroke="#c92a2a" stroke-width="2.5" stroke-dasharray="7 5" fill="none"/>
+    <text class="legend" x="744" y="704">Failure &amp; recovery</text>
+    <path d="M890 700 H926" stroke="#7048e8" stroke-width="2.2" stroke-dasharray="2 5" stroke-linecap="round" fill="none"/>
+    <text class="legend" x="934" y="704">Observability</text>
+  </g>
 </svg>

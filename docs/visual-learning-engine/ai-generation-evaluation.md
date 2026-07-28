@@ -21,11 +21,12 @@ The harness reports approximate tokens using four characters per token when prov
 - Rendering details or executable expressions leaking into semantic data.
 - Visually plausible output that omits the educational objective or article grounding.
 - Excessive verbosity and duplicated content across formats.
+- Presentation regressions the schema cannot catch: metrics that barely change between scenes (nothing visibly animates), scene stages that ignore the calm → strain → critical → improving → stable tone arc, chapter titles too long for their pills, and diagram coordinates that overlap nodes or force edges through unrelated boxes.
 
 ## Canonical comparison criteria
 
-- **Diagram:** complete operating architecture, distinct happy/failure/observability paths, readable grouping.
-- **Motion:** scheduling collision is temporally clear in 15–30 seconds and has an equivalent reduced-motion sequence.
-- **Narrative:** clear instructional arc, objective on every scene, complete captions/transcript, and compilation to shared motion.
+- **Diagram:** complete operating architecture, distinct happy/failure/observability paths, readable grouping, and a clean column/row layout the preview SVG can mirror 1:1 (no overlaps, route-friendly placement).
+- **Motion:** scheduling collision is temporally clear in 15–30 seconds, has an equivalent reduced-motion sequence, and its metric arc animates meaningfully scene to scene (see the prompt's renderer notes and `authoring.md` § Timeline renderer).
+- **Narrative:** clear instructional arc, objective on every scene, complete captions/transcript, compilation to shared motion, and `sources` values that climb through the journey rail's 10/50/100/200+ milestones.
 
 Before HubsTime generation, run at least 20 grounded samples per visual type and quantify first-pass validity, median repairs, reference-error frequency, token size, and human-rated educational usefulness.

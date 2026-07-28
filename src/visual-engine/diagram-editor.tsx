@@ -56,7 +56,7 @@ function Editor({ definition }: { definition: DiagramDefinition }): React.JSX.El
       <p className="visual-save-note">Edits stay in this browser session. Download a file to keep them.</p>
       <div className="visual-editor-canvas">
         <Excalidraw
-          initialData={{ elements: canonicalElements, appState: { viewBackgroundColor: "#ffffff" } }}
+          initialData={{ elements: canonicalElements, appState: { viewBackgroundColor: "#ffffff" }, scrollToContent: true }}
           excalidrawAPI={setApi}
           name={definition.title}
         />
