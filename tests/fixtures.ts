@@ -2,9 +2,10 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { ValidationContext, VisualDefinition, VisualPackage } from "../src/visual-engine/types";
 
-const contentDirectory = resolve(process.cwd(), "content/visuals/rpa-scaling");
+const contentRoot = resolve(process.cwd(), "content/visuals");
 
-export function loadContext(): ValidationContext {
+export function loadContext(packageName = "rpa-scaling"): ValidationContext {
+  const contentDirectory = resolve(contentRoot, packageName);
   const visualPackage = JSON.parse(readFileSync(resolve(contentDirectory, "package.json"), "utf8")) as VisualPackage;
   const definitions = new Map<string, VisualDefinition>();
   for (const visual of visualPackage.visuals) {

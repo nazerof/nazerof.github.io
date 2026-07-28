@@ -4,8 +4,10 @@ import packageSchema from "../../schemas/visuals/package.schema.json";
 import diagramSchema from "../../schemas/visuals/diagram.schema.json";
 import motionSchema from "../../schemas/visuals/motion.schema.json";
 import narrativeSchema from "../../schemas/visuals/narrative.schema.json";
+import explorableSchema from "../../schemas/visuals/explorable.schema.json";
 import type {
   DiagramDefinition,
+  ExplorableDefinition,
   MotionDefinition,
   NarrativeDefinition,
   ValidationContext,
@@ -27,7 +29,8 @@ const schemaIds: Record<VisualKind | "package", string> = {
   package: "https://nazerof.github.io/schemas/visuals/package.schema.json",
   diagram: "https://nazerof.github.io/schemas/visuals/diagram.schema.json",
   motion: "https://nazerof.github.io/schemas/visuals/motion.schema.json",
-  narrative: "https://nazerof.github.io/schemas/visuals/narrative.schema.json"
+  narrative: "https://nazerof.github.io/schemas/visuals/narrative.schema.json",
+  explorable: "https://nazerof.github.io/schemas/visuals/explorable.schema.json"
 };
 
 const ajv = new Ajv2020({ allErrors: true, strict: true });
@@ -36,6 +39,7 @@ ajv.addSchema(packageSchema);
 ajv.addSchema(diagramSchema);
 ajv.addSchema(motionSchema);
 ajv.addSchema(narrativeSchema);
+ajv.addSchema(explorableSchema);
 
 const forbiddenKeys = /^(?:__proto__|prototype|constructor|on[a-z]+|html|innerhtml|dangerouslysetinnerhtml|script|javascript|callback|expression|module|import|css)$/i;
 const unsafeValue = /(?:<\s*\/?\s*[a-z][^>]*>|\bon[a-z]+\s*=|javascript\s*:|data\s*:\s*text\/html|\beval\s*\(|\bFunction\s*\()/i;
@@ -152,6 +156,60 @@ function validateDiagram(definition: DiagramDefinition): ValidationIssue[] {
   return issues;
 }
 
+function validateExplorable(definition: ExplorableDefinition): ValidationIssue[] {
+  const issues = duplicates(definition.figures.map(({ id }) => id), definition.id, "/figures");
+  definition.figures.forEach((figure, figureIndex) => {
+    const path = `/figures/${figureIndex}`;
+    if (figure.archetype === "scrub-timeline") {
+      const dayCount = figure.timeline.labels.length;
+      issues.push(...duplicates(figure.runs.map((run) => `day-${run.day}`), definition.id, `${path}/runs`));
+      figure.runs.forEach((run, runIndex) => {
+        if (run.day >= dayCount) issues.push(issue(definition.id, `${path}/runs/${runIndex}/day`, `day exceeds timeline length ${dayCount}`));
+      });
+      figure.series.forEach((series, seriesIndex) => {
+        if (series.healthyMin !== undefined && series.healthyMax !== undefined && series.healthyMin > series.healthyMax) {
+          issues.push(issue(definition.id, `${path}/series/${seriesIndex}`, "healthyMin must not exceed healthyMax"));
+        }
+      });
+      figure.annotations?.forEach((annotation, annotationIndex) => {
+        const annotationPath = `${path}/annotations/${annotationIndex}`;
+        if (annotation.type === "region") {
+          if (annotation.from > annotation.to) issues.push(issue(definition.id, annotationPath, "region from must not exceed to"));
+          if (annotation.to >= dayCount) issues.push(issue(definition.id, annotationPath, "region exceeds timeline length"));
+        } else if (annotation.at >= dayCount) {
+          issues.push(issue(definition.id, annotationPath, "callout exceeds timeline length"));
+        }
+      });
+    } else if (figure.archetype === "parameter-playground") {
+      issues.push(...duplicates(figure.parameters.map(({ key }) => key), definition.id, `${path}/parameters`));
+      figure.parameters.forEach((parameter, parameterIndex) => {
+        const parameterPath = `${path}/parameters/${parameterIndex}`;
+        if (parameter.min >= parameter.max) issues.push(issue(definition.id, parameterPath, "parameter min must be below max"));
+        if (parameter.initial < parameter.min || parameter.initial > parameter.max) {
+          issues.push(issue(definition.id, parameterPath, "parameter initial must sit within [min, max]"));
+        }
+      });
+      const injected = figure.model.staleFailures + figure.model.partialFailures + figure.model.missingRuns;
+      if (injected >= figure.model.runs / 2) {
+        issues.push(issue(definition.id, `${path}/model`, "injected failures must stay below half the run count"));
+      }
+    } else {
+      const dayCount = figure.timeline.labels.length;
+      issues.push(...duplicates(figure.events.map((event) => `day-${event.day}`), definition.id, `${path}/events`));
+      figure.events.forEach((event, eventIndex) => {
+        if (event.day >= dayCount) issues.push(issue(definition.id, `${path}/events/${eventIndex}/day`, `day exceeds timeline length ${dayCount}`));
+      });
+      issues.push(...duplicates(figure.panels.map(({ id }) => id), definition.id, `${path}/panels`));
+      figure.panels.forEach((panel, panelIndex) => {
+        if (panel.rule === "absence-of-good" && panel.windowDays === undefined) {
+          issues.push(issue(definition.id, `${path}/panels/${panelIndex}`, "absence-of-good panels require windowDays"));
+        }
+      });
+    }
+  });
+  return issues;
+}
+
 function validateTimeline(
   definition: MotionDefinition | NarrativeDefinition,
   items: Array<{ id: string; start: number; duration: number }>,
@@ -176,7 +234,7 @@ function validateReferences(context: ValidationContext): ValidationIssue[] {
   const diagram = [...context.definitions.values()].find((item): item is DiagramDefinition => item.kind === "diagram");
   const nodes = new Set(diagram?.nodes.map(({ id }) => id) ?? []);
   for (const definition of context.definitions.values()) {
-    if (definition.kind === "diagram") continue;
+    if (definition.kind !== "motion" && definition.kind !== "narrative") continue;
     const items = definition.kind === "motion" ? definition.scenes : definition.storyBeats;
     items.forEach((item, itemIndex) => item.visualReferences?.forEach((reference, refIndex) => {
       const base = `/${definition.kind === "motion" ? "scenes" : "storyBeats"}/${itemIndex}/visualReferences/${refIndex}`;
@@ -201,8 +259,13 @@ export function validateContext(context: ValidationContext): ValidationIssue[] {
   ];
   issues.push(...duplicates(context.visualPackage.learningObjectives.map(({ id }) => id), context.visualPackage.id, "/learningObjectives"));
   issues.push(...duplicates(context.visualPackage.visuals.map(({ id }) => id), context.visualPackage.id, "/visuals"));
-  if (new Set(context.visualPackage.visuals.map(({ kind }) => kind)).size !== 3) {
-    issues.push(issue(context.visualPackage.id, "/visuals", "package must contain one diagram, one motion, and one narrative"));
+  const kinds = context.visualPackage.visuals.map(({ kind }) => kind);
+  if (new Set(kinds).size !== kinds.length) {
+    issues.push(issue(context.visualPackage.id, "/visuals", "package may contain at most one visual of each kind"));
+  }
+  const hasClassicTrio = ["diagram", "motion", "narrative"].every((kind) => kinds.includes(kind as VisualKind));
+  if (!hasClassicTrio && !kinds.includes("explorable")) {
+    issues.push(issue(context.visualPackage.id, "/visuals", "package must contain the diagram/motion/narrative trio or at least one explorable"));
   }
 
   for (const reference of context.visualPackage.visuals) {
@@ -218,6 +281,7 @@ export function validateContext(context: ValidationContext): ValidationIssue[] {
     }
     validateObjectiveAndConceptRefs(definition, context.visualPackage, issues);
     if (definition.kind === "diagram") issues.push(...validateDiagram(definition));
+    if (definition.kind === "explorable") issues.push(...validateExplorable(definition));
     if (definition.kind === "motion") issues.push(...validateTimeline(definition, definition.scenes, "/scenes"));
     if (definition.kind === "narrative") {
       issues.push(...validateTimeline(definition, definition.storyBeats, "/storyBeats"));

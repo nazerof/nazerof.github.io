@@ -11,7 +11,7 @@
       "type": "object", "additionalProperties": false, "required": ["type", "path"],
       "properties": {
         "type": { "const": "article" },
-        "path": { "const": "pages/blog/rpa-scaling.html" }
+        "path": { "type": "string", "pattern": "^pages/blog/[a-z0-9-]+\\.html$" }
       }
     },
     "audience": {
@@ -31,13 +31,13 @@
     "concepts": { "type": "array", "minItems": 1, "maxItems": 30, "uniqueItems": true, "items": { "$ref": "core.schema.json#/$defs/id" } },
     "theme": { "const": "portfolio-default" },
     "visuals": {
-      "type": "array", "minItems": 3, "maxItems": 3,
+      "type": "array", "minItems": 1, "maxItems": 4,
       "items": {
         "type": "object", "additionalProperties": false, "required": ["id", "kind", "path"],
         "properties": {
           "id": { "$ref": "core.schema.json#/$defs/id" },
-          "kind": { "enum": ["diagram", "motion", "narrative"] },
-          "path": { "type": "string", "pattern": "^(diagram|motion|narrative)\\.json$" }
+          "kind": { "enum": ["diagram", "motion", "narrative", "explorable"] },
+          "path": { "type": "string", "pattern": "^(diagram|motion|narrative|explorable)\\.json$" }
         }
       }
     }
