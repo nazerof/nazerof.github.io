@@ -6,6 +6,7 @@
     <title>Monitoring for Silent Failure - Nazer Hdaifeh</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../assets/visual-engine/visual-engine.css">
     <style>
         /* Article body styles */
         .article-body {
@@ -206,17 +207,65 @@
 
                 <p>The data it produced was yesterday's, because an upstream source went stale and nobody checked the timestamp. The job did half the work, because a partial result looked enough like a full one to pass. The numbers are the right shape but wrong values, because something changed in a format and the parsing quietly picked up the wrong field. None of these throw. None of these show up on a "failed runs" dashboard. All of them are failures, and all of them will corrupt whatever depends on them for as long as they go unnoticed. In my experience, that is usually about a week &mdash; long enough to do real damage, short enough that everyone is surprised when they finally find it.</p>
 
+                <section class="visual-learning-host" data-visual-package="../../content/visuals/monitoring-silent-failure/package.json" data-visual-id="silent-failure-explorables" data-visual-figure="cheerful-lie" aria-labelledby="cheerful-lie-title">
+                    <p class="visual-kicker">Interactive figure · scrub the two weeks</p>
+                    <h3 id="cheerful-lie-title">The cheerful lie, day by day</h3>
+                    <p class="visual-summary">Every run reports success. Scrub the timeline and watch what the exit code never mentioned: record volume collapsing and the data aging a week past fresh.</p>
+                    <div class="visual-static-fallback">
+                        <ol>
+                            <li>Days 1&ndash;6: healthy runs, around 500 fresh records each day.</li>
+                            <li>Day 7: the upstream source goes stale; the run still reports success.</li>
+                            <li>Days 8&ndash;14: data age climbs to 194 hours and volume collapses to 121 records &mdash; under an unbroken row of green checkmarks.</li>
+                            <li>Only outcome signals (volume, freshness, sentinel) make the failure visible.</li>
+                        </ol>
+                    </div>
+                    <div class="visual-runtime"><p>Loading validated figure definition&hellip;</p></div>
+                    <noscript><p><strong>JavaScript is optional:</strong> the four steps above contain the full lesson.</p></noscript>
+                </section>
+
                 <h2>Monitor Outcomes, Not Just Processes</h2>
 
                 <p>The fix for silent success is a shift in what you monitor. Process monitoring asks: <em>did the thing run?</em> Outcome monitoring asks: <em>did the thing produce what it was supposed to?</em> Those are different questions, and only the second one catches the cheerful lie.</p>
 
                 <p>In practice, outcome monitoring means checking the result, not just the exit code. A few patterns do most of the work. <strong>Volume baselines</strong>: if a process usually produces somewhere between four hundred and six hundred records, a run that produces fifty is a signal, even though nothing errored. <strong>Freshness checks</strong>: if the output is supposed to reflect today, read the timestamp on the data and confirm it actually does, because "the job succeeded" and "the data is current" are two different facts. <strong>Sentinel checks</strong>: pick one or two things that should be true in almost every correct run, and verify them explicitly, so that when the sentinel is missing you know the outcome is wrong regardless of what the exit code said.</p>
 
+                <section class="visual-learning-host" data-visual-package="../../content/visuals/monitoring-silent-failure/package.json" data-visual-id="silent-failure-explorables" data-visual-figure="alert-threshold-playground" aria-labelledby="threshold-playground-title">
+                    <p class="visual-kicker">Interactive figure · three sliders, sixty runs</p>
+                    <h3 id="threshold-playground-title">Tune the outcome checks yourself</h3>
+                    <p class="visual-summary">Sixty simulated runs hide twelve silent failures. Tighten the volume band, freshness tolerance, and heartbeat window and watch the tradeoff: what you catch, what slips through, and what the false alarms cost in trust.</p>
+                    <div class="visual-static-fallback">
+                        <ol>
+                            <li>Loose thresholds pass almost every silent failure as healthy.</li>
+                            <li>Tight thresholds catch them &mdash; and start flagging healthy jitter too.</li>
+                            <li>Every false alarm drains the trust your one real page depends on.</li>
+                            <li>The discipline is the middle: catch the twelve, keep the channel worth waking up for.</li>
+                        </ol>
+                    </div>
+                    <div class="visual-runtime"><p>Loading validated figure definition&hellip;</p></div>
+                    <noscript><p><strong>JavaScript is optional:</strong> the four steps above contain the full lesson.</p></noscript>
+                </section>
+
                 <h2>Alert on the Absence of Good, Not Just the Presence of Bad</h2>
 
                 <p>Most alerting is built to notice bad things happening. An error rate spikes, an alert fires. But an entire class of silent failure is not a bad thing happening. It is a good thing <strong>not</strong> happening, and silence is much harder to notice than noise.</p>
 
                 <p>A job that is supposed to run every hour and simply does not run throws no error, because it is not running to throw one. The only signal is the absence of its usual heartbeat. Catching this requires flipping the logic: instead of alerting when something goes wrong, alert when something expected fails to happen on time. A heartbeat that should arrive every hour and did not. A daily export that should have landed by 9am and has not. This kind of dead-man's-switch monitoring is one of the highest-value and most commonly missing pieces in a monitoring setup, precisely because absence does not announce itself.</p>
+
+                <section class="visual-learning-host" data-visual-package="../../content/visuals/monitoring-silent-failure/package.json" data-visual-id="silent-failure-explorables" data-visual-figure="absence-of-good" aria-labelledby="absence-compare-title">
+                    <p class="visual-kicker">Interactive figure · two rules, one stream</p>
+                    <h3 id="absence-compare-title">What each alerting philosophy can see</h3>
+                    <p class="visual-summary">The same three weeks judged twice. Error-based alerting fires on the two loud failures and sleeps through twelve days of silence; the dead-man's switch catches the silence the morning after it starts.</p>
+                    <div class="visual-static-fallback">
+                        <ol>
+                            <li>Days 1&ndash;9: daily runs; days 4 and 5 error loudly and error-based alerting fires.</li>
+                            <li>From day 10 the job silently stops running &mdash; no runs, no errors, no signal.</li>
+                            <li>Error-based alerting stays quiet for twelve days, because nothing runs to throw.</li>
+                            <li>The dead-man's switch fires on day 11, the first morning the heartbeat is overdue.</li>
+                        </ol>
+                    </div>
+                    <div class="visual-runtime"><p>Loading validated figure definition&hellip;</p></div>
+                    <noscript><p><strong>JavaScript is optional:</strong> the four steps above contain the full lesson.</p></noscript>
+                </section>
 
                 <blockquote>A system that fails loudly is doing you a favour. A system that lies to you cheerfully is the real threat. Build your monitoring to catch the cheerful lie.</blockquote>
 
@@ -257,5 +306,6 @@
     </footer>
 
     <script src="../../script.js"></script>
+    <script type="module" src="../../assets/visual-engine/visual-engine.js"></script>
 </body>
 </html>

@@ -592,6 +592,400 @@
   50% { transform: scale(1.07); }
 }
 
+/* ----------------------------------------------------- explorable figures */
+
+.visual-figure {
+  margin: 1rem 0 0;
+}
+
+/* Breakout applies to the stage only, and stays inside the host padding so
+   controls, captions, and text keep the prose measure. */
+@media (min-width: 900px) {
+  .visual-figure-body-outset .fig-stage { margin-inline: -0.9rem; }
+  .visual-figure-page .fig-stage { margin-inline: -1.2rem; }
+}
+
+.fig-stage {
+  overflow-x: auto;
+  border-radius: 14px;
+}
+
+.fig-svg {
+  display: block;
+  width: 100%;
+  min-width: 640px;
+  height: auto;
+  background: var(--v-surface);
+  border: 1px solid var(--v-line);
+  border-radius: 14px;
+}
+
+.fig-track-title {
+  fill: var(--v-muted);
+  font: 600 14px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.fig-series-label {
+  fill: var(--v-ink);
+  font: 600 14px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.fig-tick {
+  fill: var(--v-muted);
+  font: 500 12px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.fig-band-label {
+  fill: #8b96ab;
+  font: 500 12px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.fig-gridline {
+  stroke: #eef1f7;
+  stroke-width: 1;
+}
+
+.fig-healthy-band {
+  fill: #087f5b;
+  opacity: 0.07;
+}
+
+.fig-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.fig-line-context {
+  fill: none;
+  stroke: #dfe4ee;
+  stroke-width: 1.5;
+}
+
+.fig-marker {
+  stroke: var(--v-surface);
+  stroke-width: 2;
+}
+
+.fig-playhead {
+  stroke: var(--v-ink);
+  stroke-width: 1.5;
+  opacity: 0.55;
+}
+
+.fig-region {
+  fill: #c92a2a;
+  opacity: 0.05;
+  stroke: #e5b3b3;
+  stroke-dasharray: 4 4;
+}
+
+.fig-region-label {
+  fill: #9c2020;
+  font: 600 12.5px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.fig-swoopy {
+  fill: none;
+  stroke: var(--v-muted);
+  stroke-width: 1.3;
+}
+
+.fig-annotation {
+  fill: var(--v-muted);
+  font: italic 500 13px/1 Georgia, "Times New Roman", serif;
+}
+
+.fig-cell {
+  fill: var(--v-surface);
+  stroke: var(--v-line);
+  stroke-width: 1.4;
+  transition: fill 0.25s ease, stroke 0.25s ease;
+}
+
+.fig-cell.is-ok { fill: #e9f6f1; stroke: #9fd6c2; }
+.fig-cell.is-bad { fill: #fdeeee; stroke: #e6a1a1; }
+.fig-cell.is-absent { fill: #f6f7fa; stroke: #d6dbe6; stroke-dasharray: 4 3; }
+
+.fig-cell-mark {
+  fill: var(--v-muted);
+  font: 700 15px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+  pointer-events: none;
+}
+
+.fig-cell.is-ok + .fig-cell-mark { fill: var(--v-ok); }
+
+.fig-hit {
+  fill: transparent;
+  cursor: pointer;
+}
+
+.fig-hit.is-active {
+  fill: #667eea;
+  opacity: 0.08;
+}
+
+/* run grid (parameter playground) */
+.fig-run {
+  fill: #f3f5fa;
+  stroke: #dfe4ee;
+  stroke-width: 1.4;
+  transition: fill 0.25s ease, stroke 0.25s ease;
+  cursor: pointer;
+}
+
+.fig-run.is-healthy { fill: #f0f3f8; stroke: #d5dbe8; }
+.fig-run.is-caught { fill: #e9f6f1; stroke: var(--v-ok); }
+.fig-run.is-missed { fill: #fbdddd; stroke: var(--v-fail); stroke-width: 2; }
+.fig-run.is-false { fill: #fff4e3; stroke: var(--v-queue); }
+.fig-run.is-absent { stroke-dasharray: 4 3; }
+.fig-run.is-hovered { stroke: var(--v-ink); stroke-width: 2.2; }
+
+.fig-run-glyph {
+  fill: #9aa5ba;
+  pointer-events: none;
+}
+
+.fig-run.is-caught + .fig-run-glyph { fill: var(--v-ok); }
+.fig-run.is-missed + .fig-run-glyph { fill: var(--v-fail); }
+.fig-run.is-false + .fig-run-glyph { fill: var(--v-queue); }
+
+.fig-bell {
+  fill: var(--v-fail);
+}
+
+.fig-bell.is-repeat {
+  fill: #e7a5a5;
+}
+
+.fig-bell-clapper {
+  stroke: var(--v-fail);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* controls */
+.fig-controls,
+.fig-sliders {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+}
+
+.fig-scrubber {
+  flex: 1 1 180px;
+}
+
+.fig-toggle {
+  border: 1.5px solid var(--v-line);
+  border-radius: 999px;
+  background: var(--v-surface);
+  color: var(--v-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 650;
+  padding: 0.4rem 0.85rem;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.fig-toggle:hover { border-color: var(--v-accent); color: var(--v-accent-deep); }
+.fig-toggle.is-on { background: var(--v-accent-deep); border-color: var(--v-accent-deep); color: #ffffff; }
+.fig-toggle:focus-visible { outline: 3px solid var(--v-accent-deep); outline-offset: 3px; }
+
+.fig-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1 1 200px;
+  min-width: 170px;
+}
+
+.fig-slider-label {
+  color: var(--v-muted);
+  font-size: 0.8rem;
+}
+
+.fig-slider-value {
+  color: var(--v-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.fig-slider-input {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--v-accent);
+}
+
+/* readouts */
+.fig-legend {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.55rem;
+  color: var(--v-muted);
+  font-size: 0.78rem;
+}
+
+.fig-legend-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  border: 1.5px solid #d5dbe8;
+  background: #f0f3f8;
+  vertical-align: -1px;
+}
+
+.fig-legend-swatch.is-caught { background: #e9f6f1; border-color: var(--v-ok); }
+.fig-legend-swatch.is-missed { background: #fbdddd; border-color: var(--v-fail); }
+.fig-legend-swatch.is-false { background: #fff4e3; border-color: var(--v-queue); }
+.fig-legend-swatch.is-shape { background: transparent; border: 0; width: auto; height: auto; }
+
+.fig-readouts {
+  display: flex;
+  align-items: stretch;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+}
+
+.fig-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid var(--v-line);
+  background: var(--v-surface);
+  min-width: 7rem;
+}
+
+.fig-stat-value {
+  color: var(--v-ink);
+  font-size: 1.15rem;
+  font-weight: 750;
+}
+
+.fig-stat-green .fig-stat-value { color: #066749; }
+.fig-stat-red .fig-stat-value { color: #a12525; }
+.fig-stat-amber .fig-stat-value { color: #a85400; }
+
+.fig-stat-label {
+  color: var(--v-muted);
+  font-size: 0.74rem;
+}
+
+.fig-meter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  justify-content: center;
+  flex: 1 1 160px;
+  min-width: 150px;
+  padding: 0.5rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid var(--v-line);
+  background: var(--v-surface);
+}
+
+.fig-meter-track {
+  position: relative;
+  height: 10px;
+  border-radius: 5px;
+  background: #edf0f8;
+  overflow: hidden;
+}
+
+.fig-meter-fill {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 0;
+  border-radius: 5px;
+  background: var(--v-ok);
+  transition: inline-size 0.3s ease, background-color 0.3s ease;
+}
+
+.fig-meter-fill.is-mid { background: var(--v-queue); }
+.fig-meter-fill.is-low { background: var(--v-fail); }
+
+.fig-meter-readout {
+  color: var(--v-ink);
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* inspector + detail + caption */
+.fig-inspector {
+  min-height: 3.6rem;
+  margin-top: 0.7rem;
+  padding: 0.7rem 0.95rem;
+  border-inline-start: 4px solid var(--v-accent);
+  border-radius: 0 10px 10px 0;
+  background: var(--v-surface);
+  box-shadow: 0 2px 10px rgba(46, 61, 110, 0.06);
+}
+
+.visual-learning-host .fig-inspector-heading,
+.visual-learning-host .fig-inspector-truth {
+  margin: 0;
+  color: var(--v-ink);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.visual-learning-host .fig-inspector-truth { margin-top: 0.25rem; }
+
+.fig-verdict {
+  display: inline-block;
+  margin-inline-end: 0.35rem;
+  padding: 0.08rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.fig-verdict.is-ok { background: #e9f6f1; color: #066749; }
+.fig-verdict.is-bad { background: #fdeeee; color: #a12525; }
+
+.visual-learning-host .fig-detail {
+  min-height: 2.4rem;
+  margin: 0.55rem 0 0;
+  color: var(--v-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.visual-learning-host .fig-caption {
+  margin-top: 0.8rem;
+  color: var(--v-muted);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.fig-caption-lead {
+  color: var(--v-ink);
+}
+
+.fig-caption-instructions {
+  color: var(--v-accent-deep);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.fig-reduced ol {
+  margin: 0.4rem 0 0;
+  padding-inline-start: 1.2rem;
+}
+
 /* ------------------------------------------------------------------ editor */
 
 .visual-editor-toolbar {

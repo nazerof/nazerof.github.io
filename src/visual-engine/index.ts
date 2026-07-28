@@ -1,6 +1,7 @@
 import "./styles.css";
 import { compileNarrative, normalizeMotion } from "./compiler";
 import { MotionPlayer } from "./motion-player";
+import { mountExplorableFigure } from "./explorable/mount";
 import type { DiagramDefinition, NarrativeDefinition, VisualDefinition } from "./types";
 import { loadVisualPackage } from "./validation";
 
@@ -30,6 +31,8 @@ async function initializeHost(host: HTMLElement): Promise<void> {
       initializeDiagram(runtime, definition);
     } else if (definition.kind === "motion") {
       new MotionPlayer(runtime, normalizeMotion(definition));
+    } else if (definition.kind === "explorable") {
+      mountExplorableFigure(runtime, definition, host.dataset.visualFigure);
     } else {
       const narrative = definition as NarrativeDefinition;
       new MotionPlayer(runtime, compileNarrative(narrative), narrative.captions, "journey");
