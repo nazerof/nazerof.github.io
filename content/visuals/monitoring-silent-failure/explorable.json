@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "1.0",
+  "id": "silent-failure-explorables",
+  "kind": "explorable",
+  "title": "Silent failure, explorable",
+  "description": "Three interactive figures: a silent-success timeline, an alert-threshold playground, and a comparison of alerting on bad versus alerting on missing good.",
+  "learningObjectiveRefs": ["recognize-silent-success", "tune-outcome-alerts", "alert-on-absence"],
+  "conceptRefs": ["silent-success", "outcome-monitoring", "volume-baseline", "freshness", "sentinel", "alert-trust", "dead-mans-switch"],
+  "locale": "en",
+  "direction": "ltr",
+  "theme": "portfolio-default",
+  "accessibility": {
+    "label": "Interactive figures exploring silent failure and outcome monitoring",
+    "longDescription": "A scrubbable two-week timeline shows every run reporting success while record volume shrinks and data ages past a day old. A playground with three threshold sliders classifies sixty simulated runs into caught failures, missed failures, and false alarms, with an alert-trust meter. A final comparison shows the same three weeks judged by error-based alerting and by a dead-man's switch: only the dead-man's switch notices when the job stops running entirely."
+  },
+  "viewport": { "width": 960, "height": 480 },
+  "requiredCapabilities": ["svg", "reduced-motion"],
+  "figures": [
+    {
+      "id": "cheerful-lie",
+      "archetype": "scrub-timeline",
+      "title": "The cheerful lie",
+      "widthClass": "body-outset",
+      "caption": {
+        "lead": "Fourteen days of green checkmarks.",
+        "text": "The process track reports success every single day while record volume collapses and the data ages far past a day old — the outcome charts show the drift no failed-runs dashboard would ever surface.",
+        "instructions": "Press play or drag the scrubber; hover any day to inspect its run."
+      },
+      "timeline": {
+        "unitLabel": "day",
+        "labels": ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14"]
+      },
+      "runs": [
+        { "day": 0, "records": 520, "freshnessHours": 2, "sentinel": true },
+        { "day": 1, "records": 505, "freshnessHours": 3, "sentinel": true },
+        { "day": 2, "records": 548, "freshnessHours": 2, "sentinel": true },
+        { "day": 3, "records": 490, "freshnessHours": 4, "sentinel": true },
+        { "day": 4, "records": 561, "freshnessHours": 3, "sentinel": true },
+        { "day": 5, "records": 533, "freshnessHours": 2, "sentinel": true },
+        { "day": 6, "records": 512, "freshnessHours": 26, "sentinel": true },
+        { "day": 7, "records": 496, "freshnessHours": 50, "sentinel": true },
+        { "day": 8, "records": 508, "freshnessHours": 74, "sentinel": true },
+        { "day": 9, "records": 384, "freshnessHours": 98, "sentinel": true },
+        { "day": 10, "records": 296, "freshnessHours": 122, "sentinel": false },
+        { "day": 11, "records": 214, "freshnessHours": 146, "sentinel": false },
+        { "day": 12, "records": 158, "freshnessHours": 170, "sentinel": false },
+        { "day": 13, "records": 121, "freshnessHours": 194, "sentinel": false }
+      ],
+      "series": [
+        { "key": "records", "label": "records per run", "hue": "blue", "healthyMin": 400, "healthyMax": 600 },
+        { "key": "freshnessHours", "label": "data age in hours", "hue": "purple", "healthyMax": 24 }
+      ],
+      "lensToggle": {
+        "labelWhenOff": "Recolor the status track by the truth",
+        "labelWhenOn": "Recolor by what was reported"
+      },
+      "annotations": [
+        { "type": "region", "from": 6, "to": 13, "label": "eight days of silent damage" },
+        { "type": "callout", "at": 8, "track": "process", "text": "still green" }
+      ],
+      "reducedMotion": {
+        "summary": "A two-week run history where every day reports success while the output quietly degrades.",
+        "steps": [
+          "Days 1 to 6: runs succeed and the output is genuinely healthy, around 500 fresh records each day.",
+          "Day 7: the upstream source goes stale. The run still reports success, but the data is now 26 hours old.",
+          "Days 8 to 14: data age climbs to 194 hours and record volume collapses from around 500 to 121, yet the status dashboard shows an unbroken row of green checkmarks.",
+          "The failure is only visible in outcome signals: volume against its healthy band, freshness against a one-day limit, and the missing sentinel value."
+        ]
+      }
+    },
+    {
+      "id": "alert-threshold-playground",
+      "archetype": "parameter-playground",
+      "title": "Tune the outcome checks",
+      "widthClass": "body-outset",
+      "caption": {
+        "lead": "Sixty runs, twelve of them silently wrong.",
+        "text": "Three outcome checks judge every run. Loose thresholds miss silent failures; tight thresholds flag healthy jitter as false alarms, and every false alarm spends the trust your one real page depends on.",
+        "instructions": "Drag the sliders and watch what gets caught, what slips through, and what the false alarms cost."
+      },
+      "model": {
+        "name": "run-stream",
+        "seed": 42,
+        "runs": 60,
+        "baseVolume": 500,
+        "volumeJitter": 0.14,
+        "cadenceHours": 4,
+        "staleFailures": 5,
+        "partialFailures": 4,
+        "missingRuns": 3
+      },
+      "parameters": [
+        { "key": "volumeBandPercent", "symbol": "±V", "label": "volume band", "unit": "%", "min": 5, "max": 60, "step": 5, "initial": 40 },
+        { "key": "freshnessToleranceHours", "symbol": "F", "label": "freshness tolerance", "unit": "h", "min": 2, "max": 48, "step": 2, "initial": 36 },
+        { "key": "heartbeatWindowHours", "symbol": "H", "label": "heartbeat window", "unit": "h", "min": 2, "max": 24, "step": 1, "initial": 24 }
+      ],
+      "reducedMotion": {
+        "summary": "Threshold tuning is a tradeoff between missed silent failures and false alarms.",
+        "steps": [
+          "Sixty simulated runs contain five stale-data failures, four partial results, and three missing runs.",
+          "With loose defaults (volume band ±40%, freshness tolerance 36h, heartbeat window 24h) most silent failures pass every check and go unnoticed.",
+          "Tightening the thresholds catches the injected failures, but past a point it also flags healthy runs, and each false alarm lowers the alert-trust meter.",
+          "The goal is the middle: thresholds tight enough to catch the twelve real failures, loose enough that the alert channel stays worth waking up for."
+        ]
+      }
+    },
+    {
+      "id": "absence-of-good",
+      "archetype": "absence-compare",
+      "title": "The alert that watches for silence",
+      "widthClass": "body-outset",
+      "caption": {
+        "lead": "The job that stops running throws no error.",
+        "text": "Both panels watch the same three weeks. Error-based alerting fires on the two loud failures and then sleeps through twelve days of silence; the dead-man's switch expects a daily heartbeat and catches the silence the morning after it starts.",
+        "instructions": "Hover any day to compare what each rule sees."
+      },
+      "timeline": {
+        "unitLabel": "day",
+        "labels": ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7", "Day 8", "Day 9", "Day 10", "Day 11", "Day 12", "Day 13", "Day 14", "Day 15", "Day 16", "Day 17", "Day 18", "Day 19", "Day 20", "Day 21"]
+      },
+      "events": [
+        { "day": 0, "kind": "ok" },
+        { "day": 1, "kind": "ok" },
+        { "day": 2, "kind": "ok" },
+        { "day": 3, "kind": "error" },
+        { "day": 4, "kind": "error" },
+        { "day": 5, "kind": "ok" },
+        { "day": 6, "kind": "ok" },
+        { "day": 7, "kind": "ok" },
+        { "day": 8, "kind": "ok" },
+        { "day": 9, "kind": "absent" },
+        { "day": 10, "kind": "absent" },
+        { "day": 11, "kind": "absent" },
+        { "day": 12, "kind": "absent" },
+        { "day": 13, "kind": "absent" },
+        { "day": 14, "kind": "absent" },
+        { "day": 15, "kind": "absent" },
+        { "day": 16, "kind": "absent" },
+        { "day": 17, "kind": "absent" },
+        { "day": 18, "kind": "absent" },
+        { "day": 19, "kind": "absent" },
+        { "day": 20, "kind": "absent" }
+      ],
+      "panels": [
+        { "id": "presence-panel", "title": "Alert on the presence of bad", "rule": "presence-of-bad", "note": "fires only when something loud happens" },
+        { "id": "absence-panel", "title": "Alert on the absence of good", "rule": "absence-of-good", "windowDays": 1, "note": "expects a heartbeat every day" }
+      ],
+      "reducedMotion": {
+        "summary": "Error-based alerting and dead-man's-switch alerting judge the same three weeks very differently.",
+        "steps": [
+          "Days 1 to 9: the job runs daily; days 4 and 5 throw loud errors and error-based alerting correctly fires on both.",
+          "From day 10 the job silently stops running altogether: no runs, no errors, no signal.",
+          "Error-based alerting stays quiet for the remaining twelve days, because a job that never runs never throws.",
+          "The dead-man's switch, which expects a heartbeat every day, fires on day 11 — the first morning the heartbeat is overdue — and keeps flagging the silence until someone acts."
+        ]
+      }
+    }
+  ]
+}

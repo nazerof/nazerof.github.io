@@ -10,7 +10,7 @@
       "properties": {
         "schemaVersion": { "const": "1.0" },
         "id": { "$ref": "#/$defs/id" },
-        "kind": { "enum": ["diagram", "motion", "narrative"] },
+        "kind": { "enum": ["diagram", "motion", "narrative", "explorable"] },
         "title": { "$ref": "#/$defs/text" },
         "description": { "$ref": "#/$defs/text" },
         "learningObjectiveRefs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },

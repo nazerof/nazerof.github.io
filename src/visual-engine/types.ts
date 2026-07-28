@@ -1,4 +1,4 @@
-export type VisualKind = "diagram" | "motion" | "narrative";
+export type VisualKind = "diagram" | "motion" | "narrative" | "explorable";
 
 export interface LearningObjective {
   id: string;
@@ -137,7 +137,128 @@ export interface NarrativeDefinition extends VisualCore {
   rendererOptions?: { svgMotion: SvgMotionRendererOptions };
 }
 
-export type VisualDefinition = DiagramDefinition | MotionDefinition | NarrativeDefinition;
+export type FigureHue = "blue" | "green" | "amber" | "red" | "purple" | "gray";
+export type FigureWidthClass = "body" | "body-outset" | "page";
+
+export interface FigureCaption {
+  lead: string;
+  text: string;
+  instructions?: string;
+}
+
+export interface FigureReducedMotion {
+  summary: string;
+  steps: string[];
+}
+
+export interface FigureTimeline {
+  unitLabel: string;
+  labels: string[];
+}
+
+export interface ScrubRun {
+  day: number;
+  records: number;
+  freshnessHours: number;
+  sentinel: boolean;
+  error?: boolean;
+}
+
+export interface ScrubSeries {
+  key: "records" | "freshnessHours";
+  label: string;
+  hue: FigureHue;
+  healthyMin?: number;
+  healthyMax?: number;
+}
+
+export type ScrubAnnotation =
+  | { type: "region"; from: number; to: number; label: string }
+  | { type: "callout"; at: number; track: "process" | "outcome"; text: string };
+
+export interface ScrubTimelineFigure {
+  id: string;
+  archetype: "scrub-timeline";
+  title: string;
+  caption: FigureCaption;
+  widthClass: FigureWidthClass;
+  timeline: FigureTimeline;
+  runs: ScrubRun[];
+  series: ScrubSeries[];
+  lensToggle?: { labelWhenOff: string; labelWhenOn: string };
+  annotations?: ScrubAnnotation[];
+  reducedMotion: FigureReducedMotion;
+}
+
+export interface RunStreamModel {
+  name: "run-stream";
+  seed: number;
+  runs: number;
+  baseVolume: number;
+  volumeJitter: number;
+  cadenceHours: number;
+  staleFailures: number;
+  partialFailures: number;
+  missingRuns: number;
+}
+
+export type PlaygroundParameterKey = "volumeBandPercent" | "freshnessToleranceHours" | "heartbeatWindowHours";
+
+export interface PlaygroundParameter {
+  key: PlaygroundParameterKey;
+  symbol: string;
+  label: string;
+  unit: string;
+  min: number;
+  max: number;
+  step: number;
+  initial: number;
+}
+
+export interface ParameterPlaygroundFigure {
+  id: string;
+  archetype: "parameter-playground";
+  title: string;
+  caption: FigureCaption;
+  widthClass: FigureWidthClass;
+  model: RunStreamModel;
+  parameters: PlaygroundParameter[];
+  reducedMotion: FigureReducedMotion;
+}
+
+export interface AbsenceEvent {
+  day: number;
+  kind: "ok" | "error" | "absent";
+}
+
+export interface AbsencePanel {
+  id: string;
+  title: string;
+  rule: "presence-of-bad" | "absence-of-good";
+  windowDays?: number;
+  note?: string;
+}
+
+export interface AbsenceCompareFigure {
+  id: string;
+  archetype: "absence-compare";
+  title: string;
+  caption: FigureCaption;
+  widthClass: FigureWidthClass;
+  timeline: FigureTimeline;
+  events: AbsenceEvent[];
+  panels: AbsencePanel[];
+  reducedMotion: FigureReducedMotion;
+}
+
+export type ExplorableFigure = ScrubTimelineFigure | ParameterPlaygroundFigure | AbsenceCompareFigure;
+
+export interface ExplorableDefinition extends VisualCore {
+  kind: "explorable";
+  figures: ExplorableFigure[];
+}
+
+export type VisualDefinition = DiagramDefinition | MotionDefinition | NarrativeDefinition | ExplorableDefinition;
 
 export interface NormalizedTimeline {
   id: string;

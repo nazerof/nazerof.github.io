@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0",
+  "id": "monitoring-silent-failure-visual-package",
+  "source": { "type": "article", "path": "pages/blog/monitoring-for-silent-failure.html" },
+  "audience": {
+    "level": "intermediate",
+    "roles": ["automation engineer", "platform owner", "data professional"]
+  },
+  "learningObjectives": [
+    { "id": "recognize-silent-success", "text": "Recognize that a job can succeed by every process signal while producing a wrong result." },
+    { "id": "tune-outcome-alerts", "text": "Explain the tradeoff between catching silent failures and keeping alerts trustworthy when tuning outcome checks." },
+    { "id": "alert-on-absence", "text": "Apply dead-man's-switch monitoring to catch expected work that silently never happens." }
+  ],
+  "concepts": ["silent-success", "outcome-monitoring", "volume-baseline", "freshness", "sentinel", "alert-trust", "dead-mans-switch"],
+  "theme": "portfolio-default",
+  "visuals": [
+    { "id": "silent-failure-explorables", "kind": "explorable", "path": "explorable.json" }
+  ]
+}

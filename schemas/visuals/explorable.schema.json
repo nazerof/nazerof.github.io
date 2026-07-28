@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nazerof.github.io/schemas/visuals/explorable.schema.json",
+  "$defs": {
+    "widthClass": { "enum": ["body", "body-outset", "page"] },
+    "hue": { "enum": ["blue", "green", "amber", "red", "purple", "gray"] },
+    "caption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lead", "text"],
+      "properties": {
+        "lead": { "$ref": "core.schema.json#/$defs/text" },
+        "text": { "$ref": "core.schema.json#/$defs/text" },
+        "instructions": { "$ref": "core.schema.json#/$defs/text" }
+      }
+    },
+    "reducedMotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "steps"],
+      "properties": {
+        "summary": { "$ref": "core.schema.json#/$defs/text" },
+        "steps": { "type": "array", "minItems": 2, "maxItems": 8, "items": { "$ref": "core.schema.json#/$defs/text" } }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["unitLabel", "labels"],
+      "properties": {
+        "unitLabel": { "$ref": "core.schema.json#/$defs/text" },
+        "labels": { "type": "array", "minItems": 4, "maxItems": 40, "items": { "$ref": "core.schema.json#/$defs/text" } }
+      }
+    },
+    "scrubTimelineFigure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "archetype", "title", "caption", "widthClass", "timeline", "runs", "series", "reducedMotion"],
+      "properties": {
+        "id": { "$ref": "core.schema.json#/$defs/id" },
+        "archetype": { "const": "scrub-timeline" },
+        "title": { "$ref": "core.schema.json#/$defs/text" },
+        "caption": { "$ref": "#/$defs/caption" },
+        "widthClass": { "$ref": "#/$defs/widthClass" },
+        "timeline": { "$ref": "#/$defs/timeline" },
+        "runs": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["day", "records", "freshnessHours", "sentinel"],
+            "properties": {
+              "day": { "type": "integer", "minimum": 0, "maximum": 39 },
+              "records": { "type": "number", "minimum": 0, "maximum": 100000 },
+              "freshnessHours": { "type": "number", "minimum": 0, "maximum": 1000 },
+              "sentinel": { "type": "boolean" },
+              "error": { "type": "boolean" }
+            }
+          }
+        },
+        "series": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "label", "hue"],
+            "properties": {
+              "key": { "enum": ["records", "freshnessHours"] },
+              "label": { "$ref": "core.schema.json#/$defs/text" },
+              "hue": { "$ref": "#/$defs/hue" },
+              "healthyMin": { "type": "number", "minimum": 0 },
+              "healthyMax": { "type": "number", "minimum": 0 }
+            }
+          }
+        },
+        "lensToggle": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["labelWhenOff", "labelWhenOn"],
+          "properties": {
+            "labelWhenOff": { "$ref": "core.schema.json#/$defs/text" },
+            "labelWhenOn": { "$ref": "core.schema.json#/$defs/text" }
+          }
+        },
+        "annotations": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["type", "from", "to", "label"],
+                "properties": {
+                  "type": { "const": "region" },
+                  "from": { "type": "integer", "minimum": 0, "maximum": 39 },
+                  "to": { "type": "integer", "minimum": 0, "maximum": 39 },
+                  "label": { "$ref": "core.schema.json#/$defs/text" }
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["type", "at", "track", "text"],
+                "properties": {
+                  "type": { "const": "callout" },
+                  "at": { "type": "integer", "minimum": 0, "maximum": 39 },
+                  "track": { "enum": ["process", "outcome"] },
+                  "text": { "$ref": "core.schema.json#/$defs/text" }
+                }
+              }
+            ]
+          }
+        },
+        "reducedMotion": { "$ref": "#/$defs/reducedMotion" }
+      }
+    },
+    "parameterPlaygroundFigure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "archetype", "title", "caption", "widthClass", "model", "parameters", "reducedMotion"],
+      "properties": {
+        "id": { "$ref": "core.schema.json#/$defs/id" },
+        "archetype": { "const": "parameter-playground" },
+        "title": { "$ref": "core.schema.json#/$defs/text" },
+        "caption": { "$ref": "#/$defs/caption" },
+        "widthClass": { "$ref": "#/$defs/widthClass" },
+        "model": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "seed", "runs", "baseVolume", "volumeJitter", "cadenceHours", "staleFailures", "partialFailures", "missingRuns"],
+          "properties": {
+            "name": { "const": "run-stream" },
+            "seed": { "type": "integer", "minimum": 1, "maximum": 100000 },
+            "runs": { "type": "integer", "minimum": 20, "maximum": 120 },
+            "baseVolume": { "type": "number", "minimum": 10, "maximum": 100000 },
+            "volumeJitter": { "type": "number", "minimum": 0, "maximum": 0.5 },
+            "cadenceHours": { "type": "number", "minimum": 1, "maximum": 48 },
+            "staleFailures": { "type": "integer", "minimum": 0, "maximum": 12 },
+            "partialFailures": { "type": "integer", "minimum": 0, "maximum": 12 },
+            "missingRuns": { "type": "integer", "minimum": 0, "maximum": 12 }
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "symbol", "label", "unit", "min", "max", "step", "initial"],
+            "properties": {
+              "key": { "enum": ["volumeBandPercent", "freshnessToleranceHours", "heartbeatWindowHours"] },
+              "symbol": { "$ref": "core.schema.json#/$defs/text" },
+              "label": { "$ref": "core.schema.json#/$defs/text" },
+              "unit": { "$ref": "core.schema.json#/$defs/text" },
+              "min": { "type": "number", "minimum": 0 },
+              "max": { "type": "number", "minimum": 0 },
+              "step": { "type": "number", "exclusiveMinimum": 0 },
+              "initial": { "type": "number", "minimum": 0 }
+            }
+          }
+        },
+        "reducedMotion": { "$ref": "#/$defs/reducedMotion" }
+      }
+    },
+    "absenceCompareFigure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "archetype", "title", "caption", "widthClass", "timeline", "events", "panels", "reducedMotion"],
+      "properties": {
+        "id": { "$ref": "core.schema.json#/$defs/id" },
+        "archetype": { "const": "absence-compare" },
+        "title": { "$ref": "core.schema.json#/$defs/text" },
+        "caption": { "$ref": "#/$defs/caption" },
+        "widthClass": { "$ref": "#/$defs/widthClass" },
+        "timeline": { "$ref": "#/$defs/timeline" },
+        "events": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 40,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["day", "kind"],
+            "properties": {
+              "day": { "type": "integer", "minimum": 0, "maximum": 39 },
+              "kind": { "enum": ["ok", "error", "absent"] }
+            }
+          }
+        },
+        "panels": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "title", "rule"],
+            "properties": {
+              "id": { "$ref": "core.schema.json#/$defs/id" },
+              "title": { "$ref": "core.schema.json#/$defs/text" },
+              "rule": { "enum": ["presence-of-bad", "absence-of-good"] },
+              "windowDays": { "type": "integer", "minimum": 1, "maximum": 7 },
+              "note": { "$ref": "core.schema.json#/$defs/text" }
+            }
+          }
+        },
+        "reducedMotion": { "$ref": "#/$defs/reducedMotion" }
+      }
+    }
+  },
+  "allOf": [{ "$ref": "core.schema.json#/$defs/core" }],
+  "type": "object",
+  "required": ["figures"],
+  "properties": {
+    "kind": { "const": "explorable" },
+    "figures": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/scrubTimelineFigure" },
+          { "$ref": "#/$defs/parameterPlaygroundFigure" },
+          { "$ref": "#/$defs/absenceCompareFigure" }
+        ]
+      }
+    }
+  },
+  "unevaluatedProperties": false
+}
