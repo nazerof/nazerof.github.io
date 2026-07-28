@@ -4,6 +4,8 @@ Research date: 2026-07-28. Sources: distill.pub article corpus (momentum, augmen
 
 **Goal:** evolve this repo's visual learning engine so that a validated JSON definition can produce figures with the interaction quality of a Distill article — starting with one new article package (see § Target article).
 
+**Status:** Phase 1 is implemented — see `explorable-implementation-report.md` for what was built and `distill-research.md` for the full research findings this plan condenses.
+
 ---
 
 ## 1. How Distill actually built their graphics (digest)
@@ -27,7 +29,7 @@ Research date: 2026-07-28. Sources: distill.pub article corpus (momentum, augmen
 Eleven recurring archetypes across the corpus; the closed set below is the target component library. Interaction vocabulary is closed: hover (highlight/readout), click (toggle/select/damage/sample), drag (handle/slider/scrub), play/pause/refresh/step, preset-select, checkbox-compose. Motion has exactly three classes: continuous simulation, discrete recompute-on-input (with short tween), and checkpoint replay.
 
 | # | Archetype | Teaches | Defining example |
-|---|-----------|---------|------------------|
+| --- | ----------- | --------- | ------------------ |
 | A1 | Parameter playground (sliders → live recompute) | cause/effect, regimes | momentum |
 | A2 | Annotated system diagram | architecture, data flow | augmented-rnns |
 | A3 | Progressive reveal walkthrough (same diagram elaborated N times, stable positions) | mechanisms | augmented-rnns ACT |
